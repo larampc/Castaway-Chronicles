@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id "org.kordamp.gradle.errorprone" version "0.47.0"
 }
 
 group = 'org.example'
