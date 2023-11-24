@@ -11,8 +11,12 @@ public abstract class Interactable extends Element {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Interactable)) return false;
         Interactable interactable = (Interactable) o;
         return interactable.getName().equals(this.getName());
+    }
+    @Override
+    public int hashCode() {
+        return this.getName().hashCode();
     }
 }
