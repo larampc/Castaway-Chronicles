@@ -47,4 +47,7 @@ public class Images {
         }
         return image;
     }
+    public TextImage getImage(String name) {
+        return images.get(name);
+    }
 }
