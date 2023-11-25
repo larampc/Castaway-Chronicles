@@ -12,4 +12,5 @@ public class Location extends Scene {
     }
     public void leftLocation() {this.mainChar = false;}
     public void enteredLocation() {this.mainChar = true;}
+    public boolean hasMainChar() {return mainChar;}
 }
