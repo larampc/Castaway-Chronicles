@@ -1,5 +1,6 @@
 package castaway_chronicles.view;
 
+import castaway_chronicles.view.game.Images;
 import com.googlecode.lanterna.graphics.TextImage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,7 +69,7 @@ public class ImagesTest {
                     int alpha = (a >> 24) & 0xff;
                     int red = (a >> 16) & 255;
                     int green = (a >> 8) & 255;
-                    int blue = (a) & 255;
+                    int blue = a & 255;
 
                     if (alpha != 0) {
                         assertEquals(red, textImage.getCharacterAt(x,y).getBackgroundColor().getRed());
