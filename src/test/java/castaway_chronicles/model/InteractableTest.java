@@ -13,6 +13,12 @@ public class InteractableTest {
         interactable = new Item(1,2,3,4,"item");
     }
     @Test
+    public void interactable() {
+        assertEquals(new Position(1,2), interactable.getPosition());
+        interactable.setPosition(new Position(2,3));
+        assertEquals(new Position(2,3), interactable.getPosition());
+    }
+    @Test
     public void contains_inside(){
         assertTrue(interactable.contains(new Position(2,4)));
     }
