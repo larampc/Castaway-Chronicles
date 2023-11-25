@@ -15,13 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Images {
-    private HashMap<String, TextImage> images;
+    private final HashMap<String, TextImage> images = new HashMap<>();
     private final String type;
     public Images(List<String> images_to_load, String type) throws URISyntaxException, IOException {
+        this.type = type;
         for (String name: images_to_load) {
             images.put(name, loadpngimage(name));
         }
-        this.type = type;
     }
     private TextImage loadpngimage(String filename) throws URISyntaxException, IOException {
         URL resource = getClass().getClassLoader().getResource("Images/" + type + File.separator + filename + ".png");
@@ -38,7 +38,7 @@ public class Images {
                 int alpha = (a >> 24) & 0xff;
                 int red = (a >> 16) & 255;
                 int green = (a >> 8) & 255;
-                int blue = (a) & 255;
+                int blue = a & 255;
                 if (alpha != 0) {
                     TextCharacter c = new TextCharacter(' ', new TextColor.RGB(red, green, blue), new TextColor.RGB(red, green, blue));
                     image.setCharacterAt(x, y, c);
