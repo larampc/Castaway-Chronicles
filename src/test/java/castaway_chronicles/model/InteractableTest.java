@@ -1,5 +1,4 @@
-package model;
-import castaway_chronicles.model.Position;
+package castaway_chronicles.model;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.Item;
 import org.junit.jupiter.api.Test;

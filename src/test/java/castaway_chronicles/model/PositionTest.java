@@ -1,6 +1,5 @@
-package model;
+package castaway_chronicles.model;
 
-import castaway_chronicles.model.Position;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 
