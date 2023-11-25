@@ -42,7 +42,8 @@ public class LanternaGUI implements GUI{
 //    }
 //
 //    private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-//        File fontFile = new File("src/main/resources/fonts/square.ttf");
+//        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
+//        File fontFile = new File(resource.toURI());
 //        Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
 //
 //        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
