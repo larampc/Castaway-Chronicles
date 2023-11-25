@@ -1,46 +1,64 @@
 package castaway_chronicles.model;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.Item;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class InteractableTest {
+    private static Interactable interactable;
+    @BeforeAll
+    public static void setup() {
+        interactable = new Item(1,2,3,4,"item");
+    }
+    @Test
+    public void contains_inside(){
+        assertTrue(interactable.contains(new Position(2,4)));
+    }
 
     @Test
-    public void contains(){
-        Interactable interactable = new Item(1,2,3,4,"new item");
-        assertTrue(interactable.contains(new Position(2,4)));
+    public void contains_border() {
+        assertTrue(interactable.contains(new Position(1,2)));
         assertTrue(interactable.contains(new Position(3,2)));
-        assertTrue(interactable.contains(new Position(2,5)));
+        assertTrue(interactable.contains(new Position(1,5)));
         assertTrue(interactable.contains(new Position(3,5)));
+        assertTrue(interactable.contains(new Position(3,3)));
+    }
+
+    @Test
+    public void contains_out() {
         assertFalse(interactable.contains(new Position(4,2)));
         assertFalse(interactable.contains(new Position(2,6)));
-        assertFalse(interactable.contains(new Position(4,6)));
-        Interactable interactable2 = new Item(1,2,1,1,"new item");
-        assertTrue(interactable2.contains(new Position(1,2)));
-        assertFalse(interactable2.contains(new Position(1,1)));
-        assertFalse(interactable2.contains(new Position(1,3)));
-        assertFalse(interactable2.contains(new Position(0,2)));
-        assertFalse(interactable2.contains(new Position(2,2)));
+        assertFalse(interactable.contains(new Position(10,10)));
     }
 
     @Test
-    public void equals(){
-        Interactable interactable1 = new Item(1,2,3,4,"same item");
-        Interactable interactable2 = new Item(1,2,3,4,"same item");
-        Interactable interactable3 = new Item(1,2,3,4,"different item");
-        assertEquals(interactable1, interactable1);
-        assertEquals(interactable1, interactable2);
-        assertNotEquals(interactable1, interactable3);
-        assertNotEquals(interactable1, new Object());
+    public void equals_same(){
+        Interactable interactable2 = new Item(1,2,3,4,"item");
+        assertEquals(interactable, interactable2);
+        assertEquals(interactable, interactable);
     }
 
     @Test
-    public void hashcode(){
-        Interactable interactable1 = new Item(1,2,3,4,"same item");
-        Interactable interactable2 = new Item(1,2,3,4,"same item");
-        assertEquals(interactable1.hashCode(), interactable1.hashCode());
-        assertEquals(interactable1.hashCode(), interactable2.hashCode());
+    public void equals_different(){
+        Interactable interactable2 = new Item(1,2,3,4,"different item");
+        assertNotEquals(interactable, interactable2);
+        assertNotEquals(interactable, new Object());
+    }
+
+
+    @Test
+    public void hashcode_same(){
+        Interactable interactable2 = new Item(1,2,3,4,"item");
+        assertEquals(interactable.hashCode(), interactable2.hashCode());
+        assertEquals(interactable.hashCode(), interactable.hashCode());
+    }
+
+    @Test
+    public void hashcode_different(){
+        Interactable interactable2 = new Item(1,2,3,4,"different item");
+        assertNotEquals(interactable.hashCode(), interactable2.hashCode());
+        assertNotEquals(interactable.hashCode(), new Object().hashCode());
     }
 }
