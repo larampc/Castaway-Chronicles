@@ -1,6 +1,7 @@
 package model;
-import model.game.elements.Interactable;
-import model.game.elements.Item;
+import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.game.elements.Item;
 import org.junit.jupiter.api.Test;
 
 

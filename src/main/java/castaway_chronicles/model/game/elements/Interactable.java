@@ -1,6 +1,6 @@
-package model.game.elements;
+package castaway_chronicles.model.game.elements;
 
-import model.Position;
+import castaway_chronicles.model.Position;
 
 public abstract class Interactable extends Element {
     public Interactable(int x, int y, int w, int h, String name) {super (x, y, w, h, name);}

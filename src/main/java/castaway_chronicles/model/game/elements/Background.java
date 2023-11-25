@@ -1,4 +1,4 @@
-package model.game.elements;
+package castaway_chronicles.model.game.elements;
 
 public class Background extends Element {
 

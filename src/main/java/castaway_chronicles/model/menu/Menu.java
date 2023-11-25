@@ -1,4 +1,4 @@
-package model.menu;
+package castaway_chronicles.model.menu;
 
 import java.util.Arrays;
 import java.util.List;

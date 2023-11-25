@@ -1,7 +1,7 @@
-package model.game.scene;
+package castaway_chronicles.model.game.scene;
 
-import model.game.elements.Background;
-import model.game.elements.Interactable;
+import castaway_chronicles.model.game.elements.Background;
+import castaway_chronicles.model.game.elements.Interactable;
 
 import java.util.List;
 

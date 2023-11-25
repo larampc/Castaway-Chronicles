@@ -1,4 +1,4 @@
-package model;
+package castaway_chronicles.model;
 
 public class Position {
     private final int x;
