@@ -8,16 +8,17 @@ import castaway_chronicles.view.Viewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 
 public class MenuViewer extends Viewer<Menu> {
 
-    protected MenuViewer(Menu model, Images images) {
+    protected MenuViewer(Menu model, HashMap<String, Images> images) {
         super(model, images);
     }
 
     @Override
     protected void drawElements(GUI gui) throws IOException, InterruptedException, URISyntaxException {
-        gui.drawImage(new Position(0,0), getImages().getImage("Menu"));
+        gui.drawImage(new Position(0,0), getImages().get("Backgrounds").getImage("Menu"));
         int i = 50;
         for (String entry: getModel().getEntries()) {
             gui.drawText(new Position(20, i), 160, entry);
