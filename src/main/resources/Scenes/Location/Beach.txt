@@ -1,0 +1,3 @@
+B Beach 0 0 707 150
+I NPC toot 150 110 12 10 V
+M
