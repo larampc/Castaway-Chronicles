@@ -8,11 +8,11 @@ import java.util.HashMap;
 
 
 public class BackpackViewer extends SceneViewer<Backpack> {
-    protected BackpackViewer(Backpack model, HashMap<String, Images> images) {
+    public BackpackViewer(Backpack model, HashMap<String, Images> images) {
         super(model, images);
     }
     @Override
-    protected void drawElements(GUI gui) {
+    public void drawElements(GUI gui) {
         drawBackground(gui);
         drawInteractables(gui);
     }

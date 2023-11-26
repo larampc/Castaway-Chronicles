@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class LocationViewer extends SceneViewer<Location> {
 
-    protected LocationViewer(Location model, HashMap<String, Images> images) {
+    public LocationViewer(Location model, HashMap<String, Images> images) {
         super(model, images);
     }
     @Override

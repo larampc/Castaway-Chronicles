@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class SceneViewer<T extends Scene> extends Viewer<Scene> {
 
-    protected SceneViewer(T model, HashMap<String, Images> images) {
+    public SceneViewer(T model, HashMap<String, Images> images) {
         super(model, images);
     }
     public void drawInteractables(GUI gui) {
