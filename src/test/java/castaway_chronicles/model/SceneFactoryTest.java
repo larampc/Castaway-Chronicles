@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SceneFactoryTest {
     private static List<Interactable> interactables;
     private static List<Interactable> visibleInteractables;
-
     private static Background background;
+
     @BeforeEach
     public void init(){
         interactables = new ArrayList<>();
@@ -47,7 +47,7 @@ public class SceneFactoryTest {
     }
     @Test
     public void noScene(){
-        Scene scene = SceneFactory.getScene("hell",background,interactables,visibleInteractables);
+        Scene scene = SceneFactory.getScene("Invalid",background,interactables,visibleInteractables);
         assertNull(scene);
     }
 }
