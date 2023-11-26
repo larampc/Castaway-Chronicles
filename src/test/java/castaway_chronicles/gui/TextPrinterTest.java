@@ -47,7 +47,7 @@ public class TextPrinterTest {
         resource = getClass().getClassLoader().getResource("letters/uppercase/W.png");
         assertNotNull(resource);
         buffer.add(ImageIO.read(new File(resource.toURI())));
-        resource = getClass().getClassLoader().getResource("letters/lowercase/W.png");
+        resource = getClass().getClassLoader().getResource("letters/lowercase/w.png");
         assertNotNull(resource);
         buffer.add(ImageIO.read(new File(resource.toURI())));
 
