@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Backpack extends Scene {
 
-    public Backpack(Background background, List<Interactable> interactables) {
-        super(background, interactables);
+    public Backpack(Background background, List<Interactable> interactables, List<Interactable> visibleInteractables) {
+        super(background, interactables, visibleInteractables);
     }
 }

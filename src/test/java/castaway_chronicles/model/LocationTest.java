@@ -19,7 +19,7 @@ public class LocationTest {
         Interactable mockinteractable = Mockito.mock(Interactable.class);
         ArrayList<Interactable> interactables = new ArrayList<>();
         interactables.add(mockinteractable);
-        location = new Location(mockbackground, interactables);
+        location = new Location(mockbackground, interactables,interactables);
     }
 
     @Test
