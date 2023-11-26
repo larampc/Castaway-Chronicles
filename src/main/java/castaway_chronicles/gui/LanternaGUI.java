@@ -8,6 +8,7 @@ import com.googlecode.lanterna.graphics.TextImage;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 public class LanternaGUI implements GUI{
@@ -62,9 +63,17 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawText(Position position, String text) {
+    public void drawText(Position startPosition, int maxsize, String text) throws IOException, InterruptedException, URISyntaxException {
+        TextPrinter printer = new TextPrinter(new TerminalPosition(startPosition.getX(), startPosition.getY()),
+                maxsize,
+                screen, text);
+        printer.print();
+    }
+
+    @Override
+    public void drawLine(Position position) {
         graphics.setForegroundColor(new TextColor.RGB(255,255,255));
-        graphics.putString(position.getX(), position.getY(), text);
+        graphics.drawLine(new TerminalPosition(position.getX(), position.getY()), new TerminalPosition(position.getX()+30, position.getY()), '_');
     }
 
     @Override

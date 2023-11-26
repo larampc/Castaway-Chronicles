@@ -2,6 +2,7 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.view.Images;
 
 public class LocationViewer extends SceneViewer<Location> {
 

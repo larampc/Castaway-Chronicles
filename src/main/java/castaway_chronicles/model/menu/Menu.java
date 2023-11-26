@@ -26,7 +26,8 @@ public class Menu {
     public String getEntry(int i) {
         return entries.get(i);
     }
-
+    public int getCurrentEntry() {return currentEntry;}
+    public List<String> getEntries() {return entries;}
     public boolean isSelected(int i) {
         return currentEntry == i;
     }

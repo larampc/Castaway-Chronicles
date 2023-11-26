@@ -38,14 +38,6 @@ public class GUITest {
     }
 
     @Test
-    void drawText() {
-        gui.drawText(new Position(1, 1), "Hello World");
-
-        Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(new TextColor.RGB(255, 255, 255));
-        Mockito.verify(graphics, Mockito.times(1)).putString(1, 1, "Hello World");
-    }
-
-    @Test
     void refresh() throws IOException {
         gui.refresh();
         Mockito.verify(screen, Mockito.times(1)).refresh();

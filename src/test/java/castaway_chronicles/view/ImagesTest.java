@@ -1,6 +1,5 @@
 package castaway_chronicles.view;
 
-import castaway_chronicles.view.game.Images;
 import com.googlecode.lanterna.graphics.TextImage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,6 +59,7 @@ public class ImagesTest {
             Images image = new Images(ImagesList, "Test");
             TextImage textImage = image.getImage("test");
             URL resource = getClass().getClassLoader().getResource("Images/Test/test.png");
+            assert resource != null;
             File fontFile = new File(resource.toURI());
             BufferedImage img = ImageIO.read(fontFile);
 

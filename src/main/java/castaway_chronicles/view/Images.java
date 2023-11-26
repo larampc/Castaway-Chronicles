@@ -1,4 +1,4 @@
-package castaway_chronicles.view.game;
+package castaway_chronicles.view;
 
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;

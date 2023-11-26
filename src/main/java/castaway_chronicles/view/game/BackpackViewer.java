@@ -2,6 +2,7 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.scene.Backpack;
+import castaway_chronicles.view.Images;
 
 
 public class BackpackViewer extends SceneViewer<Backpack> {
