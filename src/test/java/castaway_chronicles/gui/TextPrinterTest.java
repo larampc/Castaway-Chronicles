@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TextPrinterTest {
     private Screen screen;
@@ -38,16 +39,16 @@ public class TextPrinterTest {
         assertEquals(buffer, printer.getLetters(""));
 
         URL resource = getClass().getClassLoader().getResource("letters/uppercase/question.png");
-        assert resource != null;
+        assertNotNull(resource);
         buffer.add(ImageIO.read(new File(resource.toURI())));
         resource = getClass().getClassLoader().getResource("letters/uppercase/point.png");
-        assert resource != null;
+        assertNotNull(resource);
         buffer.add(ImageIO.read(new File(resource.toURI())));
         resource = getClass().getClassLoader().getResource("letters/uppercase/W.png");
-        assert resource != null;
+        assertNotNull(resource);
         buffer.add(ImageIO.read(new File(resource.toURI())));
         resource = getClass().getClassLoader().getResource("letters/lowercase/W.png");
-        assert resource != null;
+        assertNotNull(resource);
         buffer.add(ImageIO.read(new File(resource.toURI())));
 
         assertEquals(buffer.get(0).getData().toString(), printer.getLetters("?.Ww").get(0).getData().toString());
@@ -61,7 +62,7 @@ public class TextPrinterTest {
         TextPrinter printer = new TextPrinter(new TerminalPosition(1,1), 100, screen, "?.Ww");
 
         URL resource = getClass().getClassLoader().getResource("Images/Test/test.png");
-        assert resource != null;
+        assertNotNull(resource);
         BufferedImage img = ImageIO.read(new File(resource.toURI()));
 
         printer.drawLetter(img);
