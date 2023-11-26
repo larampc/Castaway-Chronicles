@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Location extends Scene {
     private boolean mainChar = false;
-    public Location(Background background, List<Interactable> interactables) {
-        super(background,interactables);
+    public Location(Background background, List<Interactable> interactables, List<Interactable> visibleInteractables) {
+        super(background,interactables, visibleInteractables);
     }
     public void leftLocation() {this.mainChar = false;}
     public void enteredLocation() {this.mainChar = true;}
