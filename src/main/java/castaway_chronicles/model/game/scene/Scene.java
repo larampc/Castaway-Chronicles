@@ -5,7 +5,7 @@ import castaway_chronicles.model.game.elements.Interactable;
 
 import java.util.List;
 
-public abstract class Scene {
+public class Scene {
     private final List<Interactable> interactables;
     private final Background background;
 
