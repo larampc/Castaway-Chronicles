@@ -12,9 +12,11 @@ import java.io.IOException;
 
 public class LanternaGUI implements GUI{
     private final Screen screen;
+    private final TextGraphics graphics;
 
     public LanternaGUI(Screen screen) {
         this.screen = screen;
+        this.graphics = screen.newTextGraphics();
     }
 
 //    public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
@@ -56,13 +58,11 @@ public class LanternaGUI implements GUI{
 
     @Override
     public void drawImage(Position position, TextImage image) {
-        TextGraphics graphics = screen.newTextGraphics();
         graphics.drawImage(new TerminalPosition(position.getX(), position.getY()), image);
     }
 
     @Override
     public void drawText(Position position, String text) {
-        TextGraphics graphics = screen.newTextGraphics();
         graphics.setForegroundColor(new TextColor.RGB(255,255,255));
         graphics.putString(position.getX(), position.getY(), text);
     }
