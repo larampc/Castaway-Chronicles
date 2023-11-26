@@ -3,6 +3,9 @@ import castaway_chronicles.model.menu.Menu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuTest {
@@ -14,8 +17,19 @@ public class MenuTest {
 
     @Test
     public void getEntry(){
-        assertEquals(menu.getEntry(0),"Start");
-        assertEquals(menu.getEntry(1),"Exit");
+        assertEquals("Start", menu.getEntry(0));
+        assertEquals("Exit", menu.getEntry(1));
+    }
+
+    @Test
+    public void getCurrentEntry(){
+        assertEquals(0, menu.getCurrentEntry());
+    }
+
+    @Test
+    public void getEntries(){
+        List<String> entries = Arrays.asList("Start", "Exit");
+        assertEquals(entries, menu.getEntries());
     }
 
     @Test
@@ -40,16 +54,18 @@ public class MenuTest {
 
     @Test
     public void getNumberEntries(){
-        assertEquals(menu.getNumberEntries(), 2);
+        assertEquals(2, menu.getNumberEntries());
     }
     @Test
     public void nextEntry(){
         menu.nextEntry();
         assertTrue(menu.isSelected(1));
         assertFalse(menu.isSelected(0));
+        assertEquals(1, menu.getCurrentEntry());
         menu.nextEntry();
         assertTrue(menu.isSelected(0));
         assertFalse(menu.isSelected(1));
+        assertEquals(0, menu.getCurrentEntry());
     }
 
     @Test
@@ -57,8 +73,10 @@ public class MenuTest {
         menu.previousEntry();
         assertTrue(menu.isSelected(1));
         assertFalse(menu.isSelected(0));
+        assertEquals(1, menu.getCurrentEntry());
         menu.previousEntry();
         assertTrue(menu.isSelected(0));
         assertFalse(menu.isSelected(1));
+        assertEquals(0, menu.getCurrentEntry());
     }
 }
