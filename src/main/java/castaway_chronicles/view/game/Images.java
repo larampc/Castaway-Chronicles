@@ -24,7 +24,8 @@ public class Images {
         }
     }
     private TextImage loadpngimage(String filename) throws URISyntaxException, IOException {
-        URL resource = getClass().getClassLoader().getResource("Images/" + type + File.separator + filename + ".png");
+        URL resource = getClass().getClassLoader().getResource("Images/" + type + "/" + filename + ".png");
+        assert resource != null;
         File fontFile = new File(resource.toURI());
         BufferedImage img = ImageIO.read(fontFile);
 

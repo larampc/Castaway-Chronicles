@@ -7,6 +7,7 @@ import castaway_chronicles.model.game.elements.NPC;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,9 @@ public class LoaderSceneBuilder extends SceneBuilder{
     private final List<String> lines;
 
     public LoaderSceneBuilder(String filename, String type) throws IOException {
-        URL resource = LoaderSceneBuilder.class.getResource("/Scenes" + File.separator + type + File.separator + filename + ".txt");
+        URL resource = getClass().getClassLoader().getResource("Scenes/" + type + "/" + filename + ".txt");
         assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         lines = readLines(br);
     }
 
@@ -34,7 +35,7 @@ public class LoaderSceneBuilder extends SceneBuilder{
     protected Background getBackground() {
         for (String line : lines) {
             if (line.charAt(0) == 'B') {
-                String[] s = line.split(" ");
+                String[] s = line.split(" ", -1);
                 if(s.length < 5) return null;
                 int x = Integer.parseInt(s[2]), y = Integer.parseInt(s[3]), w = Integer.parseInt(s[4]), h = Integer.parseInt(s[5]);
                 return new Background(x, y, w, h, s[1]);
@@ -48,7 +49,7 @@ public class LoaderSceneBuilder extends SceneBuilder{
         List<Interactable> interactables = new ArrayList<>();
         for (String line : lines) {
             if (line.charAt(0) == 'I') {
-                String[] s = line.split(" ");
+                String[] s = line.split(" ",-1);
                 String name = s[2];
                 String type = s[1];
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
@@ -65,7 +66,7 @@ public class LoaderSceneBuilder extends SceneBuilder{
         List<Interactable> visibleInteractables = new ArrayList<>();
         for (String line : lines) {
             if (line.charAt(0) == 'I' && line.charAt(line.length() - 1) == 'V') {
-                String[] s = line.split(" ");
+                String[] s = line.split(" ", -1);
                 String name = s[2];
                 String type = s[1];
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
