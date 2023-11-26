@@ -35,7 +35,7 @@ public class TextPrinter {
         position = new TerminalPosition(startPosition.getColumn(), position.getRow()+spacing);
     }
 
-    public void drawletter(BufferedImage letter) throws IOException {
+    public void drawLetter(BufferedImage letter) throws IOException {
         for (int x = position.getColumn(); x < position.getColumn() + letter.getWidth(); x++) {
             for (int y = position.getRow(); y < position.getRow() + letter.getHeight(); y++) {
                 int a = letter.getRGB(x - position.getColumn(), y - position.getRow());
@@ -88,10 +88,9 @@ public class TextPrinter {
             int wordsize = 0;
             for(BufferedImage b : arr) wordsize += b.getWidth();
             if (position.getColumn() + wordsize > startPosition.getColumn()+maxsize) newLine();
-            for(BufferedImage b : arr) drawletter(b);
+            for(BufferedImage b : arr) drawLetter(b);
             TimeUnit.MILLISECONDS.sleep(writeTime);
             position = new TerminalPosition(position.getColumn() + space, position.getRow());
-            screen.refresh();
         }
     }
     public void setWriteTime(int writeTime) {this.writeTime = writeTime;}
