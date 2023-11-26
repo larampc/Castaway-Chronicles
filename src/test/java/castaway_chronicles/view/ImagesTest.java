@@ -45,9 +45,9 @@ public class ImagesTest {
     public void ImagesSize(){
         try {
             Images image = new Images(ImagesList, "Test");
-            TextImage textImage = image.getImage("test");
-            assertEquals(textImage.getSize().getRows(), 12);
-            assertEquals(textImage.getSize().getColumns(), 12);
+            BufferedImage textImage = image.getImage("test");
+            assertEquals(textImage.getWidth(), 12);
+            assertEquals(textImage.getHeight(), 12);
         } catch (URISyntaxException | IOException e) {
             fail();
         }
@@ -57,31 +57,15 @@ public class ImagesTest {
     public void ImagesContent(){
         try {
             Images image = new Images(ImagesList, "Test");
-            TextImage textImage = image.getImage("test");
+            BufferedImage textImage = image.getImage("test");
             URL resource = getClass().getClassLoader().getResource("Images/Test/test.png");
             assertNotNull(resource);
             File fontFile = new File(resource.toURI());
             BufferedImage img = ImageIO.read(fontFile);
 
-            for (int x = 0; x < textImage.getSize().getColumns(); x++){
-                for (int y = 0; y < textImage.getSize().getRows(); y++){
-                    int a = img.getRGB(x, y);
-                    int alpha = (a >> 24) & 0xff;
-                    int red = (a >> 16) & 255;
-                    int green = (a >> 8) & 255;
-                    int blue = a & 255;
-
-                    if (alpha != 0) {
-                        assertEquals(red, textImage.getCharacterAt(x,y).getBackgroundColor().getRed());
-                        assertEquals(green, textImage.getCharacterAt(x,y).getBackgroundColor().getGreen());
-                        assertEquals(blue, textImage.getCharacterAt(x,y).getBackgroundColor().getBlue());
-                    }
-                    else {
-                        assertEquals(0, textImage.getCharacterAt(x,y).getBackgroundColor().getRed());
-                        assertEquals(0, textImage.getCharacterAt(x,y).getBackgroundColor().getGreen());
-                        assertEquals(0, textImage.getCharacterAt(x,y).getBackgroundColor().getBlue());
-                    }
-
+            for (int x = 0; x < textImage.getWidth(); x++){
+                for (int y = 0; y < textImage.getHeight(); y++){
+                    assertEquals(img.getRGB(x, y), textImage.getRGB(x,y));
                 }
             }
         } catch (URISyntaxException | IOException e) {

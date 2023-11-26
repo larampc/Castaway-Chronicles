@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class GUITest {
@@ -30,11 +32,14 @@ public class GUITest {
 
     @Test
     void drawImage() {
-        BasicTextImage image = new BasicTextImage(10,10);
-        image.setCharacterAt(1, 2, new TextCharacter('T', new TextColor.RGB(0,200,0), new TextColor.RGB(200, 0, 0)));
-        gui.drawImage(new Position(1, 1), image);
+        BufferedImage image = new BufferedImage(10,10, BufferedImage.TYPE_INT_ARGB);
+        Color myWhite = new Color(255, 255, 255); // Color white
+        int rgb = myWhite.getRGB();
+        image.setRGB(0,0, rgb);
+        gui.drawImage(new Position(0, 0), image);
 
-        Mockito.verify(graphics, Mockito.times(1)).drawImage(new TerminalPosition(1,1), image);
+        TextCharacter c = new TextCharacter(' ', new TextColor.RGB(255, 255, 255), new TextColor.RGB(255, 255, 255));
+        Mockito.verify(graphics, Mockito.times(1)).setCharacter(0,0,c);
     }
 
     @Test
