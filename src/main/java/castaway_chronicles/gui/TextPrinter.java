@@ -82,7 +82,7 @@ public class TextPrinter {
         return buffer;
     }
     public void print() throws IOException, InterruptedException, URISyntaxException {
-        String[] arrOfStr = s.split(" ");
+        String[] arrOfStr = s.split(" ", -1);
         for (String a : arrOfStr) {
             ArrayList<BufferedImage> arr = getLetters(a);
             int wordsize = 0;

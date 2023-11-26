@@ -1,14 +1,14 @@
 package castaway_chronicles.gui;
 
 import castaway_chronicles.model.Position;
-import com.googlecode.lanterna.graphics.TextImage;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface GUI {
     //method to get next action
-    void drawImage(Position position, TextImage image);
+    void drawImage(Position position, BufferedImage image);
     void drawText(Position startPosition, int maxsize, String text) throws IOException, InterruptedException, URISyntaxException;
     void drawLine(Position position);
     void clear();
