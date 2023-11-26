@@ -11,19 +11,22 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-public class LoaderSceneBuilder extends SceneBuilder{
+public class SceneLoader {
     private final List<String> lines;
+    private final String type;
 
-    public LoaderSceneBuilder(String filename, String type) throws IOException {
+    public SceneLoader(String filename, String type) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Scenes/" + type + "/" + filename + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         lines = readLines(br);
+        this.type = type;
     }
-
+    public Scene createScene() {
+        Scene scene = SceneFactory.getScene(type, getBackground(), getInteractables(), getVisibleInteractables());
+        if(scene instanceof Location && hasMainChar()) ((Location) scene).enteredLocation();
+        return scene;
+    }
     private List<String> readLines(BufferedReader br) throws IOException {
         List<String> lines = new ArrayList<>();
         for (String line; (line = br.readLine()) != null; )
@@ -31,7 +34,6 @@ public class LoaderSceneBuilder extends SceneBuilder{
         return lines;
     }
 
-    @Override
     protected Background getBackground() {
         for (String line : lines) {
             if (line.charAt(0) == 'B') {
@@ -44,7 +46,6 @@ public class LoaderSceneBuilder extends SceneBuilder{
         return null;
     }
 
-    @Override
     protected List<Interactable> getInteractables() {
         List<Interactable> interactables = new ArrayList<>();
         for (String line : lines) {
@@ -61,7 +62,6 @@ public class LoaderSceneBuilder extends SceneBuilder{
         return interactables;
     }
 
-    @Override
     protected List<Interactable> getVisibleInteractables() {
         List<Interactable> visibleInteractables = new ArrayList<>();
         for (String line : lines) {
@@ -78,7 +78,6 @@ public class LoaderSceneBuilder extends SceneBuilder{
         return visibleInteractables;
     }
 
-    @Override
     protected boolean hasMainChar() {
         for(String line : lines){
             if(line.equals("M")) return true;

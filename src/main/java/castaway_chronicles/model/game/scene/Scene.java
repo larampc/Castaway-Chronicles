@@ -5,7 +5,7 @@ import castaway_chronicles.model.game.elements.Interactable;
 
 import java.util.List;
 
-public class Scene {
+public abstract class Scene {
     private final List<Interactable> interactables;
     private final Background background;
     private final List<Interactable> visibleInteractables;
@@ -14,13 +14,6 @@ public class Scene {
         this.interactables = interactables;
         this.background = background;
         this.visibleInteractables = visibleInteractables;
-    }
-    public void addInteractable(Interactable interactable) {
-        interactables.add(interactable);
-    }
-    public void removeInteractable(Interactable interactable) {
-        interactables.remove(interactable);
-        visibleInteractables.remove(interactable);
     }
     public List<Interactable> getInteractables() {return interactables;}
     public Background getBackground() {return background;}

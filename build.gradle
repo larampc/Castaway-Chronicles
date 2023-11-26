@@ -33,5 +33,5 @@ test {
 }
 
 application {
-    mainClass.set('castaway_chronicles.Game')
+    mainClass.set('castaway_chronicles.Application')
 }
