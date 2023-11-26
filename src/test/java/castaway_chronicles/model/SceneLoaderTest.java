@@ -34,7 +34,10 @@ public class SceneLoaderTest {
         sceneBuilder = new SceneLoader("TestScene2", "Location");
         scene = sceneBuilder.createScene();
         assertNull(scene.getBackground());
-//        assertThrows(NullPointerException.class, () -> scene.getBackground().getName());
+
+        sceneBuilder = new SceneLoader("TestScene3", "Location");
+        scene = sceneBuilder.createScene();
+        assertNull(scene.getBackground());
     }
     @Test
     public void hasMainChar() throws IOException {
