@@ -32,7 +32,7 @@ public class Application {
         backgrounds.add("Beach");
         SceneViewer<Location> scene = new LocationViewer((Location) loadscene.createScene());
         scene.draw(gui);
-        gui.drawText(new Position(10, 100), 170, "H,ell!o wh?????                           ? ? .sfiriugreofe Brunooooooooo   ooooooooo oo ooo ooooooooooooo oo ooooooooogg cnxhd fhhfhfb bfysgf fssbhh", 1);
+        gui.drawText(new Position(10, 100), 170, "I'm toot H,ell!o wh?????                           ? ? .sfiriugreofe Brunooooooooo   ooooooooo oo ooo ooooooooooooo oo ooooooooogg cnxhd fhhfhfb bfysgf fssbhh", 1);
         TimeUnit.SECONDS.sleep(15);
         gui.close();
     }
