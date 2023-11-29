@@ -9,6 +9,7 @@ import com.googlecode.lanterna.screen.Screen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import static org.mockito.ArgumentMatchers.*;
@@ -24,7 +25,6 @@ public class GUITest {
         graphics = Mockito.mock(TextGraphics.class);
 
         Mockito.when(screen.newTextGraphics()).thenReturn(graphics);
-
         gui = new LanternaGUI(screen);
     }
 
@@ -44,11 +44,13 @@ public class GUITest {
 
         TextCharacter c = new TextCharacter(' ', new TextColor.RGB(0, 0, 0), new TextColor.RGB(0, 0, 0));
         gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j", 0);
+        gui.drawText(new Position(0,0),70,"Lorem ipsum ,.!? jjjjj", 0);
 
-        Mockito.verify(graphics, Mockito.times(2)).setCharacter(63,6, c);
-        Mockito.verify(graphics, Mockito.times(1)).setCharacter(1,10, c);
 
-        Mockito.verify(screen,Mockito.times(16)).refresh();
+        Mockito.verify(graphics, Mockito.times(3)).setCharacter(63,6, c);
+        Mockito.verify(graphics, Mockito.times(2)).setCharacter(1,10, c);
+
+        Mockito.verify(screen,Mockito.times(17)).refresh();
     }
 
     @Test
