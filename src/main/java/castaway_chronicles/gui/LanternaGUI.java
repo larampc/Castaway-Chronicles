@@ -94,23 +94,22 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text, int waittime) throws IOException, InterruptedException {
+    public void drawText(Position startPosition, int maxsize, String text, int waitTime) throws IOException, InterruptedException {
         String[] arrOfStr = text.split(" ", -1);
         Position position = new Position(startPosition.getX(), startPosition.getY());
         for (String word : arrOfStr) {
             int wordsize = 0;
-            for(int i = 0; i < word.length(); i++) {
+            for(int i = 0; i < word.length(); i++)
                 wordsize += images.get(String.valueOf(word.charAt(i))).getWidth();
-            }
-            if (position.getX() + wordsize > startPosition.getX() +maxsize) position = new Position(startPosition.getX(), position.getY()+10);
+            if (position.getX() + wordsize > startPosition.getX() +maxsize)
+                position = new Position(startPosition.getX(), position.getY()+10);
             for(int i = 0; i < word.length(); i++) {
                 drawImage(position, String.valueOf(word.charAt(i)));
-                if (waittime != 0) {
+                if (waitTime != 0) {
                     screen.refresh();
-                    TimeUnit.MILLISECONDS.sleep(waittime);
+                    TimeUnit.MILLISECONDS.sleep(waitTime);
                 }
                 position = position.getRight(images.get(String.valueOf(word.charAt(i))).getWidth());
-
             }
             position = position.getRight(2);
         }
