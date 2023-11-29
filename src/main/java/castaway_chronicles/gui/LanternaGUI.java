@@ -62,12 +62,9 @@ public class LanternaGUI implements GUI{
         assert resource != null;
         File fontFile = new File(resource.toURI());
         Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
-
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
-
         Font newfont = font.deriveFont(Font.PLAIN, 4);
-
         return new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING, newfont);
     }
 
@@ -77,7 +74,7 @@ public class LanternaGUI implements GUI{
         File fontFile = new File(resource.toURI());
         loadFiles(fontFile, images);
     }
-    private void loadFiles(File dir, HashMap<String, Sprite> images) throws IOException, URISyntaxException {
+    private void loadFiles(File dir, HashMap<String, Sprite> images) throws IOException {
         if (!dir.isDirectory()) {
             if(dir.getName().equals("question.png")) images.put("?", new Sprite(dir));
             else if(dir.getName().equals("point.png")) images.put(".", new Sprite(dir));
