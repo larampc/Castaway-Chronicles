@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import static org.mockito.ArgumentMatchers.*;
 
 public class GUITest {
     private Screen screen;
@@ -20,31 +20,42 @@ public class GUITest {
     private TextGraphics graphics;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws URISyntaxException, IOException {
         screen = Mockito.mock(Screen.class);
         graphics = Mockito.mock(TextGraphics.class);
 
         Mockito.when(screen.newTextGraphics()).thenReturn(graphics);
-
         gui = new LanternaGUI(screen);
     }
 
     @Test
     void drawImage() {
-        BufferedImage image = new BufferedImage(10,10, BufferedImage.TYPE_INT_ARGB);
-        Color myWhite = new Color(255, 255, 255); // Color white
-        int rgb = myWhite.getRGB();
-        image.setRGB(0,0, rgb);
-        gui.drawImage(new Position(0, 0), image);
-
+        gui.drawImage(new Position(0, 0), "test");
         TextCharacter c = new TextCharacter(' ', new TextColor.RGB(255, 255, 255), new TextColor.RGB(255, 255, 255));
-        Mockito.verify(graphics, Mockito.times(1)).setCharacter(0,0,c);
+        Mockito.verify(graphics, Mockito.times(1)).setCharacter(10,10, c);
+        Mockito.verify(graphics, Mockito.times(0)).setCharacter(eq(11),eq(11), any(TextCharacter.class));
+        Mockito.verify(graphics, Mockito.times(96)).setCharacter(intThat(inte -> (inte>0 && inte <11)),intThat(inte -> (inte>0 && inte <11)), any(TextCharacter.class));
+    }
+
+    @Test
+    void drawText() throws IOException, InterruptedException {
+        gui.drawText(new Position(0,0),100,"Lorem ipsum ,.!?", 1);
+        Mockito.verify(screen,Mockito.times(15)).refresh();
+
+        TextCharacter c = new TextCharacter(' ', new TextColor.RGB(0, 0, 0), new TextColor.RGB(0, 0, 0));
+        gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j", 0);
+        gui.drawText(new Position(0,0),70,"Lorem ipsum ,.!? jjjjj", 0);
+
+
+        Mockito.verify(graphics, Mockito.times(3)).setCharacter(63,6, c);
+        Mockito.verify(graphics, Mockito.times(2)).setCharacter(1,10, c);
+
+        Mockito.verify(screen,Mockito.times(17)).refresh();
     }
 
     @Test
     void drawLine() {
         gui.drawLine(new Position(1, 1));
-
         Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(new TextColor.RGB(255,255,255));
         Mockito.verify(graphics, Mockito.times(1)).drawLine(new TerminalPosition(1, 1), new TerminalPosition(31, 1), '_');
     }
@@ -67,3 +78,4 @@ public class GUITest {
         Mockito.verify(screen, Mockito.times(1)).close();
     }
 }
+

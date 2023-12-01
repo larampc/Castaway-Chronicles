@@ -3,7 +3,6 @@ package castaway_chronicles.gui;
 import castaway_chronicles.model.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -12,22 +11,25 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 
 public class LanternaGUI implements GUI{
     private final Screen screen;
     private final TextGraphics graphics;
+    private final HashMap<String, Sprite> images = new HashMap<>();
 
-    public LanternaGUI(Screen screen) {
+    public LanternaGUI(Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
         this.graphics = screen.newTextGraphics();
+        loadSprites();
     }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
@@ -35,7 +37,7 @@ public class LanternaGUI implements GUI{
         Terminal terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
         this.graphics = screen.newTextGraphics();
-
+        loadSprites();
     }
     private Screen createScreen(Terminal terminal) throws IOException {
         final Screen screen;
@@ -60,38 +62,55 @@ public class LanternaGUI implements GUI{
         assert resource != null;
         File fontFile = new File(resource.toURI());
         Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
-
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
-
         Font newfont = font.deriveFont(Font.PLAIN, 4);
-
         return new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING, newfont);
     }
 
-    @Override
-    public void drawImage(Position position, BufferedImage image) {
-        for (int x = 0; x < image.getWidth(); x++){
-            for (int y = 0; y < image.getHeight(); y++){
-                int a = image.getRGB(x, y);
-                int alpha = (a >> 24) & 0xff;
-                int red = (a >> 16) & 255;
-                int green = (a >> 8) & 255;
-                int blue = a & 255;
-                if (alpha != 0) {
-                    TextCharacter c = new TextCharacter(' ', new TextColor.RGB(red, green, blue), new TextColor.RGB(red, green, blue));
-                    graphics.setCharacter(position.getX() + x, position.getY() + y, c);
-                }
-            }
+    private void loadSprites() throws URISyntaxException, IOException {
+        URL resource = getClass().getClassLoader().getResource("Images");
+        assert resource != null;
+        File fontFile = new File(resource.toURI());
+        loadFiles(fontFile, images);
+    }
+    private void loadFiles(File dir, HashMap<String, Sprite> images) throws IOException {
+        if (!dir.isDirectory()) {
+            if(dir.getName().equals("question.png")) images.put("?", new Sprite(dir));
+            else if(dir.getName().equals("point.png")) images.put(".", new Sprite(dir));
+            else images.put(dir.getName().split(".png")[0], new Sprite(dir));
+            return;
         }
+        for (File f : Objects.requireNonNull(dir.listFiles())) {
+            loadFiles(f, images);
+        }
+    }
+    @Override
+    public void drawImage(Position position, String name) {
+        images.get(name).drawSprite(position, graphics);
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text) throws IOException, InterruptedException, URISyntaxException {
-        TextPrinter printer = new TextPrinter(new TerminalPosition(startPosition.getX(), startPosition.getY()),
-                maxsize,
-                screen, text);
-        printer.print();
+    public void drawText(Position startPosition, int maxsize, String text, int waitTime) throws IOException, InterruptedException {
+        String[] arrOfStr = text.split(" ", -1);
+        Position position = new Position(startPosition.getX(), startPosition.getY());
+        for (String word : arrOfStr) {
+            int wordsize = 0;
+            for(int i = 0; i < word.length(); i++)
+                wordsize += images.get(String.valueOf(word.charAt(i))).getWidth();
+            if (position.getX() + wordsize > startPosition.getX() +maxsize)
+                position = new Position(startPosition.getX(), position.getY()+10);
+            for(int i = 0; i < word.length(); i++) {
+                drawImage(position, String.valueOf(word.charAt(i)));
+                if (waitTime != 0) {
+                    screen.refresh();
+                    TimeUnit.MILLISECONDS.sleep(waitTime);
+                }
+                position = position.getRight(images.get(String.valueOf(word.charAt(i))).getWidth());
+            }
+            position = position.getRight(2);
+        }
+        screen.refresh();
     }
 
     @Override
