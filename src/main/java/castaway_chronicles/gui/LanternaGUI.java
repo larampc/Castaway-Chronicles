@@ -91,7 +91,7 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text, int waitTime) throws IOException, InterruptedException {
+    public void drawText(Position startPosition, int maxsize, String text, int waitTime, boolean underlined) throws IOException, InterruptedException {
         String[] arrOfStr = text.split(" ", -1);
         Position position = new Position(startPosition.getX(), startPosition.getY());
         for (String word : arrOfStr) {
@@ -100,6 +100,7 @@ public class LanternaGUI implements GUI{
                 wordsize += images.get(String.valueOf(word.charAt(i))).getWidth();
             if (position.getX() + wordsize > startPosition.getX() +maxsize)
                 position = new Position(startPosition.getX(), position.getY()+10);
+            if(underlined) drawLine(position.getDown(8).getLeft(1),wordsize+2);
             for(int i = 0; i < word.length(); i++) {
                 drawImage(position, String.valueOf(word.charAt(i)));
                 if (waitTime != 0) {
@@ -114,9 +115,9 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawLine(Position position) {
+    public void drawLine(Position position, int size) {
         graphics.setForegroundColor(new TextColor.RGB(255,255,255));
-        graphics.drawLine(new TerminalPosition(position.getX(), position.getY()), new TerminalPosition(position.getX()+30, position.getY()), '_');
+        graphics.drawLine(new TerminalPosition(position.getX(), position.getY()), new TerminalPosition(position.getX()+size, position.getY()), '_');
     }
 
     @Override
