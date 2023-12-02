@@ -64,7 +64,7 @@ public class LanternaGUI implements GUI{
         MouseAdapter mouseAdapter = new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
-                action = new ClickAction("CLICK", new Position(e.getX(), e.getY()));
+                action = new ClickAction("CLICK", new Position(e.getX()/4, e.getY()/4));
             }
         };
         ((AWTTerminalFrame)terminal).getComponent(0).addMouseListener(mouseAdapter);

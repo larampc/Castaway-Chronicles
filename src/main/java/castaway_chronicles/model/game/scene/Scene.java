@@ -23,7 +23,7 @@ public abstract class Scene {
     public List<Interactable> getVisibleInteractables() {
         return new ArrayList<>(visibleInteractables.values());
     }
-
+    public Interactable getInteractable(String name) {return interactables.get(name);}
     public void setVisible(String name){
         visibleInteractables.put(name, interactables.get(name));
     }

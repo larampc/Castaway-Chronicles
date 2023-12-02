@@ -1,0 +1,2 @@
+map_Icon 2 2 23 17
+backpack_icon 180 2 17 25

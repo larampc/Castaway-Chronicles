@@ -47,16 +47,16 @@ public class SceneLoader {
         return null;
     }
 
-    protected void getInteractables() {
+    protected void getInteractables() throws IOException {
         for (String line : lines) {
             if (line.charAt(0) == 'I') {
                 String[] s = line.split(" ",-1);
                 String name = s[2];
                 String type = s[1];
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
-                if ( line.charAt(line.length() - 1) == 'V') {
-                    if (type.equalsIgnoreCase("NPC")) visibleInteractables.put(name, new NPC(x, y, w, h, name));
-                    if (type.equalsIgnoreCase("ITEM")) visibleInteractables.put(name, new Item(x, y, w, h, name));
+                Interactable interactable = InteractableFactory.getInteractable(type,x,y,w,h,name);
+                if (line.charAt(line.length() - 1) == 'V') {
+                    visibleInteractables.put(name,interactable);
                 }
                 if (type.equalsIgnoreCase("NPC")) interactables.put(name, new NPC(x, y, w, h, name));
                 if (type.equalsIgnoreCase("ITEM")) interactables.put(name, new Item(x, y, w, h, name));

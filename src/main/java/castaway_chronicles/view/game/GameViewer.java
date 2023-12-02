@@ -4,13 +4,16 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.view.Viewer;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class GameViewer extends Viewer<Game> {
     public GameViewer(Game model) {
         super(model);
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    protected void drawElements(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
             case BACKPACK:
                 new BackpackViewer(getModel().getBackpack()).draw(gui);

@@ -5,6 +5,7 @@ import castaway_chronicles.model.game.scene.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ public class SceneFactoryTest {
     private static MainChar mainChar;
 
     @BeforeEach
-    public void init(){
+    public void init() throws IOException {
         interactables = new HashMap<>();
         visibleInteractables = new HashMap<>();
         interactables.put("new Item", new Item(1,2,3,4,"new item"));
