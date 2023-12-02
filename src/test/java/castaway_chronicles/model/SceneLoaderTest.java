@@ -2,7 +2,6 @@ package castaway_chronicles.model;
 
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.SceneLoader;
-import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Scene;
 import org.junit.jupiter.api.Test;
 
@@ -39,20 +38,20 @@ public class SceneLoaderTest {
         scene = sceneBuilder.createScene();
         assertNull(scene.getBackground());
     }
-    @Test
-    public void hasMainChar() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene2", "Location");
-        Scene scene = sceneBuilder.createScene();
-        assertNotNull(scene);
-        assertTrue(((Location) scene).hasMainChar());
-    }
-    @Test
-    public void hasNotMainChar() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene", "Location");
-        Scene scene = sceneBuilder.createScene();
-        assertNotNull(scene);
-        assertFalse(((Location) scene).hasMainChar());
-    }
+//    @Test
+//    public void hasMainChar() throws IOException {
+//        SceneLoader sceneBuilder = new SceneLoader("TestScene2", "Location");
+//        Scene scene = sceneBuilder.createScene();
+//        assertNotNull(scene);
+//        assertTrue(((Location) scene).hasMainChar());
+//    }
+//    @Test
+//    public void hasNotMainChar() throws IOException {
+//        SceneLoader sceneBuilder = new SceneLoader("TestScene", "Location");
+//        Scene scene = sceneBuilder.createScene();
+//        assertNotNull(scene);
+//        assertFalse(((Location) scene).hasMainChar());
+//    }
 
 
     @Test

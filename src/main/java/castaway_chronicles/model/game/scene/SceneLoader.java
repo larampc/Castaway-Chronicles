@@ -1,15 +1,13 @@
 package castaway_chronicles.model.game.scene;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.Item;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.elements.*;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SceneLoader {
     private final List<String> lines;
@@ -23,8 +21,7 @@ public class SceneLoader {
         this.type = type;
     }
     public Scene createScene() {
-        Scene scene = SceneFactory.getScene(type, getBackground(), getInteractables(), getVisibleInteractables());
-        if(scene instanceof Location && hasMainChar()) ((Location) scene).enteredLocation();
+        Scene scene = SceneFactory.getScene(type, getBackground(), getInteractables(), getVisibleInteractables(), getMainChar());
         return scene;
     }
     private List<String> readLines(BufferedReader br) throws IOException {
@@ -78,11 +75,18 @@ public class SceneLoader {
         return visibleInteractables;
     }
 
-    protected boolean hasMainChar() {
-        for(String line : lines){
-            if(line.equals("M")) return true;
+    protected MainChar getMainChar() {
+        if (Objects.equals(type, "Location")) {
+            for(String line : lines){
+                if (line.charAt(0) == 'M') {
+                    String[] s = line.split(" ",-1);
+                    int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
+                    //FACTORY?
+                    return new MainChar(x,y,w,h, "standing_left");
+                }
+            }
         }
-        return false;
+        return null;
     }
 
 }
