@@ -40,7 +40,7 @@ public class GUITest {
     @Test
     void drawText() throws IOException, InterruptedException {
         gui.drawText(new Position(0,0),100,"Lorem ipsum ,.!?", 1,false);
-        Mockito.verify(screen,Mockito.times(15)).refresh();
+        Mockito.verify(screen,Mockito.times(14)).refresh();
 
         TextCharacter c = new TextCharacter(' ', new TextColor.RGB(0, 0, 0), new TextColor.RGB(0, 0, 0));
         gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j", 0,false);
@@ -50,7 +50,7 @@ public class GUITest {
         Mockito.verify(graphics, Mockito.times(3)).setCharacter(63,6, c);
         Mockito.verify(graphics, Mockito.times(2)).setCharacter(1,10, c);
 
-        Mockito.verify(screen,Mockito.times(17)).refresh();
+        Mockito.verify(screen,Mockito.times(14)).refresh();
     }
 
     @Test
