@@ -58,8 +58,7 @@ public class SceneLoader {
                 if (line.charAt(line.length() - 1) == 'V') {
                     visibleInteractables.put(name,interactable);
                 }
-                if (type.equalsIgnoreCase("NPC")) interactables.put(name, new NPC(x, y, w, h, name));
-                if (type.equalsIgnoreCase("ITEM")) interactables.put(name, new Item(x, y, w, h, name));
+                interactables.put(name,interactable);
             }
         }
     }
