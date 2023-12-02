@@ -137,9 +137,12 @@ public class LanternaGUI implements GUI{
             }
             position = position.getRight(2);
         }
-//        screen.refresh();
     }
-
+    @Override
+    public void drawDialog(String text) throws IOException, InterruptedException {
+        drawImage(new Position(2,118), "dialog");
+        drawText(new Position(6,122),130,text,0,false);
+    }
     @Override
     public void drawLine(Position position, int size) {
         graphics.setForegroundColor(new TextColor.RGB(255,255,255));

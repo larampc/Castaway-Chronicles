@@ -9,6 +9,7 @@ public interface GUI {
     //method to get next action
     void drawImage(Position position, String name);
     void drawText(Position startPosition, int maxsize, String text, int waitTime, boolean underlined) throws IOException, InterruptedException, URISyntaxException;
+    void drawDialog(String text) throws IOException, InterruptedException;
     void drawLine(Position position, int size);
     void clear();
     void refresh() throws IOException;
