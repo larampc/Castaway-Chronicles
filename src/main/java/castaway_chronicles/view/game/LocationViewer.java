@@ -9,17 +9,12 @@ public class LocationViewer extends SceneViewer<Location> {
         super(model);
     }
 
-    public Location getLocationModel() {
-        return (Location) getModel();
-    }
-
-    @Override
-    public void drawElements(GUI gui) {
+    public void draw(GUI gui) {
         drawBackground(gui);
         drawInteractables(gui);
         drawMainChar(gui);
     }
     public void drawMainChar(GUI gui) {
-        gui.drawImage(getLocationModel().getMainChar().getPosition(), getLocationModel().getMainChar().getName());
+        gui.drawImage(getModel().getMainChar().getPosition(), getModel().getMainChar().getName());
     }
 }

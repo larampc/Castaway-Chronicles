@@ -7,12 +7,8 @@ public class MapViewer extends SceneViewer<Map> {
     public MapViewer(Map model) {
         super(model);
     }
-    public Map getMapModel() {
-        return (Map) getModel();
-    }
 
-    @Override
-    public void drawElements(GUI gui) {
+    public void draw(GUI gui) {
         drawBackground(gui);
         drawInteractables(gui);
     }

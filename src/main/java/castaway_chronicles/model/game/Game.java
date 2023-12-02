@@ -1,43 +1,56 @@
 package castaway_chronicles.model.game;
 
-import castaway_chronicles.model.game.elements.MainChar;
 import castaway_chronicles.model.game.scene.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class Game {
     private final Map map;
     private final Backpack backpack;
-    private final List<Location> locations = new ArrayList<>();
-    private final MainChar mainchar;
+    private final HashMap<String, Location> locations = new HashMap<>();
+    private String currentLocation;
+    private SCENE currentScene;
 
     public Game() throws IOException {
-        SceneLoader mapBuilder = new SceneLoader("Map","Map");
+        SceneLoader mapBuilder = new SceneLoader("Map", "Map");
         this.map = (Map) mapBuilder.createScene();
-        SceneLoader backpackBuilder = new SceneLoader("Backpack","Backpack");
+        SceneLoader backpackBuilder = new SceneLoader("Backpack", "Backpack");
         this.backpack = (Backpack) backpackBuilder.createScene();
-        for (Integer i = 1; i <= 2; i++) {
-            SceneLoader locationsBuilder = new SceneLoader("Scene"+i.toString(),"Location");
-            this.locations.add((Location) locationsBuilder.createScene());
+        URL resource = getClass().getClassLoader().getResource("Scenes/Location/Locations.txt");
+        assert resource != null;
+        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        for (String line; (line = br.readLine()) != null; ){
+            String[] s = line.split(" ",-1);
+            if (s.length == 2) {currentLocation = s[0];}
+            SceneLoader locationsBuilder = new SceneLoader(s[0], "Location");
+            this.locations.put(s[0], (Location) locationsBuilder.createScene());
         }
-        this.mainchar = new MainChar(120,120, 10, 10, "MainChar");
+        currentScene = SCENE.LOCATION;
     }
 
     public Backpack getBackpack() {
         return backpack;
     }
 
-    public MainChar getMainchar() {
-        return mainchar;
-    }
-
     public Map getMap() {
         return map;
     }
-
-    public List<Location> getLocations() {
-        return locations;
+    public Location getLocation(String name) {
+        return locations.get(name);
     }
+    public String getCurrentLocation() {
+        return currentLocation;
+    }
+    public SCENE getScene() {
+        return currentScene;
+    }
+    public void setCurrentScene(String scene) {
+        currentScene = SCENE.valueOf(scene);
+    }
+    public enum SCENE{BACKPACK, MAP, LOCATION}
 }

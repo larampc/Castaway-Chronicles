@@ -7,14 +7,7 @@ public class BackpackViewer extends SceneViewer<Backpack> {
     public BackpackViewer(Backpack model) {
         super(model);
     }
-
-    public Backpack getLocationModel() {
-        return (Backpack) getModel();
-    }
-
-
-    @Override
-    public void drawElements(GUI gui) {
+    public void draw(GUI gui) {
         drawBackground(gui);
         drawInteractables(gui);
     }
