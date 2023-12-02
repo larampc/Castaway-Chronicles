@@ -141,7 +141,7 @@ public class LanternaGUI implements GUI{
             }
             position = position.getRight(2);
         }
-        screen.refresh();
+//        screen.refresh();
     }
 
     @Override
