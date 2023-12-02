@@ -79,10 +79,6 @@ public class LanternaGUI implements GUI{
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) key = "SELECT";
                 action = new KeyAction(key);
             }
-            @Override
-            public void keyReleased(KeyEvent e) {
-                action = new KeyAction("NONE");
-            }
         });
         return terminal;
     }
@@ -167,6 +163,8 @@ public class LanternaGUI implements GUI{
 
     @Override
     public Action getNextAction() {
-        return action;
+        Action return_action = action;
+        action = new KeyAction("NONE");
+        return return_action;
     }
 }
