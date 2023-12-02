@@ -10,8 +10,13 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -25,6 +30,7 @@ public class LanternaGUI implements GUI{
     private final Screen screen;
     private final TextGraphics graphics;
     private final HashMap<String, Sprite> images = new HashMap<>();
+    private Action action = new KeyAction("NONE");
 
     public LanternaGUI(Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
@@ -50,11 +56,35 @@ public class LanternaGUI implements GUI{
     }
 
     private Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
-        return new DefaultTerminalFactory()
+        Terminal terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(new TerminalSize(width, height))
                 .setTerminalEmulatorFontConfiguration(fontConfig)
                 .setForceAWTOverSwing(true)
                 .createTerminal();
+        MouseAdapter mouseAdapter = new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                action = new ClickAction("CLICK", new Position(e.getX(), e.getY()));
+            }
+        };
+        ((AWTTerminalFrame)terminal).getComponent(0).addMouseListener(mouseAdapter);
+        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                String key = "NONE";
+                if (e.getKeyCode() == KeyEvent.VK_UP) key = "UP";
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) key = "DOWN";
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) key = "LEFT";
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) key = "RIGHT";
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) key = "SELECT";
+                action = new KeyAction(key);
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                action = new KeyAction("NONE");
+            }
+        });
+        return terminal;
     }
 
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
@@ -78,7 +108,7 @@ public class LanternaGUI implements GUI{
         if (!dir.isDirectory()) {
             if(dir.getName().equals("question.png")) images.put("?", new Sprite(dir));
             else if(dir.getName().equals("point.png")) images.put(".", new Sprite(dir));
-            else images.put(dir.getName().split(".png")[0], new Sprite(dir));
+            else images.put(dir.getName().split(".png", -1)[0], new Sprite(dir));
             return;
         }
         for (File f : Objects.requireNonNull(dir.listFiles())) {
@@ -133,5 +163,10 @@ public class LanternaGUI implements GUI{
     @Override
     public void close() throws IOException {
         screen.close();
+    }
+
+    @Override
+    public Action getNextAction() {
+        return action;
     }
 }
