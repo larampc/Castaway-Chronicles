@@ -3,11 +3,11 @@ package castaway_chronicles.model.game.scene;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Interactable;
 
-import java.util.List;
+import java.util.HashMap;
 
 public class Backpack extends Scene {
 
-    public Backpack(Background background, List<Interactable> interactables, List<Interactable> visibleInteractables) {
+    public Backpack(Background background, HashMap<String, Interactable> interactables, HashMap<String, Interactable> visibleInteractables) {
         super(background, interactables, visibleInteractables);
     }
 }

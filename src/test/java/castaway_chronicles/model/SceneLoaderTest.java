@@ -1,12 +1,13 @@
 package castaway_chronicles.model;
 
+import castaway_chronicles.model.game.elements.Icon;
+import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.SceneLoader;
 import castaway_chronicles.model.game.scene.Scene;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,13 +17,17 @@ public class SceneLoaderTest {
     public void getInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
         Scene scene = sceneBuilder.createScene();
-        assertEquals(Arrays.asList(new NPC(1,2,3,4,"engineer"), new NPC(1,2,3,4,"witch")), scene.getInteractables());
+        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer"),
+                new NPC(1,2,3,4,"witch"), new Icon(2,2,23,17,"map_Icon"), new Icon(180,2,17,25, "backpack_icon"));
+        assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
     public void getVisibleInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
         Scene scene = sceneBuilder.createScene();
-        assertEquals(List.of(new NPC(1, 2, 3, 4, "engineer")), scene.getVisibleInteractables());
+        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer"),
+                new Icon(2,2,23,17,"map_Icon"), new Icon(180,2,17,25, "backpack_icon"));
+        assertTrue(interactables.size() == scene.getVisibleInteractables().size() && interactables.containsAll(scene.getVisibleInteractables()));
     }
     @Test
     public void getBackground() throws IOException {

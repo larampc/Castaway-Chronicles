@@ -6,11 +6,13 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class SceneLoader {
     private final List<String> lines;
+    private final HashMap<String, Interactable> interactables = new HashMap<>();
+    private final HashMap<String, Interactable> visibleInteractables = new HashMap<>();
     private final String type;
 
     public SceneLoader(String filename, String type) throws IOException {
@@ -19,9 +21,11 @@ public class SceneLoader {
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         lines = readLines(br);
         this.type = type;
+        getInteractables();
+        getIcons();
     }
     public Scene createScene() {
-        Scene scene = SceneFactory.getScene(type, getBackground(), getInteractables(), getVisibleInteractables(), getMainChar());
+        Scene scene = SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
         return scene;
     }
     private List<String> readLines(BufferedReader br) throws IOException {
@@ -43,40 +47,26 @@ public class SceneLoader {
         return null;
     }
 
-    protected List<Interactable> getInteractables() {
-        List<Interactable> interactables = new ArrayList<>();
+    protected void getInteractables() {
         for (String line : lines) {
             if (line.charAt(0) == 'I') {
                 String[] s = line.split(" ",-1);
                 String name = s[2];
                 String type = s[1];
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
-                //FACTORY?
-                if (type.equalsIgnoreCase("NPC")) interactables.add(new NPC(x, y, w, h, name));
-                if (type.equalsIgnoreCase("ITEM")) interactables.add(new Item(x, y, w, h, name));
+                if ( line.charAt(line.length() - 1) == 'V') {
+                    if (type.equalsIgnoreCase("NPC")) visibleInteractables.put(name, new NPC(x, y, w, h, name));
+                    if (type.equalsIgnoreCase("ITEM")) visibleInteractables.put(name, new Item(x, y, w, h, name));
+                }
+                if (type.equalsIgnoreCase("NPC")) interactables.put(name, new NPC(x, y, w, h, name));
+                if (type.equalsIgnoreCase("ITEM")) interactables.put(name, new Item(x, y, w, h, name));
             }
         }
-        return interactables;
     }
 
-    protected List<Interactable> getVisibleInteractables() {
-        List<Interactable> visibleInteractables = new ArrayList<>();
-        for (String line : lines) {
-            if (line.charAt(0) == 'I' && line.charAt(line.length() - 1) == 'V') {
-                String[] s = line.split(" ", -1);
-                String name = s[2];
-                String type = s[1];
-                int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
-                //FACTORY?
-                if (type.equalsIgnoreCase("NPC")) visibleInteractables.add(new NPC(x, y, w, h, name));
-                if (type.equalsIgnoreCase("ITEM")) visibleInteractables.add(new Item(x, y, w, h, name));
-            }
-        }
-        return visibleInteractables;
-    }
 
     protected MainChar getMainChar() {
-        if (Objects.equals(type, "Location")) {
+        if (type.equalsIgnoreCase( "Location")) {
             for(String line : lines){
                 if (line.charAt(0) == 'M') {
                     String[] s = line.split(" ",-1);
@@ -88,5 +78,19 @@ public class SceneLoader {
         }
         return null;
     }
-
+    protected void getIcons() throws IOException {
+        if (type.equalsIgnoreCase("Location")) {
+            URL resource = getClass().getClassLoader().getResource("Scenes/Location/Icons.txt");
+            assert resource != null;
+            BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+            List<String> icons = readLines(br);
+            for (String line : icons) {
+                String[] s = line.split(" ",-1);
+                String name = s[0];
+                int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
+                visibleInteractables.put(name, new Icon(x, y, w,h,name));
+                interactables.put(name, new Icon(x,y,w,h,name));
+            }
+        }
+    }
 }

@@ -22,5 +22,4 @@ public class GameViewer extends Viewer<Game> {
                 new LocationViewer(getModel().getLocation(getModel().getCurrentLocation())).draw(gui);
         }
     }
-
 }

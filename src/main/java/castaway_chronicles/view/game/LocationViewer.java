@@ -14,7 +14,8 @@ public class LocationViewer extends SceneViewer<Location> {
         drawInteractables(gui);
         drawMainChar(gui);
     }
-    public void drawMainChar(GUI gui) {
+
+    private void drawMainChar(GUI gui) {
         gui.drawImage(getModel().getMainChar().getPosition(), getModel().getMainChar().getName());
     }
 }

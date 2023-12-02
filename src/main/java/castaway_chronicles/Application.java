@@ -27,7 +27,7 @@ public class Application {
     }
 
     private void start() throws IOException, URISyntaxException, InterruptedException {
-        int FPS = 7; //10?
+        int FPS = 10;
         int frameTime = 1000 / FPS;
 
         while (this.state != null) {
