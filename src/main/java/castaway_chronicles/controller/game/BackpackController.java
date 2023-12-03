@@ -1,4 +1,4 @@
-package castaway_chronicles.controller.game.Commands;
+package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.gui.Action;

@@ -17,8 +17,7 @@ public abstract class SceneViewer<T extends Scene> {
     }
 
     public void drawInteractables(GUI gui) {
-        List<Interactable> interactableList = model.getInteractables();
-        for(Interactable interactable: interactableList) {
+        for(Interactable interactable: model.getVisibleInteractables()) {
             gui.drawImage(interactable.getPosition(), interactable.getName());
         }
     }
