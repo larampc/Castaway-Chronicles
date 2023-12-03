@@ -15,14 +15,12 @@ public class MoveCommand implements Command{
     }
     @Override
     public void execute() throws IOException {
-        if (location.getBackground().getPosition().getX()+offset <= 0 && location.getBackground().getPosition().getX()+offset>=-location.getBackground().getWidth()+200) {
-            int next = (Character.digit(location.getMainChar().getName().charAt(4),10) % 4) + 1 ;
-            location.getMainChar().setName("walk" + next + ((offset < 0) ? "_right" : "_left"));
-            location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));
-            for (Interactable e : location.getInteractables()) {
-                if (!(e instanceof Icon)) {
-                    e.setPosition(e.getPosition().getRight(offset));
-                }
+        int next = (Character.digit(location.getMainChar().getName().charAt(4),10) % 4) + 1 ;
+        location.getMainChar().setName("walk" + next + ((offset < 0) ? "_right" : "_left"));
+        location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));
+        for (Interactable e : location.getInteractables()) {
+            if (!(e instanceof Icon && (e.getName().equalsIgnoreCase("Map") || e.getName().equalsIgnoreCase("Backpack")))) {
+                e.setPosition(e.getPosition().getRight(offset));
             }
         }
     }

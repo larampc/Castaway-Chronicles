@@ -25,6 +25,7 @@ public class LocationViewer extends SceneViewer<Location> {
     }
 
     private void drawMainChar(GUI gui) {
+        if (getModel().getMainChar() == null) return;
         gui.drawImage(getModel().getMainChar().getPosition(), getModel().getMainChar().getName());
     }
 }

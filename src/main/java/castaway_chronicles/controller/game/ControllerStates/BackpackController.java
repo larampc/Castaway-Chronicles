@@ -32,6 +32,7 @@ public class BackpackController implements ControllerState {
 
     @Override
     public void escape() {
+        gameController.getModel().setCurrentScene("LOCATION");
         gameController.setControllerState(gameController.getLocationController());
     }
 }

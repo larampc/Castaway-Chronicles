@@ -39,20 +39,35 @@ public class LocationController implements ControllerState {
                 }
                 else if (e instanceof Icon) {
                     String[] split = e.getName().split("_", -1);
-                    ChangeSceneCommand changeScene = new ChangeSceneCommand(gameController.getModel(), split[0]);
-                    invoker.setCommand(changeScene);
-                    if (split[0].equalsIgnoreCase("Backpack")) gameController.setControllerState(gameController.getBackpackController());
-                    if (split[0].equalsIgnoreCase("Map")) gameController.setControllerState(gameController.getMapController());
-                }
+                    if (split[0].equalsIgnoreCase("Backpack")) {
+                        ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "BACKPACK");
+                        invoker.setCommand(changeScene2);
+                        gameController.setControllerState(gameController.getBackpackController());
+                    }
+                    else if (split[0].equalsIgnoreCase("Map")) {
+                        ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "MAP");
+                        invoker.setCommand(changeScene2);
+                        gameController.setControllerState(gameController.getMapController());
+                    }
+                    else {
+                        ChangeLocationCommand changeLocation = new ChangeLocationCommand(gameController.getModel(), split[0]);
+                        invoker.setCommand(changeLocation);
+                    }
                 invoker.execute();
                 break;
+                }
             }
         }
         invoker.execute();
-        int towalk = (location.getMainChar().getPosition().getX() - position.getX())/10;
-        location.getMainChar().setName("walk1" + ((towalk < 0) ? "_right" : "_left"));
-        ((WalkingController)gameController.getWalkingController()).setTowalk((towalk < 0) ? towalk+=2: towalk);
-        gameController.setControllerState(gameController.getWalkingController());
+        location = gameController.getModel().getCurrentLocation();
+        if (location.getMainChar() != null) {
+            int towalk = (location.getMainChar().getPosition().getX() - position.getX())/15;
+            if (location.getBackground().getPosition().getX() + towalk <= 0 && location.getBackground().getPosition().getX() + towalk >= -location.getBackground().getWidth()+200) {
+                location.getMainChar().setName("walk1" + ((towalk < 0) ? "_right" : "_left"));
+                ((WalkingController)gameController.getWalkingController()).setTowalk((towalk < 0) ? towalk+=2: towalk);
+                gameController.setControllerState(gameController.getWalkingController());
+            }
+        }
     }
 
     @Override

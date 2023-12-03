@@ -1,3 +1,2 @@
-I Item drink 1 2 3 4
-I Item flower 1 2 3 4
-B backpack 1 2 3 4
+I Item rock 100 110 8 7
+B backpack 0 0 200 150

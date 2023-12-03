@@ -24,10 +24,10 @@ public class WalkingController implements ControllerState{
     }
 
     public void checkwalk(long time) throws IOException, InterruptedException {
-        if (towalk != 0 && time-lastMovement>60) {
+        if (towalk != 0 && time-lastMovement>100) {
             Location location = gameController.getModel().getCurrentLocation();
             CommandInvoker invoker = new CommandInvoker();
-            MoveCommand move = new MoveCommand(location,(towalk < 0) ? -10 : 10);
+            MoveCommand move = new MoveCommand(location,(towalk < 0) ? -15 : 15);
             invoker.setCommand(move);
             invoker.execute();
             if (abs(towalk) == 1) location.getMainChar().setName("standing_" + ((towalk < 0) ? "right" : "left"));
@@ -40,8 +40,10 @@ public class WalkingController implements ControllerState{
     @Override
     public void click(Position position) throws IOException, InterruptedException {
         Location location = gameController.getModel().getCurrentLocation();
-        towalk = (location.getMainChar().getPosition().getX() - position.getX())/10;
-        location.getMainChar().setName("walk1" + ((towalk < 0) ? "_right" : "_left"));
+        int towalk2 = (location.getMainChar().getPosition().getX() - position.getX())/15;
+        if (location.getBackground().getPosition().getX()+towalk2 <= 0 && abs(location.getBackground().getPosition().getX()+towalk2) <= abs(-location.getBackground().getWidth()+200)) {
+            towalk = towalk2;
+        }
     }
 
     @Override

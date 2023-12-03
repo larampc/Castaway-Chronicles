@@ -42,6 +42,7 @@ public class GameController extends Controller<Game> {
         if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
         if (action.getType().equalsIgnoreCase("ESCAPE")) current.escape();
         if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition());
+
     }
     public void setControllerState(ControllerState controllerState) {
         this.previous = this.current;
