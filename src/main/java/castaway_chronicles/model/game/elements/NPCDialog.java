@@ -14,6 +14,7 @@ public class NPCDialog {
     private int max;
     private int choices;
     private String name;
+    private List<String> lines;
     public NPCDialog(int state, int line, String name) throws IOException {
         this.state = state;
         this.line = line;
@@ -25,21 +26,21 @@ public class NPCDialog {
         URL resource = getClass().getClassLoader().getResource("Dialog/" + name + state + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        List<String> lines = br.lines().collect(Collectors.toList());
+        lines = br.lines().collect(Collectors.toList());
         for (int i= 0; i < lines.size();i++) {
             if (lines.get(i).charAt(0) == '-') {
                 max = i-1;
                 choices = Character.digit(lines.get(i).charAt(1), 10);
             }
         }
-        if (choices == 0) max = lines.size();
+        if (choices == 0) max = lines.size() -1;
     }
     public int getLine() { return line;}
     public int getFile() { return state;}
-    public void setState(int state) throws IOException { this.state = state; this.line = 0; setMaxChoices();}
+    public void setState(int state) throws IOException { this.state = state; this.line = 0; this.choices = 0; setMaxChoices();}
     public void nextLine() {
         if (this.line == max+choices+1) {
-            this.line = this.line + 1 -choices;
+            this.line = this.line + 1 - choices;
         }
         else ++line;
     }
@@ -49,5 +50,7 @@ public class NPCDialog {
     else --line;}
     public int getMax() {return max;}
     public int getChoices() {return choices;}
-
+    public void goToStateChoice(int line) throws IOException {
+        setState(Character.digit(lines.get(line+choices).charAt(0), 10));
+    }
 }

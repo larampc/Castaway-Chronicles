@@ -1,3 +1,6 @@
-I Item drink 1 2 3 4
-I Item flower 1 2 3 4
-B map 1 2 3 4
+I Icon map_mountain 97 35 39 36
+I Icon map_beach 22 85 21 29 V
+I Icon map_city 62 75 30 23
+I Icon map_forest 112 74 24 30
+I Icon map_volcano 132 26 33 25
+B map 0 0 200 150

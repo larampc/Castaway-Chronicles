@@ -3,7 +3,6 @@ package castaway_chronicles.controller.game;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.StartTalkCommand;
 import castaway_chronicles.gui.Action;
-import castaway_chronicles.gui.ClickAction;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.NPC;
 
@@ -18,10 +17,8 @@ public class NPCController {
     }
     public void step(Application application, Action action) throws IOException {
         CommandInvoker invoker = new CommandInvoker();
-        if (npc.contains(((ClickAction)action).getPosition())) {
-            StartTalkCommand talk = new StartTalkCommand(model.getLocation(model.getCurrentLocation()), npc.getName());
-            invoker.setCommand(talk);
-        }
+        StartTalkCommand talk = new StartTalkCommand(model.getLocation(model.getCurrentLocation()), npc.getName());
+        invoker.setCommand(talk);
         invoker.execute();
     }
 }

@@ -77,6 +77,7 @@ public class LanternaGUI implements GUI{
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) key = "LEFT";
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) key = "RIGHT";
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) key = "SELECT";
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) key = "ESCAPE";
                 action = new KeyAction(key);
             }
         });

@@ -2,7 +2,6 @@ package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
-import castaway_chronicles.controller.game.Commands.BackpackController;
 import castaway_chronicles.gui.Action;
 import castaway_chronicles.model.game.Game;
 

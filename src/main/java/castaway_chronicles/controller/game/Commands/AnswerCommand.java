@@ -11,5 +11,7 @@ public class AnswerCommand implements Command {
     }
     @Override
     public void execute() throws IOException {
+        location.getDialogState().getNPCDialog().getState().goToStateChoice(location.getDialogState().getNPCDialog().getState().getLine());
+        location.getDialogState().setChoice(false);
     }
 }
