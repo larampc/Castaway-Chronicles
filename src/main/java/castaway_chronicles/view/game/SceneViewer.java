@@ -4,8 +4,6 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.scene.Scene;
 
-import java.util.List;
-
 public abstract class SceneViewer<T extends Scene> {
     private final T model;
     public SceneViewer(T model) {
