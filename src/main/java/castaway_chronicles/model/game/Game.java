@@ -52,5 +52,8 @@ public class Game {
     public void setCurrentScene(String scene) {
         currentScene = SCENE.valueOf(scene);
     }
+    public void setCurrentLocation(String name) {
+        currentLocation = name;
+    }
     public enum SCENE{BACKPACK, MAP, LOCATION}
 }

@@ -1,8 +1,8 @@
-package castaway_chronicles.controller.game;
+package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
 
-public class PickUpCommand implements Command{
+public class PickUpCommand implements Command {
     private Game game;
     private String name;
     public PickUpCommand(Game game, String name) {

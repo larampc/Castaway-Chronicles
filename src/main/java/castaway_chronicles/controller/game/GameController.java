@@ -2,6 +2,7 @@ package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
+import castaway_chronicles.controller.game.Commands.BackpackController;
 import castaway_chronicles.gui.Action;
 import castaway_chronicles.model.game.Game;
 
@@ -16,10 +17,10 @@ public class GameController extends Controller<Game> {
     public void step(Application application, Action action) throws IOException {
         switch (getModel().getScene()) {
             case BACKPACK:
-                new BackpackController(getModel().getBackpack()).step(application, action);
+                new BackpackController(getModel()).step(application,action);
                 break;
             case MAP:
-                new MapController(getModel().getMap()).step(application, action);
+                new MapController(getModel()).step(application,action);
                 break;
             case LOCATION:
                 new LocationController(getModel()).step(application, action);
