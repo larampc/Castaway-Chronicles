@@ -1,10 +1,11 @@
-package castaway_chronicles.controller.game;
+package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
 
-public class PauseController implements ControllerState{
+public class PauseController implements ControllerState {
     private final GameController gameController;
     private final PauseMenu pauseMenu;
 

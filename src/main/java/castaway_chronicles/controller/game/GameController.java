@@ -2,6 +2,7 @@ package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
+import castaway_chronicles.controller.game.ControllerStates.*;
 import castaway_chronicles.gui.Action;
 import castaway_chronicles.gui.ClickAction;
 import castaway_chronicles.model.game.Game;
@@ -15,7 +16,9 @@ public class GameController extends Controller<Game> {
     private final ControllerState dialogController;
     private final ControllerState handController;
     private final ControllerState pauseController;
+    private final ControllerState walkingController;
     private ControllerState current;
+    private ControllerState previous;
 
 
     public GameController(Game model) {
@@ -26,11 +29,14 @@ public class GameController extends Controller<Game> {
         dialogController = new DialogController(this);
         handController = new HandController(this);
         pauseController = new PauseController(this);
+        walkingController = new WalkingController(this);
+        
         current = locationController;
     }
 
     @Override
-    public void step(Application application, Action action) throws IOException {
+    public void step(Application application, Action action, long time) throws IOException, InterruptedException {
+        if (current instanceof WalkingController) ((WalkingController) current).checkwalk(time);
         if (action.getType().equalsIgnoreCase("UP")) current.keyUp();
         if (action.getType().equalsIgnoreCase("DOWN")) current.keyDown();
         if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
@@ -38,6 +44,7 @@ public class GameController extends Controller<Game> {
         if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition());
     }
     public void setControllerState(ControllerState controllerState) {
+        this.previous = this.current;
         this.current = controllerState;
     }
 
@@ -62,5 +69,15 @@ public class GameController extends Controller<Game> {
 
     public ControllerState getHandController() {
         return handController;
+    }
+
+    public ControllerState getWalkingController() {
+        return walkingController;
+    }
+    public ControllerState getCurrent() {
+        return current;
+    }
+    public ControllerState getPrevious() {
+        return previous;
     }
 }

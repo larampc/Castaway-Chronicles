@@ -17,16 +17,16 @@ public class SceneLoaderTest {
     public void getInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
         Scene scene = sceneBuilder.createScene();
-        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer"),
-                new NPC(1,2,3,4,"witch"), new Icon(2,2,23,17,"map_Icon"), new Icon(180,2,17,25, "backpack_icon"));
+        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
+                new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_Icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
         assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
     public void getVisibleInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
         Scene scene = sceneBuilder.createScene();
-        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer"),
-                new Icon(2,2,23,17,"map_Icon"), new Icon(180,2,17,25, "backpack_icon"));
+        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
+                new Icon(2,2,23,17,"MAP_Icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
         assertTrue(interactables.size() == scene.getVisibleInteractables().size() && interactables.containsAll(scene.getVisibleInteractables()));
     }
     @Test

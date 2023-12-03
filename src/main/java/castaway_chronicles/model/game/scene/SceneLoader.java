@@ -52,9 +52,10 @@ public class SceneLoader {
                 String[] s = line.split(" ",-1);
                 String name = s[2];
                 String type = s[1];
-                int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
-                Interactable interactable = InteractableFactory.getInteractable(type,x,y,w,h,name);
-                if (s.length == 8) {
+                int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]), state = 0;
+                if (type.equalsIgnoreCase("npc")) state = Integer.parseInt(s[7]);
+                Interactable interactable = InteractableFactory.getInteractable(type,x,y,w,h,name,state);
+                if (line.charAt(line.length()-1)=='V') {
                     visibleInteractables.put(name,interactable);
                 }
                 interactables.put(name,interactable);

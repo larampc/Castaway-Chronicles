@@ -1,8 +1,10 @@
-package castaway_chronicles.controller.game;
+package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.AnswerCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
+import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class DialogController implements ControllerState {
     }
 
     @Override
-    public void select(Application application) throws IOException {
+    public void select(Application application) throws IOException, InterruptedException {
         CommandInvoker invoker = new CommandInvoker();
         if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());

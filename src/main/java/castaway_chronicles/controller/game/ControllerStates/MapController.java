@@ -1,7 +1,9 @@
-package castaway_chronicles.controller.game;
+package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.ChangeLocationCommand;
+import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Interactable;
@@ -15,15 +17,15 @@ public class MapController implements ControllerState {
     }
 
     @Override
-    public void click(Position position) throws IOException {
+    public void click(Position position) throws IOException, InterruptedException {
         CommandInvoker invoker = new CommandInvoker();
         for (Interactable e: gameController.getModel().getMap().getVisibleInteractables()) {
             if (e.contains(position) && e instanceof Icon) {
                 String[] split = e.getName().split("_", -1);
-                gameController.getModel().setCurrentScene("LOCATION");
                 ChangeLocationCommand changeLocation = new ChangeLocationCommand(gameController.getModel(), split[0]);
                 invoker.setCommand(changeLocation);
                 invoker.execute();
+                gameController.getModel().setCurrentScene("LOCATION");
                 gameController.setControllerState(gameController.getLocationController());
                 break;
             }

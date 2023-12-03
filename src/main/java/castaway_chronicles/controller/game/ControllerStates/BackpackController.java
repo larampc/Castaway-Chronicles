@@ -1,6 +1,7 @@
-package castaway_chronicles.controller.game;
+package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 
 public class BackpackController implements ControllerState {

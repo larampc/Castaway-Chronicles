@@ -1,5 +1,5 @@
 B Beach 0 0 707 150
-I NPC toot 150 100 12 10 V
-I NPC witch 10 10 15 33
+I NPC toot 150 100 12 10 0 V
+I NPC witch 10 10 15 33 0
 M 100 80 17 41
 S

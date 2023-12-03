@@ -16,5 +16,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Application application, Action action) throws IOException;
+    public abstract void step(Application application, Action action, long startTime) throws IOException, InterruptedException;
 }

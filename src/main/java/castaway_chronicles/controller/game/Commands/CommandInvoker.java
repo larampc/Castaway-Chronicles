@@ -1,6 +1,4 @@
-package castaway_chronicles.controller.game;
-
-import castaway_chronicles.controller.game.Commands.Command;
+package castaway_chronicles.controller.game.Commands;
 
 import java.io.IOException;
 
@@ -8,7 +6,7 @@ public class CommandInvoker {
     public Command command = null;
     public CommandInvoker() {
     }
-    public void execute() throws IOException {
+    public void execute() throws IOException, InterruptedException {
         if (command!= null) {
             this.command.execute();
         }

@@ -14,7 +14,7 @@ public class MenuController extends Controller<Menu> {
         super(model);
     }
     @Override
-    public void step(Application application, Action action) throws IOException {
+    public void step(Application application, Action action, long time) throws IOException {
         switch (action.getType().charAt(0)) {
             case 'U':
                 getModel().previousEntry();

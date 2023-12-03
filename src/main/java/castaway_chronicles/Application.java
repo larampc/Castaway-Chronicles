@@ -33,7 +33,7 @@ public class Application {
         while (this.state != null) {
             long startTime = System.currentTimeMillis();
 
-            state.step(this, gui);
+            state.step(this, gui, startTime);
 
             long elapsedTime = System.currentTimeMillis() - startTime;
             long sleepTime = frameTime - elapsedTime;

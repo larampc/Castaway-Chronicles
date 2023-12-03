@@ -21,7 +21,7 @@ public class SceneFactoryTest {
         interactables = new HashMap<>();
         visibleInteractables = new HashMap<>();
         interactables.put("new Item", new Item(1,2,3,4,"new item"));
-        interactables.put("new NPC", new NPC(1,2,3,4,"new NPC"));
+        interactables.put("witch", new NPC(1,2,3,4,"witch", 0));
         background = new Background(2,3,4,5,"New background");
         mainChar = null;
         visibleInteractables.put("new Item", new Item(1,2,3,4,"new item"));

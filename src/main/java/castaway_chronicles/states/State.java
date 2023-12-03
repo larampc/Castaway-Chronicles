@@ -28,9 +28,9 @@ public abstract class State<T> {
         return model;
     }
 
-    public void step(Application application, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+    public void step(Application application, GUI gui, long startTime) throws IOException, URISyntaxException, InterruptedException {
         Action action = gui.getNextAction();
-        controller.step(application, action);
+        controller.step(application, action, startTime);
         viewer.draw(gui);
     }
 }
