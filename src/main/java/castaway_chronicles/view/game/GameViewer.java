@@ -15,6 +15,9 @@ public class GameViewer extends Viewer<Game> {
     @Override
     protected void drawElements(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
+            case PAUSE:
+                new PauseMenuViewer(getModel().getPauseMenu()).draw(gui);
+                break;
             case BACKPACK:
                 new BackpackViewer(getModel().getBackpack()).draw(gui);
                 break;
@@ -22,7 +25,8 @@ public class GameViewer extends Viewer<Game> {
                 new MapViewer(getModel().getMap()).draw(gui);
                 break;
             case LOCATION:
-                new LocationViewer(getModel().getLocation(getModel().getCurrentLocation())).draw(gui);
+                new LocationViewer(getModel().getCurrentLocation()).draw(gui);
+                break;
         }
     }
 }

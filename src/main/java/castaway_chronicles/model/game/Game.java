@@ -13,7 +13,8 @@ public class Game {
     private final Map map;
     private final Backpack backpack;
     private final HashMap<String, Location> locations = new HashMap<>();
-    private String currentLocation;
+    private final PauseMenu pauseMenu;
+    private Location currentLocation;
     private SCENE currentScene;
 
     public Game() throws IOException {
@@ -29,21 +30,23 @@ public class Game {
             if (s.length == 2) {currentLocation = s[0];}
             SceneLoader locationsBuilder = new SceneLoader(s[0], "Location");
             this.locations.put(s[0], (Location) locationsBuilder.createScene());
+            if (s.length == 2) {currentLocation = getLocation(s[0]);}
         }
+        this.pauseMenu = new PauseMenu();
         currentScene = SCENE.LOCATION;
     }
 
     public Backpack getBackpack() {
         return backpack;
     }
-
+    public PauseMenu getPauseMenu() {return pauseMenu;}
     public Map getMap() {
         return map;
     }
     public Location getLocation(String name) {
         return locations.get(name);
     }
-    public String getCurrentLocation() {
+    public Location getCurrentLocation() {
         return currentLocation;
     }
     public SCENE getScene() {
@@ -55,5 +58,5 @@ public class Game {
     public void setCurrentLocation(String name) {
         currentLocation = name;
     }
-    public enum SCENE{BACKPACK, MAP, LOCATION}
+    public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE}
 }

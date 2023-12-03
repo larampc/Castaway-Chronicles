@@ -11,7 +11,7 @@ public class PickUpCommand implements Command {
     }
     @Override
     public void execute() {
-        game.getLocation(game.getCurrentLocation()).setInvisible(name);
+        game.getCurrentLocation().setInvisible(name);
         game.getBackpack().setVisible(name);
     }
 }

@@ -3,12 +3,11 @@ package castaway_chronicles.controller.game;
 import castaway_chronicles.Application;
 import castaway_chronicles.model.Position;
 
-public class BackpackController {
-    private Game model;
-    public BackpackController(Game model) {
-        this.model = model;
+public class HandController implements ControllerState{
+    private GameController gameController;
+    public HandController(GameController gameController) {
+        this.gameController = gameController;
     }
-
     @Override
     public void click(Position position) {
 
@@ -31,6 +30,6 @@ public class BackpackController {
 
     @Override
     public void escape() {
-        gameController.setControllerState(gameController.getLocationController());
+        gameController.setControllerState(gameController.getBackpackController());
     }
 }
