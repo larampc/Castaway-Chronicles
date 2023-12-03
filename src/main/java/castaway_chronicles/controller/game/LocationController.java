@@ -22,6 +22,20 @@ public class LocationController {
         this.model = model;
         this.location = model.getLocation(model.getCurrentLocation());
     }
+    public void moveLocation(Position position){
+        int offset = position.getX() > location.getMainChar().getPosition().getX()
+                ? - position.getX() + location.getMainChar().getPosition().getX()
+                : location.getMainChar().getPosition().getX() - position.getX();
+        System.out.println(offset);
+        if (location.getBackground().getPosition().getX()-offset>=0 && location.getBackground().getPosition().getX()-offset<=location.getBackground().getWidth()-200) {
+            location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));
+            for (Interactable e : location.getInteractables()) {
+                if (!(e instanceof Icon)) {
+                    e.setPosition(e.getPosition().getRight(offset));
+                }
+            }
+        }
+    }
 
     public void step(Application application, Action action) throws IOException {
         CommandInvoker invoker = new CommandInvoker();
@@ -45,6 +59,7 @@ public class LocationController {
 
         }
         else if (action instanceof ClickAction) {
+            moveLocation(((ClickAction)action).getPosition());
             for (Interactable e: location.getVisibleInteractables()) {
                 if (e.contains(((ClickAction)action).getPosition())) {
                     new InteractableController(model, e).step(application, action);
