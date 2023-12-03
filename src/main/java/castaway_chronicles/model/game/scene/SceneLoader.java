@@ -71,7 +71,7 @@ public class SceneLoader {
                     String[] s = line.split(" ",-1);
                     int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
                     //FACTORY?
-                    return new MainChar(x,y,w,h, "standing_left");
+                    return new MainChar(x,y,w,h, "standing_right");
                 }
             }
         }

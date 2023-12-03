@@ -2,6 +2,8 @@ package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.AnswerCommand;
+import castaway_chronicles.controller.game.Commands.ChangeLocationCommand;
+import castaway_chronicles.controller.game.Commands.MoveCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
 import castaway_chronicles.gui.Action;
 import castaway_chronicles.gui.ClickAction;
@@ -21,20 +23,6 @@ public class LocationController {
     public LocationController(Game model) {
         this.model = model;
         this.location = model.getLocation(model.getCurrentLocation());
-    }
-    public void moveLocation(Position position){
-        int offset = position.getX() > location.getMainChar().getPosition().getX()
-                ? - position.getX() + location.getMainChar().getPosition().getX()
-                : location.getMainChar().getPosition().getX() - position.getX();
-        System.out.println(offset);
-        if (location.getBackground().getPosition().getX()-offset>=0 && location.getBackground().getPosition().getX()-offset<=location.getBackground().getWidth()-200) {
-            location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));
-            for (Interactable e : location.getInteractables()) {
-                if (!(e instanceof Icon)) {
-                    e.setPosition(e.getPosition().getRight(offset));
-                }
-            }
-        }
     }
 
     public void step(Application application, Action action) throws IOException {
@@ -59,12 +47,16 @@ public class LocationController {
 
         }
         else if (action instanceof ClickAction) {
-            moveLocation(((ClickAction)action).getPosition());
             for (Interactable e: location.getVisibleInteractables()) {
                 if (e.contains(((ClickAction)action).getPosition())) {
                     new InteractableController(model, e).step(application, action);
                 }
             }
+            MoveCommand move = new MoveCommand(location, ((ClickAction)action).getPosition());
+            invoker.setCommand(move);
+            invoker.execute();
+            invoker.setCommand(null);
+
         }
         if (action.getType().equalsIgnoreCase("escape")) {
             application.setState(new MenuState(new Menu()));
