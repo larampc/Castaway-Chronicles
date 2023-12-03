@@ -6,7 +6,7 @@ public abstract class Element {
     private Position position;
     private final int width;
     private final int height;
-    private final String name;
+    private String name;
     public Element(int x, int y, int width, int height, String name) {
         this.name = name;
         this.position = new Position(x,y);
@@ -17,5 +17,6 @@ public abstract class Element {
     public int getWidth() {return width; }
     public int getHeight() {return height; }
     public String getName() {return name; }
+    public void setName(String name) {this.name = name;}
     public void setPosition(Position position) {this.position = position; }
 }
