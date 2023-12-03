@@ -3,10 +3,10 @@ package castaway_chronicles.controller.game;
 import castaway_chronicles.Application;
 import castaway_chronicles.model.Position;
 
-public class BackpackController {
-    private Game model;
-    public BackpackController(Game model) {
-        this.model = model;
+public class BackpackController implements ControllerState {
+    private GameController gameController;
+    public BackpackController(GameController gameController) {
+        this.gameController = gameController;
     }
 
     @Override

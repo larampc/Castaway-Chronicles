@@ -27,7 +27,6 @@ public class Game {
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         for (String line; (line = br.readLine()) != null; ){
             String[] s = line.split(" ",-1);
-            if (s.length == 2) {currentLocation = s[0];}
             SceneLoader locationsBuilder = new SceneLoader(s[0], "Location");
             this.locations.put(s[0], (Location) locationsBuilder.createScene());
             if (s.length == 2) {currentLocation = getLocation(s[0]);}
@@ -56,7 +55,7 @@ public class Game {
         currentScene = SCENE.valueOf(scene);
     }
     public void setCurrentLocation(String name) {
-        currentLocation = name;
+        currentLocation = getLocation(name);
     }
     public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE}
 }
