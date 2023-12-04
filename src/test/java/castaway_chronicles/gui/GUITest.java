@@ -6,7 +6,7 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,7 +24,7 @@ public class GUITest {
     void setUp() throws URISyntaxException, IOException {
         screen = Mockito.mock(Screen.class);
         graphics = Mockito.mock(TextGraphics.class);
-        Terminal terminal = Mockito.mock(Terminal.class);
+        AWTTerminalFrame terminal = Mockito.mock(AWTTerminalFrame.class);
         Mockito.when(screen.newTextGraphics()).thenReturn(graphics);
         gui = new LanternaGUI(terminal, screen);
     }

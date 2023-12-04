@@ -13,5 +13,7 @@ public interface GUI {
     void clear();
     void refresh() throws IOException;
     void close() throws IOException;
+    void resizeTerminal() throws IOException;
+    boolean isBigger();
     Action getNextAction();
 }

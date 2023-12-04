@@ -30,10 +30,11 @@ public class LanternaGUI implements GUI{
     private final Screen screen;
     private final TextGraphics graphics;
     private final HashMap<String, Sprite> images = new HashMap<>();
-    private final Terminal terminal;
+    private final AWTTerminalFrame terminal;
+    private boolean bigger;
     private Action action = new KeyAction("NONE");
 
-    public LanternaGUI(Terminal terminal, Screen screen) throws URISyntaxException, IOException {
+    public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
         this.graphics = screen.newTextGraphics();
         this.terminal = terminal;
@@ -57,7 +58,7 @@ public class LanternaGUI implements GUI{
         return screen;
     }
 
-    private Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
+    private AWTTerminalFrame createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
         Terminal terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(new TerminalSize(width, height))
                 .setTerminalEmulatorFontConfiguration(fontConfig)
@@ -81,7 +82,7 @@ public class LanternaGUI implements GUI{
                 action = new KeyAction(key);
             }
         });
-        return terminal;
+        return (AWTTerminalFrame) terminal;
     }
 
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
@@ -111,6 +112,23 @@ public class LanternaGUI implements GUI{
         for (File f : Objects.requireNonNull(dir.listFiles())) {
             loadFiles(f, images);
         }
+    }
+    @Override
+    public void resizeTerminal() throws IOException {
+        if (bigger) {
+            terminal.setSize(terminal.getWidth(), 635);
+        }
+        else {
+            terminal.setSize(terminal.getWidth(), 765);
+        }
+        bigger = !bigger;
+        screen.refresh(Screen.RefreshType.COMPLETE);
+        screen.doResizeIfNecessary();
+        screen.refresh(Screen.RefreshType.COMPLETE);
+    }
+    @Override
+    public boolean isBigger() {
+        return bigger;
     }
     @Override
     public void drawImage(Position position, String name) {

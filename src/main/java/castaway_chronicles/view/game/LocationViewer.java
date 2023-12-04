@@ -19,6 +19,7 @@ public class LocationViewer extends SceneViewer<Location> {
         if (getModel().getDialogState().isDialog()) {
             new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialog(gui);
         }
+        else if (gui.isBigger()) gui.resizeTerminal();
         if (getModel().getDialogState().isChoice()) {
             new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialogChoices(gui);
         }
