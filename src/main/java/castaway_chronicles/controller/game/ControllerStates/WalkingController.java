@@ -16,27 +16,40 @@ public class WalkingController implements ControllerState{
     private int toWalk = 0;
     private long lastMovementTime = 0;
     private boolean goRight = false;
+    private static int dx = 10;
     public WalkingController(GameController gameController) {
         this.gameController = gameController;
     }
 
     public boolean setTowalk(Position walkto) {
         Location location = gameController.getModel().getCurrentLocation();
-        int offset = (location.getMainChar().getPosition().getX() - walkto.getX()) + location.getMainChar().getWidth()/2;
-        int next_x = location.getBackground().getPosition().getX()+location.getMainChar().getWidth()/2+offset;
+        int background_x = location.getBackground().getPosition().getX();
+        int character_x = location.getMainChar().getPosition().getX();
+        int max_background_x = 200 - location.getBackground().getWidth();
+        int offset = (character_x - walkto.getX()) + location.getMainChar().getWidth()/2;
+        int next_x = background_x + location.getMainChar().getWidth()/2 + offset;
         goRight = (offset < 0);
-        if (next_x <= 0 && 200-location.getBackground().getWidth() <= next_x && abs(offset)>20) {
-            toWalk = offset/10;
-            toWalk += (toWalk < 0) ? 1 : -1;
-            return true;
+        if (abs(offset) < 2*dx || (background_x == 0 && !goRight) || (background_x-dx <= max_background_x && goRight)) {
+            toWalk = 0;
+            return false;
         }
-        return false;
+        if (next_x <= 0 && next_x >= max_background_x) {
+            toWalk = offset/dx;
+            toWalk += (toWalk < 0) ? 1 : -1;
+        }
+        else {
+            if (goRight) offset = (max_background_x+dx) - background_x;
+            else offset = background_x + location.getMainChar().getWidth()/2;
+            toWalk = offset/dx;
+            toWalk += (toWalk < 0) ? -1 : 1;
+        }
+        return true;
     }
 
     public boolean canwalk() {
         if (toWalk == 0) {
             gameController.setControllerState(gameController.getPrevious());
-            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + ((goRight) ? "right" : "left"));
+            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
             return false;
         }
         return true;
@@ -72,7 +85,7 @@ public class WalkingController implements ControllerState{
         if (canwalk() && time- lastMovementTime >150) {
             Location location = gameController.getModel().getCurrentLocation();
             CommandInvoker invoker = new CommandInvoker();
-            MoveCommand move = new MoveCommand(location,(goRight) ? -10 : 10);
+            MoveCommand move = new MoveCommand(location,goRight ? -dx : dx);
             invoker.setCommand(move);
             invoker.execute();
             toWalk += (toWalk < 0) ? 1 : -1;
