@@ -3,7 +3,7 @@ package castaway_chronicles.controller.menu;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
 import castaway_chronicles.gui.Action;
-import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.GameBuilder;
 import castaway_chronicles.model.menu.Menu;
 import castaway_chronicles.states.GameState;
 
@@ -24,7 +24,7 @@ public class MenuController extends Controller<Menu> {
                 break;
             case 'S':
                 if (getModel().isSelectedExit()) application.setState(null);
-                if (getModel().isSelectedStart()) application.setState(new GameState(new Game()));
+                if (getModel().isSelectedStart()) application.setState(new GameState(new GameBuilder().createGame()));
                 break;
         }
     }
