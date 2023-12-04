@@ -30,17 +30,19 @@ public class LanternaGUI implements GUI{
     private final Screen screen;
     private final TextGraphics graphics;
     private final HashMap<String, Sprite> images = new HashMap<>();
+    private final Terminal terminal;
     private Action action = new KeyAction("NONE");
 
-    public LanternaGUI(Screen screen) throws URISyntaxException, IOException {
+    public LanternaGUI(Terminal terminal, Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
         this.graphics = screen.newTextGraphics();
+        this.terminal = terminal;
         loadSprites();
     }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        Terminal terminal = createTerminal(width, height, fontConfig);
+        this.terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
         this.graphics = screen.newTextGraphics();
         loadSprites();

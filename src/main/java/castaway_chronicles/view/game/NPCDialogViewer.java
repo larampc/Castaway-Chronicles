@@ -24,7 +24,7 @@ public class NPCDialogViewer {
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());
         gui.drawImage(new Position(2,118), "dialog");
-        gui.drawText(new Position(6,122),130,lines.get(npc.getState().getLine()),0,false);
+        gui.drawText(new Position(6,122),190,lines.get(npc.getState().getLine()),0,false);
     }
     public void drawNPCDialogChoices(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         URL resource = getClass().getClassLoader().getResource("Dialog/" + npc.getName() + npc.getState().getFile() + ".txt");
