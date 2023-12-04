@@ -42,4 +42,9 @@ public class PauseController implements ControllerState {
     public void escape() {
         //does nothing
     }
+
+    @Override
+    public void none(long time) {
+
+    }
 }

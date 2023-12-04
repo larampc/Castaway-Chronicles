@@ -11,4 +11,5 @@ public interface ControllerState {
     void keyDown();
     void select(Application application) throws IOException, InterruptedException;
     void escape();
+    void none(long time) throws IOException, InterruptedException;
 }

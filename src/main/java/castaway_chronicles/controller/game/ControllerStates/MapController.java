@@ -52,4 +52,9 @@ public class MapController implements ControllerState {
         gameController.getModel().setCurrentScene("LOCATION");
         gameController.setControllerState(gameController.getLocationController());
     }
+
+    @Override
+    public void none(long time) {
+
+    }
 }

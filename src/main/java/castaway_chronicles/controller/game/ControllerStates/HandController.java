@@ -33,4 +33,9 @@ public class HandController implements ControllerState {
     public void escape() {
         gameController.setControllerState(gameController.getBackpackController());
     }
+
+    @Override
+    public void none(long time) {
+
+    }
 }

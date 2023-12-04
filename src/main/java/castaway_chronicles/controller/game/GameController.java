@@ -36,7 +36,7 @@ public class GameController extends Controller<Game> {
 
     @Override
     public void step(Application application, Action action, long time) throws IOException, InterruptedException {
-        if (current instanceof WalkingController) ((WalkingController) current).checkwalk(time);
+        current.none(time);
         if (action.getType().equalsIgnoreCase("UP")) current.keyUp();
         if (action.getType().equalsIgnoreCase("DOWN")) current.keyDown();
         if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);

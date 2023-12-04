@@ -16,6 +16,7 @@ import java.io.IOException;
 public class LocationController implements ControllerState {
 
     private GameController gameController;
+    private Command lastCommand = null;
 
     public LocationController(GameController gameController) {
         this.gameController = gameController;
@@ -29,13 +30,10 @@ public class LocationController implements ControllerState {
         for (Interactable e: location.getVisibleInteractables()) {
             if (e.contains(position)) {
                 if (e instanceof Item) {
-                    PickUpCommand pickup = new PickUpCommand(gameController.getModel(), e.getName());
-                    invoker.setCommand(pickup);
+                    lastCommand = new PickUpCommand(gameController.getModel(), e.getName());
                 }
                 else if (e instanceof NPC) {
-                    StartTalkCommand talk = new StartTalkCommand(location, e.getName());
-                    invoker.setCommand(talk);
-                    gameController.setControllerState(gameController.getDialogController());
+                    lastCommand = new StartTalkCommand(location, e.getName());
                 }
                 else if (e instanceof Icon) {
                     String[] split = e.getName().split("_", -1);
@@ -50,8 +48,7 @@ public class LocationController implements ControllerState {
                         gameController.setControllerState(gameController.getMapController());
                     }
                     else {
-                        ChangeLocationCommand changeLocation = new ChangeLocationCommand(gameController.getModel(), split[0]);
-                        invoker.setCommand(changeLocation);
+                        lastCommand = new ChangeLocationCommand(gameController.getModel(), split[0]);
                     }
                 invoker.execute();
                 break;
@@ -60,13 +57,11 @@ public class LocationController implements ControllerState {
         }
         invoker.execute();
         location = gameController.getModel().getCurrentLocation();
-        if (location.getMainChar() != null) {
-            int towalk = (location.getMainChar().getPosition().getX() - position.getX())/15;
-            if (location.getBackground().getPosition().getX() + towalk <= 0 && location.getBackground().getPosition().getX() + towalk >= -location.getBackground().getWidth()+200) {
-                location.getMainChar().setName("walk1" + ((towalk < 0) ? "_right" : "_left"));
-                ((WalkingController)gameController.getWalkingController()).setTowalk((towalk < 0) ? towalk+=2: towalk);
-                gameController.setControllerState(gameController.getWalkingController());
+        if (location.getMainChar() != null && gameController.getCurrent() instanceof LocationController) {
+            if (((WalkingController) gameController.getWalkingController()).setTowalk(position)) {
+                location.getMainChar().setName("walk1" + ((location.getMainChar().getPosition().getX() - position.getX() < 0) ? "_right" : "_left"));
             }
+            gameController.setControllerState(gameController.getWalkingController());
         }
     }
 
@@ -90,5 +85,18 @@ public class LocationController implements ControllerState {
         gameController.getModel().setCurrentScene("PAUSE");
         gameController.setControllerState(gameController.getLocationController());
         gameController.setControllerState(gameController.getPauseController());
+    }
+
+    @Override
+    public void none(long time) throws IOException, InterruptedException {
+        if (lastCommand != null) {
+            CommandInvoker invoker = new CommandInvoker();
+            invoker.setCommand(lastCommand);
+            invoker.execute();
+            if (lastCommand instanceof StartTalkCommand) {
+                gameController.setControllerState(gameController.getDialogController());
+            }
+            lastCommand = null;
+        }
     }
 }

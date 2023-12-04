@@ -58,4 +58,9 @@ public class DialogController implements ControllerState {
     public void escape() {
 
     }
+
+    @Override
+    public void none(long time) {
+
+    }
 }
