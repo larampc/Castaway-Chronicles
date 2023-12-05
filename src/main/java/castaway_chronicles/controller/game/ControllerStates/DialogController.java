@@ -24,24 +24,24 @@ public class DialogController implements ControllerState {
 
     @Override
     public void keyUp() {
-        if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
+        if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
             gameController.getModel().getCurrentLocation()
-                    .getDialogState().getNPCDialog().getState().previousLine();
+                    .getDialogState().getNPCDialog().getDialogState().getChoices().previousEntry();
         }
     }
 
     @Override
     public void keyDown() {
-        if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
+        if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
             gameController.getModel().getCurrentLocation()
-                    .getDialogState().getNPCDialog().getState().nextLine();
+                    .getDialogState().getNPCDialog().getDialogState().getChoices().nextEntry();
         }
     }
 
     @Override
     public void select(Application application) throws IOException, InterruptedException {
         CommandInvoker invoker = new CommandInvoker();
-        if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
+        if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
             invoker.setCommand(answer);
             invoker.execute();
@@ -53,7 +53,7 @@ public class DialogController implements ControllerState {
             invoker.setCommand(talk);
         }
         invoker.execute();
-        if(!gameController.getModel().getCurrentLocation().getDialogState().isDialog()){
+        if(!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()){
             gameController.setControllerState(gameController.getLocationController());
         }
     }

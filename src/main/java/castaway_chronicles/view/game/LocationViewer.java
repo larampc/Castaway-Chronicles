@@ -16,11 +16,11 @@ public class LocationViewer extends SceneViewer<Location> {
         drawBackground(gui);
         drawInteractables(gui);
         drawMainChar(gui);
-        if (getModel().getDialogState().isDialog()) {
+        if (getModel().getDialogState().isActiveDialog()) {
             new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialog(gui);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
-        if (getModel().getDialogState().isChoice()) {
+        if (getModel().getDialogState().isActiveChoice()) {
             new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialogChoices(gui);
         }
     }

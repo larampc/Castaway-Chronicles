@@ -14,7 +14,7 @@ public class HandleEffectsCommand implements Command{
 
     @Override
     public void execute() throws IOException, InterruptedException {
-        List<String> effects = game.getCurrentLocation().getDialogState().getNPCDialog().getState().getEffects();
+        List<String> effects = game.getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects();
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);

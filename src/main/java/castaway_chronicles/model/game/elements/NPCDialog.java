@@ -1,5 +1,7 @@
 package castaway_chronicles.model.game.elements;
 
+import castaway_chronicles.model.SelectionPanel;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,60 +12,58 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class NPCDialog {
-    private int state;
-    private int line;
-    private int max;
-    private int choices;
     private final String name;
-    private List<String> lines;
-    public NPCDialog(int state, int line, String name) throws IOException {
-        this.state = state;
-        this.line = line;
+    private int line = 0;
+    private List<String> dialog = new ArrayList<>();
+    private SelectionPanel choices;
+    private List<Integer> nextStates = new ArrayList<>();
+    private List<String> effects = new ArrayList<>();
+    public NPCDialog(int state, String name) throws IOException {
         this.name = name;
-        this.choices = 0;
-        setMaxChoices();
+        init(state);
+        readEffects(state);
     }
-    protected void setMaxChoices() throws IOException {
+    protected void init(int state) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Dialog/" + name + state + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        lines = br.lines().collect(Collectors.toList());
-        for (int i= 0; i < lines.size();i++) {
-            if (lines.get(i).charAt(0) == '-') {
-                max = i-1;
-                choices = Character.digit(lines.get(i).charAt(1), 10);
+        List<String> lines = br.lines().collect(Collectors.toList());
+        int count = 0;
+        for (String s: lines) {
+            if (s.charAt(0) == '-') {
+                count = Character.digit(s.charAt(1), 10);
+                break;
             }
+            dialog.add(s);
         }
-        if (choices == 0) max = lines.size() -1;
+        List<String> choices = new ArrayList<>();
+        for (int i= dialog.size()+1; i < dialog.size() + 1 + count; i++) {
+            choices.add(lines.get(i));
+            nextStates.add(Integer.parseInt(lines.get(i+count)));
+        }
+        this.choices = new SelectionPanel(choices);
+    }
+    public SelectionPanel getChoices() {
+        return choices;
+    }
+    public void goToStateChoice() throws IOException {
+        System.out.println(nextStates.get(choices.getCurrentEntry()));
+        init(nextStates.get(choices.getCurrentEntry()));
     }
     public int getLine() { return line;}
-    public int getFile() { return state;}
-    public void setState(int state) throws IOException { this.state = state; this.line = 0; this.choices = 0; setMaxChoices();}
     public void nextLine() {
-        if (this.line == max+choices+1) {
-            this.line = this.line + 1 - choices;
-        }
-        else ++line;
+        line++;
     }
-    public void previousLine() { if (this.line == max+2) {
-        this.line = this.line + choices-1;
-    }
-    else --line;}
-    public int getMax() {return max;}
-    public int getChoices() {return choices;}
-    public void goToStateChoice() throws IOException {
-        setState(Character.digit(lines.get(line+choices).charAt(0), 10));
-    }
-    public void goToChoices() {
-        line = max + 2;
-    }
-    public List<String> getEffects() throws IOException {
-        List<String> effects = new ArrayList<>();
+    public int getMax() {return dialog.size()-1;}
+    public void readEffects(int state) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Dialog/effect_" + name + state + ".txt");
         if (resource!=null) {
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-            effects = br.lines().collect(Collectors.toList());
+            this.effects = br.lines().collect(Collectors.toList());
         }
+    }
+    public List<String> getEffects() {
         return effects;
     }
+    public String getCurrentLine() {return dialog.get(line);}
 }

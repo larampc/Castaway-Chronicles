@@ -9,13 +9,12 @@ public class TalkCommand implements Command{
     }
     @Override
     public void execute() {
-        if (location.getDialogState().getNPCDialog().getState().getLine() == location.getDialogState().getNPCDialog().getState().getMax() && location.getDialogState().getNPCDialog().getState().getChoices() == 0) {
+        if (location.getDialogState().getNPCDialog().getDialogState().getLine() == location.getDialogState().getNPCDialog().getDialogState().getMax() && location.getDialogState().getNPCDialog().getDialogState().getChoices().getNumberEntries() == 0) {
             location.getDialogState().leaveDialog();
         }
-        else if (location.getDialogState().getNPCDialog().getState().getLine() == location.getDialogState().getNPCDialog().getState().getMax()) {
-            location.getDialogState().setChoice(true);
-            location.getDialogState().getNPCDialog().getState().goToChoices();
+        else if (location.getDialogState().getNPCDialog().getDialogState().getLine() == location.getDialogState().getNPCDialog().getDialogState().getMax()) {
+            location.getDialogState().setActiveChoice(true);
         }
-        else location.getDialogState().getNPCDialog().getState().nextLine();
+        else location.getDialogState().getNPCDialog().getDialogState().nextLine();
     }
 }

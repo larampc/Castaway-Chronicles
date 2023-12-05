@@ -4,20 +4,21 @@ import castaway_chronicles.model.game.elements.NPC;
 
 
 public class DialogState {
-    private boolean isDialog;
-    private boolean isChoice;
+    private boolean activeDialog;
+    private boolean activeChoice;
     private NPC npcDialog;
 
     public DialogState() {
-        isDialog = false;
-        isChoice = false;
+        activeDialog = false;
+        activeChoice = false;
     }
-    public boolean isDialog() {return isDialog;}
+    public boolean isActiveDialog() {return activeDialog;}
     public NPC getNPCDialog() {return npcDialog;}
-    public void activateDialog(NPC npc) {npcDialog = npc; isDialog = true;}
-    public void leaveDialog() {isDialog = false; isChoice = false;}
-    public boolean isChoice() {
-        return isChoice;
+    public void activateDialog(NPC npc) {npcDialog = npc; activeDialog = true;}
+    public void leaveDialog() {
+        activeDialog = false; activeChoice = false;}
+    public boolean isActiveChoice() {
+        return activeChoice;
     }
-    public void setChoice(boolean choice) {this.isChoice = choice;}
+    public void setActiveChoice(boolean activeChoice) {this.activeChoice = activeChoice;}
 }
