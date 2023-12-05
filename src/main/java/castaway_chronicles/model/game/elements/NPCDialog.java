@@ -13,21 +13,23 @@ import java.util.stream.Collectors;
 
 public class NPCDialog {
     private final String name;
-    private int line = 0;
-    private List<String> dialog = new ArrayList<>();
+    private int line;
+    private List<String> dialog;
     private SelectionPanel choices;
-    private List<Integer> nextStates = new ArrayList<>();
-    private List<String> effects = new ArrayList<>();
+    private List<Integer> nextStates;
+    private List<String> effects;
     public NPCDialog(int state, String name) throws IOException {
         this.name = name;
         init(state);
-        readEffects(state);
     }
     protected void init(int state) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Dialog/" + name + state + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());
+        line = 0;
+        nextStates = new ArrayList<>();
+        dialog = new ArrayList<>();
         int count = 0;
         for (String s: lines) {
             if (s.charAt(0) == '-') {
@@ -42,6 +44,7 @@ public class NPCDialog {
             nextStates.add(Integer.parseInt(lines.get(i+count)));
         }
         this.choices = new SelectionPanel(choices);
+        readEffects(state);
     }
     public SelectionPanel getChoices() {
         return choices;
@@ -57,6 +60,7 @@ public class NPCDialog {
     public int getMax() {return dialog.size()-1;}
     public void readEffects(int state) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Dialog/effect_" + name + state + ".txt");
+        effects = new ArrayList<>();
         if (resource!=null) {
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
             this.effects = br.lines().collect(Collectors.toList());
