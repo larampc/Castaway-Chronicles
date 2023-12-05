@@ -1,7 +1,7 @@
 package castaway_chronicles;
 
 import castaway_chronicles.gui.LanternaGUI;
-import castaway_chronicles.model.menu.Menu;
+import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.states.MenuState;
 import castaway_chronicles.states.State;
 
@@ -15,7 +15,7 @@ public class Application {
 
     public Application() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(200, 150);
-        this.state = new MenuState(new Menu());
+        this.state = new MenuState(new MainMenu());
     }
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException, InterruptedException {

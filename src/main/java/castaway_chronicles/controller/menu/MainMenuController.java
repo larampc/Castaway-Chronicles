@@ -4,13 +4,13 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
 import castaway_chronicles.gui.Action;
 import castaway_chronicles.model.game.GameBuilder;
-import castaway_chronicles.model.menu.Menu;
+import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.states.GameState;
 
 import java.io.IOException;
 
-public class MenuController extends Controller<Menu> {
-    public MenuController(Menu model) {
+public class MainMenuController extends Controller<MainMenu> {
+    public MainMenuController(MainMenu model) {
         super(model);
     }
     @Override

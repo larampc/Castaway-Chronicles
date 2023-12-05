@@ -3,11 +3,11 @@ package castaway_chronicles.model.menu;
 import java.util.Arrays;
 import java.util.List;
 
-public class Menu {
+public class MainMenu {
     private final List<String> entries;
     private int currentEntry = 0;
 
-    public Menu() {
+    public MainMenu() {
         this.entries = Arrays.asList("Start", "Exit");
     }
 

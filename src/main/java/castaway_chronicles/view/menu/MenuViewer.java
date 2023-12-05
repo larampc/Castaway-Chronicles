@@ -2,14 +2,14 @@ package castaway_chronicles.view.menu;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.menu.Menu;
+import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.view.Viewer;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MenuViewer extends Viewer<Menu> {
+public class MenuViewer extends Viewer<MainMenu> {
 
-    public MenuViewer(Menu model) {
+    public MenuViewer(MainMenu model) {
         super(model);
     }
 
