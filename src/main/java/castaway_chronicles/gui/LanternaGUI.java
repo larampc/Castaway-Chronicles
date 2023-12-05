@@ -116,7 +116,7 @@ public class LanternaGUI implements GUI{
     @Override
     public void resizeTerminal() throws IOException {
         if (bigger) {
-            terminal.setSize(terminal.getWidth(), 635);
+            terminal.setSize(terminal.getWidth(), 637);
         }
         else {
             terminal.setSize(terminal.getWidth(), 765);
