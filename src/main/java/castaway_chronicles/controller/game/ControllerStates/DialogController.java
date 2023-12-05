@@ -3,6 +3,7 @@ package castaway_chronicles.controller.game.ControllerStates;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.AnswerCommand;
+import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
@@ -43,6 +44,9 @@ public class DialogController implements ControllerState {
         if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
             invoker.setCommand(answer);
+            invoker.execute();
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel());
+            invoker.setCommand(effects);
         }
         else {
             TalkCommand talk = new TalkCommand(gameController.getModel().getCurrentLocation());

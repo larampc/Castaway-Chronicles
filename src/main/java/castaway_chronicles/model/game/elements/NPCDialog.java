@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,5 +56,14 @@ public class NPCDialog {
     }
     public void goToChoices() {
         line = max + 2;
+    }
+    public List<String> getEffects() throws IOException {
+        List<String> effects = new ArrayList<>();
+        URL resource = getClass().getClassLoader().getResource("Dialog/effect_" + name + state + ".txt");
+        if (resource!=null) {
+            BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+            effects = br.lines().collect(Collectors.toList());
+        }
+        return effects;
     }
 }

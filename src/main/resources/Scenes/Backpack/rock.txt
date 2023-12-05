@@ -1,8 +1,8 @@
-USE
-DEFAULT You're a dumb bitch
-GIVE
-engineer 2
-DEFAULT I don't want that you dumb bitch
-THROW
-window broken_window
-DEFAULT You blind?
+DRINK
+DIALOG: DUMB,NO
+DRINKK
+DIALOG: DUMB,NOO
+DRINKKK
+DIALOG: DUMB,NOOO
+GIVEEEEE
+ENGINEER 2 WEFREF
