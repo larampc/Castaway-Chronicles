@@ -13,7 +13,7 @@ public class NPCDialog {
     private int line;
     private int max;
     private int choices;
-    private String name;
+    private final String name;
     private List<String> lines;
     public NPCDialog(int state, int line, String name) throws IOException {
         this.state = state;
@@ -50,7 +50,10 @@ public class NPCDialog {
     else --line;}
     public int getMax() {return max;}
     public int getChoices() {return choices;}
-    public void goToStateChoice(int line) throws IOException {
+    public void goToStateChoice() throws IOException {
         setState(Character.digit(lines.get(line+choices).charAt(0), 10));
+    }
+    public void goToChoices() {
+        line = max + 2;
     }
 }

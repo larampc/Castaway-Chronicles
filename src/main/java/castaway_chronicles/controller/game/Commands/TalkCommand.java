@@ -3,7 +3,7 @@ package castaway_chronicles.controller.game.Commands;
 import castaway_chronicles.model.game.scene.Location;
 
 public class TalkCommand implements Command{
-    private Location location;
+    private final Location location;
     public TalkCommand(Location location) {
         this.location = location;
     }
@@ -14,8 +14,7 @@ public class TalkCommand implements Command{
         }
         else if (location.getDialogState().getNPCDialog().getState().getLine() == location.getDialogState().getNPCDialog().getState().getMax()) {
             location.getDialogState().setChoice(true);
-            location.getDialogState().getNPCDialog().getState().nextLine();
-            location.getDialogState().getNPCDialog().getState().nextLine();
+            location.getDialogState().getNPCDialog().getState().goToChoices();
         }
         else location.getDialogState().getNPCDialog().getState().nextLine();
     }
