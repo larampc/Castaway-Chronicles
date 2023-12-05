@@ -40,10 +40,7 @@ public class DialogController implements ControllerState {
     @Override
     public void select(Application application) throws IOException, InterruptedException {
         CommandInvoker invoker = new CommandInvoker();
-        if(!gameController.getModel().getCurrentLocation().getDialogState().isDialog()){
-            gameController.setControllerState(gameController.getLocationController());
-        }
-        else if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
+        if (gameController.getModel().getCurrentLocation().getDialogState().isChoice()) {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
             invoker.setCommand(answer);
         }
@@ -52,6 +49,9 @@ public class DialogController implements ControllerState {
             invoker.setCommand(talk);
         }
         invoker.execute();
+        if(!gameController.getModel().getCurrentLocation().getDialogState().isDialog()){
+            gameController.setControllerState(gameController.getLocationController());
+        }
     }
 
     @Override
