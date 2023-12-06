@@ -52,6 +52,9 @@ public class NPCDialog {
     public void goToStateChoice() throws IOException {
         init(nextStates.get(choices.getCurrentEntry()));
     }
+    public void goToState(int i) throws IOException {
+        init(i);
+    }
     public int getLine() { return line;}
     public void nextLine() {
         line++;

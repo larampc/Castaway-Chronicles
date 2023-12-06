@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
@@ -19,6 +20,11 @@ public class HandleEffectsCommand implements Command{
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);
+            if (s[0].equalsIgnoreCase("NPC")) {
+                ((NPC)game.getCurrentLocation().getInteractable(s[1])).getDialogState().goToState(Integer.parseInt(s[2]));
+                game.getCurrentLocation().setDialog((s[1]));
+                continue;
+            }
             if (s[0].equalsIgnoreCase("map")) {
                 if (s[2].equalsIgnoreCase("V")) {
                     game.getMap().setVisible(s[1]);
@@ -26,23 +32,23 @@ public class HandleEffectsCommand implements Command{
                 if (s[2].equalsIgnoreCase("I")) {
                     game.getMap().setInvisible(s[1]);
                 }
+                continue;
             }
-            else if (s[0].equalsIgnoreCase("backpack")) {
+            if (s[0].equalsIgnoreCase("backpack")) {
                 if (s[2].equalsIgnoreCase("V")) {
-                    game.getMap().setVisible(s[1]);
+                    game.getBackpack().setVisible(s[1]);
                 }
                 if (s[2].equalsIgnoreCase("I")) {
-                    game.getMap().setInvisible(s[1]);
+                    game.getBackpack().setInvisible(s[1]);
                 }
+                continue;
             }
-            else {
-                Location location = game.getLocation(s[0]);
-                if (s[2].equalsIgnoreCase("V")) {
-                    location.setVisible(s[1]);
-                }
-                if (s[2].equalsIgnoreCase("I")) {
-                    location.setInvisible(s[1]);
-                }
+            Location location = game.getLocation(s[0]);
+            if (s[2].equalsIgnoreCase("V")) {
+                location.setVisible(s[1]);
+            }
+            if (s[2].equalsIgnoreCase("I")) {
+                location.setInvisible(s[1]);
             }
         }
     }

@@ -30,6 +30,7 @@ public class HandController implements ControllerState {
             gameController.setControllerState(gameController.getNarratorController());
         }
         else {
+            boolean right = false;
             for (Interactable e: gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
                     CommandInvoker invoker = new CommandInvoker();
@@ -38,11 +39,14 @@ public class HandController implements ControllerState {
                     invoker.execute();
                     gameController.getModel().setCurrentScene("LOCATION");
                     gameController.setControllerState(gameController.getLocationController());
+                    right = true;
                 }
             }
-            gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(gameController.getModel().getBackpack().getBackpackSelection().getItem());
-            gameController.getModel().setCurrentScene("LOCATION");
-            gameController.setControllerState(gameController.getNarratorController());
+            if (!right) {
+                gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(gameController.getModel().getBackpack().getBackpackSelection().getItem());
+                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.setControllerState(gameController.getNarratorController());
+            }
         }
     }
 

@@ -22,7 +22,8 @@ public class SelectionPanel {
     }
 
     public String getEntry(int i) {
-        return entries.get(i);
+        try {return entries.get(i);}
+        catch (IndexOutOfBoundsException e) {return "";}
     }
     public int getCurrentEntry() {return currentEntry;}
     public List<String> getEntries() {return entries;}
