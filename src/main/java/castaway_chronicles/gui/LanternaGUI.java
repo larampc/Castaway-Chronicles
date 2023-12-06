@@ -122,7 +122,8 @@ public class LanternaGUI implements GUI{
         loadFiles(fontFile, images);
     }
     @Override
-    public void resizeTerminal() throws IOException {
+    public void resizeTerminal() {
+        screen.doResizeIfNecessary();
         if (bigger) {
             terminal.setSize(terminal.getWidth(), 637);
         }
@@ -130,9 +131,7 @@ public class LanternaGUI implements GUI{
             terminal.setSize(terminal.getWidth(), 765);
         }
         bigger = !bigger;
-        screen.refresh(Screen.RefreshType.COMPLETE);
-        while (screen.doResizeIfNecessary() != null);
-        screen.refresh(Screen.RefreshType.COMPLETE);
+        while (screen.doResizeIfNecessary() == null);
     }
     @Override
     public boolean isBigger() {
