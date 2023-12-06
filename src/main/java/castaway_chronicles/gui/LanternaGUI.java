@@ -125,7 +125,7 @@ public class LanternaGUI implements GUI{
         }
         bigger = !bigger;
         screen.refresh(Screen.RefreshType.COMPLETE);
-        screen.doResizeIfNecessary();
+        while (screen.doResizeIfNecessary() != null);
         screen.refresh(Screen.RefreshType.COMPLETE);
     }
     @Override
