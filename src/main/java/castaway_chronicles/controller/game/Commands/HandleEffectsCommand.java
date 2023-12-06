@@ -22,7 +22,7 @@ public class HandleEffectsCommand implements Command{
             String[] s = effect.split(" ", -1);
             if (s[0].equalsIgnoreCase("NPC")) {
                 ((NPC)game.getCurrentLocation().getInteractable(s[1])).getDialogState().goToState(Integer.parseInt(s[2]));
-                game.getCurrentLocation().setDialog((s[1]));
+                game.getCurrentLocation().setDialog(s[1]);
                 continue;
             }
             if (s[0].equalsIgnoreCase("map")) {
