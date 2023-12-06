@@ -49,6 +49,11 @@ public class NPCDialog {
     public SelectionPanel getChoices() {
         return choices;
     }
+
+    public List<Integer> getNextStates() {
+        return nextStates;
+    }
+
     public void goToStateChoice() throws IOException {
         init(nextStates.get(choices.getCurrentEntry()));
     }
