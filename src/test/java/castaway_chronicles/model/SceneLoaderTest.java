@@ -67,7 +67,7 @@ public class SceneLoaderTest {
     }
     @Test
     public void BackPack() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestBackpack","BackPack");
+        SceneLoader sceneBuilder = new SceneLoader("TestBackpack","Backpack");
         Scene scene = sceneBuilder.createScene();
         assertEquals(2,scene.getInteractables().size());
         assertEquals("backpack", scene.getBackground().getName());
