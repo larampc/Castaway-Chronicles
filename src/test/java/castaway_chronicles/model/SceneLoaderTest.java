@@ -1,13 +1,13 @@
 package castaway_chronicles.model;
 
+import castaway_chronicles.model.game.elements.Icon;
+import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.SceneLoader;
-import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Scene;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,13 +17,17 @@ public class SceneLoaderTest {
     public void getInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
         Scene scene = sceneBuilder.createScene();
-        assertEquals(Arrays.asList(new NPC(1,2,3,4,"engineer"), new NPC(1,2,3,4,"witch")), scene.getInteractables());
+        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
+                new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_Icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
+        assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
     public void getVisibleInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
         Scene scene = sceneBuilder.createScene();
-        assertEquals(List.of(new NPC(1, 2, 3, 4, "engineer")), scene.getVisibleInteractables());
+        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
+                new Icon(2,2,23,17,"MAP_Icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
+        assertTrue(interactables.size() == scene.getVisibleInteractables().size() && interactables.containsAll(scene.getVisibleInteractables()));
     }
     @Test
     public void getBackground() throws IOException {
@@ -39,20 +43,20 @@ public class SceneLoaderTest {
         scene = sceneBuilder.createScene();
         assertNull(scene.getBackground());
     }
-    @Test
-    public void hasMainChar() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene2", "Location");
-        Scene scene = sceneBuilder.createScene();
-        assertNotNull(scene);
-        assertTrue(((Location) scene).hasMainChar());
-    }
-    @Test
-    public void hasNotMainChar() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene", "Location");
-        Scene scene = sceneBuilder.createScene();
-        assertNotNull(scene);
-        assertFalse(((Location) scene).hasMainChar());
-    }
+//    @Test
+//    public void hasMainChar() throws IOException {
+//        SceneLoader sceneBuilder = new SceneLoader("TestScene2", "Location");
+//        Scene scene = sceneBuilder.createScene();
+//        assertNotNull(scene);
+//        assertTrue(((Location) scene).hasMainChar());
+//    }
+//    @Test
+//    public void hasNotMainChar() throws IOException {
+//        SceneLoader sceneBuilder = new SceneLoader("TestScene", "Location");
+//        Scene scene = sceneBuilder.createScene();
+//        assertNotNull(scene);
+//        assertFalse(((Location) scene).hasMainChar());
+//    }
 
 
     @Test

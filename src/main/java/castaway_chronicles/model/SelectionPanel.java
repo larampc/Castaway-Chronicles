@@ -1,14 +1,12 @@
-package castaway_chronicles.model.menu;
+package castaway_chronicles.model;
 
-import java.util.Arrays;
 import java.util.List;
 
-public class Menu {
-    private final List<String> entries;
-    private int currentEntry = 0;
-
-    public Menu() {
-        this.entries = Arrays.asList("Start", "Exit");
+public class SelectionPanel {
+    private List<String> entries;
+    private int currentEntry;
+    public SelectionPanel(List<String> entries) {
+        this.entries = entries;
     }
 
     public void nextEntry() {
@@ -24,20 +22,13 @@ public class Menu {
     }
 
     public String getEntry(int i) {
-        return entries.get(i);
+        try {return entries.get(i);}
+        catch (IndexOutOfBoundsException e) {return "";}
     }
     public int getCurrentEntry() {return currentEntry;}
     public List<String> getEntries() {return entries;}
     public boolean isSelected(int i) {
         return currentEntry == i;
-    }
-
-    public boolean isSelectedExit() {
-        return isSelected(1);
-    }
-
-    public boolean isSelectedStart() {
-        return isSelected(0);
     }
 
     public int getNumberEntries() {

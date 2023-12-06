@@ -10,8 +10,13 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -25,16 +30,20 @@ public class LanternaGUI implements GUI{
     private final Screen screen;
     private final TextGraphics graphics;
     private final HashMap<String, Sprite> images = new HashMap<>();
+    private final AWTTerminalFrame terminal;
+    private boolean bigger;
+    private Action action = new KeyAction("NONE");
 
-    public LanternaGUI(Screen screen) throws URISyntaxException, IOException {
+    public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
         this.graphics = screen.newTextGraphics();
+        this.terminal = terminal;
         loadSprites();
     }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        Terminal terminal = createTerminal(width, height, fontConfig);
+        this.terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
         this.graphics = screen.newTextGraphics();
         loadSprites();
@@ -49,12 +58,33 @@ public class LanternaGUI implements GUI{
         return screen;
     }
 
-    private Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
-        return new DefaultTerminalFactory()
+    private AWTTerminalFrame createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
+        Terminal terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(new TerminalSize(width, height))
                 .setTerminalEmulatorFontConfiguration(fontConfig)
                 .setForceAWTOverSwing(true)
                 .createTerminal();
+        MouseAdapter mouseAdapter = new MouseAdapter(){
+            @Override
+            public void mousePressed(MouseEvent e) {
+                action = new ClickAction("CLICK", new Position(e.getX()/4, e.getY()/4));
+            }
+        };
+        ((AWTTerminalFrame)terminal).getComponent(0).addMouseListener(mouseAdapter);
+        ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                String key = "NONE";
+                if (e.getKeyCode() == KeyEvent.VK_UP) key = "UP";
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) key = "DOWN";
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) key = "LEFT";
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) key = "RIGHT";
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) key = "SELECT";
+                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) key = "ESCAPE";
+                action = new KeyAction(key);
+            }
+        });
+        return (AWTTerminalFrame) terminal;
     }
 
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
@@ -78,7 +108,7 @@ public class LanternaGUI implements GUI{
         if (!dir.isDirectory()) {
             if(dir.getName().equals("question.png")) images.put("?", new Sprite(dir));
             else if(dir.getName().equals("point.png")) images.put(".", new Sprite(dir));
-            else images.put(dir.getName().split(".png")[0], new Sprite(dir));
+            else images.put(dir.getName().split(".png", -1)[0], new Sprite(dir));
             return;
         }
         for (File f : Objects.requireNonNull(dir.listFiles())) {
@@ -86,12 +116,29 @@ public class LanternaGUI implements GUI{
         }
     }
     @Override
+    public void resizeTerminal() throws IOException {
+        if (bigger) {
+            terminal.setSize(terminal.getWidth(), 637);
+        }
+        else {
+            terminal.setSize(terminal.getWidth(), 765);
+        }
+        bigger = !bigger;
+        screen.refresh(Screen.RefreshType.COMPLETE);
+        while (screen.doResizeIfNecessary() != null);
+        screen.refresh(Screen.RefreshType.COMPLETE);
+    }
+    @Override
+    public boolean isBigger() {
+        return bigger;
+    }
+    @Override
     public void drawImage(Position position, String name) {
         images.get(name).drawSprite(position, graphics);
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text, int waitTime) throws IOException, InterruptedException {
+    public void drawText(Position startPosition, int maxsize, String text, int waitTime, boolean underlined) throws IOException, InterruptedException {
         String[] arrOfStr = text.split(" ", -1);
         Position position = new Position(startPosition.getX(), startPosition.getY());
         for (String word : arrOfStr) {
@@ -100,6 +147,7 @@ public class LanternaGUI implements GUI{
                 wordsize += images.get(String.valueOf(word.charAt(i))).getWidth();
             if (position.getX() + wordsize > startPosition.getX() +maxsize)
                 position = new Position(startPosition.getX(), position.getY()+10);
+            if(underlined) drawLine(position.getDown(8).getLeft(1),wordsize+2);
             for(int i = 0; i < word.length(); i++) {
                 drawImage(position, String.valueOf(word.charAt(i)));
                 if (waitTime != 0) {
@@ -110,13 +158,11 @@ public class LanternaGUI implements GUI{
             }
             position = position.getRight(2);
         }
-        screen.refresh();
     }
-
     @Override
-    public void drawLine(Position position) {
+    public void drawLine(Position position, int size) {
         graphics.setForegroundColor(new TextColor.RGB(255,255,255));
-        graphics.drawLine(new TerminalPosition(position.getX(), position.getY()), new TerminalPosition(position.getX()+30, position.getY()), '_');
+        graphics.drawLine(new TerminalPosition(position.getX(), position.getY()), new TerminalPosition(position.getX()+size, position.getY()), '_');
     }
 
     @Override
@@ -132,5 +178,12 @@ public class LanternaGUI implements GUI{
     @Override
     public void close() throws IOException {
         screen.close();
+    }
+
+    @Override
+    public Action getNextAction() {
+        Action return_action = action;
+        action = new KeyAction("NONE");
+        return return_action;
     }
 }

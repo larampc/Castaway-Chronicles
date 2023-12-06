@@ -1,0 +1,6 @@
+B City 0 0 629 150
+I NPC toot 150 100 12 10 1 V
+I NPC engineer 200 105 13 28 0 V
+I Item rock 500 125 8 7 V
+I Icon tavern_door 112 100 18 23 V
+M 100 105 17 41

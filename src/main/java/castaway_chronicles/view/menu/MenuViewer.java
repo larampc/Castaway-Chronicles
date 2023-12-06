@@ -2,14 +2,14 @@ package castaway_chronicles.view.menu;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.menu.Menu;
+import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.view.Viewer;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MenuViewer extends Viewer<Menu> {
+public class MenuViewer extends Viewer<MainMenu> {
 
-    protected MenuViewer(Menu model) {
+    public MenuViewer(MainMenu model) {
         super(model);
     }
 
@@ -17,9 +17,9 @@ public class MenuViewer extends Viewer<Menu> {
     protected void drawElements(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         gui.drawImage(new Position(0,0), "Menu");
         int i = 50;
-        for (String entry: getModel().getEntries()) {
-            gui.drawText(new Position(20, i), 160, entry, 0);
+        for (int j = 0; j < getModel().getNumberEntries(); j++) {
+            gui.drawText(new Position(20, i), 160, getModel().getEntry(j), 0, getModel().isSelected(j));
+            i+=10;
         }
-        gui.drawLine(new Position(10, getModel().getCurrentEntry()*10+50)); //check position in image
     }
 }

@@ -1,18 +1,18 @@
 package castaway_chronicles.model.game.scene;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.Item;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.elements.*;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SceneLoader {
     private final List<String> lines;
+    private final HashMap<String, Interactable> interactables = new HashMap<>();
+    private final HashMap<String, Interactable> visibleInteractables = new HashMap<>();
     private final String type;
 
     public SceneLoader(String filename, String type) throws IOException {
@@ -21,10 +21,10 @@ public class SceneLoader {
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         lines = readLines(br);
         this.type = type;
+        getInteractables();
     }
     public Scene createScene() {
-        Scene scene = SceneFactory.getScene(type, getBackground(), getInteractables(), getVisibleInteractables());
-        if(scene instanceof Location && hasMainChar()) ((Location) scene).enteredLocation();
+        Scene scene = SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
         return scene;
     }
     private List<String> readLines(BufferedReader br) throws IOException {
@@ -46,43 +46,49 @@ public class SceneLoader {
         return null;
     }
 
-    protected List<Interactable> getInteractables() {
-        List<Interactable> interactables = new ArrayList<>();
+    protected void getInteractables() throws IOException {
         for (String line : lines) {
             if (line.charAt(0) == 'I') {
                 String[] s = line.split(" ",-1);
                 String name = s[2];
                 String type = s[1];
-                int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
-                //FACTORY?
-                if (type.equalsIgnoreCase("NPC")) interactables.add(new NPC(x, y, w, h, name));
-                if (type.equalsIgnoreCase("ITEM")) interactables.add(new Item(x, y, w, h, name));
+                int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]), state = 0;
+                if (type.equalsIgnoreCase("npc")) state = Integer.parseInt(s[7]);
+                Interactable interactable = InteractableFactory.getInteractable(type,x,y,w,h,name,state);
+                if (line.charAt(line.length()-1)=='V') {
+                    visibleInteractables.put(name,interactable);
+                }
+                interactables.put(name,interactable);
             }
         }
-        return interactables;
+        if (type.equalsIgnoreCase("Location")) getIcons();
     }
 
-    protected List<Interactable> getVisibleInteractables() {
-        List<Interactable> visibleInteractables = new ArrayList<>();
-        for (String line : lines) {
-            if (line.charAt(0) == 'I' && line.charAt(line.length() - 1) == 'V') {
-                String[] s = line.split(" ", -1);
-                String name = s[2];
-                String type = s[1];
-                int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]);
-                //FACTORY?
-                if (type.equalsIgnoreCase("NPC")) visibleInteractables.add(new NPC(x, y, w, h, name));
-                if (type.equalsIgnoreCase("ITEM")) visibleInteractables.add(new Item(x, y, w, h, name));
+
+    protected MainChar getMainChar() {
+        if (type.equalsIgnoreCase( "Location")) {
+            for(String line : lines){
+                if (line.charAt(0) == 'M') {
+                    String[] s = line.split(" ",-1);
+                    int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
+                    //FACTORY?
+                    return new MainChar(x,y,w,h, "standing_right");
+                }
             }
         }
-        return visibleInteractables;
+        return null;
     }
-
-    protected boolean hasMainChar() {
-        for(String line : lines){
-            if(line.equals("M")) return true;
+    protected void getIcons() throws IOException {
+        URL resource = getClass().getClassLoader().getResource("Scenes/Location/Icons.txt");
+        assert resource != null;
+        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        List<String> icons = readLines(br);
+        for (String line : icons) {
+            String[] s = line.split(" ",-1);
+            String name = s[0];
+            int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
+            visibleInteractables.put(name, new Icon(x, y, w,h,name));
+            interactables.put(name, new Icon(x,y,w,h,name));
         }
-        return false;
     }
-
 }

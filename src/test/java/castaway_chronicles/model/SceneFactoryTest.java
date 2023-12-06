@@ -1,53 +1,53 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.Item;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.elements.*;
 import castaway_chronicles.model.game.scene.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SceneFactoryTest {
-    private static List<Interactable> interactables;
-    private static List<Interactable> visibleInteractables;
+    private static HashMap<String, Interactable> interactables;
+    private static HashMap<String, Interactable> visibleInteractables;
     private static Background background;
+    private static MainChar mainChar;
 
     @BeforeEach
-    public void init(){
-        interactables = new ArrayList<>();
-        visibleInteractables = new ArrayList<>();
-        interactables.add(new Item(1,2,3,4,"new item"));
-        interactables.add(new NPC(1,2,3,4,"new NPC"));
+    public void init() throws IOException {
+        interactables = new HashMap<>();
+        visibleInteractables = new HashMap<>();
+        interactables.put("new Item", new Item(1,2,3,4,"new item"));
+        interactables.put("witch", new NPC(1,2,3,4,"witch", 0));
         background = new Background(2,3,4,5,"New background");
-        visibleInteractables.add(interactables.get(0));
+        mainChar = null;
+        visibleInteractables.put("new Item", new Item(1,2,3,4,"new item"));
     }
     @Test
     public void Location(){
-        Scene scene = SceneFactory.getScene("Location",background,interactables,visibleInteractables);
+        mainChar = new MainChar(10, 10, 10, 10, "standing_left");
+        Scene scene = SceneFactory.getScene("Location",background,interactables,visibleInteractables, mainChar);
         assertNotNull(scene);
         assertEquals(scene.getClass(), Location.class);
     }
     @Test
     public void Backpack(){
-        Scene scene = SceneFactory.getScene("Backpack",background,interactables,visibleInteractables);
+        Scene scene = SceneFactory.getScene("Backpack",background,interactables,visibleInteractables, mainChar);
         assertNotNull(scene);
         assertEquals(scene.getClass(), Backpack.class);
     }
     @Test
     public void Map(){
-        Scene scene = SceneFactory.getScene("Map",background,interactables,visibleInteractables);
+        Scene scene = SceneFactory.getScene("Map",background,interactables,visibleInteractables, mainChar);
         assertNotNull(scene);
         assertEquals(scene.getClass(), Map.class);
     }
     @Test
     public void noScene(){
-        Scene scene = SceneFactory.getScene("Invalid",background,interactables,visibleInteractables);
+        Scene scene = SceneFactory.getScene("Invalid",background,interactables,visibleInteractables, mainChar);
         assertNull(scene);
     }
 }

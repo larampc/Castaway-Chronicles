@@ -6,6 +6,7 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,9 +24,9 @@ public class GUITest {
     void setUp() throws URISyntaxException, IOException {
         screen = Mockito.mock(Screen.class);
         graphics = Mockito.mock(TextGraphics.class);
-
+        AWTTerminalFrame terminal = Mockito.mock(AWTTerminalFrame.class);
         Mockito.when(screen.newTextGraphics()).thenReturn(graphics);
-        gui = new LanternaGUI(screen);
+        gui = new LanternaGUI(terminal, screen);
     }
 
     @Test
@@ -39,23 +40,23 @@ public class GUITest {
 
     @Test
     void drawText() throws IOException, InterruptedException {
-        gui.drawText(new Position(0,0),100,"Lorem ipsum ,.!?", 1);
-        Mockito.verify(screen,Mockito.times(15)).refresh();
+        gui.drawText(new Position(0,0),100,"Lorem ipsum ,.!?", 1,false);
+        Mockito.verify(screen,Mockito.times(14)).refresh();
 
         TextCharacter c = new TextCharacter(' ', new TextColor.RGB(0, 0, 0), new TextColor.RGB(0, 0, 0));
-        gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j", 0);
-        gui.drawText(new Position(0,0),70,"Lorem ipsum ,.!? jjjjj", 0);
+        gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j", 0,false);
+        gui.drawText(new Position(0,0),70,"Lorem ipsum ,.!? jjjjj", 0,false);
 
 
         Mockito.verify(graphics, Mockito.times(3)).setCharacter(63,6, c);
         Mockito.verify(graphics, Mockito.times(2)).setCharacter(1,10, c);
 
-        Mockito.verify(screen,Mockito.times(17)).refresh();
+        Mockito.verify(screen,Mockito.times(14)).refresh();
     }
 
     @Test
     void drawLine() {
-        gui.drawLine(new Position(1, 1));
+        gui.drawLine(new Position(1, 1),30);
         Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(new TextColor.RGB(255,255,255));
         Mockito.verify(graphics, Mockito.times(1)).drawLine(new TerminalPosition(1, 1), new TerminalPosition(31, 1), '_');
     }

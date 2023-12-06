@@ -11,7 +11,9 @@ public abstract class Viewer<T> {
     protected Viewer(T model) {
         this.model = model;
     }
-    public T getModel() {return model;}
+    public T getModel() {
+        return model;
+    }
     public void draw(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         gui.clear();
         drawElements(gui);
