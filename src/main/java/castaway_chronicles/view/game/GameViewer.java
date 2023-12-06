@@ -15,6 +15,9 @@ public class GameViewer extends Viewer<Game> {
     @Override
     protected void drawElements(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
+            case END:
+                new EndViewer(gui, getModel().getEnd()).draw(gui);
+                break;
             case PAUSE:
                 new PauseMenuViewer(getModel().getPauseMenu()).draw(gui);
                 break;

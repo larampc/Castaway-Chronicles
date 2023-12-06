@@ -20,6 +20,7 @@ public class GameController extends Controller<Game> {
     private ControllerState current;
     private ControllerState previous;
     private ControllerState narratorController;
+    private ControllerState endController;
 
 
     public GameController(Game model) {
@@ -32,6 +33,7 @@ public class GameController extends Controller<Game> {
         pauseController = new PauseController(this);
         walkingController = new WalkingController(this);
         narratorController = new NarratorController(this);
+        endController = new EndController(this);
         current = locationController;
     }
 
@@ -45,7 +47,6 @@ public class GameController extends Controller<Game> {
         if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
         if (action.getType().equalsIgnoreCase("ESCAPE")) current.escape();
         if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition());
-
     }
     public void setControllerState(ControllerState controllerState) {
         this.previous = this.current;
@@ -79,6 +80,7 @@ public class GameController extends Controller<Game> {
         return walkingController;
     }
     public ControllerState getNarratorController() {return narratorController;}
+    public ControllerState getEndController() {return endController;}
     public ControllerState getCurrent() {
         return current;
     }

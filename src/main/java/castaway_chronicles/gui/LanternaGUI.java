@@ -115,6 +115,12 @@ public class LanternaGUI implements GUI{
             loadFiles(f, images);
         }
     }
+    public void loadEnding(String name) throws URISyntaxException, IOException {
+        URL resource = getClass().getClassLoader().getResource("Endings/"+name);
+        assert resource != null;
+        File fontFile = new File(resource.toURI());
+        loadFiles(fontFile, images);
+    }
     @Override
     public void resizeTerminal() throws IOException {
         if (bigger) {

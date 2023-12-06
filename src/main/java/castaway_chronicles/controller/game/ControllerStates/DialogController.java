@@ -7,6 +7,7 @@ import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 
 import java.io.IOException;
 
@@ -54,9 +55,6 @@ public class DialogController implements ControllerState {
         if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
             invoker.setCommand(answer);
-            invoker.execute();
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
-            invoker.setCommand(effects);
         }
         else {
             TalkCommand talk = new TalkCommand(gameController.getModel().getCurrentLocation());
@@ -64,7 +62,13 @@ public class DialogController implements ControllerState {
         }
         invoker.execute();
         if(!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()){
-            gameController.setControllerState(gameController.getLocationController());
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
+            invoker.setCommand(effects);
+            invoker.execute();
+            if (gameController.getModel().getScene() == Game.SCENE.END) {
+                gameController.setControllerState(gameController.getEndController());
+            }
+            else gameController.setControllerState(gameController.getLocationController());
         }
     }
 

@@ -20,6 +20,11 @@ public class HandleEffectsCommand implements Command{
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);
+            if (s[0].equalsIgnoreCase("end")) {
+                game.setEnd(s[1]);
+                game.setCurrentScene("END");
+                continue;
+            }
             if (s[0].equalsIgnoreCase("NPC")) {
                 ((NPC)game.getCurrentLocation().getInteractable(s[1])).getDialogState().goToState(Integer.parseInt(s[2]));
                 game.getCurrentLocation().setDialog(s[1]);

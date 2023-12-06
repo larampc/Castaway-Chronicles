@@ -11,6 +11,7 @@ public class Game {
     private PauseMenu pauseMenu;
     private Location currentLocation;
     private SCENE currentScene;
+    private Ending end;
 
     public Game() {}
     public Backpack getBackpack() {
@@ -52,5 +53,9 @@ public class Game {
     public void setCurrentLocation(String name) {
         currentLocation = getLocation(name);
     }
-    public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE}
+    public Ending getEnd() {return end;}
+    public void setEnd(String name) {
+        end = new Ending(name);
+    }
+    public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE, END}
 }
