@@ -1,6 +1,9 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.Commands.Command;
+import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Interactable;
@@ -29,12 +32,16 @@ public class BackpackController implements ControllerState {
 
     @Override
     public void keyUp() {
-        backpack.getBackpackSelection().getItem().getItemOptions().previousEntry();
+        if (backpack.getBackpackSelection().isSelection()) {
+            backpack.getBackpackSelection().getItem().getItemOptions().previousEntry();
+        }
     }
 
     @Override
     public void keyDown() {
-        backpack.getBackpackSelection().getItem().getItemOptions().nextEntry();
+        if (backpack.getBackpackSelection().isSelection()) {
+            backpack.getBackpackSelection().getItem().getItemOptions().nextEntry();
+        }
     }
 
     @Override
@@ -50,8 +57,37 @@ public class BackpackController implements ControllerState {
     }
 
     @Override
-    public void select(Application application) {
-        //does nothing
+    public void select(Application application) throws IOException, InterruptedException {
+        if (backpack.getBackpackSelection().isSelection()) {
+            String command = backpack.getBackpackSelection().getItem().getCommand();
+            backpack.getBackpackSelection().deactivate();
+            String[] s = command.split(" ", -1);
+            if (s.length == 1) {
+                if (s[0].equalsIgnoreCase("give")) {
+                    gameController.getModel().setCurrentScene("LOCATION");
+                    ((HandController)gameController.getHandController()).setToGive("");
+                    gameController.setControllerState(gameController.getHandController());
+                }
+                gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(backpack.getBackpackSelection().getItem());
+                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.setControllerState(gameController.getNarratorController());
+            }
+            else {
+                CommandInvoker invoker = new CommandInvoker();
+                if (s[0].equalsIgnoreCase("use")) {
+                    Command effects = new HandleEffectsCommand(gameController.getModel(), backpack.getBackpackSelection().getItem().getEffects());
+                    invoker.setCommand(effects);
+                    invoker.execute();
+                    gameController.getModel().setCurrentScene("LOCATION");
+                    gameController.setControllerState(gameController.getLocationController());
+                }
+                if (s[0].equalsIgnoreCase("give")) {
+                    gameController.getModel().setCurrentScene("LOCATION");
+                    ((HandController)gameController.getHandController()).setToGive(s[1]);
+                    gameController.setControllerState(gameController.getHandController());
+                }
+            }
+        }
     }
 
     @Override

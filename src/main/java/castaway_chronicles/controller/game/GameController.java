@@ -19,6 +19,7 @@ public class GameController extends Controller<Game> {
     private final ControllerState walkingController;
     private ControllerState current;
     private ControllerState previous;
+    private ControllerState narratorController;
 
 
     public GameController(Game model) {
@@ -30,7 +31,7 @@ public class GameController extends Controller<Game> {
         handController = new HandController(this);
         pauseController = new PauseController(this);
         walkingController = new WalkingController(this);
-        
+        narratorController = new NarratorController(this);
         current = locationController;
     }
 
@@ -77,6 +78,7 @@ public class GameController extends Controller<Game> {
     public ControllerState getWalkingController() {
         return walkingController;
     }
+    public ControllerState getNarratorController() {return narratorController;}
     public ControllerState getCurrent() {
         return current;
     }

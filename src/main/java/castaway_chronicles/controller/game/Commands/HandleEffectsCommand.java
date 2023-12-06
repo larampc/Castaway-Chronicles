@@ -8,13 +8,14 @@ import java.util.List;
 
 public class HandleEffectsCommand implements Command{
     private Game game;
-    public HandleEffectsCommand(Game game) {
+    private List<String> effects;
+    public HandleEffectsCommand(Game game, List<String> effects) {
         this.game = game;
+        this.effects = effects;
     }
 
     @Override
     public void execute() throws IOException, InterruptedException {
-        List<String> effects = game.getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects();
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);

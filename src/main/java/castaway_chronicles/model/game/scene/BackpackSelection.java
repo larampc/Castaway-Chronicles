@@ -20,6 +20,5 @@ public class BackpackSelection {
     }
     public void deactivate() {
         isSelection = false;
-        this.item  = null;
     }
 }

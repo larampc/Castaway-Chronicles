@@ -40,4 +40,14 @@ public class ItemBackpack extends Interactable {
     public SelectionPanel getItemOptions() {
         return itemOptions;
     }
+    public String getCommand() {
+        return optionCommand.get(itemOptions.getEntry(itemOptions.getCurrentEntry()));
+    }
+    public List<String> getEffects() throws IOException {
+        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + getName() + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()) + "_effects.txt");
+        if (resource == null) return new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        List<String> lines = br.lines().collect(Collectors.toList());
+        return lines;
+    }
 }

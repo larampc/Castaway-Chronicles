@@ -19,7 +19,7 @@ public class LocationViewer extends SceneViewer<Location> {
         if (getModel().getBackpackAnswer().isActive()) {
             new BackpackAnswerViewer(getModel().getBackpackAnswer().getItem()).drawBackpackAnswer(gui);
         }
-        if (getModel().getDialogState().isActiveDialog()) {
+        else if (getModel().getDialogState().isActiveDialog()) {
             new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialog(gui);
         }
         else if (gui.isBigger()) gui.resizeTerminal();

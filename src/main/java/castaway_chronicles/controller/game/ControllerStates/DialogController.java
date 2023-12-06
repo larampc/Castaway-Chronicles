@@ -55,7 +55,7 @@ public class DialogController implements ControllerState {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
             invoker.setCommand(answer);
             invoker.execute();
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel());
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
             invoker.setCommand(effects);
         }
         else {
