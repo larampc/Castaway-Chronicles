@@ -39,6 +39,8 @@ public class GameController extends Controller<Game> {
         current.none(time);
         if (action.getType().equalsIgnoreCase("UP")) current.keyUp();
         if (action.getType().equalsIgnoreCase("DOWN")) current.keyDown();
+        if (action.getType().equalsIgnoreCase("LEFT")) current.keyLeft();
+        if (action.getType().equalsIgnoreCase("RIGHT")) current.keyRight();
         if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
         if (action.getType().equalsIgnoreCase("ESCAPE")) current.escape();
         if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition());

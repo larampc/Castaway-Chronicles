@@ -11,6 +11,7 @@ public class Location extends Scene {
     private MainChar mainChar;
     private int offset = 0;
     private DialogState dialog = new DialogState();
+    private BackpackAnswer backpackAnswer = new BackpackAnswer();
     public Location(Background background, HashMap<String, Interactable> interactables, HashMap<String, Interactable> visibleInteractables, MainChar mainChar) {
         super(background,interactables, visibleInteractables);
         this.mainChar = mainChar;
@@ -27,4 +28,5 @@ public class Location extends Scene {
     public void setOffset(int offset) {
         this.offset = offset;
     }
+    public BackpackAnswer getBackpackAnswer() {return backpackAnswer;}
 }

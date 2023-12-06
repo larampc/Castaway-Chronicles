@@ -1,2 +1,2 @@
-I Item rock 100 110 8 7
+I BItem rock 100 110 8 7
 B backpack 0 0 200 150

@@ -16,6 +16,9 @@ public class LocationViewer extends SceneViewer<Location> {
         drawBackground(gui);
         drawInteractables(gui);
         drawMainChar(gui);
+        if (getModel().getBackpackAnswer().isActive()) {
+            new BackpackAnswerViewer(getModel().getBackpackAnswer().getItem()).drawBackpackAnswer(gui);
+        }
         if (getModel().getDialogState().isActiveDialog()) {
             new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialog(gui);
         }

@@ -25,6 +25,16 @@ public class HandController implements ControllerState {
     }
 
     @Override
+    public void keyRight() {
+
+    }
+
+    @Override
+    public void keyLeft() {
+
+    }
+
+    @Override
     public void select(Application application) {
         //does nothing
     }

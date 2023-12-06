@@ -50,7 +50,6 @@ public class NPCDialog {
         return choices;
     }
     public void goToStateChoice() throws IOException {
-        System.out.println(nextStates.get(choices.getCurrentEntry()));
         init(nextStates.get(choices.getCurrentEntry()));
     }
     public int getLine() { return line;}

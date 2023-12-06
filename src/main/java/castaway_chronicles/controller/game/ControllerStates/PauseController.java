@@ -30,6 +30,16 @@ public class PauseController implements ControllerState {
     }
 
     @Override
+    public void keyRight() {
+
+    }
+
+    @Override
+    public void keyLeft() {
+
+    }
+
+    @Override
     public void select(Application application) {
         if (pauseMenu.isSelectedExit()) application.setState(null);
         if (pauseMenu.isSelectedResume()) {

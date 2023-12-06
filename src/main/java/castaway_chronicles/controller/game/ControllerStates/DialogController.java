@@ -39,6 +39,16 @@ public class DialogController implements ControllerState {
     }
 
     @Override
+    public void keyRight() {
+
+    }
+
+    @Override
+    public void keyLeft() {
+
+    }
+
+    @Override
     public void select(Application application) throws IOException, InterruptedException {
         CommandInvoker invoker = new CommandInvoker();
         if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {

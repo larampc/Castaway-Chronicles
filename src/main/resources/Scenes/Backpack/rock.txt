@@ -1,8 +1,6 @@
-DRINK
-DIALOG: DUMB,NO
-DRINKK
-DIALOG: DUMB,NOO
-DRINKKK
-DIALOG: DUMB,NOOO
-GIVEEEEE
-ENGINEER 2 WEFREF
+DRINK - use
+I'm not gonna drink a rock...
+THROW - give engineer effects
+You have really bad aim...
+GIVE - give
+The rock is gonna be sad if you give her away...

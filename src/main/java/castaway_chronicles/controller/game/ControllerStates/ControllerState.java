@@ -9,6 +9,8 @@ public interface ControllerState {
     void click(Position position) throws IOException, InterruptedException;
     void keyUp();
     void keyDown();
+    void keyRight();
+    void keyLeft();
     void select(Application application) throws IOException, InterruptedException;
     void escape();
     void none(long time) throws IOException, InterruptedException;

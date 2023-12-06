@@ -7,7 +7,6 @@ public class DialogState {
     private boolean activeDialog;
     private boolean activeChoice;
     private NPC npcDialog;
-
     public DialogState() {
         activeDialog = false;
         activeChoice = false;
