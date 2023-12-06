@@ -3,11 +3,14 @@ package castaway_chronicles.model;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.scene.Scene;
+import castaway_chronicles.model.game.scene.SceneFactory;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,15 +23,15 @@ public class SceneTest {
         mockinteractable = Mockito.mock(Interactable.class);
     }
 
-//    @Test
-//    public void SceneContent(){
-//        ArrayList<Interactable> interactables = new ArrayList<>();
-//        interactables.add(mockinteractable);
-//
-//        Scene scene = new Scene(mockbackground, interactables,interactables);
-//        assertEquals(interactables, scene.getInteractables());
-//        assertEquals(mockbackground, scene.getBackground());
-//    }
+    @Test
+    public void SceneContent(){
+        HashMap<String,Interactable> interactables = new HashMap<>();
+        interactables.put("mock",mockinteractable);
+        Scene scene = SceneFactory.getScene("Map",mockbackground, interactables,interactables,null);
+        assert scene != null;
+        assertEquals(List.of(mockinteractable), scene.getInteractables());
+        assertEquals(mockbackground, scene.getBackground());
+    }
 //
 //    @Test
 //    public void SceneAdd(){
