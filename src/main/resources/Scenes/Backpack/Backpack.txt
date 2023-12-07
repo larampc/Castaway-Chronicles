@@ -1,3 +1,6 @@
 I BItem rock 100 110 8 7
-I BItem rocket 30 50 11 32
+I BItem rope 30 50 11 32
+I BItem beer1 50 60 10 10
+I BItem beer2 50 60 10 10
+I BItem beer3 50 60 10 10
 B Backpack 0 0 200 150

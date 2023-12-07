@@ -1,5 +1,4 @@
 B Beach -200 0 707 150
 I NPC toot 150 100 12 10 0 V
-I Item rocket 155 100 11 32
+I Item rope 155 100 11 32
 M 100 80 17 41
-S

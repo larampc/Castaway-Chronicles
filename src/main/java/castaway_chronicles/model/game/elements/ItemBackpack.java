@@ -16,6 +16,7 @@ public class ItemBackpack extends Interactable {
     private SelectionPanel itemOptions;
     private HashMap<String, String> optionCommand = new HashMap<>();
     private List<String> defaultAnswers = new ArrayList<>();
+    private String description;
     public ItemBackpack(int x, int y, int w, int h, String name) throws IOException {
         super(x, y, w, h, name);
         getInfo();
@@ -26,7 +27,8 @@ public class ItemBackpack extends Interactable {
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());
         List<String> entries = new ArrayList<>();
-        for (int i = 0; i < lines.size(); i+=2) {
+        description = lines.get(0);
+        for (int i = 1; i < lines.size(); i+=2) {
             String[] s = lines.get(i).split(" - ",-1);
             optionCommand.put(s[0], s[1]);
             defaultAnswers.add(lines.get(i+1));
@@ -43,8 +45,9 @@ public class ItemBackpack extends Interactable {
     public String getCommand() {
         return optionCommand.get(itemOptions.getEntry(itemOptions.getCurrentEntry()));
     }
+    public String getDescription() {return description;}
     public List<String> getEffects() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + getName() + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()) + "_effects.txt");
+        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + getName() + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "") + "_effects.txt");
         if (resource == null) return new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());

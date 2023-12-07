@@ -1,0 +1,3 @@
+NPC bartender 5 W
+Backpack beer2 I
+Backpack beer3 V

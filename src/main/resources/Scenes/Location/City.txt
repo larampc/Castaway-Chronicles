@@ -3,4 +3,5 @@ I NPC engineer 200 105 13 28 0 V
 I Item rock 500 125 8 7 V
 I Icon Tavern_door 112 100 18 23 V
 I Icon Store_door 321 99 19 28 V
+I NPC witchdoor 451 90 17 30 0 V
 M 100 105 17 41

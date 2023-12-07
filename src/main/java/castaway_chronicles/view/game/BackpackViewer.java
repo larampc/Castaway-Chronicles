@@ -13,7 +13,10 @@ public class BackpackViewer extends SceneViewer<Backpack> {
     public void draw(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         drawBackground(gui);
         drawInteractables(gui);
-        if (getModel().getBackpackSelection().isSelection()) {
+        if (getModel().getBackpackSelection().isDescription()) {
+            new BackpackDescriptionViewer(getModel().getBackpackSelection().getItem()).drawBackpackDescription(gui);
+        }
+        else if (getModel().getBackpackSelection().isSelection()) {
             new BackpackSelectionViewer(getModel().getBackpackSelection().getItem()).drawBackpackSelectionViewer(gui);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
