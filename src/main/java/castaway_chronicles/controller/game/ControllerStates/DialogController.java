@@ -53,6 +53,9 @@ public class DialogController implements ControllerState {
     public void select(Application application) throws IOException, InterruptedException {
         CommandInvoker invoker = new CommandInvoker();
         if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
+            invoker.setCommand(effects);
+            invoker.execute();
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
             invoker.setCommand(answer);
         }
@@ -61,6 +64,7 @@ public class DialogController implements ControllerState {
             invoker.setCommand(talk);
         }
         invoker.execute();
+
         if(!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()){
             HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
             invoker.setCommand(effects);
@@ -68,7 +72,7 @@ public class DialogController implements ControllerState {
             if (gameController.getModel().getScene() == Game.SCENE.END) {
                 gameController.setControllerState(gameController.getEndController());
             }
-            else gameController.setControllerState(gameController.getLocationController());
+            else if (!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()) gameController.setControllerState(gameController.getLocationController());
         }
     }
 

@@ -27,7 +27,8 @@ public class HandleEffectsCommand implements Command{
             }
             if (s[0].equalsIgnoreCase("NPC")) {
                 ((NPC)game.getCurrentLocation().getInteractable(s[1])).getDialogState().goToState(Integer.parseInt(s[2]));
-                game.getCurrentLocation().setDialog(s[1]);
+                if (s.length != 4) game.getCurrentLocation().setDialog(s[1]);
+                else game.getCurrentLocation().getDialogState().leaveDialog();
                 continue;
             }
             if (s[0].equalsIgnoreCase("map")) {

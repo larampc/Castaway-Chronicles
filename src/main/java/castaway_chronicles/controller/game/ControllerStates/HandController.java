@@ -37,8 +37,10 @@ public class HandController implements ControllerState {
                     invoker.setCommand(effects);
                     invoker.execute();
                     gameController.getModel().setCurrentScene("LOCATION");
-                    gameController.getModel().getCurrentLocation().setDialog(e.getName());
-                    gameController.setControllerState(gameController.getDialogController());
+                    if (gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()) {
+                        gameController.setControllerState(gameController.getDialogController());
+                    }
+                    else gameController.setControllerState(gameController.getLocationController());
                     return;
                 }
             }

@@ -23,7 +23,7 @@ public class NPCDialog {
         init(state);
     }
     protected void init(int state) throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Dialog/" + name + state + ".txt");
+        URL resource = getClass().getClassLoader().getResource("Dialog/" + name + "/" + name + state + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class NPCDialog {
     }
     public int getMax() {return dialog.size()-1;}
     public void readEffects(int state) throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Dialog/effect_" + name + state + ".txt");
+        URL resource = getClass().getClassLoader().getResource("Dialog/" + name + "/effect_" + name + state + ".txt");
         effects = new ArrayList<>();
         if (resource!=null) {
             BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
