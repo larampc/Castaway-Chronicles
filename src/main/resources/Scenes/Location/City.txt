@@ -4,4 +4,6 @@ I Item rock 500 125 8 7 V
 I Icon Tavern_door 112 100 18 23 V
 I Icon Store_door 321 99 19 28 V
 I NPC witchdoor 451 90 17 30 0 V
+I NPC witchwindow 443 58 29 25 0 V
+I Icon WitchOldHouse_window 443 58 29 25
 M 100 105 17 41
