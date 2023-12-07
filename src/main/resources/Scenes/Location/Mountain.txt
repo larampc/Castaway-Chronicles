@@ -1,0 +1,2 @@
+I NPC mountain_ground 61 93 59 27 0 V
+B Mountain 0 0 200 150

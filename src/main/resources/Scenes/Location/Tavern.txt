@@ -1,1 +1,3 @@
-B tavern 0 0 200 150
+I NPC bartender 110 66 9 12 0 V
+I NPC people 48 71 32 59 0 V
+B Tavern 0 0 200 150
