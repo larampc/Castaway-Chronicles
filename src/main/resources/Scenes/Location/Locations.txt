@@ -6,5 +6,6 @@ WitchOldHouse
 Newspaper
 Paper1
 Paper2
-Forest S
+Forest
 WitchNewHouse
+Store S

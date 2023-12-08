@@ -1,0 +1,2 @@
+Store clothNPC I
+Store cloth V

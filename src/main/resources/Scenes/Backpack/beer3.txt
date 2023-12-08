@@ -3,5 +3,5 @@ THROW - give
 You sure you want to throw that amazing beer away?
 DRINK WITH - give bartender
 Where's your loyalty???
-GIVE - give engineer
+GIVE - give shopkeeper
 Who would want your beer?
