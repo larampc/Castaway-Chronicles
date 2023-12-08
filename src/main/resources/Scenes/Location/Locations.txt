@@ -1,5 +1,5 @@
-Beach S
-City
+Beach
+City S
 Tavern
 Mountain
 WitchOldHouse
