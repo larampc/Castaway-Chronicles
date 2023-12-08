@@ -22,6 +22,10 @@ public class HandleEffectsCommand implements Command{
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);
+            if (s[0].equalsIgnoreCase("go")) {
+                game.setCurrentLocation(s[1]);
+                continue;
+            }
             if (s[0].equalsIgnoreCase("end")) {
                 game.setEnd(s[1]);
                 game.setCurrentScene("END");

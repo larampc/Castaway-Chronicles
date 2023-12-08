@@ -1,6 +1,6 @@
 A key
-USE - use
-
+OPEN - give witchNewHouseNPC
+That can't be used here.
 THROW - use
 A key may be useful and we don't want to lose it.
 GIVE - give
