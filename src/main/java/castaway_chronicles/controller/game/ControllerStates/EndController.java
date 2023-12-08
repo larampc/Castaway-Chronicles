@@ -42,7 +42,7 @@ public class EndController implements ControllerState{
 
     @Override
     public void select(Application application) throws IOException, InterruptedException {
-        application.setState(new MenuState(new MainMenu()));
+        if (gameController.getModel().getEnd().getMax() == gameController.getModel().getEnd().getCurrent()) application.setState(new MenuState(new MainMenu()));
     }
 
     @Override
