@@ -8,6 +8,7 @@ import castaway_chronicles.gui.ClickAction;
 import castaway_chronicles.model.game.Game;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class GameController extends Controller<Game> {
     private final ControllerState locationController;
@@ -38,7 +39,7 @@ public class GameController extends Controller<Game> {
     }
 
     @Override
-    public void step(Application application, Action action, long time) throws IOException, InterruptedException {
+    public void step(Application application, Action action, long time) throws IOException, InterruptedException, URISyntaxException {
         current.none(time);
         if (action.getType().equalsIgnoreCase("UP")) current.keyUp();
         if (action.getType().equalsIgnoreCase("DOWN")) current.keyDown();

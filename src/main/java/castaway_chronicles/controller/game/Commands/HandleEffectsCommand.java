@@ -6,6 +6,7 @@ import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class HandleEffectsCommand implements Command{
@@ -17,7 +18,7 @@ public class HandleEffectsCommand implements Command{
     }
 
     @Override
-    public void execute() throws IOException, InterruptedException {
+    public void execute() throws IOException, InterruptedException, URISyntaxException {
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);

@@ -1,16 +1,28 @@
 package castaway_chronicles.model.game.scene;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Objects;
+
 public class Ending {
     private String name;
     private int current = 1;
-    public Ending(String name) {this.name = name;}
-
+    private int max = 0;
+    public Ending(String name) throws URISyntaxException {this.name = name;setMax();}
+    public void setMax() throws URISyntaxException {
+        URL resource = getClass().getClassLoader().getResource("Endings/"+name);
+        assert resource != null;
+        File fontFile = new File(resource.toURI());
+        max = Objects.requireNonNull(fontFile.list()).length;
+    }
+    public int getMax() {return max;}
     public int getCurrent() {
         return current;
     }
 
-    public void setCurrent(int current) {
-        this.current = current;
+    public void setNext() {
+        ++this.current;
     }
     public String getCurrentFrame() {
         return String.format("%04d", current);

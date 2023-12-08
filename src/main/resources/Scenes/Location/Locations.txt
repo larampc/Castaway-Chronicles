@@ -1,8 +1,10 @@
-Beach S
+Beach
 City
-Tavern
+Tavern S
 Mountain
 WitchOldHouse
 Newspaper
 Paper1
 Paper2
+Forest
+WitchNewHouse

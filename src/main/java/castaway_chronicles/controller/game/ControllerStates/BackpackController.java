@@ -12,6 +12,7 @@ import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 public class BackpackController implements ControllerState {
@@ -66,7 +67,7 @@ public class BackpackController implements ControllerState {
     }
 
     @Override
-    public void select(Application application) throws IOException, InterruptedException {
+    public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         if (backpack.getBackpackSelection().isDescription()) {
             backpack.getBackpackSelection().activateSelection();
             return;

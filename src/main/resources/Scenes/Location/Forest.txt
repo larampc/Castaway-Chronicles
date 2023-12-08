@@ -1,5 +1,7 @@
-I NPC forestRock 51 108 32 11 0 V
+I Item forestRock 51 108 32 11 V
 I NPC bush 373 99 29 26 0 V
+I Item branch 188 120 60 9 V
 I Icon MAP_icon 2 2 23 17 V
 I Icon BACKPACK_icon 180 2 17 25 V
 B Forest 0 0 491 150
+M 100 105 17 41

@@ -1,0 +1,7 @@
+A key
+USE - use
+
+THROW - use
+A key may be useful and we don't want to lose it.
+GIVE - give
+You don't give someone's keys away just like that.

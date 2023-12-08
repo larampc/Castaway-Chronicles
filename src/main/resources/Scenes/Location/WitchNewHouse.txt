@@ -1,0 +1,2 @@
+I NPC witch 140 60 15 33 0 V
+B WitchNewHouse 0 0 200 150

@@ -9,6 +9,7 @@ import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Interactable;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class MapController implements ControllerState {
     private GameController gameController;
@@ -17,7 +18,7 @@ public class MapController implements ControllerState {
     }
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException {
+    public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
         CommandInvoker invoker = new CommandInvoker();
         for (Interactable e: gameController.getModel().getMap().getVisibleInteractables()) {
             if (e.contains(position) && e instanceof Icon) {

@@ -2,6 +2,7 @@ package castaway_chronicles.model.game;
 
 import castaway_chronicles.model.game.scene.*;
 
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 public class Game {
@@ -54,7 +55,7 @@ public class Game {
         currentLocation = getLocation(name);
     }
     public Ending getEnd() {return end;}
-    public void setEnd(String name) {
+    public void setEnd(String name) throws URISyntaxException {
         end = new Ending(name);
     }
     public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE, END}

@@ -1,13 +1,14 @@
 I BItem rock_backpack 73 112 23 20
-I BItem rope_backpack 84 72 31 21
+I BItem rope_backpack 72 72 31 21
 I BItem beer1_backpack 104 105 20 29
 I BItem beer2_backpack 104 105 20 29
 I BItem beer3_backpack 104 105 20 29
 I BItem broom_backpack 44 17 14 118
 I BItem pipe_backpack 24 18 16 117
-I BItem cloth_backpack 101 40 23 14
+I BItem cloth_backpack 104 40 23 14
 I BItem branch_backpack 146 16 29 127
 I BItem flower_backpack 72 24 18 25
-I BItem potion1_backpack 110 37 9 11
-I BItem potion2_backpack 120 37 9 11
+I BItem potion1_backpack 105 80 9 11
+I BItem potion2_backpack 117 80 9 11
+I BItem forestRock_backpack 94 30 9 18
 B Backpack 0 0 200 150

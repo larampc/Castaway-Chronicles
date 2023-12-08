@@ -8,6 +8,7 @@ import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static java.lang.Math.abs;
 
@@ -91,7 +92,7 @@ public class WalkingController implements ControllerState{
     }
 
     @Override
-    public void none(long time) throws IOException, InterruptedException {
+    public void none(long time) throws IOException, InterruptedException, URISyntaxException {
         if (canwalk() && time- lastMovementTime >150) {
             Location location = gameController.getModel().getCurrentLocation();
             CommandInvoker invoker = new CommandInvoker();
