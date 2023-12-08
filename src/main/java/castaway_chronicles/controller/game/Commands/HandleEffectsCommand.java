@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
@@ -44,8 +45,11 @@ public class HandleEffectsCommand implements Command{
                 if (s[2].equalsIgnoreCase("V")) {
                     game.getBackpack().setVisible(s[1]+"_backpack");
                 }
-                if (s[2].equalsIgnoreCase("I")) {
+                else if (s[2].equalsIgnoreCase("I")) {
                     game.getBackpack().setInvisible(s[1]+"_backpack");
+                }
+                else {
+                    ((ItemBackpack)game.getBackpack().getInteractable(s[1]+"_backpack")).setNameBackpack(s[2]+"_backpack");
                 }
                 continue;
             }

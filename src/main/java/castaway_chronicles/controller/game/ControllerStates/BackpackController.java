@@ -6,6 +6,7 @@ import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
@@ -93,8 +94,10 @@ public class BackpackController implements ControllerState {
                 Command effects = new HandleEffectsCommand(gameController.getModel(), backpack.getBackpackSelection().getItem().getEffects());
                 invoker.setCommand(effects);
                 invoker.execute();
-                gameController.getModel().setCurrentScene("LOCATION");
-                gameController.setControllerState(gameController.getLocationController());
+                if (gameController.getModel().getScene()!= Game.SCENE.END) {
+                    gameController.getModel().setCurrentScene("LOCATION");
+                    gameController.setControllerState(gameController.getLocationController());
+                }
             }
             if (s[0].equalsIgnoreCase("give")) {
                 gameController.getModel().setCurrentScene("LOCATION");

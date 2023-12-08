@@ -5,4 +5,7 @@ I BItem beer2_backpack 104 105 20 29
 I BItem beer3_backpack 104 105 20 29
 I BItem broom_backpack 44 17 14 118
 I BItem pipe_backpack 24 18 16 117
+I BItem cloth_backpack 101 40 23 14
+I BItem branch_backpack 146 16 29 127
+I BItem flower_backpack 72 24 18 25 V
 B Backpack 0 0 200 150

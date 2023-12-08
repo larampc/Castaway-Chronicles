@@ -47,6 +47,10 @@ public class ItemBackpack extends Interactable {
         return optionCommand.get(itemOptions.getEntry(itemOptions.getCurrentEntry()));
     }
     public String getDescription() {return description;}
+    public void setNameBackpack(String name) throws IOException {
+        setName(name);
+        getInfo();
+    }
     public List<String> getEffects() throws IOException {
         String[] s = getName().split("_",-1);
         URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + s[0] + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "") + "_effects.txt");
