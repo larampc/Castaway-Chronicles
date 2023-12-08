@@ -1,0 +1,7 @@
+A very magic potion whose purposes are unknown
+THROW - give
+This is a precious potion, maybe you shouldn't throw it.
+DRINK - use
+Maybe it's poisonous, better not to drink.
+GIVE - give
+This potion is invisible for others.
