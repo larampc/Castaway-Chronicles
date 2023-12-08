@@ -4,3 +4,5 @@ Tavern
 Mountain
 WitchOldHouse
 Newspaper
+Paper1
+Paper2

@@ -42,10 +42,10 @@ public class HandleEffectsCommand implements Command{
             }
             if (s[0].equalsIgnoreCase("backpack")) {
                 if (s[2].equalsIgnoreCase("V")) {
-                    game.getBackpack().setVisible(s[1]);
+                    game.getBackpack().setVisible(s[1]+"_backpack");
                 }
                 if (s[2].equalsIgnoreCase("I")) {
-                    game.getBackpack().setInvisible(s[1]);
+                    game.getBackpack().setInvisible(s[1]+"_backpack");
                 }
                 continue;
             }

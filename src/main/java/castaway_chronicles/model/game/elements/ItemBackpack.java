@@ -22,7 +22,9 @@ public class ItemBackpack extends Interactable {
         getInfo();
     }
     public void getInfo() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + getName() + ".txt");
+        String[] s1 = getName().split("_",-1);
+        System.out.println(s1[0]);
+        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + s1[0] + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());
@@ -47,7 +49,8 @@ public class ItemBackpack extends Interactable {
     }
     public String getDescription() {return description;}
     public List<String> getEffects() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + getName() + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "") + "_effects.txt");
+        String[] s = getName().split("_",-1);
+        URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + s[0] + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "") + "_effects.txt");
         if (resource == null) return new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         List<String> lines = br.lines().collect(Collectors.toList());
