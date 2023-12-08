@@ -1,2 +1,4 @@
 I NPC mountain_ground 61 93 59 27 0 V
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
 B Mountain 0 0 200 150

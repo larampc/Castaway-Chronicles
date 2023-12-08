@@ -19,7 +19,7 @@ public class MoveCommand implements Command{
         location.getMainChar().setName("walk" + next + ((offset < 0) ? "_right" : "_left"));
         location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));
         for (Interactable e : location.getInteractables()) {
-            if (!(e instanceof Icon && (e.getName().equalsIgnoreCase("Map") || e.getName().equalsIgnoreCase("Backpack")))) {
+            if (!(e instanceof Icon && (e.getName().equalsIgnoreCase("Map_icon") || e.getName().equalsIgnoreCase("Backpack_icon")))) {
                 e.setPosition(e.getPosition().getRight(offset));
             }
         }

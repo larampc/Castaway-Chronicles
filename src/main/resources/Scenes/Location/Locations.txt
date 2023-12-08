@@ -3,3 +3,4 @@ City
 Tavern
 Mountain
 WitchOldHouse
+Newspaper

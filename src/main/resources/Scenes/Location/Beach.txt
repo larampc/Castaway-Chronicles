@@ -1,4 +1,7 @@
 B Beach -200 0 707 150
-I NPC toot 150 100 12 10 0 V
-I Item rope 155 100 11 32
+I NPC toot 230 100 12 10 0 V
+I Item rope 245 100 11 32
+I Icon Newspaper_icon 150 100 23 14 V
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
 M 100 80 17 41

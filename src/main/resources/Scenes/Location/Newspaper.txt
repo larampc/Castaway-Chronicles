@@ -1,0 +1,2 @@
+I Icon Beach_goback 180 130 18 16 V
+B Newspaper 0 0 200 150
