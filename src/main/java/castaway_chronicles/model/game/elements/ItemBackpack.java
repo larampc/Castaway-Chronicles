@@ -23,7 +23,6 @@ public class ItemBackpack extends Interactable {
     }
     public void getInfo() throws IOException {
         String[] s1 = getName().split("_",-1);
-        System.out.println(s1[0]);
         URL resource = getClass().getClassLoader().getResource("Scenes/Backpack/" + s1[0] + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
