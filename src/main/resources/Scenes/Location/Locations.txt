@@ -10,3 +10,4 @@ Forest
 WitchNewHouse S
 Store
 Volcano
+PiratesTip

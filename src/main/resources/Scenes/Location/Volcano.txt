@@ -1,1 +1,3 @@
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
 B Volcano 0 0 200 150
