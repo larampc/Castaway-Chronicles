@@ -99,6 +99,7 @@ public class BackpackController implements ControllerState {
                     gameController.getModel().setCurrentScene("LOCATION");
                     gameController.setControllerState(gameController.getLocationController());
                 }
+                else gameController.setControllerState(gameController.getEndController());
             }
             if (s[0].equalsIgnoreCase("give")) {
                 gameController.getModel().setCurrentScene("LOCATION");
