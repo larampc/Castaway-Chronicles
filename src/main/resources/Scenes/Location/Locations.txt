@@ -1,5 +1,5 @@
 Beach
-City S
+City
 Tavern
 Mountain
 WitchOldHouse
@@ -7,5 +7,6 @@ Newspaper
 Paper1
 Paper2
 Forest
-WitchNewHouse
+WitchNewHouse S
 Store
+Volcano
