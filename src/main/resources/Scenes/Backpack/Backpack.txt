@@ -1,6 +1,6 @@
 I BItem rock_backpack 73 112 23 20
 I BItem rope_backpack 72 72 31 21
-I BItem beer1_backpack 104 105 20 29 V
+I BItem beer1_backpack 104 105 20 29
 I BItem beer2_backpack 104 105 20 29
 I BItem beer3_backpack 104 105 20 29
 I BItem broom_backpack 44 17 14 118
