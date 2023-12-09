@@ -1,3 +1,5 @@
 NPC shopkeeper 10
+Store shopkeeper I
+Store shopkeeper2 V
 Store clothNPC I
 Store cloth V
