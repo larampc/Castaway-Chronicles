@@ -1,5 +1,7 @@
 package castaway_chronicles.controller;
 
+import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.ControllerStates.BackpackController;
 import castaway_chronicles.controller.game.ControllerStates.HandController;
 import castaway_chronicles.controller.game.GameController;
@@ -32,6 +34,7 @@ public class HandControllerTest {
         gameController = new GameController(game);
         handController = (HandController) gameController.getHandController();
         gameController.setControllerState(handController);
+
     }
 
     @Test
@@ -60,6 +63,7 @@ public class HandControllerTest {
         handController.click(new Position(0, 0));
 
         Mockito.verify(backpackAnswer,times(1)).activate(itemBackpack);
+
         assertEquals(Game.SCENE.LOCATION, game.getScene());
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }
@@ -93,9 +97,14 @@ public class HandControllerTest {
 
         when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
 
+        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
+        gameController.setCommandInvoker(commandInvokerMock);
+
         handController.setToGive("NPC_NAME");
         handController.click(new Position(0, 0));
 
+        verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
+        verify(commandInvokerMock, times(1)).execute();
         assertEquals(Game.SCENE.LOCATION, game.getScene());
         Mockito.verify(locationMock,times(1)).setDialog("NPC_NAME");
         assertEquals(gameController.getDialogController(), gameController.getCurrent());

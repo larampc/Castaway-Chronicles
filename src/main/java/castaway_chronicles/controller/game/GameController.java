@@ -2,6 +2,8 @@ package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
+import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
 import castaway_chronicles.controller.game.ControllerStates.*;
 import castaway_chronicles.gui.Action;
 import castaway_chronicles.gui.ClickAction;
@@ -19,10 +21,10 @@ public class GameController extends Controller<Game> {
     private final ControllerState walkingController;
     private ControllerState current;
     private ControllerState previous;
-    private ControllerState narratorController;
-    private ControllerState endController;
+    private final ControllerState narratorController;
+    private final ControllerState endController;
 
-
+    private GenericCommandInvoker commandInvoker;
     public GameController(Game model) {
         super(model);
         locationController = new LocationController(this);
@@ -35,6 +37,7 @@ public class GameController extends Controller<Game> {
         narratorController = new NarratorController(this);
         endController = new EndController(this);
         current = locationController;
+        commandInvoker = new CommandInvoker();
     }
 
     @Override
@@ -87,4 +90,8 @@ public class GameController extends Controller<Game> {
     public ControllerState getPrevious() {
         return previous;
     }
+
+    public GenericCommandInvoker getCommandInvoker() {return commandInvoker;}
+    public void setCommandInvoker(GenericCommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
+
 }
