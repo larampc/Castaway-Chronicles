@@ -3,5 +3,5 @@ I Icon Beach_icon 22 85 21 29 V
 I Icon City_icon 62 75 30 23
 I Icon Forest_icon 112 74 24 30
 I Icon Volcano_icon 132 26 33 25
-I Item Volcano_item 132 26 32 25 V
+I Item Volcano_item 132 26 32 25
 B Map 0 0 200 150

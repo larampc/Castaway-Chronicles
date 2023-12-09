@@ -1,4 +1,4 @@
-Beach
+Beach S
 City
 Tavern
 Mountain
@@ -7,7 +7,7 @@ Newspaper
 Paper1
 Paper2
 Forest
-WitchNewHouse S
+WitchNewHouse
 Store
 Volcano
 PiratesTip
