@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SceneLoaderTest {
     @Test
     public void getInteractables() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
                 new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_Icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
@@ -23,7 +23,7 @@ public class SceneLoaderTest {
     }
     @Test
     public void getVisibleInteractables() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
                 new Icon(2,2,23,17,"MAP_Icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
@@ -31,15 +31,15 @@ public class SceneLoaderTest {
     }
     @Test
     public void getBackground() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene", "Location");
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene", "Location");
         Scene scene = sceneBuilder.createScene();
         assertEquals("Beach", scene.getBackground().getName());
 
-        sceneBuilder = new SceneLoader("TestScene2", "Location");
+        sceneBuilder = new SceneLoader("Scenes", "TestScene2", "Location");
         scene = sceneBuilder.createScene();
         assertNull(scene.getBackground());
 
-        sceneBuilder = new SceneLoader("TestScene3", "Location");
+        sceneBuilder = new SceneLoader("Scenes","TestScene3", "Location");
         scene = sceneBuilder.createScene();
         assertNull(scene.getBackground());
     }
@@ -61,20 +61,20 @@ public class SceneLoaderTest {
 
     @Test
     public void Location() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestScene","Location");
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         assertEquals("Beach",scene.getBackground().getName());
     }
     @Test
     public void BackPack() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestBackpack","Backpack");
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestBackpack","Backpack");
         Scene scene = sceneBuilder.createScene();
         assertEquals(2,scene.getInteractables().size());
         assertEquals("backpack", scene.getBackground().getName());
     }
     @Test
     public void Map() throws IOException {
-        SceneLoader sceneBuilder = new SceneLoader("TestMap","Map");
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestMap","Map");
         Scene scene = sceneBuilder.createScene();
         assertEquals(2,scene.getInteractables().size());
         assertEquals("map", scene.getBackground().getName());

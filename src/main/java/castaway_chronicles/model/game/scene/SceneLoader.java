@@ -15,8 +15,8 @@ public class SceneLoader {
     private final HashMap<String, Interactable> visibleInteractables = new HashMap<>();
     private final String type;
 
-    public SceneLoader(String filename, String type) throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Scenes/" + type + "/" + filename + ".txt");
+    public SceneLoader(String dir, String filename, String type) throws IOException {
+        URL resource = getClass().getClassLoader().getResource(dir + "/" + filename + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         lines = readLines(br);

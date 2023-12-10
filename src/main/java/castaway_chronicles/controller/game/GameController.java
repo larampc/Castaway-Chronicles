@@ -22,19 +22,20 @@ public class GameController extends Controller<Game> {
     private ControllerState previous;
     private ControllerState narratorController;
     private ControllerState endController;
-
+    private GameSaver gameSaver;
 
     public GameController(Game model) {
         super(model);
+        gameSaver = new GameSaver(model);
         locationController = new LocationController(this);
         backpackController = new BackpackController(this);
         mapController = new MapController(this);
         dialogController = new DialogController(this);
         handController = new HandController(this);
-        pauseController = new PauseController(this);
+        pauseController = new PauseController(this, gameSaver);
         walkingController = new WalkingController(this);
         narratorController = new NarratorController(this);
-        endController = new EndController(this);
+        endController = new EndController(this, gameSaver);
         current = locationController;
     }
 

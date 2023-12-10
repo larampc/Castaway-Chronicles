@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class NPCDialog {
     private final String name;
+    private int state;
     private int line;
     private List<String> dialog;
     private SelectionPanel choices;
@@ -20,9 +21,10 @@ public class NPCDialog {
     private List<String> effects;
     public NPCDialog(int state, String name) throws IOException {
         this.name = name;
-        init(state);
+        this.state = state;
+        init();
     }
-    protected void init(int state) throws IOException {
+    protected void init() throws IOException {
         URL resource = getClass().getClassLoader().getResource("Dialog/" + name + "/" + name + state + ".txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
@@ -55,10 +57,12 @@ public class NPCDialog {
     }
 
     public void goToStateChoice() throws IOException {
-        init(nextStates.get(choices.getCurrentEntry()));
+        state = nextStates.get(choices.getCurrentEntry());
+        init();
     }
     public void goToState(int i) throws IOException {
-        init(i);
+        state = i;
+        init();
     }
     public int getLine() { return line;}
     public void nextLine() {
@@ -77,4 +81,5 @@ public class NPCDialog {
         return effects;
     }
     public String getCurrentLine() {return dialog.get(line);}
+    public int getState() {return state;}
 }

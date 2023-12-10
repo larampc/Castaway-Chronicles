@@ -2,6 +2,7 @@ package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.GameController;
+import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.states.MenuState;
@@ -11,8 +12,10 @@ import java.io.IOException;
 public class EndController implements ControllerState{
     private GameController gameController;
     private long lastFrame = 0;
-    public EndController(GameController gameController) {
+    private GameSaver gameSaver;
+    public EndController(GameController gameController, GameSaver gameSaver) {
         this.gameController = gameController;
+        this.gameSaver = gameSaver;
     }
 
     @Override
@@ -42,6 +45,7 @@ public class EndController implements ControllerState{
 
     @Override
     public void select(Application application) throws IOException, InterruptedException {
+        gameSaver.emptySave();
         if (gameController.getModel().getEnd().getMax() == gameController.getModel().getEnd().getCurrent()) application.setState(new MenuState(new MainMenu()));
     }
 
