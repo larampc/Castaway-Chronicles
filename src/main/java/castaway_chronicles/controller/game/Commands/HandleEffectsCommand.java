@@ -40,7 +40,7 @@ public class HandleEffectsCommand implements Command{
                         file.delete();
                     }
                 }
-                application.setState(new EndState(new Ending(s[0])));
+                application.setState(new EndState(new Ending(s[1])));
                 continue;
             }
             if (s[0].equalsIgnoreCase("NPC")) {
