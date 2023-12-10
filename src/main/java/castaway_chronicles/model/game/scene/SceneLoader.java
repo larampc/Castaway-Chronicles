@@ -40,7 +40,7 @@ public class SceneLoader {
                 String[] s = line.split(" ", -1);
                 if(s.length < 6) return null;
                 int x = Integer.parseInt(s[2]), y = Integer.parseInt(s[3]), w = Integer.parseInt(s[4]), h = Integer.parseInt(s[5]);
-                boolean loopable = s.length == 6;
+                boolean loopable = s.length == 7;
                 return new Background(x, y, w, h, s[1], loopable);
             }
         }
