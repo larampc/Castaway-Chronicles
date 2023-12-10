@@ -44,7 +44,7 @@ public class HandleEffectsCommand implements Command{
                 }
                 File backpack = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
                 Writer writer = Files.newBufferedWriter(Paths.get(backpack.getAbsolutePath()));
-                writer.write(s[1]+"\n");
+                writer.append(s[1]).append("\n");
                 writer.close();
                 application.setState(new EndState(new Ending(s[1])));
                 continue;
