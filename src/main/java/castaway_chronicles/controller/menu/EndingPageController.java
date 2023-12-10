@@ -8,7 +8,9 @@ import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.menu.EndingItem;
 import castaway_chronicles.model.menu.EndingPage;
+import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.states.EndState;
+import castaway_chronicles.states.MenuState;
 
 import java.net.URISyntaxException;
 
@@ -26,6 +28,9 @@ public class EndingPageController extends Controller<EndingPage> {
                     application.setState(new EndState(new Ending(e.getName())));
                 }
             }
+        }
+        if (action.getType().equalsIgnoreCase("escape")) {
+            application.setState(new MenuState(new MainMenu()));
         }
     }
 }
