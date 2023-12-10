@@ -22,6 +22,7 @@ public class GameSaver {
         this.game =game;
         Path n = Paths.get("");
         this.toSave = new File(n.toAbsolutePath()+"/src/main/resources/Scenes_saved");
+        toSave.mkdirs();
     }
     public void emptySave() {
         File[] allContents = toSave.listFiles();

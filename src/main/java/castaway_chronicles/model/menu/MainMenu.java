@@ -6,7 +6,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class MainMenu extends SelectionPanel {
 
@@ -24,6 +23,8 @@ public class MainMenu extends SelectionPanel {
     }
     public boolean canContinue() {
         Path n = Paths.get("");
-        return Objects.requireNonNull(new File(n.toAbsolutePath() + "/src/main/resources/Scenes_saved").list()).length > 0;
+        File f = new File(n.toAbsolutePath() + "/src/main/resources/Scenes_saved");
+        if (!f.exists()) return false;
+        return f.list().length > 0;
     }
 }
