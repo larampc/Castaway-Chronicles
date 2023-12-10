@@ -3,7 +3,6 @@ package castaway_chronicles.model.menu;
 import castaway_chronicles.model.SelectionPanel;
 
 import java.io.File;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
@@ -22,8 +21,7 @@ public class MainMenu extends SelectionPanel {
         return isSelected(1);
     }
     public boolean canContinue() {
-        Path n = Paths.get("");
-        File f = new File(n.toAbsolutePath() + "/src/main/resources/Scenes_saved");
+        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/Scenes_saved");
         if (!f.exists()) return false;
         return f.list().length > 0;
     }

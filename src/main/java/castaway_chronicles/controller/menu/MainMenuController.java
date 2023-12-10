@@ -7,7 +7,9 @@ import castaway_chronicles.model.game.GameBuilder;
 import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.states.GameState;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class MainMenuController extends Controller<MainMenu> {
     public MainMenuController(MainMenu model) {
@@ -26,7 +28,17 @@ public class MainMenuController extends Controller<MainMenu> {
                 break;
             case 'S':
                 if (getModel().isSelectedExit()) application.setState(null);
-                if (getModel().isSelectedStart()) application.setState(new GameState(new GameBuilder().createGame(false)));
+                if (getModel().isSelectedStart()) {
+                    //wipe saving records
+                    File toClean = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/Scenes_saved");
+                    File[] allContents = toClean.listFiles();
+                    if (allContents != null) {
+                        for (File file : allContents) {
+                            file.delete();
+                        }
+                    }
+                    application.setState(new GameState(new GameBuilder().createGame(false)));
+                }
                 if (getModel().isSelectedContinue() && getModel().canContinue())  application.setState(new GameState(new GameBuilder().createGame(true)));
                 break;
         }

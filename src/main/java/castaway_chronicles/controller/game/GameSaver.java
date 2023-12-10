@@ -12,16 +12,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class GameSaver {
     private Game game;
     private File toSave;
     public GameSaver(Game game) {
-        this.game =game;
-        Path n = Paths.get("");
-        this.toSave = new File(n.toAbsolutePath()+"/src/main/resources/Scenes_saved");
+        this.game = game;
+        this.toSave = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/Scenes_saved");
         toSave.mkdirs();
     }
     public void emptySave() {
