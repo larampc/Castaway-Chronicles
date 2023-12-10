@@ -1,8 +1,8 @@
-drink 113 126 10 15
-shipSelfish 78 119 27 27
-shipHero 128 108 28 30
 flower 43 118 11 18
 trampoline 55 125 21 22
+shipSelfish 78 119 27 27
+drink 113 126 10 15
+shipHero 128 108 28 30
 question1 38 125 13 13 V
 question2 58 126 12 16 V
 question3 84 127 11 16 V
