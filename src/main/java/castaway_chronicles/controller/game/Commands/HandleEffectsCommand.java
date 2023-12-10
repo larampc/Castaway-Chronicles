@@ -10,7 +10,9 @@ import castaway_chronicles.states.EndState;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -40,6 +42,10 @@ public class HandleEffectsCommand implements Command{
                         file.delete();
                     }
                 }
+                File backpack = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
+                Writer writer = Files.newBufferedWriter(Paths.get(backpack.getAbsolutePath()));
+                writer.write(s[1]+"\n");
+                writer.close();
                 application.setState(new EndState(new Ending(s[1])));
                 continue;
             }
