@@ -13,6 +13,6 @@ public interface ControllerState {
     void keyRight();
     void keyLeft();
     void select(Application application) throws IOException, InterruptedException, URISyntaxException;
-    void escape();
+    void escape() throws IOException, URISyntaxException, InterruptedException;
     void none(long time) throws IOException, InterruptedException, URISyntaxException;
 }

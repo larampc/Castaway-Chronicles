@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.Commands.ChangeSceneCommand;
 import castaway_chronicles.controller.game.Commands.Command;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
@@ -77,8 +78,12 @@ public class HandController implements ControllerState {
     }
 
     @Override
-    public void escape() {
+    public void escape() throws IOException, URISyntaxException, InterruptedException {
+        CommandInvoker invoker = new CommandInvoker();
+        ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "BACKPACK");
+        invoker.setCommand(changeScene2);
         gameController.setControllerState(gameController.getBackpackController());
+        invoker.execute();
     }
 
     @Override
