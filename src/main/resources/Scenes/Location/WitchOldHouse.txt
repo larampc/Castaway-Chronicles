@@ -1,0 +1,9 @@
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
+I Item broom 109 48 8 64 V
+I Item potion1 134 72 9 11 V
+I Item potion2 152 73 9 12 V
+I Icon Paper1_icon 17 93 22 14 V
+I Icon Paper2_icon 17 93 22 14
+I Icon City_goback 180 130 18 16 V
+B WitchOldHouse 0 0 200 150

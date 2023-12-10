@@ -1,0 +1,7 @@
+A very magic potion that improves vision.
+THROW - give
+This is a precious potion, maybe you shouldn't throw it.
+DRINK - use paper2
+
+GIVE - give
+This potion is invisible for others.

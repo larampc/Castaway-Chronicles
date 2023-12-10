@@ -1,0 +1,8 @@
+I Icon City_goback 180 130 18 16 V
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
+I NPC shopkeeper 76 66 22 32 0 V
+I NPC shopkeeper2 76 66 22 32 0
+I NPC clothNPC 84 98 21 8 0 V
+I Item cloth 84 98 21 8
+B Store 0 0 200 150

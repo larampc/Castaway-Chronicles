@@ -1,0 +1,7 @@
+A completely ordinary beer
+THROW - give
+You sure you want to throw that amazing beer away?
+DRINK WITH - give bartender
+You wanna betray your drinking buddy?
+GIVE - give shopkeeper
+Who would want your beer?

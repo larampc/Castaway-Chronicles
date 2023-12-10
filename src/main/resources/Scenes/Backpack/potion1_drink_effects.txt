@@ -1,0 +1,3 @@
+Backpack potion1 I
+WitchOldHouse Paper1_icon I
+WitchOldHouse Paper2_icon V

@@ -1,0 +1,10 @@
+I Item forestRock 51 108 32 11 V
+I Item flower 130 108 10 16 V
+I NPC bush 373 99 29 26 0 V
+I Item branch 240 120 60 9 V
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
+I Icon WitchNewHouse_door 207 82 19 35
+I NPC witchNewHouseNPC 207 82 19 35 0
+B Forest 0 0 491 150
+M 100 105 17 41

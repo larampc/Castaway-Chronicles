@@ -1,10 +1,12 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class HandleEffectsCommand implements Command{
@@ -16,10 +18,14 @@ public class HandleEffectsCommand implements Command{
     }
 
     @Override
-    public void execute() throws IOException, InterruptedException {
+    public void execute() throws IOException, InterruptedException, URISyntaxException {
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);
+            if (s[0].equalsIgnoreCase("go")) {
+                game.setCurrentLocation(s[1]);
+                continue;
+            }
             if (s[0].equalsIgnoreCase("end")) {
                 game.setEnd(s[1]);
                 game.setCurrentScene("END");
@@ -42,10 +48,13 @@ public class HandleEffectsCommand implements Command{
             }
             if (s[0].equalsIgnoreCase("backpack")) {
                 if (s[2].equalsIgnoreCase("V")) {
-                    game.getBackpack().setVisible(s[1]);
+                    game.getBackpack().setVisible(s[1]+"_backpack");
                 }
-                if (s[2].equalsIgnoreCase("I")) {
-                    game.getBackpack().setInvisible(s[1]);
+                else if (s[2].equalsIgnoreCase("I")) {
+                    game.getBackpack().setInvisible(s[1]+"_backpack");
+                }
+                else {
+                    ((ItemBackpack)game.getBackpack().getInteractable(s[1]+"_backpack")).setNameBackpack(s[2]+"_backpack");
                 }
                 continue;
             }

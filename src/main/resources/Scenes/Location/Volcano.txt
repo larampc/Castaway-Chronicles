@@ -1,0 +1,6 @@
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
+I NPC witch 90 118 15 33 5 V
+I NPC shipdown 64 55 70 52 0 V
+I NPC ship 70 10 53 42 0
+B Volcano 0 0 200 150

@@ -10,6 +10,7 @@ import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class DialogController implements ControllerState {
     private final GameController gameController;
@@ -50,7 +51,7 @@ public class DialogController implements ControllerState {
     }
 
     @Override
-    public void select(Application application) throws IOException, InterruptedException {
+    public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         CommandInvoker invoker = new CommandInvoker();
         if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
             HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());

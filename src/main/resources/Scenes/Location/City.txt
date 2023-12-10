@@ -1,6 +1,14 @@
-B City 0 0 629 150
-I NPC toot 150 100 12 10 1 V
+B City 0 0 854 150
 I NPC engineer 200 105 13 28 0 V
 I Item rock 500 125 8 7 V
-I Icon tavern_door 112 100 18 23 V
+I Item pipe 227 52 4 49 V
+I Icon Tavern_door 112 100 18 23 V
+I Icon Store_door 321 99 19 28 V
+I NPC witchdoor 451 90 17 30 0 V
+I NPC witchwindow 443 58 29 25 0 V
+I Icon WitchOldHouse_window 443 58 29 25
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
+I Icon Forest_entry 686 78 59 50
+I NPC forestEntryNPC 686 78 59 50 0 V
 M 100 105 17 41

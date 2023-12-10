@@ -3,17 +3,16 @@ package castaway_chronicles.controller.game.ControllerStates;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.menu.MainMenu;
+import castaway_chronicles.states.MenuState;
 
 import java.io.IOException;
 
 public class EndController implements ControllerState{
     private GameController gameController;
-    private String ending;
+    private long lastFrame = 0;
     public EndController(GameController gameController) {
         this.gameController = gameController;
-    }
-    public void setEnding(String ending) {
-        this.ending = ending;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class EndController implements ControllerState{
 
     @Override
     public void select(Application application) throws IOException, InterruptedException {
-
+        if (gameController.getModel().getEnd().getMax() == gameController.getModel().getEnd().getCurrent()) application.setState(new MenuState(new MainMenu()));
     }
 
     @Override
@@ -53,6 +52,9 @@ public class EndController implements ControllerState{
 
     @Override
     public void none(long time) throws IOException, InterruptedException {
-
+        if (time-lastFrame > 200 && gameController.getModel().getEnd().getMax() > gameController.getModel().getEnd().getCurrent()) {
+            gameController.getModel().getEnd().setNext();
+            lastFrame = time;
+        }
     }
 }

@@ -6,11 +6,13 @@ import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 public class BackpackController implements ControllerState {
@@ -25,7 +27,7 @@ public class BackpackController implements ControllerState {
     public void click(Position position) throws IOException {
         for (Interactable e: backpack.getVisibleInteractables()) {
             if (e.contains(position)) {
-                backpack.getBackpackSelection().activate((ItemBackpack) e);
+                backpack.getBackpackSelection().activateDescription((ItemBackpack) e);
             }
         }
     }
@@ -65,7 +67,11 @@ public class BackpackController implements ControllerState {
     }
 
     @Override
-    public void select(Application application) throws IOException, InterruptedException {
+    public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
+        if (backpack.getBackpackSelection().isDescription()) {
+            backpack.getBackpackSelection().activateSelection();
+            return;
+        }
         if (!backpack.getBackpackSelection().isSelection()) return;
 
         String command = backpack.getBackpackSelection().getItem().getCommand();
@@ -89,8 +95,11 @@ public class BackpackController implements ControllerState {
                 Command effects = new HandleEffectsCommand(gameController.getModel(), backpack.getBackpackSelection().getItem().getEffects());
                 invoker.setCommand(effects);
                 invoker.execute();
-                gameController.getModel().setCurrentScene("LOCATION");
-                gameController.setControllerState(gameController.getLocationController());
+                if (gameController.getModel().getScene()!= Game.SCENE.END) {
+                    gameController.getModel().setCurrentScene("LOCATION");
+                    gameController.setControllerState(gameController.getLocationController());
+                }
+                else gameController.setControllerState(gameController.getEndController());
             }
             if (s[0].equalsIgnoreCase("give")) {
                 gameController.getModel().setCurrentScene("LOCATION");
@@ -102,7 +111,7 @@ public class BackpackController implements ControllerState {
 
     @Override
     public void escape() {
-        if (!backpack.getBackpackSelection().isSelection()) {
+        if (!(backpack.getBackpackSelection().isSelection()|| backpack.getBackpackSelection().isDescription())) {
             gameController.getModel().setCurrentScene("LOCATION");
             gameController.setControllerState(gameController.getLocationController());
         }

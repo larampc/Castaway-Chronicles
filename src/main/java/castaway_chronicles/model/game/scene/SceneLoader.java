@@ -40,7 +40,8 @@ public class SceneLoader {
                 String[] s = line.split(" ", -1);
                 if(s.length < 6) return null;
                 int x = Integer.parseInt(s[2]), y = Integer.parseInt(s[3]), w = Integer.parseInt(s[4]), h = Integer.parseInt(s[5]);
-                return new Background(x, y, w, h, s[1]);
+                boolean loopable = s.length == 7;
+                return new Background(x, y, w, h, s[1], loopable);
             }
         }
         return null;
@@ -61,7 +62,6 @@ public class SceneLoader {
                 interactables.put(name,interactable);
             }
         }
-        if (type.equalsIgnoreCase("Location")) getIcons();
     }
 
 
@@ -77,18 +77,5 @@ public class SceneLoader {
             }
         }
         return null;
-    }
-    protected void getIcons() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Scenes/Location/Icons.txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        List<String> icons = readLines(br);
-        for (String line : icons) {
-            String[] s = line.split(" ",-1);
-            String name = s[0];
-            int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
-            visibleInteractables.put(name, new Icon(x, y, w,h,name));
-            interactables.put(name, new Icon(x,y,w,h,name));
-        }
     }
 }

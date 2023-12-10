@@ -1,1 +1,6 @@
-B tavern 0 0 200 150
+I NPC bartender 110 66 9 12 0 V
+I NPC people 48 71 32 59 0 V
+I Icon City_goback 180 130 18 16 V
+I Icon MAP_icon 2 2 23 17 V
+I Icon BACKPACK_icon 180 2 17 25 V
+B Tavern 0 0 200 150

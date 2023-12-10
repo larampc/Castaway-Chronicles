@@ -12,6 +12,7 @@ import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class LocationController implements ControllerState {
 
@@ -21,12 +22,12 @@ public class LocationController implements ControllerState {
     public LocationController(GameController gameController) {
         this.gameController = gameController;
     }
+    public void setLastCommandNull() {lastCommand = null;}
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException {
+    public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
         Location location = gameController.getModel().getCurrentLocation();
         CommandInvoker invoker = new CommandInvoker();
-
         for (Interactable e: location.getVisibleInteractables()) {
             if (e.contains(position)) {
                 if (e instanceof Item) {
@@ -98,7 +99,7 @@ public class LocationController implements ControllerState {
     }
 
     @Override
-    public void none(long time) throws IOException, InterruptedException {
+    public void none(long time) throws IOException, InterruptedException, URISyntaxException {
         if (lastCommand != null) {
             CommandInvoker invoker = new CommandInvoker();
             invoker.setCommand(lastCommand);

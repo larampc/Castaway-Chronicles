@@ -10,6 +10,7 @@ import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.NPC;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class HandController implements ControllerState {
     private GameController gameController;
@@ -23,7 +24,7 @@ public class HandController implements ControllerState {
     }
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException {
+    public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
         if (toGive.isEmpty()) {
             gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(gameController.getModel().getBackpack().getBackpackSelection().getItem());
             gameController.getModel().setCurrentScene("LOCATION");

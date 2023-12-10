@@ -1,3 +1,13 @@
 Beach S
 City
 Tavern
+Mountain
+WitchOldHouse
+Newspaper
+Paper1
+Paper2
+Forest
+WitchNewHouse
+Store
+Volcano
+PiratesTip
