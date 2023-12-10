@@ -30,7 +30,7 @@ public class WalkingController implements ControllerState{
         int offset = (character_x - walkto.getX()) + location.getMainChar().getWidth()/2;
         int next_x = background_x + location.getMainChar().getWidth()/2 + offset;
         goRight = (offset < 0);
-        if (abs(offset) < 2*dx || (background_x == 0 && !goRight) || (background_x-dx <= max_background_x && goRight)) {
+        if (abs(offset) < 2*dx || !location.getBackground().isIsloopable() && ((background_x == 0 && !goRight) || (background_x-dx <= max_background_x && goRight))) {
             toWalk = 0;
             return false;
         }
