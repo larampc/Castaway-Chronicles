@@ -1,4 +1,4 @@
-package castaway_chronicles.model.game.scene;
+package castaway_chronicles.model;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class Ending {
-    private String name;
+    private final String name;
     private int current = 1;
     private int max = 0;
     public Ending(String name) throws URISyntaxException {this.name = name;setMax();}

@@ -13,13 +13,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MapController implements ControllerState {
-    private GameController gameController;
+    private final GameController gameController;
     public MapController(GameController gameController) {
         this.gameController = gameController;
     }
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
+    public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         CommandInvoker invoker = new CommandInvoker();
         for (Interactable e: gameController.getModel().getMap().getVisibleInteractables()) {
             if (e.contains(position) && e instanceof Icon) {

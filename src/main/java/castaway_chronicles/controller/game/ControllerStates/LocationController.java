@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 
 public class LocationController implements ControllerState {
 
-    private GameController gameController;
+    private final GameController gameController;
     private Command lastCommand = null;
 
     public LocationController(GameController gameController) {
@@ -25,7 +25,7 @@ public class LocationController implements ControllerState {
     public void setLastCommandNull() {lastCommand = null;}
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
+    public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         Location location = gameController.getModel().getCurrentLocation();
         CommandInvoker invoker = new CommandInvoker();
         for (Interactable e: location.getVisibleInteractables()) {

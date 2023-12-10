@@ -11,7 +11,7 @@ import java.io.IOException;
 public class PauseController implements ControllerState {
     private final GameController gameController;
     private final PauseMenu pauseMenu;
-    private GameSaver gameSaver;
+    private final GameSaver gameSaver;
 
     public PauseController(GameController gameController, GameSaver gameSaver){
         this.gameController = gameController;
@@ -20,7 +20,7 @@ public class PauseController implements ControllerState {
     }
 
     @Override
-    public void click(Position position){
+    public void click(Position position, Application application){
         //does nothing
     }
 

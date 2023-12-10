@@ -9,10 +9,10 @@ import java.util.Arrays;
 public class MainMenu extends SelectionPanel {
 
     public MainMenu() {
-        super(Arrays.asList("Start", "Continue", "Exit"));
+        super(Arrays.asList("Start", "Continue", "Endings", "Exit"));
     }
     public boolean isSelectedExit() {
-        return isSelected(2);
+        return isSelected(3);
     }
     public boolean isSelectedStart() {
         return isSelected(0);
@@ -25,4 +25,5 @@ public class MainMenu extends SelectionPanel {
         if (!f.exists()) return false;
         return f.list().length > 0;
     }
+    public boolean isSelectedEndings() {return isSelected(2);}
 }

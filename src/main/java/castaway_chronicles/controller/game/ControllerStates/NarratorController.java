@@ -8,13 +8,13 @@ import java.io.IOException;
 
 public class NarratorController implements ControllerState {
 
-    private GameController gameController;
+    private final GameController gameController;
     public NarratorController(GameController gameController) {
         this.gameController = gameController;
     }
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException {
+    public void click(Position position, Application application) throws IOException, InterruptedException {
 
     }
 
