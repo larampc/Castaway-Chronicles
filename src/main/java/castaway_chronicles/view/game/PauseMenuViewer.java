@@ -14,7 +14,7 @@ public class PauseMenuViewer {
     }
 
     protected void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
-        gui.drawImage(new Position(0,0), "Menu");
+        gui.drawImage(new Position(0,0), "PauseMenu");
         int i = 101;
         for (int j = 0; j < pauseMenu.getNumberEntries(); j++) {
             gui.drawText(new Position(100, i), 160, pauseMenu.getEntry(j), 0, pauseMenu.isSelected(j));
