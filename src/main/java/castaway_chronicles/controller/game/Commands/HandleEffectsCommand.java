@@ -9,10 +9,9 @@ import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.states.EndState;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -42,10 +41,11 @@ public class HandleEffectsCommand implements Command{
                         file.delete();
                     }
                 }
-                File backpack = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
-                Writer writer = Files.newBufferedWriter(Paths.get(backpack.getAbsolutePath()));
-                writer.append(s[1]).append("\n");
-                writer.close();
+                File endings = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
+                File file = new File(endings.getAbsolutePath());
+                FileWriter fr = new FileWriter(file, true);
+                fr.write(s[1]+"\n");
+                fr.close();
                 application.setState(new EndState(new Ending(s[1])));
                 continue;
             }
