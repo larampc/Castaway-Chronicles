@@ -9,11 +9,16 @@ import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.states.EndState;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class HandleEffectsCommand implements Command{
     private final Game game;
@@ -42,8 +47,7 @@ public class HandleEffectsCommand implements Command{
                     }
                 }
                 File endings = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
-                File file = new File(endings.getAbsolutePath());
-                FileWriter fr = new FileWriter(file, true);
+                Writer fr = Files.newBufferedWriter(endings.toPath(), UTF_8, CREATE, APPEND);
                 fr.write(s[1]+"\n");
                 fr.close();
                 application.setState(new EndState(new Ending(s[1])));
