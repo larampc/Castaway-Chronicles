@@ -22,12 +22,12 @@ public class LocationController implements ControllerState {
     public LocationController(GameController gameController) {
         this.gameController = gameController;
     }
+    public void setLastCommandNull() {lastCommand = null;}
 
     @Override
     public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
         Location location = gameController.getModel().getCurrentLocation();
         CommandInvoker invoker = new CommandInvoker();
-
         for (Interactable e: location.getVisibleInteractables()) {
             if (e.contains(position)) {
                 if (e instanceof Item) {
