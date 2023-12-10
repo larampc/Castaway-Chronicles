@@ -1,7 +1,7 @@
-Beach S
+Beach
 City
 Tavern
-Mountain
+Mountain S
 WitchOldHouse
 Newspaper
 Paper1
