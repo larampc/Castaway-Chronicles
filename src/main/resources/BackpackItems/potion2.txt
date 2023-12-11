@@ -1,7 +1,7 @@
-A very magic potion whose purposes are unknown
-THROW - give
-This is a precious potion, maybe you shouldn't throw it.
-DRINK - use
-Maybe it's poisonous, better not to drink.
+A very magic growing potion.
+POUR - give seed
+This is a precious potion, use it wisely.
+DRINK - use end
+
 GIVE - give
 This potion is invisible for others.

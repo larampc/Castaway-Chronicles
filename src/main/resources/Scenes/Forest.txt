@@ -1,6 +1,7 @@
 I Item forestRock 51 108 32 11 V
 I Item flower 130 108 10 16 V
-I NPC bush 368 104 29 26 0 V
+I NPC bush 368 104 29 26 0
+I NPC seed 376 116 12 14 0 V
 I Item branch 240 120 60 9 V
 I Icon MAP_icon 2 2 23 17 V
 I Icon BACKPACK_icon 180 2 17 25 V
