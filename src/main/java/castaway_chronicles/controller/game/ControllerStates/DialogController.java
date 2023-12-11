@@ -1,7 +1,6 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.AnswerCommand;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
@@ -51,20 +50,19 @@ public class DialogController implements ControllerState {
 
     @Override
     public void select(Application application) throws IOException, InterruptedException {
-        CommandInvoker invoker = new CommandInvoker();
         if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
-            invoker.setCommand(answer);
+            gameController.getCommandInvoker().setCommand(answer);
         }
         else {
             TalkCommand talk = new TalkCommand(gameController.getModel().getCurrentLocation());
-            invoker.setCommand(talk);
+            gameController.getCommandInvoker().setCommand(talk);
         }
-        invoker.execute();
+        gameController.getCommandInvoker().execute();
         if(!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()){
             HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
-            invoker.setCommand(effects);
-            invoker.execute();
+            gameController.getCommandInvoker().setCommand(effects);
+            gameController.getCommandInvoker().execute();
             if (gameController.getModel().getScene() == Game.SCENE.END) {
                 gameController.setControllerState(gameController.getEndController());
             }
