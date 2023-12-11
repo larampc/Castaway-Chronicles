@@ -12,7 +12,7 @@ import castaway_chronicles.model.game.elements.NPC;
 import java.io.IOException;
 
 public class HandController implements ControllerState {
-    private GameController gameController;
+    private final GameController gameController;
     private String toGive = "";
     public HandController(GameController gameController) {
         this.gameController = gameController;
@@ -32,7 +32,7 @@ public class HandController implements ControllerState {
         else {
             for (Interactable e: gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
-                    CommandInvoker invoker = new CommandInvoker();
+                    CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
                     Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getBackpack().getBackpackSelection().getItem().getEffects());
                     invoker.setCommand(effects);
                     invoker.execute();
