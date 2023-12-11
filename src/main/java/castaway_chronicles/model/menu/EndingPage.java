@@ -26,6 +26,7 @@ public class EndingPage {
             else endings.add(new EndingItem(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4]), s[0]));
         }
         File endings = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
+        if (!endings.exists()) return;
         br = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
         for (String line; (line = br.readLine()) != null; ) {
             int i = index(line);
