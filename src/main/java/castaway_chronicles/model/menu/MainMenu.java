@@ -9,21 +9,21 @@ import java.util.Arrays;
 public class MainMenu extends SelectionPanel {
 
     public MainMenu() {
-        super(Arrays.asList("Start", "Continue", "Endings", "Exit"));
+        super(Arrays.asList("Start", "Exit", "Continue", "Endings"));
     }
     public boolean isSelectedExit() {
-        return isSelected(3);
+        return isSelected(1);
     }
     public boolean isSelectedStart() {
         return isSelected(0);
     }
     public boolean isSelectedContinue() {
-        return isSelected(1);
+        return isSelected(2);
     }
     public boolean canContinue() {
         File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/Scenes_saved");
         if (!f.exists()) return false;
         return f.list().length > 0;
     }
-    public boolean isSelectedEndings() {return isSelected(2);}
+    public boolean isSelectedEndings() {return isSelected(3);}
 }
