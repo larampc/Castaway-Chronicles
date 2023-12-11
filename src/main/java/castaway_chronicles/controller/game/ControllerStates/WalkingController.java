@@ -12,11 +12,11 @@ import java.io.IOException;
 import static java.lang.Math.abs;
 
 public class WalkingController implements ControllerState{
-    private GameController gameController;
+    private final GameController gameController;
     private int toWalk = 0;
     private long lastMovementTime = 0;
     private boolean goRight = false;
-    private static int dx = 10;
+    private static final int dx = 10;
     public WalkingController(GameController gameController) {
         this.gameController = gameController;
     }
@@ -42,15 +42,6 @@ public class WalkingController implements ControllerState{
             else offset = background_x + location.getMainChar().getWidth()/2;
             toWalk = offset/dx;
             toWalk += (toWalk < 0) ? -1 : 1;
-        }
-        return true;
-    }
-
-    public boolean canwalk() {
-        if (toWalk == 0) {
-            gameController.setControllerState(gameController.getPrevious());
-            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
-            return false;
         }
         return true;
     }
@@ -92,9 +83,14 @@ public class WalkingController implements ControllerState{
 
     @Override
     public void none(long time) throws IOException, InterruptedException {
-        if (canwalk() && time- lastMovementTime >150) {
+        if (toWalk == 0) {
+            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
+            gameController.setControllerState(gameController.getPrevious());
+            return;
+        }
+        if (time - lastMovementTime > 150) {
             Location location = gameController.getModel().getCurrentLocation();
-            CommandInvoker invoker = new CommandInvoker();
+            CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
             MoveCommand move = new MoveCommand(location,goRight ? -dx : dx);
             invoker.setCommand(move);
             invoker.execute();
@@ -102,4 +98,10 @@ public class WalkingController implements ControllerState{
             lastMovementTime = time;
         }
     }
+
+    public int getToWalk() {
+        return toWalk;
+    }
+
+    public boolean isFacingRight() {return goRight;}
 }
