@@ -1,5 +1,5 @@
 I NPC engineer 40 98 13 28 15 V
-I NPC trampoline 65 85 51 47 0
+I NPC trampolineBig 65 85 51 47 0
 I Icon MAP_icon 2 2 23 17 V
 I Icon BACKPACK_icon 180 2 17 25 V
 B Mountain 0 0 200 150

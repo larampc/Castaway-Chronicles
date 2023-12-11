@@ -13,11 +13,11 @@ import java.net.URISyntaxException;
 import static java.lang.Math.abs;
 
 public class WalkingController implements ControllerState{
-    private GameController gameController;
+    private final GameController gameController;
     private int toWalk = 0;
     private long lastMovementTime = 0;
     private boolean goRight = false;
-    private static int dx = 10;
+    private static final int dx = 10;
     public WalkingController(GameController gameController) {
         this.gameController = gameController;
     }
@@ -58,7 +58,7 @@ public class WalkingController implements ControllerState{
     }
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException {
+    public void click(Position position, Application application) throws IOException, InterruptedException {
         setTowalk(position);
         ((LocationController)gameController.getLocationController()).setLastCommandNull();
     }

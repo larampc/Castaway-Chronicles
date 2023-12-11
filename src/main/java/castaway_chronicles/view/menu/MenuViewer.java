@@ -17,9 +17,11 @@ public class MenuViewer extends Viewer<MainMenu> {
     protected void drawElements(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         gui.drawImage(new Position(0,0), "MainMenu");
         int i = 101;
+        int x = 98;
         for (int j = 0; j < getModel().getNumberEntries(); j++) {
-            gui.drawText(new Position(102, i), 160, getModel().getEntry(j), 0, getModel().isSelected(j));
+            gui.drawText(new Position(x, i), 160, getModel().getEntry(j), 0, getModel().isSelected(j));
             i+=20;
+            if (j == 1) {x+=42; i = 101;}
         }
     }
 }

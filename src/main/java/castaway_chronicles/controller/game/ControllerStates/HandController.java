@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class HandController implements ControllerState {
-    private GameController gameController;
+    private final GameController gameController;
     private String toGive = "";
     public HandController(GameController gameController) {
         this.gameController = gameController;
@@ -25,7 +25,7 @@ public class HandController implements ControllerState {
     }
 
     @Override
-    public void click(Position position) throws IOException, InterruptedException, URISyntaxException {
+    public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         if (toGive.isEmpty()) {
             gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(gameController.getModel().getBackpack().getBackpackSelection().getItem());
             gameController.getModel().setCurrentScene("LOCATION");
@@ -35,7 +35,7 @@ public class HandController implements ControllerState {
             for (Interactable e: gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
                     CommandInvoker invoker = new CommandInvoker();
-                    Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getBackpack().getBackpackSelection().getItem().getEffects());
+                    Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getBackpack().getBackpackSelection().getItem().getEffects(), application);
                     invoker.setCommand(effects);
                     invoker.execute();
                     gameController.getModel().setCurrentScene("LOCATION");

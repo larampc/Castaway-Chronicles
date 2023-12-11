@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface ControllerState {
-    void click(Position position) throws IOException, InterruptedException, URISyntaxException;
+    void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException;
     void keyUp();
     void keyDown();
     void keyRight();

@@ -1,22 +1,34 @@
 package castaway_chronicles.controller.game.Commands;
 
+import castaway_chronicles.Application;
+import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.states.EndState;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.nio.file.StandardOpenOption.APPEND;
+import static java.nio.file.StandardOpenOption.CREATE;
+
 public class HandleEffectsCommand implements Command{
-    private Game game;
-    private List<String> effects;
-    public HandleEffectsCommand(Game game, List<String> effects) {
+    private final Game game;
+    private final List<String> effects;
+    private final Application application;
+    public HandleEffectsCommand(Game game, List<String> effects, Application application) {
         this.game = game;
         this.effects = effects;
+        this.application = application;
     }
-
     @Override
     public void execute() throws IOException, InterruptedException, URISyntaxException {
         if (effects.isEmpty()) return;
@@ -27,8 +39,18 @@ public class HandleEffectsCommand implements Command{
                 continue;
             }
             if (s[0].equalsIgnoreCase("end")) {
-                game.setEnd(s[1]);
-                game.setCurrentScene("END");
+                File toDelete = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/Scenes_saved");
+                File[] allContents = toDelete.listFiles();
+                if (allContents != null) {
+                    for (File file : allContents) {
+                        file.delete();
+                    }
+                }
+                File endings = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
+                Writer fr = Files.newBufferedWriter(endings.toPath(), UTF_8, CREATE, APPEND);
+                fr.write(s[1]+"\n");
+                fr.close();
+                application.setState(new EndState(new Ending(s[1])));
                 continue;
             }
             if (s[0].equalsIgnoreCase("NPC")) {

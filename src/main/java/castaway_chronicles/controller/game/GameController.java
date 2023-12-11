@@ -20,21 +20,20 @@ public class GameController extends Controller<Game> {
     private final ControllerState walkingController;
     private ControllerState current;
     private ControllerState previous;
-    private ControllerState narratorController;
-    private ControllerState endController;
-
+    private final ControllerState narratorController;
+    private final GameSaver gameSaver;
 
     public GameController(Game model) {
         super(model);
+        gameSaver = new GameSaver(model);
         locationController = new LocationController(this);
         backpackController = new BackpackController(this);
         mapController = new MapController(this);
         dialogController = new DialogController(this);
         handController = new HandController(this);
-        pauseController = new PauseController(this);
+        pauseController = new PauseController(this, gameSaver);
         walkingController = new WalkingController(this);
         narratorController = new NarratorController(this);
-        endController = new EndController(this);
         current = locationController;
     }
 
@@ -47,7 +46,7 @@ public class GameController extends Controller<Game> {
         if (action.getType().equalsIgnoreCase("RIGHT")) current.keyRight();
         if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
         if (action.getType().equalsIgnoreCase("ESCAPE")) current.escape();
-        if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition());
+        if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition(), application);
     }
     public void setControllerState(ControllerState controllerState) {
         this.previous = this.current;
@@ -81,7 +80,6 @@ public class GameController extends Controller<Game> {
         return walkingController;
     }
     public ControllerState getNarratorController() {return narratorController;}
-    public ControllerState getEndController() {return endController;}
     public ControllerState getCurrent() {
         return current;
     }

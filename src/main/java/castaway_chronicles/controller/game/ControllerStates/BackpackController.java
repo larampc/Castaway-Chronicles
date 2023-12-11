@@ -6,7 +6,6 @@ import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
@@ -16,15 +15,15 @@ import java.net.URISyntaxException;
 
 
 public class BackpackController implements ControllerState {
-    private Backpack backpack;
-    private GameController gameController;
+    private final Backpack backpack;
+    private final GameController gameController;
     public BackpackController(GameController gameController) {
         this.gameController = gameController;
         backpack = gameController.getModel().getBackpack();
     }
 
     @Override
-    public void click(Position position) throws IOException {
+    public void click(Position position, Application application) throws IOException {
         for (Interactable e: backpack.getVisibleInteractables()) {
             if (e.contains(position)) {
                 backpack.getBackpackSelection().activateDescription((ItemBackpack) e);
@@ -92,14 +91,11 @@ public class BackpackController implements ControllerState {
         else {
             CommandInvoker invoker = new CommandInvoker();
             if (s[0].equalsIgnoreCase("use")) {
-                Command effects = new HandleEffectsCommand(gameController.getModel(), backpack.getBackpackSelection().getItem().getEffects());
+                Command effects = new HandleEffectsCommand(gameController.getModel(), backpack.getBackpackSelection().getItem().getEffects(), application);
                 invoker.setCommand(effects);
                 invoker.execute();
-                if (gameController.getModel().getScene()!= Game.SCENE.END) {
-                    gameController.getModel().setCurrentScene("LOCATION");
-                    gameController.setControllerState(gameController.getLocationController());
-                }
-                else gameController.setControllerState(gameController.getEndController());
+                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.setControllerState(gameController.getLocationController());
             }
             if (s[0].equalsIgnoreCase("give")) {
                 gameController.getModel().setCurrentScene("LOCATION");

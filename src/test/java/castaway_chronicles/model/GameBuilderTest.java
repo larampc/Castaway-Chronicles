@@ -20,13 +20,13 @@ public class GameBuilderTest {
     private Game game;
     @BeforeEach
     public void init() throws IOException {
-        game = new GameBuilder().createGame();
+        game = new GameBuilder().createGame(false);
     }
     @Test
     public void game_map() throws IOException {
         List<Interactable> expectedInteractables = new ArrayList<>();
         List<Interactable> expectedVisibleInteractables = new ArrayList<>();
-        Background expectedBackground = new Background(0,0, 200, 150, "map");
+        Background expectedBackground = new Background(0,0, 200, 150, "map", false);
         expectedInteractables.add(InteractableFactory.getInteractable("Icon", 97, 35, 39, 36, "Mountain_icon",0));
         expectedInteractables.add(InteractableFactory.getInteractable("Icon", 22, 85, 21, 29, "Beach_icon",0));
         expectedInteractables.add(InteractableFactory.getInteractable("Icon", 62, 75, 30, 23, "City_icon",0));
