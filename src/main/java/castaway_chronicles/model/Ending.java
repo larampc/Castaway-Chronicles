@@ -25,7 +25,7 @@ public class Ending {
         ++this.current;
     }
     public String getCurrentFrame() {
-        return String.format("%04d", current);
+        return String.format(name + "_" + "%04d", current);
 //        return name + current;
     }
     public String getName() {return name;}
