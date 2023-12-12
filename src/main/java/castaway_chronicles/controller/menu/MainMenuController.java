@@ -28,9 +28,29 @@ public class MainMenuController extends Controller<MainMenu> {
                 break;
             case 'S':
                 if (getModel().isSelectedExit()) application.setState(null);
-                if (getModel().isSelectedStart()) application.setState(new GameState(new GameBuilder().createGame(false)));
-                if (getModel().isSelectedContinue() && getModel().canContinue())  application.setState(new GameState(new GameBuilder().createGame(true)));
+                if (getModel().isSelectedStart())
+                    application.setState(new GameState(new GameBuilder().createGame(false)));
+                if (getModel().isSelectedContinue() && getModel().canContinue())
+                    application.setState(new GameState(new GameBuilder().createGame(true)));
                 if (getModel().isSelectedEndings()) application.setState(new EndingPageState(new EndingPage()));
+                break;
+            case 'R':
+            case 'L':
+                if (!getModel().getEntry(
+                        getModel().getCurrentEntry() + 2
+                ).isEmpty()) {
+                    getModel().nextEntry();
+                    getModel().nextEntry();
+                } else if (!getModel().getEntry(
+                        getModel().getCurrentEntry() - 2
+                ).isEmpty()) {
+                    getModel().previousEntry();
+                    getModel().previousEntry();
+                }
+                if (getModel().isSelectedContinue() && !getModel().canContinue()) {
+                    getModel().previousEntry();
+                    getModel().previousEntry();
+                }
                 break;
         }
     }
