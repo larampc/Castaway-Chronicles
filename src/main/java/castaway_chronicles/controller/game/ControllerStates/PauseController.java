@@ -5,6 +5,8 @@ import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
+import castaway_chronicles.model.menu.MainMenu;
+import castaway_chronicles.states.MenuState;
 
 import java.io.IOException;
 
@@ -46,6 +48,7 @@ public class PauseController implements ControllerState {
 
     @Override
     public void select(Application application) throws IOException {
+        if (pauseMenu.isSelectedMenu()) application.setState(new MenuState(new MainMenu()));
         if (pauseMenu.isSelectedExit()) application.setState(null);
         if (pauseMenu.isSelectedResume()) {
             gameController.getModel().setCurrentScene("LOCATION");

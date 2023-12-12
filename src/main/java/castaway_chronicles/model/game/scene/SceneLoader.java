@@ -3,8 +3,8 @@ package castaway_chronicles.model.game.scene;
 import castaway_chronicles.model.game.elements.*;
 
 import java.io.*;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +16,8 @@ public class SceneLoader {
     private final String type;
 
     public SceneLoader(String dir, String filename, String type) throws IOException {
-        URL resource = getClass().getClassLoader().getResource(dir + "/" + filename + ".txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/"+dir + "/" + filename + ".txt");
+        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
         lines = readLines(br);
         this.type = type;
         getInteractables();

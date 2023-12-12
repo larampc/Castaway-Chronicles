@@ -7,11 +7,11 @@ import java.util.Arrays;
 public class PauseMenu extends SelectionPanel {
 
     public PauseMenu() {
-        super(Arrays.asList("Resume", "Save", "Exit"));
+        super(Arrays.asList("Resume", "Save", "Menu", "Exit"));
     }
 
     public boolean isSelectedExit() {
-        return isSelected(2);
+        return isSelected(3);
     }
 
     public boolean isSelectedResume() {
@@ -19,5 +19,6 @@ public class PauseMenu extends SelectionPanel {
     }
 
     public boolean isSelectedSave() {return isSelected(1);}
+    public boolean isSelectedMenu() {return isSelected(2);}
 
 }
