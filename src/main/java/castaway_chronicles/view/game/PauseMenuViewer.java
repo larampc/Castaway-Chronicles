@@ -13,7 +13,7 @@ public class PauseMenuViewer {
         this.pauseMenu = model;
     }
 
-    protected void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
+    public void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         gui.drawImage(new Position(0,0), "Menu");
         int i = 101;
         int x = 97;

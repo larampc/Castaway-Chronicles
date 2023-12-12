@@ -12,7 +12,7 @@ public class EndingPageViewer extends Viewer<EndingPage> {
     }
 
     @Override
-    protected void drawElements(GUI gui) {
+    public void drawElements(GUI gui) {
         gui.drawImage(new Position(0,0), "EndingsMenu");
         for (Element e: getModel().getVisibleEndings()) {
             gui.drawImage(e.getPosition(), e.getName());
