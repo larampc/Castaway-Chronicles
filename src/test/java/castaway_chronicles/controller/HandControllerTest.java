@@ -1,9 +1,9 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.game.Commands.ChangeSceneCommand;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
-import castaway_chronicles.controller.game.ControllerStates.BackpackController;
 import castaway_chronicles.controller.game.ControllerStates.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
@@ -30,11 +30,14 @@ public class HandControllerTest {
     private GameController gameController;
     private Game game;
     private Application applicationMock;
+    private CommandInvoker commandInvokerMock;
 
     @BeforeEach
     void setUp() {
         game = new Game();
         gameController = new GameController(game);
+        commandInvokerMock = Mockito.mock(CommandInvoker.class);
+        gameController.setCommandInvoker(commandInvokerMock);
         handController = (HandController) gameController.getHandController();
         gameController.setControllerState(handController);
         applicationMock = Mockito.mock(Application.class);
@@ -157,6 +160,8 @@ public class HandControllerTest {
     @Test
     public void escape() throws IOException, URISyntaxException, InterruptedException {
         handController.escape();
-        assertTrue(gameController.getCurrent() instanceof BackpackController);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeSceneCommand.class)); //new ChangeSceneCommand(gameController.getModel(), "BACKPACK")
+        assertEquals(gameController.getBackpackController(),gameController.getCurrent());
+        Mockito.verify(commandInvokerMock).execute();
     }
 }
