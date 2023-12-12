@@ -8,7 +8,6 @@ import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static java.lang.Math.abs;
 
@@ -44,15 +43,6 @@ public class WalkingController implements ControllerState{
             else offset = background_x + location.getMainChar().getWidth()/2;
             toWalk = offset/dx;
             toWalk += (toWalk < 0) ? -1 : 1;
-        }
-        return true;
-    }
-
-    public boolean canwalk() {
-        if (toWalk == 0) {
-            gameController.setControllerState(gameController.getPrevious());
-            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
-            return false;
         }
         return true;
     }
@@ -94,10 +84,15 @@ public class WalkingController implements ControllerState{
     }
 
     @Override
-    public void none(long time) throws IOException, InterruptedException, URISyntaxException {
-        if (canwalk() && time- lastMovementTime >150) {
+    public void none(long time) throws IOException, InterruptedException {
+        if (toWalk == 0) {
+            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
+            gameController.setControllerState(gameController.getPrevious());
+            return;
+        }
+        if (time - lastMovementTime > 150) {
             Location location = gameController.getModel().getCurrentLocation();
-            CommandInvoker invoker = new CommandInvoker();
+            CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
             MoveCommand move = new MoveCommand(location,goRight ? -dx : dx);
             invoker.setCommand(move);
             invoker.execute();
@@ -105,4 +100,10 @@ public class WalkingController implements ControllerState{
             lastMovementTime = time;
         }
     }
+
+    public int getToWalk() {
+        return toWalk;
+    }
+
+    public boolean isFacingRight() {return goRight;}
 }

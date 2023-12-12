@@ -1,7 +1,6 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.ChangeSceneCommand;
 import castaway_chronicles.controller.game.Commands.Command;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
@@ -34,8 +33,8 @@ public class HandController implements ControllerState {
         else {
             for (Interactable e: gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
-                    CommandInvoker invoker = new CommandInvoker();
-                    Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getBackpack().getBackpackSelection().getItem().getEffects(), application);
+                    CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
+                    Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getBackpack().getBackpackSelection().getItem().getEffects());
                     invoker.setCommand(effects);
                     invoker.execute();
                     gameController.getModel().setCurrentScene("LOCATION");
@@ -79,11 +78,10 @@ public class HandController implements ControllerState {
 
     @Override
     public void escape() throws IOException, URISyntaxException, InterruptedException {
-        CommandInvoker invoker = new CommandInvoker();
         ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "BACKPACK");
-        invoker.setCommand(changeScene2);
+        gameController.getCommandInvoker().setCommand(changeScene2);
         gameController.setControllerState(gameController.getBackpackController());
-        invoker.execute();
+        gameController.getCommandInvoker().execute();
     }
 
     @Override

@@ -1,13 +1,12 @@
 package castaway_chronicles.controller.game.Commands;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
-public class CommandInvoker {
+public class CommandInvoker extends GenericCommandInvoker {
     public Command command = null;
     public CommandInvoker() {
     }
-    public void execute() throws IOException, InterruptedException, URISyntaxException {
+    public void execute() throws IOException, InterruptedException {
         if (command!= null) {
             this.command.execute();
         }

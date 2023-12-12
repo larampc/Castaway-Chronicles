@@ -1,15 +1,14 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.AnswerCommand;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class DialogController implements ControllerState {
     private final GameController gameController;
@@ -50,26 +49,24 @@ public class DialogController implements ControllerState {
     }
 
     @Override
-    public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
-        CommandInvoker invoker = new CommandInvoker();
+    public void select(Application application) throws IOException, InterruptedException {
         if (gameController.getModel().getCurrentLocation().getDialogState().isActiveChoice()) {
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects(), application);
-            invoker.setCommand(effects);
-            invoker.execute();
             AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
-            invoker.setCommand(answer);
+            gameController.getCommandInvoker().setCommand(answer);
         }
         else {
             TalkCommand talk = new TalkCommand(gameController.getModel().getCurrentLocation());
-            invoker.setCommand(talk);
+            gameController.getCommandInvoker().setCommand(talk);
         }
-        invoker.execute();
-
+        gameController.getCommandInvoker().execute();
         if(!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()){
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects(), application);
-            invoker.setCommand(effects);
-            invoker.execute();
-            if (!gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()) gameController.setControllerState(gameController.getLocationController());
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getCurrentLocation().getDialogState().getNPCDialog().getDialogState().getEffects());
+            gameController.getCommandInvoker().setCommand(effects);
+            gameController.getCommandInvoker().execute();
+            if (gameController.getModel().getScene() == Game.SCENE.END) {
+                gameController.setControllerState(gameController.getEndController());
+            }
+            else gameController.setControllerState(gameController.getLocationController());
         }
     }
 
