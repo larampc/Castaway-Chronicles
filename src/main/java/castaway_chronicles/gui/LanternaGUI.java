@@ -23,8 +23,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
 
 public class LanternaGUI implements GUI{
     private final Screen screen;
@@ -143,7 +141,7 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text, int waitTime, boolean underlined) throws IOException, InterruptedException {
+    public void drawText(Position startPosition, int maxsize, String text, boolean underlined) throws IOException, InterruptedException {
         String[] arrOfStr = text.split(" ", -1);
         Position position = new Position(startPosition.getX(), startPosition.getY());
         for (String word : arrOfStr) {
@@ -155,10 +153,6 @@ public class LanternaGUI implements GUI{
             if(underlined) drawLine(position.getDown(8).getLeft(1),wordsize+2);
             for(int i = 0; i < word.length(); i++) {
                 drawImage(position, String.valueOf(word.charAt(i)));
-                if (waitTime != 0) {
-                    screen.refresh();
-                    TimeUnit.MILLISECONDS.sleep(waitTime);
-                }
                 position = position.getRight(images.get(String.valueOf(word.charAt(i))).getWidth());
             }
             position = position.getRight(2);

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class BackpackSelectionViewer {
-    private ItemBackpack item;
+    private final ItemBackpack item;
     public BackpackSelectionViewer(ItemBackpack item) {
         this.item = item;
     }
@@ -18,7 +18,7 @@ public class BackpackSelectionViewer {
         int offsety  = 157;
         int offsetx = 50;
         for (int i = 0; i < item.getItemOptions().getNumberEntries(); i++) {
-            gui.drawText(new Position(offsetx,offsety),190,item.getItemOptions().getEntry(i),0, i == item.getItemOptions().getCurrentEntry());
+            gui.drawText(new Position(offsetx,offsety),190,item.getItemOptions().getEntry(i), i == item.getItemOptions().getCurrentEntry());
             offsety += 10;
             if (i == 1) {
                 offsety = 157;

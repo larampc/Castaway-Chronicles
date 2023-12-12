@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class BackpackDescriptionViewer {
-    private ItemBackpack item;
+    private final ItemBackpack item;
     public BackpackDescriptionViewer(ItemBackpack item) {
         this.item  =item;
     }
     public void drawBackpackDescription(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         if (!gui.isBigger()) gui.resizeTerminal();
         gui.drawImage(new Position(2,151), "dialog");
-        gui.drawText(new Position(6,155),190,item.getDescription(),0,false);
+        gui.drawText(new Position(6,155),190,item.getDescription(),false);
     }
 }
