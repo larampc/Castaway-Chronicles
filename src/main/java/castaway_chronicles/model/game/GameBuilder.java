@@ -3,10 +3,11 @@ package castaway_chronicles.model.game;
 import castaway_chronicles.model.game.scene.*;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class GameBuilder {
@@ -23,9 +24,8 @@ public class GameBuilder {
     }
 
     private String getCurrentLocation(String dir) throws IOException {
-        URL resource = getClass().getClassLoader().getResource(dir + "/Locations.txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/" + dir + "/Locations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
         for (String line; (line = br.readLine()) != null; ){
             String[] s = line.split(" ",-1);
             if (s.length == 2) { return s[0];}
@@ -43,9 +43,8 @@ public class GameBuilder {
     }
     public HashMap<String, Location> createLocations(String dir) throws IOException {
         HashMap<String, Location> locations = new HashMap<>();
-        URL resource = getClass().getClassLoader().getResource("Scenes/Locations.txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/" + dir + "/Locations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
         for (String line; (line = br.readLine()) != null; ){
             String[] s = line.split(" ",-1);
             SceneLoader locationsBuilder = new SceneLoader(dir, s[0], "Location");
