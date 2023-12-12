@@ -13,12 +13,12 @@ import java.io.IOException;
 public class PauseController implements ControllerState {
     private final GameController gameController;
     private final PauseMenu pauseMenu;
-    private final GameSaver gameSaver;
+    private GameSaver gameSaver;
 
-    public PauseController(GameController gameController, GameSaver gameSaver){
+    public PauseController(GameController gameController){
         this.gameController = gameController;
         this.pauseMenu = gameController.getModel().getPauseMenu();
-        this.gameSaver = gameSaver;
+        this.gameSaver = gameController.getGameSaver();
     }
 
     @Override
@@ -67,5 +67,8 @@ public class PauseController implements ControllerState {
     @Override
     public void none(long time) {
 
+    }
+    public void setGameSaver(GameSaver gameSaver) {
+        this.gameSaver = gameSaver;
     }
 }

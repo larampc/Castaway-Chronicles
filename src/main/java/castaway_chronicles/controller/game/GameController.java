@@ -24,8 +24,8 @@ public class GameController extends Controller<Game> {
     private ControllerState previous;
     private final ControllerState narratorController;
     private final GameSaver gameSaver;
-
     private GenericCommandInvoker commandInvoker;
+
     public GameController(Game model) {
         super(model);
         gameSaver = new GameSaver(model);
@@ -34,7 +34,7 @@ public class GameController extends Controller<Game> {
         mapController = new MapController(this);
         dialogController = new DialogController(this);
         handController = new HandController(this);
-        pauseController = new PauseController(this, gameSaver);
+        pauseController = new PauseController(this);
         walkingController = new WalkingController(this);
         narratorController = new NarratorController(this);
         current = locationController;
@@ -94,4 +94,5 @@ public class GameController extends Controller<Game> {
     public GenericCommandInvoker getCommandInvoker() {return commandInvoker;}
     public void setCommandInvoker(GenericCommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
 
+    public GameSaver getGameSaver() {return gameSaver;}
 }

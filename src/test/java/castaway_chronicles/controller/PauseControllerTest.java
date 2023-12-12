@@ -1,101 +1,93 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.ControllerStates.LocationController;
 import castaway_chronicles.controller.game.ControllerStates.PauseController;
 import castaway_chronicles.controller.game.GameController;
-import castaway_chronicles.gui.KeyAction;
+import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.game.Game;
 
 import castaway_chronicles.model.game.scene.PauseMenu;
+import castaway_chronicles.states.MenuState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PauseControllerTest {
+    private PauseController pauseController;
+    private Application applicationMock;
+    private PauseMenu pauseMenuMock;
+    private Game gameMock;
     private GameController gameController;
-    private Application application;
-    private PauseMenu pauseMenu;
+    private GameSaver gameSaverMock;
 
     @BeforeEach
-    void init() {
-        Game game = new Game();
-        pauseMenu = new PauseMenu();
-        game.setPauseMenu(pauseMenu);
-        gameController = new GameController(game);
-        application = Mockito.mock(Application.class);
-        game.setCurrentScene("PAUSE");
-        gameController.setControllerState(gameController.getPauseController());
-    }
+    void setUp() {
+        gameMock = Mockito.mock(Game.class);
+        pauseMenuMock = Mockito.mock(PauseMenu.class);
+        applicationMock = Mockito.mock(Application.class);
+        gameSaverMock = Mockito.mock(GameSaver.class);
 
-//    @Test
-//    void empty_keys() throws IOException, InterruptedException {
-//        assertTrue(pauseMenu.isSelectedResume());
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
-//        assertTrue(gameController.getCurrent() instanceof PauseController);
-//
-//        gameController.step(application, new KeyAction("RIGHT"),0);
-//        assertTrue(pauseMenu.isSelectedResume());
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
-//        assertTrue(gameController.getCurrent() instanceof PauseController);
-//
-//        gameController.step(application, new KeyAction("LEFT"),0);
-//        assertTrue(pauseMenu.isSelectedResume());
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
-//        assertTrue(gameController.getCurrent() instanceof PauseController);
-//
-//        gameController.step(application, new ClickAction("CLICK", new Position(25,50)),0);
-//        assertTrue(pauseMenu.isSelectedResume());
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
-//        assertTrue(gameController.getCurrent() instanceof PauseController);
-//
-//        gameController.step(application, new KeyAction("ESCAPE"),0);
-//        assertTrue(pauseMenu.isSelectedResume());
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
-//        assertTrue(gameController.getCurrent() instanceof PauseController);
-//    }
-
-    @Test
-    void pressed_ArrowKey() throws IOException, InterruptedException, URISyntaxException {
-        assertTrue(gameController.getCurrent() instanceof PauseController);
-        assertTrue(pauseMenu.isSelectedResume());
-        gameController.step(application, new KeyAction("DOWN"),0);
-        assertTrue(pauseMenu.isSelectedSave());
-        gameController.step(application, new KeyAction("DOWN"),0);
-        assertTrue(pauseMenu.isSelectedExit());
-        gameController.step(application, new KeyAction("DOWN"),0);
-        assertTrue(pauseMenu.isSelectedResume());
-        gameController.step(application, new KeyAction("UP"),0);
-        assertTrue(pauseMenu.isSelectedExit());
-        gameController.step(application, new KeyAction("UP"),0);
-        assertTrue(pauseMenu.isSelectedSave());
-        gameController.step(application, new KeyAction("UP"),0);
-        assertTrue(pauseMenu.isSelectedResume());
-        assertTrue(gameController.getCurrent() instanceof PauseController);
+        Mockito.when(gameMock.getPauseMenu()).thenReturn(pauseMenuMock);
+        gameController = new GameController(gameMock);
+        pauseController = (PauseController) gameController.getPauseController();
+        pauseController.setGameSaver(gameSaverMock);
+        gameController.setControllerState(pauseController);
     }
 
     @Test
-    void select_resume() throws IOException, InterruptedException, URISyntaxException {
-        assertTrue(pauseMenu.isSelectedResume());
-        assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
-        assertTrue(gameController.getCurrent() instanceof PauseController);
-        gameController.step(application, new KeyAction("SELECT"),0);
-        assertEquals(gameController.getModel().getScene(), Game.SCENE.LOCATION);
-        assertTrue(gameController.getCurrent() instanceof LocationController);
+    void pressed_ArrowKey() {
+        pauseController.keyUp();
+        Mockito.verify(pauseMenuMock).previousEntry();
+        pauseController.keyDown();
+        Mockito.verify(pauseMenuMock).nextEntry();
     }
 
     @Test
-    void select_exit() throws IOException, InterruptedException, URISyntaxException {
-        assertTrue(pauseMenu.isSelectedResume());
-        assertTrue(gameController.getCurrent() instanceof PauseController);
-        gameController.step(application, new KeyAction("DOWN"),0);
-        gameController.step(application, new KeyAction("DOWN"),0);
-        gameController.step(application, new KeyAction("SELECT"),0);
-        Mockito.verify(application).setState(null);
+    void select_resume() throws IOException {
+        Mockito.when(pauseMenuMock.isSelectedMenu()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedResume()).thenReturn(true);
+        Mockito.when(pauseMenuMock.isSelectedSave()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(false);
+
+        pauseController.select(applicationMock);
+        Mockito.verify(gameMock).setCurrentScene("LOCATION");
+        assertEquals(gameController.getLocationController(),gameController.getCurrent());
+    }
+
+    @Test
+    void select_exit() throws IOException {
+        Mockito.when(pauseMenuMock.isSelectedMenu()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedResume()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedSave()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(true);
+
+        pauseController.select(applicationMock);
+        Mockito.verify(applicationMock).setState(null);
+    }
+
+    @Test
+    void select_save() throws IOException {
+        Mockito.when(pauseMenuMock.isSelectedMenu()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedResume()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedSave()).thenReturn(true);
+        Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(false);
+
+        pauseController.select(applicationMock);
+        Mockito.verify(gameSaverMock).saveGame();
+    }
+
+    @Test
+    void select_Menu() throws IOException {
+        Mockito.when(pauseMenuMock.isSelectedMenu()).thenReturn(true);
+        Mockito.when(pauseMenuMock.isSelectedResume()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedSave()).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(false);
+
+        pauseController.select(applicationMock);
+        Mockito.verify(applicationMock).setState(Mockito.any(MenuState.class));
     }
 }
