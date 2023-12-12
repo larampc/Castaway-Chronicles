@@ -38,12 +38,22 @@ public class PauseController implements ControllerState {
 
     @Override
     public void keyRight() {
-
+        if (!pauseMenu.getEntry(
+                pauseMenu.getCurrentEntry() + 2
+        ).isEmpty()) {
+            pauseMenu.nextEntry();
+            pauseMenu.nextEntry();
+        } else if (!pauseMenu.getEntry(
+                pauseMenu.getCurrentEntry() - 2
+        ).isEmpty()) {
+            pauseMenu.previousEntry();
+            pauseMenu.previousEntry();
+        }
     }
 
     @Override
     public void keyLeft() {
-
+        keyRight();
     }
 
     @Override
