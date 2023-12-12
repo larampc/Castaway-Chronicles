@@ -11,8 +11,7 @@ import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.SelectionPanel;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.NPC;
-import castaway_chronicles.model.game.elements.NPCDialog;
-import castaway_chronicles.model.game.scene.DialogState;
+import castaway_chronicles.model.game.scene.TextDisplay;
 import castaway_chronicles.model.game.scene.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,18 +43,15 @@ public class DialogControllerTest {
         gameController.setCommandInvoker(commandInvokerMock);
 
         Location currentLocationMock = Mockito.mock(Location.class);
-        DialogState dialogStateMock = Mockito.mock(DialogState.class);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC npcMock = Mockito.mock(NPC.class);
-        NPCDialog npcDialogMock = Mockito.mock(NPCDialog.class);
-
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(currentLocationMock.getDialogState()).thenReturn(dialogStateMock);
-        when(dialogStateMock.isActiveChoice()).thenReturn(true);
-        when(dialogStateMock.isActiveDialog()).thenReturn(true);
-        when(dialogStateMock.getNPCDialog()).thenReturn(npcMock);
-        when(npcMock.getDialogState()).thenReturn(npcDialogMock);
-        when(npcDialogMock.getEffects()).thenReturn(new ArrayList<>());
+        when(currentLocationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        when(textDisplayMock.isActiveChoice()).thenReturn(true);
+        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
+        when(textDisplayMock.getElement()).thenReturn(npcMock);
+        when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
         dialogController.select(Mockito.mock(Application.class));
 
@@ -70,12 +66,12 @@ public class DialogControllerTest {
         gameController.setCommandInvoker(commandInvokerMock);
 
         Location currentLocationMock = Mockito.mock(Location.class);
-        DialogState dialogStateMock = Mockito.mock(DialogState.class);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(currentLocationMock.getDialogState()).thenReturn(dialogStateMock);
-        when(dialogStateMock.isActiveChoice()).thenReturn(false);
-        when(dialogStateMock.isActiveDialog()).thenReturn(true);
+        when(currentLocationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        when(textDisplayMock.isActiveChoice()).thenReturn(false);
+        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
 
         dialogController.select(mock(Application.class));
 
@@ -89,18 +85,16 @@ public class DialogControllerTest {
         gameController.setCommandInvoker(commandInvokerMock);
 
         Location currentLocationMock = Mockito.mock(Location.class);
-        DialogState dialogStateMock = Mockito.mock(DialogState.class);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC npcMock = Mockito.mock(NPC.class);
-        NPCDialog npcDialogMock = Mockito.mock(NPCDialog.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(currentLocationMock.getDialogState()).thenReturn(dialogStateMock);
-        when(dialogStateMock.isActiveChoice()).thenReturn(true);
-        when(dialogStateMock.isActiveDialog()).thenReturn(true);
-        when(dialogStateMock.getNPCDialog()).thenReturn(npcMock);
-        when(npcMock.getDialogState()).thenReturn(npcDialogMock);
-        when(npcDialogMock.getChoices()).thenReturn(selectionPanelMock);
+        when(currentLocationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        when(textDisplayMock.isActiveChoice()).thenReturn(true);
+        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
+        when(textDisplayMock.getElement()).thenReturn(npcMock);
+        when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
         dialogController.keyUp();
 
@@ -112,18 +106,16 @@ public class DialogControllerTest {
         gameController.setCommandInvoker(commandInvokerMock);
 
         Location currentLocationMock = Mockito.mock(Location.class);
-        DialogState dialogStateMock = Mockito.mock(DialogState.class);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC npcMock = Mockito.mock(NPC.class);
-        NPCDialog npcDialogMock = Mockito.mock(NPCDialog.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(currentLocationMock.getDialogState()).thenReturn(dialogStateMock);
-        when(dialogStateMock.isActiveChoice()).thenReturn(true);
-        when(dialogStateMock.isActiveDialog()).thenReturn(true);
-        when(dialogStateMock.getNPCDialog()).thenReturn(npcMock);
-        when(npcMock.getDialogState()).thenReturn(npcDialogMock);
-        when(npcDialogMock.getChoices()).thenReturn(selectionPanelMock);
+        when(currentLocationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        when(textDisplayMock.isActiveChoice()).thenReturn(true);
+        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
+        when(textDisplayMock.getElement()).thenReturn(npcMock);
+        when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
         dialogController.keyDown();
 

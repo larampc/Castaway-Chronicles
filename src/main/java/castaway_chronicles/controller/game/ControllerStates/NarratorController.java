@@ -40,7 +40,7 @@ public class NarratorController implements ControllerState {
 
     @Override
     public void select(Application application) throws IOException, InterruptedException {
-        gameController.getModel().getCurrentLocation().getBackpackAnswer().deactivate();
+        gameController.getModel().getCurrentLocation().getTextDisplay().closeTextBox();
         gameController.setControllerState(gameController.getLocationController());
     }
 

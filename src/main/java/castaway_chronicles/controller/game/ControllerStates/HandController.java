@@ -8,6 +8,7 @@ import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.elements.NPC;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class HandController implements ControllerState {
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         if (toGive.isEmpty()) {
-            gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(gameController.getModel().getBackpack().getBackpackSelection().getItem());
+            gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getBackpackSelection().getElement());
             gameController.getModel().setCurrentScene("LOCATION");
             gameController.setControllerState(gameController.getNarratorController());
         }
@@ -35,18 +36,18 @@ public class HandController implements ControllerState {
             for (Interactable e: gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
                     CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
-                    Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getBackpack().getBackpackSelection().getItem().getEffects(), application);
+                    Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)gameController.getModel().getBackpack().getBackpackSelection().getElement()).getEffects(), application);
                     invoker.setCommand(effects);
                     invoker.execute();
                     gameController.getModel().setCurrentScene("LOCATION");
-                    if (gameController.getModel().getCurrentLocation().getDialogState().isActiveDialog()) {
+                    if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveTextBox()) {
                         gameController.setControllerState(gameController.getDialogController());
                     }
                     else gameController.setControllerState(gameController.getLocationController());
                     return;
                 }
             }
-            gameController.getModel().getCurrentLocation().getBackpackAnswer().activate(gameController.getModel().getBackpack().getBackpackSelection().getItem());
+            gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getBackpackSelection().getElement());
             gameController.getModel().setCurrentScene("LOCATION");
             gameController.setControllerState(gameController.getNarratorController());
         }

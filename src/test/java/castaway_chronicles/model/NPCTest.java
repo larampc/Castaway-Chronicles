@@ -1,7 +1,6 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.NPCDialog;
-
+import castaway_chronicles.model.game.elements.NPC;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,11 +10,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class NPCDialogTest {
-    private NPCDialog npcDialog;
+public class NPCTest {
+    private NPC npcDialog;
     @BeforeEach
     void init() throws IOException {
-        npcDialog = new NPCDialog(0,"toot");
+        npcDialog = new NPC(0,0,0,0, "toot", 0);
     }
 
     @Test

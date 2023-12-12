@@ -15,8 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class GameSaver {
-    private Game game;
-    private File toSave;
+    private final Game game;
+    private final File toSave;
     public GameSaver(Game game) {
         this.game = game;
         this.toSave = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/Scenes_saved");
@@ -69,7 +69,7 @@ public class GameSaver {
         String loopable = bg.isIsloopable()?" L":"";
         writer.write("B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + loopable + "\n");
         for (Interactable i: location.getInteractables()) {
-            String npcState = i instanceof NPC ? " " +((NPC) i).getDialogState().getState() : "";
+            String npcState = i instanceof NPC ? " " +((NPC) i).getState() : "";
             String visible = location.getVisibleInteractables().contains(i)? " V":"";
             writer.write("I "+ i.getClass().getSimpleName() + " " + i.getName() + " " + i.getPosition().getX() + " " + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + npcState + visible + "\n");
         }

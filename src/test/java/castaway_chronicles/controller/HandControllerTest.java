@@ -47,8 +47,8 @@ public class HandControllerTest {
     void testClickWithEmptyToGive() throws IOException, InterruptedException, URISyntaxException {
         ItemBackpack itemBackpack = Mockito.mock(ItemBackpack.class);
 
-        BackpackSelection backpackSelectionMock = mock(BackpackSelection.class);
-        when(backpackSelectionMock.getItem()).thenReturn(itemBackpack);
+        TextDisplay backpackSelectionMock = mock(TextDisplay.class);
+        when(backpackSelectionMock.getElement()).thenReturn(itemBackpack);
 
         Backpack backpackMock = mock(Backpack.class);
         when(backpackMock.getBackpackSelection()).thenReturn(backpackSelectionMock);
@@ -57,8 +57,8 @@ public class HandControllerTest {
 
 
         Location locationMock = mock(Location.class);
-        BackpackAnswer backpackAnswer = mock(BackpackAnswer.class);
-        when(locationMock.getBackpackAnswer()).thenReturn(backpackAnswer);
+        TextDisplay backpackAnswer = mock(TextDisplay.class);
+        when(locationMock.getTextDisplay()).thenReturn(backpackAnswer);
 
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
@@ -68,7 +68,7 @@ public class HandControllerTest {
 
         handController.click(new Position(0, 0), applicationMock);
 
-        Mockito.verify(backpackAnswer,times(1)).activate(itemBackpack);
+        Mockito.verify(backpackAnswer,times(1)).activateTextBox(itemBackpack);
 
         assertEquals(Game.SCENE.LOCATION, game.getScene());
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
@@ -79,8 +79,8 @@ public class HandControllerTest {
         ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
         when(itemBackpackMock.getEffects()).thenReturn(new ArrayList<>());
 
-        BackpackSelection backpackSelectionMock = mock(BackpackSelection.class);
-        when(backpackSelectionMock.getItem()).thenReturn(itemBackpackMock);
+        TextDisplay backpackSelectionMock = mock(TextDisplay.class);
+        when(backpackSelectionMock.getElement()).thenReturn(itemBackpackMock);
 
         Backpack backpackMock = mock(Backpack.class);
         when(backpackMock.getBackpackSelection()).thenReturn(backpackSelectionMock);
@@ -88,8 +88,8 @@ public class HandControllerTest {
         game.setBackpack(backpackMock);
 
         Location locationMock = mock(Location.class);
-        BackpackAnswer backpackAnswer = mock(BackpackAnswer.class);
-        when(locationMock.getBackpackAnswer()).thenReturn(backpackAnswer);
+        TextDisplay backpackAnswer = mock(TextDisplay.class);
+        when(locationMock.getTextDisplay()).thenReturn(backpackAnswer);
 
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
@@ -106,9 +106,9 @@ public class HandControllerTest {
         CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
         gameController.setCommandInvoker(commandInvokerMock);
 
-        DialogState dialogStateMock = Mockito.mock(DialogState.class);
-        when(locationMock.getDialogState()).thenReturn(dialogStateMock);
-        when(dialogStateMock.isActiveDialog()).thenReturn(true);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
 
         handController.setToGive("NPC_NAME");
         handController.click(new Position(0, 0), applicationMock);
@@ -124,8 +124,8 @@ public class HandControllerTest {
     void testEmptyClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
         ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
 
-        BackpackSelection backpackSelectionMock = mock(BackpackSelection.class);
-        when(backpackSelectionMock.getItem()).thenReturn(itemBackpackMock);
+        TextDisplay backpackSelectionMock = mock(TextDisplay.class);
+        when(backpackSelectionMock.getElement()).thenReturn(itemBackpackMock);
 
         Backpack backpackMock = mock(Backpack.class);
         when(backpackMock.getBackpackSelection()).thenReturn(backpackSelectionMock);
@@ -133,8 +133,8 @@ public class HandControllerTest {
         game.setBackpack(backpackMock);
 
         Location locationMock = mock(Location.class);
-        BackpackAnswer backpackAnswer = mock(BackpackAnswer.class);
-        when(locationMock.getBackpackAnswer()).thenReturn(backpackAnswer);
+        TextDisplay backpackAnswer = mock(TextDisplay.class);
+        when(locationMock.getTextDisplay()).thenReturn(backpackAnswer);
 
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
@@ -151,7 +151,7 @@ public class HandControllerTest {
         handController.setToGive("NPC_NAME");
         handController.click(new Position(5, 5), applicationMock);
 
-        Mockito.verify(backpackAnswer,times(1)).activate(itemBackpackMock);
+        Mockito.verify(backpackAnswer,times(1)).activateTextBox(itemBackpackMock);
         assertEquals(Game.SCENE.LOCATION, game.getScene());
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }

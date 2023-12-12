@@ -97,8 +97,6 @@ public class CommandTest {
         NPC npcMock = Mockito.mock(NPC.class);
         Mockito.when(startLocation.getInteractable("TestNPC")).thenReturn(npcMock);
 
-        NPCDialog npcDialogMock = Mockito.mock(NPCDialog.class);
-        Mockito.when(npcMock.getDialogState()).thenReturn(npcDialogMock);
         HashMap<String, Location> locations = new HashMap<>();
         locations.put("Beach",startLocation);
         game.setLocations(locations);
@@ -107,8 +105,8 @@ public class CommandTest {
 
         handleEffectsCommand.execute();
 
-        Mockito.verify(npcDialogMock,Mockito.times(1)).goToState(1);
-        Mockito.verify(startLocation,Mockito.times(1)).setDialog("TestNPC");
+        Mockito.verify(npcMock,Mockito.times(1)).goToState(1);
+        Mockito.verify(startLocation,Mockito.times(1)).setTextDisplay("TestNPC");
     }
 
     @Test

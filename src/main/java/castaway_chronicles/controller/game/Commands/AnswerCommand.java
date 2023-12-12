@@ -1,5 +1,6 @@
 package castaway_chronicles.controller.game.Commands;
 
+import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ public class AnswerCommand implements Command {
     }
     @Override
     public void execute() throws IOException {
-        location.getDialogState().getNPCDialog().getDialogState().goToStateChoice();
-        location.getDialogState().setActiveChoice(false);
+        ((NPC)location.getTextDisplay().getElement()).goToStateChoice();
+        location.getTextDisplay().setActiveChoice(false);
     }
 }
