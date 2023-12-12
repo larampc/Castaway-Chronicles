@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class PauseMenuViewer {
-    private PauseMenu pauseMenu;
+    private final PauseMenu pauseMenu;
     public PauseMenuViewer(PauseMenu model) {
         this.pauseMenu = model;
     }
 
     protected void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
-        gui.drawImage(new Position(0,0), "PauseMenu");
+        gui.drawImage(new Position(0,0), "MainMenu");
         int i = 101;
         int x = 97;
         for (int j = 0; j < pauseMenu.getNumberEntries(); j++) {
