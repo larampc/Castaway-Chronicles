@@ -27,7 +27,7 @@ public class EndingPageController extends Controller<EndingPage> {
         if (action.getType().equalsIgnoreCase("Click")) {
             Position clicked = ((ClickAction)action).getPosition();
             for (EndingItem e: getModel().getVisibleEndings()) {
-                if (e.getName().equalsIgnoreCase("reset")){
+                if (e.getName().equalsIgnoreCase("reset") && e.contains(clicked)){
                     File achievedEnd = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
                     achievedEnd.delete();
                     getModel().reset();
