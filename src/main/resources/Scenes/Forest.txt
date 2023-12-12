@@ -1,4 +1,4 @@
-I Item forestRock 51 108 32 11 V
+I NPC forestRock 51 108 32 11 0
 I Item flower 130 108 10 16 V
 I NPC bush 368 104 29 26 0
 I NPC seed 376 116 12 14 0 V

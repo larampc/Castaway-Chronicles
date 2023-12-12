@@ -10,5 +10,5 @@ I BItem branch_backpack 146 16 29 127
 I BItem flower_backpack 72 24 18 25
 I BItem potion1_backpack 105 80 9 11
 I BItem potion2_backpack 117 80 9 11
-I BItem forestRock_backpack 94 30 9 18
+I BItem key_backpack 94 30 9 18
 B Backpack 0 0 200 150
