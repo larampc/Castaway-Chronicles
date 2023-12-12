@@ -20,10 +20,10 @@ public class NPCDialogTest {
 
     @Test
     void NPCDialog() {
-        assertEquals(npcDialog.getChoices().getEntries(),List.of("Hi! I'm so happy to meet you",
-                "Whatever, what the hell am I doing here?",
-                "Loll"));
-        assertEquals(npcDialog.getNextStates(), List.of(1,2,2
+        assertEquals(npcDialog.getChoices().getEntries(),List.of(
+                "Sure, why not","Forget this Toot Oriole nonsense, I'm smart"
+        ));
+        assertEquals(npcDialog.getNextStates(), List.of(1,3
         ));
         assertTrue(npcDialog.getEffects().isEmpty());
     }
@@ -31,6 +31,7 @@ public class NPCDialogTest {
     @Test
     void changeState() throws IOException {
         npcDialog.goToStateChoice();
-        assertEquals(npcDialog.getEffects(),List.of("Map City_icon V"));
+        assertEquals(npcDialog.getEffects(),List.of("Beach rope V",
+                "NPC toot 2"));
     }
 }

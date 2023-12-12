@@ -18,7 +18,7 @@ public class SceneLoaderTest {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
-                new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
+                new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_icon"));
         assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
@@ -26,7 +26,7 @@ public class SceneLoaderTest {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
-                new Icon(2,2,23,17,"MAP_icon"), new Icon(180,2,17,25, "BACKPACK_icon"));
+                new Icon(2,2,23,17,"MAP_icon"));
         assertTrue(interactables.size() == scene.getVisibleInteractables().size() && interactables.containsAll(scene.getVisibleInteractables()));
     }
     @Test

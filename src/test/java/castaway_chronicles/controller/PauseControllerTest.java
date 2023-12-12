@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,22 +61,26 @@ public class PauseControllerTest {
 //    }
 
     @Test
-    void pressed_ArrowKey() throws IOException, InterruptedException {
+    void pressed_ArrowKey() throws IOException, InterruptedException, URISyntaxException {
         assertTrue(gameController.getCurrent() instanceof PauseController);
         assertTrue(pauseMenu.isSelectedResume());
+        gameController.step(application, new KeyAction("DOWN"),0);
+        assertTrue(pauseMenu.isSelectedSave());
         gameController.step(application, new KeyAction("DOWN"),0);
         assertTrue(pauseMenu.isSelectedExit());
         gameController.step(application, new KeyAction("DOWN"),0);
         assertTrue(pauseMenu.isSelectedResume());
         gameController.step(application, new KeyAction("UP"),0);
         assertTrue(pauseMenu.isSelectedExit());
+        gameController.step(application, new KeyAction("UP"),0);
+        assertTrue(pauseMenu.isSelectedSave());
         gameController.step(application, new KeyAction("UP"),0);
         assertTrue(pauseMenu.isSelectedResume());
         assertTrue(gameController.getCurrent() instanceof PauseController);
     }
 
     @Test
-    void select_resume() throws IOException, InterruptedException {
+    void select_resume() throws IOException, InterruptedException, URISyntaxException {
         assertTrue(pauseMenu.isSelectedResume());
         assertEquals(gameController.getModel().getScene(), Game.SCENE.PAUSE);
         assertTrue(gameController.getCurrent() instanceof PauseController);
@@ -85,9 +90,10 @@ public class PauseControllerTest {
     }
 
     @Test
-    void select_new() throws IOException, InterruptedException {
+    void select_exit() throws IOException, InterruptedException, URISyntaxException {
         assertTrue(pauseMenu.isSelectedResume());
         assertTrue(gameController.getCurrent() instanceof PauseController);
+        gameController.step(application, new KeyAction("DOWN"),0);
         gameController.step(application, new KeyAction("DOWN"),0);
         gameController.step(application, new KeyAction("SELECT"),0);
         Mockito.verify(application).setState(null);

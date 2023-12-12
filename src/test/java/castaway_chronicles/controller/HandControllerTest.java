@@ -1,5 +1,6 @@
 package castaway_chronicles.controller;
 
+import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.ControllerStates.BackpackController;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +29,7 @@ public class HandControllerTest {
     private HandController handController;
     private GameController gameController;
     private Game game;
+    private Application applicationMock;
 
     @BeforeEach
     void setUp() {
@@ -34,11 +37,11 @@ public class HandControllerTest {
         gameController = new GameController(game);
         handController = (HandController) gameController.getHandController();
         gameController.setControllerState(handController);
-
+        applicationMock = Mockito.mock(Application.class);
     }
 
     @Test
-    void testClickWithEmptyToGive() throws IOException, InterruptedException {
+    void testClickWithEmptyToGive() throws IOException, InterruptedException, URISyntaxException {
         ItemBackpack itemBackpack = Mockito.mock(ItemBackpack.class);
 
         BackpackSelection backpackSelectionMock = mock(BackpackSelection.class);
@@ -60,7 +63,7 @@ public class HandControllerTest {
         game.setLocations(locations);
         game.setCurrentLocation("StartLocation");
 
-        handController.click(new Position(0, 0));
+        handController.click(new Position(0, 0), applicationMock);
 
         Mockito.verify(backpackAnswer,times(1)).activate(itemBackpack);
 
@@ -69,7 +72,7 @@ public class HandControllerTest {
     }
 
     @Test
-    void testNPCClickWithToGive() throws IOException, InterruptedException {
+    void testNPCClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
         ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
         when(itemBackpackMock.getEffects()).thenReturn(new ArrayList<>());
 
@@ -100,19 +103,22 @@ public class HandControllerTest {
         CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
         gameController.setCommandInvoker(commandInvokerMock);
 
+        DialogState dialogStateMock = Mockito.mock(DialogState.class);
+        when(locationMock.getDialogState()).thenReturn(dialogStateMock);
+        when(dialogStateMock.isActiveDialog()).thenReturn(true);
+
         handController.setToGive("NPC_NAME");
-        handController.click(new Position(0, 0));
+        handController.click(new Position(0, 0), applicationMock);
 
         verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
         verify(commandInvokerMock, times(1)).execute();
         assertEquals(Game.SCENE.LOCATION, game.getScene());
-        Mockito.verify(locationMock,times(1)).setDialog("NPC_NAME");
         assertEquals(gameController.getDialogController(), gameController.getCurrent());
     }
 
 
     @Test
-    void testEmptyClickWithToGive() throws IOException, InterruptedException {
+    void testEmptyClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
         ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
 
         BackpackSelection backpackSelectionMock = mock(BackpackSelection.class);
@@ -140,7 +146,7 @@ public class HandControllerTest {
         when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
 
         handController.setToGive("NPC_NAME");
-        handController.click(new Position(5, 5));
+        handController.click(new Position(5, 5), applicationMock);
 
         Mockito.verify(backpackAnswer,times(1)).activate(itemBackpackMock);
         assertEquals(Game.SCENE.LOCATION, game.getScene());
@@ -149,7 +155,7 @@ public class HandControllerTest {
 
 
     @Test
-    public void escape() {
+    public void escape() throws IOException, URISyntaxException, InterruptedException {
         handController.escape();
         assertTrue(gameController.getCurrent() instanceof BackpackController);
     }

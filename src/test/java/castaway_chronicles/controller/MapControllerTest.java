@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 
 
@@ -41,13 +42,13 @@ public class MapControllerTest {
         visibleInteractables.put("Icon",icon);
         interactables.put("Icon",new Icon(20,20,10,10,"Beach"));
 
-        game.setMap(new Map(new Background(0,0,200,150,"map"),interactables,visibleInteractables));
+        game.setMap(new Map(new Background(0,0,200,150,"map", false),interactables,visibleInteractables));
         game.setCurrentScene("MAP");
 
         HashMap<String, Location> locations = new HashMap<>();
-        locations.put("Beach",new Location(new Background(0,0,700,150,"Beach"),
+        locations.put("Beach",new Location(new Background(0,0,700,150,"Beach", false),
                 new HashMap<>(), new HashMap<>(), new MainChar(100,100,10,10,"standing_right")));
-        locations.put("City",new Location(new Background(0,0,700,150,"Beach"),
+        locations.put("City",new Location(new Background(0,0,700,150,"Beach", false),
                 new HashMap<>(), new HashMap<>(), null));
         game.setLocations(locations);
         game.setCurrentLocation("Beach");
@@ -58,7 +59,7 @@ public class MapControllerTest {
     }
 
     @Test
-    public void clickIcon() throws IOException, InterruptedException {
+    public void clickIcon() throws IOException, InterruptedException, URISyntaxException {
         gameController.step(application, new ClickAction("Click", new Position(6,6)),10);
         assertEquals(gameController.getCurrent(),gameController.getLocationController());
         assertEquals(gameController.getModel().getScene(), Game.SCENE.LOCATION);
@@ -66,14 +67,14 @@ public class MapControllerTest {
     }
 
     @Test
-    public void clickInvisibleIcon() throws IOException, InterruptedException {
+    public void clickInvisibleIcon() throws IOException, InterruptedException, URISyntaxException {
         gameController.step(application, new ClickAction("Click", new Position(25,25)),10);
         assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
         assertTrue(gameController.getCurrent() instanceof MapController);
     }
 
     @Test
-    public void escape() throws IOException, InterruptedException {
+    public void escape() throws IOException, InterruptedException, URISyntaxException {
         gameController.step(application, new KeyAction("ESCAPE"),0);
         assertEquals(Game.SCENE.LOCATION,gameController.getModel().getScene());
         assertTrue(gameController.getCurrent() instanceof LocationController);

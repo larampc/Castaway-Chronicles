@@ -1,4 +1,5 @@
 B Beach 1 2 3 4
 I NPC engineer 1 2 3 4 0 V
 I NPC witch 1 2 3 4 0
+I Icon MAP_icon 2 2 23 17 V
 M 1 2 3 4
