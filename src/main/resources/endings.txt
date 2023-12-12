@@ -10,3 +10,4 @@ question2 58 126 12 16 V
 question3 84 127 11 16 V
 question4 111 126 11 16 V
 question5 133 123 12 12 V
+reset 61 87 63 14 V

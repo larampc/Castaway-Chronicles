@@ -13,10 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EndingPage {
-    private final List<EndingItem> visibleEndings = new ArrayList<>();
-    private final List<EndingItem> endings = new ArrayList<>();
+    private List<EndingItem> visibleEndings;
+    private List<EndingItem> endings;
 
     public EndingPage() throws IOException {
+        setup();
+    }
+
+    private void setup() throws IOException {
+        visibleEndings = new ArrayList<>();
+        endings = new ArrayList<>();
         URL resource = getClass().getClassLoader().getResource("endings.txt");
         assert resource != null;
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
@@ -49,4 +55,7 @@ public class EndingPage {
         return null;
     }
     public List<EndingItem> getVisibleEndings() {return visibleEndings;}
+    public void reset() throws IOException {
+        setup();
+    }
 }
