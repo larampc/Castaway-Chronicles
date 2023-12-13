@@ -53,10 +53,9 @@ public class ItemBackpack extends Interactable {
     }
     public List<String> getEffects() throws IOException {
         String[] s = getName().split("_",-1);
-        URL resource = getClass().getClassLoader().getResource("BackpackItems/" + s[0] + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "") + "_effects.txt");
+        URL resource = getClass().getClassLoader().getResource("BackpackItems/" + s[0] + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "").toLowerCase() + "_effects.txt");
         if (resource == null) return new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        List<String> lines = br.lines().collect(Collectors.toList());
-        return lines;
+        return br.lines().collect(Collectors.toList());
     }
 }

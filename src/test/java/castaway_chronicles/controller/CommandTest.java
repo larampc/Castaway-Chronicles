@@ -9,13 +9,18 @@ import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
 import castaway_chronicles.model.game.scene.TextDisplay;
+
 import castaway_chronicles.states.EndState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandTest {
@@ -53,10 +58,25 @@ public class CommandTest {
     }
     @Test
     void executeEndEffect() throws IOException, InterruptedException, URISyntaxException {
-        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END TestEnd"),applicationMock);
+        //set up
+        File endings = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
+        List<String> lines = new ArrayList<>();
+        for (String line; (line = bufferedReader.readLine()) != null; ) {
+            lines.add(line);
+        }
+        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"),applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
+
+        //tear down
+        Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
+        for (String line : lines) {
+            writer.write(line + '\n');
+        }
+        writer.close();
+
     }
 
     @Test
@@ -239,20 +259,22 @@ public class CommandTest {
         Mockito.when(backgroundPositionMock.getX()).thenReturn(-120);
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
         Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+        Mockito.when(backgroundPositionMock.getRight(10)).thenReturn(new Position(1,1));
+        Mockito.when(interactablePositionMock.getRight(10)).thenReturn(new Position(2,2));
 
         MoveCommand moveCommand = new MoveCommand(locationMock, 10);
         moveCommand.execute();
 
-        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
-        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(backgroundPositionMock.getRight(10));
-        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(interactablePositionMock.getRight(10));
+        Mockito.verify(mainCharMock).setName("walk2_left");
+        Mockito.verify(backgroundMock).setPosition(new Position(1,1));
+        Mockito.verify(interactableMock).setPosition(new Position(2,2));
 
         Mockito.when(mainCharMock.getName()).thenReturn("walk4_left");
         moveCommand.execute();
 
-        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_left");
-        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(backgroundPositionMock.getRight(10));
-        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(interactablePositionMock.getRight(10));
+        Mockito.verify(mainCharMock).setName("walk1_left");
+        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(1,1));
+        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(new Position(2,2));
     }
 
     @Test
@@ -273,21 +295,23 @@ public class CommandTest {
         Mockito.when(backgroundPositionMock.getX()).thenReturn(0);
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
         Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+        Mockito.when(interactablePositionMock.getRight(-490)).thenReturn(new Position(0,0));
+        Mockito.when(interactablePositionMock.getRight(490)).thenReturn(new Position(1,1));
 
         MoveCommand moveCommand = new MoveCommand(locationMock, 10);
         moveCommand.execute();
 
-        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
-        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-490,0));
-        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(interactablePositionMock.getRight(-490));
+        Mockito.verify(mainCharMock).setName("walk2_left");
+        Mockito.verify(backgroundMock).setPosition(new Position(-490,0));
+        Mockito.verify(interactableMock).setPosition(new Position(0,0));
 
         Mockito.when(backgroundPositionMock.getX()).thenReturn(-500);
 
         moveCommand = new MoveCommand(locationMock, -10);
         moveCommand.execute();
 
-        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-10,0));
-        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(interactablePositionMock.getRight(-510));
+        Mockito.verify(backgroundMock).setPosition(new Position(-10,0));
+        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(1,1));
     }
     @Test
     void moveCommand_MainIconsDontMove() throws IOException {
@@ -311,13 +335,14 @@ public class CommandTest {
         Mockito.when(backgroundPositionMock.getRight(-10)).thenReturn(new Position(-110,0));
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(backpackMock,mapMock,iconMock));
         Mockito.when(iconMock.getPosition()).thenReturn(iconPositionMock);
+        Mockito.when(iconPositionMock.getRight(-10)).thenReturn(new Position(1,1));
 
         MoveCommand moveCommand = new MoveCommand(locationMock, -10);
         moveCommand.execute();
 
         Mockito.verify(backpackMock,Mockito.never()).setPosition(Mockito.any(Position.class));
         Mockito.verify(mapMock,Mockito.never()).setPosition(Mockito.any(Position.class));
-        Mockito.verify(iconMock,Mockito.times(1)).setPosition(iconPositionMock.getRight(-10));
+        Mockito.verify(iconMock,Mockito.times(1)).setPosition(new Position(1,1));
     }
 
     @Test
