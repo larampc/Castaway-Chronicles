@@ -24,24 +24,40 @@ public class MenuViewerTest {
     @Test
     void mainMenuView() throws IOException, URISyntaxException, InterruptedException {
         MainMenu mainMenuMock = Mockito.mock(MainMenu.class);
-        Mockito.when(mainMenuMock.getNumberEntries()).thenReturn(2);
+        Mockito.when(mainMenuMock.getNumberEntries()).thenReturn(3);
         Mockito.when(mainMenuMock.getEntry(0)).thenReturn("Start");
         Mockito.when(mainMenuMock.getEntry(1)).thenReturn("Exit");
+        Mockito.when(mainMenuMock.getEntry(2)).thenReturn("Continue");
+        Mockito.when(mainMenuMock.isSelected(0)).thenReturn(true);
+        Mockito.when(mainMenuMock.isSelected(1)).thenReturn(false);
+        Mockito.when(mainMenuMock.isSelected(2)).thenReturn(false);
         MenuViewer menuViewer = new MenuViewer(mainMenuMock);
         menuViewer.drawElements(guiMock);
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "Menu");
-        Mockito.verify(guiMock, Mockito.times(2)).drawText(Mockito.any(Position.class), Mockito.anyInt(), Mockito.anyString(), Mockito.anyBoolean());
+        Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(98, 101), 160, "Start", true);
+        Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(98, 121), 160, "Exit", false);
+        Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(140, 101), 160, "Continue", false);
+        Mockito.verify(guiMock, Mockito.times(3)).drawText(Mockito.any(Position.class), Mockito.anyInt(), Mockito.anyString(), Mockito.anyBoolean());
     }
 
     @Test
     void pauseMenuView() throws IOException, URISyntaxException, InterruptedException {
         PauseMenu pauseMenuMock = Mockito.mock(PauseMenu.class);
-        Mockito.when(pauseMenuMock.getNumberEntries()).thenReturn(2);
+        Mockito.when(pauseMenuMock.getNumberEntries()).thenReturn(3);
         Mockito.when(pauseMenuMock.getEntry(0)).thenReturn("Start");
         Mockito.when(pauseMenuMock.getEntry(1)).thenReturn("Exit");
+        Mockito.when(pauseMenuMock.getEntry(2)).thenReturn("Continue");
+        Mockito.when(pauseMenuMock.isSelected(0)).thenReturn(true);
+        Mockito.when(pauseMenuMock.isSelected(1)).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelected(2)).thenReturn(false);
+
         PauseMenuViewer pauseMenuViewer = new PauseMenuViewer(pauseMenuMock);
         pauseMenuViewer.draw(guiMock);
+
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "Menu");
-        Mockito.verify(guiMock, Mockito.times(2)).drawText(Mockito.any(Position.class), Mockito.anyInt(), Mockito.anyString(), Mockito.anyBoolean());
+        Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(97, 101), 160, "Start", true);
+        Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(97, 121), 160, "Exit", false);
+        Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(145, 101), 160, "Continue", false);
+        Mockito.verify(guiMock, Mockito.times(3)).drawText(Mockito.any(Position.class), Mockito.anyInt(), Mockito.anyString(), Mockito.anyBoolean());
     }
 }

@@ -13,17 +13,17 @@ public class LocationViewer extends SceneViewer<Location> {
         super(model);
     }
 
-    public void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
+    public void draw(GUI gui, TextBoxViewer textBoxViewer) throws IOException, InterruptedException, URISyntaxException {
         drawBackground(gui);
         drawInteractables(gui);
         drawMainChar(gui);
-        if (getModel().getTextDisplay().isActiveTextBox()) {
-            new TextBoxViewer(getModel().getTextDisplay().getElement()).drawTextBox(gui, Game.SCENE.LOCATION);
+        if (getModel().getTextDisplay().isActiveChoice()) {
+            textBoxViewer.drawChoices(gui);
+        }
+        else if (getModel().getTextDisplay().isActiveTextBox()) {
+            textBoxViewer.drawTextBox(gui, Game.SCENE.LOCATION);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
-        if (getModel().getTextDisplay().isActiveChoice()) {
-            new TextBoxViewer(getModel().getTextDisplay().getElement()).drawChoices(gui);
-        }
     }
 
     private void drawMainChar(GUI gui) {

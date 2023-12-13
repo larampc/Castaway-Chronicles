@@ -25,7 +25,7 @@ public class GameViewer extends Viewer<Game> {
                 new MapViewer(getModel().getMap()).draw(gui);
                 break;
             case LOCATION:
-                new LocationViewer(getModel().getCurrentLocation()).draw(gui);
+                new LocationViewer(getModel().getCurrentLocation()).draw(gui, new TextBoxViewer(getModel().getCurrentLocation().getTextDisplay().getElement()));
                 break;
         }
     }
