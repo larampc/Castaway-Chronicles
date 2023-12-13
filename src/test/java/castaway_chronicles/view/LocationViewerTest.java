@@ -2,7 +2,6 @@ package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Item;
@@ -23,11 +22,13 @@ public class LocationViewerTest {
     private GUI guiMock;
     private Location locationMock;
     private LocationViewer locationViewer;
+    private TextBoxViewer textBoxViewerMock;
     @BeforeEach
     void setUp() {
         guiMock = Mockito.mock(GUI.class);
         locationMock = Mockito.mock(Location.class);
-        locationViewer = new LocationViewer(locationMock);
+        textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
+        locationViewer = new LocationViewer();
         Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(new Item(0,0,0,0, "people"), new Icon(10,10, 10, 10, "forestRock")));
         Mockito.when(locationMock.getBackground()).thenReturn(new Background(10,10,10, 10, "Menu", false));
     }
@@ -38,9 +39,8 @@ public class LocationViewerTest {
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
         Mockito.when(locationMock.getMainChar()).thenReturn(new MainChar(10,10, 10, 10, "MainChar"));
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        locationViewer.draw(guiMock, textBoxViewerMock);
+        locationViewer.draw(locationMock, guiMock);
 
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(10,10), "Menu");
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "people");
@@ -55,9 +55,8 @@ public class LocationViewerTest {
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
         Mockito.when(locationMock.getMainChar()).thenReturn(null);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        locationViewer.draw(guiMock, textBoxViewerMock);
+        locationViewer.draw(locationMock, guiMock);
 
         Mockito.verify(guiMock, Mockito.times(3)).drawImage(Mockito.any(Position.class), Mockito.anyString());
     }
@@ -68,11 +67,10 @@ public class LocationViewerTest {
         Mockito.when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        locationViewer.draw(guiMock, textBoxViewerMock);
+        locationViewer.draw(locationMock, guiMock);
 
-        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawTextBox(guiMock, Game.SCENE.LOCATION);
+        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawTextBox(guiMock, locationMock);
     }
 
     @Test
@@ -81,11 +79,10 @@ public class LocationViewerTest {
         Mockito.when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(true);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        locationViewer.draw(guiMock, textBoxViewerMock);
+        locationViewer.draw(locationMock, guiMock);
 
-        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawChoices(guiMock);
+        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawChoices(guiMock, locationMock);
     }
 
     @Test
@@ -95,9 +92,8 @@ public class LocationViewerTest {
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(true);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        locationViewer.draw(guiMock, textBoxViewerMock);
+        locationViewer.draw(locationMock, guiMock);
 
         Mockito.verify(guiMock, Mockito.times(1)).resizeTerminal();
     }

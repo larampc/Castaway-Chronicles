@@ -1,24 +1,26 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.scene.Backpack;
+import castaway_chronicles.model.game.scene.Scene;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class BackpackViewer extends SceneViewer<Backpack> {
-    public BackpackViewer(Backpack model) {
-        super(model);
+    TextBoxViewer textBoxViewer;
+    public BackpackViewer() {
+        this.textBoxViewer = new TextBoxViewer();
     }
-    public void draw(GUI gui, TextBoxViewer textBoxViewer) throws IOException, URISyntaxException, InterruptedException {
-        drawBackground(gui);
-        drawInteractables(gui);
-        if (getModel().getBackpackItemInfo().isActiveTextBox() && !getModel().getBackpackItemInfo().isActiveChoice()) {
-            textBoxViewer.drawTextBox(gui, Game.SCENE.BACKPACK);
+    @Override
+    public void draw(Scene model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawBackground(gui, model.getBackground());
+        drawInteractables(gui, model.getVisibleInteractables());
+        if (((Backpack) model).getBackpackItemInfo().isActiveTextBox() && !((Backpack) model).getBackpackItemInfo().isActiveChoice()) {
+            textBoxViewer.drawTextBox(gui, (Backpack) model);
         }
-        else if (getModel().getBackpackItemInfo().isActiveChoice()) {
-            textBoxViewer.drawChoices(gui);
+        else if (((Backpack) model).getBackpackItemInfo().isActiveChoice()) {
+            textBoxViewer.drawChoices(gui, (Backpack) model);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }

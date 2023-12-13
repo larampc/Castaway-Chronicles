@@ -11,8 +11,7 @@ import castaway_chronicles.model.game.scene.Map;
 import castaway_chronicles.model.game.scene.TextDisplay;
 
 import castaway_chronicles.states.EndState;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.*;
@@ -23,11 +22,42 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CommandTest {
     private Game gameMock;
     private Application applicationMock;
+    private boolean exists;
+    private File endings;
+    private List<String> lines = new ArrayList<>();
+    @BeforeAll
+    void init() throws IOException {
+        exists = true;
+        endings = null;
+        try {
+            endings = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
+            for (String line; (line = bufferedReader.readLine()) != null; ) {
+                lines.add(line);
+            }
+        }
+        catch (FileNotFoundException f) {
+            exists = false;
+        }
+    }
 
-
+    @AfterAll
+    void tearDown() throws IOException {
+        if(exists) {
+            Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
+            for (String line : lines) {
+                writer.write(line + '\n');
+            }
+            writer.close();
+        }
+        else {
+            new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt").delete();
+        }
+    }
     @BeforeEach
     void setUp() {
         gameMock = Mockito.mock(Game.class);
@@ -59,19 +89,6 @@ public class CommandTest {
     @Test
     void executeEndEffect() throws IOException, InterruptedException, URISyntaxException {
         //set up
-        boolean exists = true;
-        List<String> lines = new ArrayList<>();
-        File endings = null;
-        try {
-            endings = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt");
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
-            for (String line; (line = bufferedReader.readLine()) != null; ) {
-                lines.add(line);
-            }
-        }
-        catch (FileNotFoundException f) {
-            exists = false;
-        }
 
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"),applicationMock);
         handleEffectsCommand.execute();
@@ -79,16 +96,7 @@ public class CommandTest {
         Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
 
         //tear down
-        if(exists) {
-            Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
-            for (String line : lines) {
-                writer.write(line + '\n');
-            }
-            writer.close();
-        }
-        else {
-            new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt").delete();
-        }
+
     }
 
     @Test

@@ -55,8 +55,8 @@ public class MenuViewerTest {
         Mockito.when(pauseMenuMock.isSelected(2)).thenReturn(false);
         Mockito.when(pauseMenuMock.isSelected(3)).thenReturn(false);
 
-        PauseMenuViewer pauseMenuViewer = new PauseMenuViewer(pauseMenuMock);
-        pauseMenuViewer.draw(guiMock);
+        PauseMenuViewer pauseMenuViewer = new PauseMenuViewer();
+        pauseMenuViewer.draw(pauseMenuMock, guiMock);
 
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "Menu");
         Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(97, 101), 160, "Start", true);

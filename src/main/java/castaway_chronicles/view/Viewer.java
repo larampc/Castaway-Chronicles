@@ -19,5 +19,5 @@ public abstract class Viewer<T> {
         drawElements(gui);
         gui.refresh();
     }
-    protected abstract void drawElements(GUI gui) throws IOException, InterruptedException, URISyntaxException;
+    public abstract void drawElements(GUI gui) throws IOException, InterruptedException, URISyntaxException;
 }

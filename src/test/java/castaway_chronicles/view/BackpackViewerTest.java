@@ -2,7 +2,6 @@ package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Item;
@@ -22,11 +21,13 @@ public class BackpackViewerTest {
     private GUI guiMock;
     private Backpack backpackMock;
     private BackpackViewer backpackViewer;
+    private TextBoxViewer textBoxViewerMock;
     @BeforeEach
     void setUp() {
         guiMock = Mockito.mock(GUI.class);
         backpackMock = Mockito.mock(Backpack.class);
-        backpackViewer = new BackpackViewer(backpackMock);
+        textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
+        backpackViewer = new BackpackViewer();
         Mockito.when(backpackMock.getVisibleInteractables()).thenReturn(List.of(new Item(0,0,0,0, "people"), new Icon(10,10, 10, 10, "forestRock")));
         Mockito.when(backpackMock.getBackground()).thenReturn(new Background(10,10,10, 10, "Menu", false));
     }
@@ -36,9 +37,8 @@ public class BackpackViewerTest {
         Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        backpackViewer.draw(guiMock, textBoxViewerMock);
+        backpackViewer.draw(backpackMock, guiMock);
 
         Mockito.verify(guiMock).drawImage(new Position(10,10), "Menu");
         Mockito.verify(guiMock).drawImage(new Position(0,0), "people");
@@ -52,11 +52,9 @@ public class BackpackViewerTest {
         Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        backpackViewer.draw(guiMock, textBoxViewerMock);
-
-        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawTextBox(guiMock, Game.SCENE.BACKPACK);
+        backpackViewer.draw(backpackMock, guiMock);
+        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawTextBox(guiMock, backpackMock);
     }
 
     @Test
@@ -65,11 +63,10 @@ public class BackpackViewerTest {
         Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(true);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        backpackViewer.draw(guiMock, textBoxViewerMock);
+        backpackViewer.draw(backpackMock, guiMock);
 
-        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawChoices(guiMock);
+        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawChoices(guiMock, backpackMock);
     }
 
     @Test
@@ -79,9 +76,8 @@ public class BackpackViewerTest {
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(true);
-        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
 
-        backpackViewer.draw(guiMock, textBoxViewerMock);
+        backpackViewer.draw(backpackMock, guiMock);
 
         Mockito.verify(guiMock, Mockito.times(1)).resizeTerminal();
     }

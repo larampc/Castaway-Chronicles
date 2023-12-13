@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class MapViewerTest {
@@ -22,14 +24,14 @@ public class MapViewerTest {
     void setUp() {
         guiMock = Mockito.mock(GUI.class);
         mapMock = Mockito.mock(Map.class);
-        mapViewer = new MapViewer(mapMock);
+        mapViewer = new MapViewer();
         Mockito.when(mapMock.getVisibleInteractables()).thenReturn(List.of(new Item(0,0,0,0, "people"), new Icon(10,10, 10, 10, "forestRock")));
         Mockito.when(mapMock.getBackground()).thenReturn(new Background(10,10,10, 10, "Menu", false));
     }
 
     @Test
-    void mapViewerTest() {
-        mapViewer.draw(guiMock);
+    void mapViewerTest() throws IOException, URISyntaxException, InterruptedException {
+        mapViewer.draw(mapMock, guiMock);
 
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(10, 10), "Menu");
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "people");

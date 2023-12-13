@@ -1,33 +1,35 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.model.game.scene.Scene;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class LocationViewer extends SceneViewer<Location> {
-
-    public LocationViewer(Location model) {
-        super(model);
+    TextBoxViewer textBoxViewer;
+    public LocationViewer() {
+        this.textBoxViewer = new TextBoxViewer();
     }
 
-    public void draw(GUI gui, TextBoxViewer textBoxViewer) throws IOException, InterruptedException, URISyntaxException {
-        drawBackground(gui);
-        drawInteractables(gui);
-        drawMainChar(gui);
-        if (getModel().getTextDisplay().isActiveChoice()) {
-            textBoxViewer.drawChoices(gui);
+    private void drawMainChar(GUI gui, MainChar mainChar) {
+        if (mainChar == null) return;
+        gui.drawImage(mainChar.getPosition(), mainChar.getName());
+    }
+
+    @Override
+    public void draw(Scene model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawBackground(gui, model.getBackground());
+        drawInteractables(gui, model.getVisibleInteractables());
+        drawMainChar(gui, ((Location) model).getMainChar());
+        if (((Location)model).getTextDisplay().isActiveChoice()) {
+            textBoxViewer.drawChoices(gui, (Location) model);
         }
-        else if (getModel().getTextDisplay().isActiveTextBox()) {
-            textBoxViewer.drawTextBox(gui, Game.SCENE.LOCATION);
+        else if (((Location)model).getTextDisplay().isActiveTextBox()) {
+            textBoxViewer.drawTextBox(gui, (Location) model);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
-    }
-
-    private void drawMainChar(GUI gui) {
-        if (getModel().getMainChar() == null) return;
-        gui.drawImage(getModel().getMainChar().getPosition(), getModel().getMainChar().getName());
     }
 }
