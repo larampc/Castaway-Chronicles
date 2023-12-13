@@ -28,9 +28,11 @@ public class MenuViewerTest {
         Mockito.when(mainMenuMock.getEntry(0)).thenReturn("Start");
         Mockito.when(mainMenuMock.getEntry(1)).thenReturn("Exit");
         Mockito.when(mainMenuMock.getEntry(2)).thenReturn("Continue");
+        Mockito.when(mainMenuMock.getEntry(3)).thenReturn("");
         Mockito.when(mainMenuMock.isSelected(0)).thenReturn(true);
         Mockito.when(mainMenuMock.isSelected(1)).thenReturn(false);
         Mockito.when(mainMenuMock.isSelected(2)).thenReturn(false);
+        Mockito.when(mainMenuMock.isSelected(3)).thenReturn(false);
         MenuViewer menuViewer = new MenuViewer(mainMenuMock);
         menuViewer.drawElements(guiMock);
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "Menu");
@@ -47,9 +49,11 @@ public class MenuViewerTest {
         Mockito.when(pauseMenuMock.getEntry(0)).thenReturn("Start");
         Mockito.when(pauseMenuMock.getEntry(1)).thenReturn("Exit");
         Mockito.when(pauseMenuMock.getEntry(2)).thenReturn("Continue");
+        Mockito.when(pauseMenuMock.getEntry(3)).thenReturn("");
         Mockito.when(pauseMenuMock.isSelected(0)).thenReturn(true);
         Mockito.when(pauseMenuMock.isSelected(1)).thenReturn(false);
         Mockito.when(pauseMenuMock.isSelected(2)).thenReturn(false);
+        Mockito.when(pauseMenuMock.isSelected(3)).thenReturn(false);
 
         PauseMenuViewer pauseMenuViewer = new PauseMenuViewer(pauseMenuMock);
         pauseMenuViewer.draw(guiMock);
