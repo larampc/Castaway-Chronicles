@@ -59,24 +59,36 @@ public class CommandTest {
     @Test
     void executeEndEffect() throws IOException, InterruptedException, URISyntaxException {
         //set up
-        File endings = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
+        boolean exists = true;
         List<String> lines = new ArrayList<>();
-        for (String line; (line = bufferedReader.readLine()) != null; ) {
-            lines.add(line);
+        File endings = null;
+        try {
+            endings = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt");
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
+            for (String line; (line = bufferedReader.readLine()) != null; ) {
+                lines.add(line);
+            }
         }
+        catch (FileNotFoundException f) {
+            exists = false;
+        }
+
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"),applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
 
         //tear down
-        Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
-        for (String line : lines) {
-            writer.write(line + '\n');
+        if(exists) {
+            Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
+            for (String line : lines) {
+                writer.write(line + '\n');
+            }
+            writer.close();
         }
-        writer.close();
-
+        else {
+            new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt").delete();
+        }
     }
 
     @Test
