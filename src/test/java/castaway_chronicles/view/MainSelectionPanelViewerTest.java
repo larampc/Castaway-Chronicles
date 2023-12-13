@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MainMenuViewerTest {
+public class MainSelectionPanelViewerTest {
     private GUI guiMock;
 
     @BeforeEach

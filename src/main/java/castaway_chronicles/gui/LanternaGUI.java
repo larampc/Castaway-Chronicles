@@ -187,7 +187,7 @@ public class LanternaGUI implements GUI{
         action = new KeyAction("NONE");
         return return_action;
     }
-    public boolean imageIsLoad(String name) {
+    public boolean imageIsLoaded(String name) {
         return images.get(name) != null;
     }
 }
