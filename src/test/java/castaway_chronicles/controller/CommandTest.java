@@ -1,10 +1,8 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.ChangeLocationCommand;
-import castaway_chronicles.controller.game.Commands.ChangeSceneCommand;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
-import castaway_chronicles.controller.game.GameController;
+import castaway_chronicles.controller.game.Commands.*;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.*;
 import castaway_chronicles.model.game.scene.Backpack;
@@ -22,7 +20,6 @@ import java.util.List;
 
 public class CommandTest {
     private Game gameMock;
-    GameController gameController;
     private Application applicationMock;
 
 
@@ -123,117 +120,241 @@ public class CommandTest {
         Mockito.verify(Beach,Mockito.times(1)).setVisible("TestNPC");
     }
 
-//    @Test
-//    void moveRightCommand() throws IOException {
-//        game.setCurrentScene("LOCATION");
-//        Location startLocation = Mockito.mock(Location.class);
-//
-//        HashMap<String, Location> locations = new HashMap<>();
-//        locations.put("Beach",startLocation);
-//        game.setLocations(locations);
-//        game.setCurrentLocation("Beach");
-//
-//        MainChar mainCharMock = Mockito.mock(MainChar.class);
-//        Background backgroundMock = Mockito.mock(Background.class);
-//        Interactable interactableMock = Mockito.mock(Interactable.class);
-//
-//        Mockito.when(startLocation.getBackground()).thenReturn(backgroundMock);
-//        Mockito.when(backgroundMock.getPosition()).thenReturn(new Position(-100,0));
-//        Mockito.when(interactableMock.getPosition()).thenReturn(new Position(100,100));
-//
-//        Mockito.when(startLocation.getMainChar()).thenReturn(mainCharMock);
-//        Mockito.when(startLocation.getInteractables()).thenReturn(List.of(interactableMock));
-//        Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
-//
-//        MoveCommand moveCommand = new MoveCommand(startLocation, -10);
-//        moveCommand.execute();
-//
-//        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_right");
-//        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-110,0));
-//        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(90,100));
-//
-//        Mockito.when(mainCharMock.getName()).thenReturn("walk4_right");
-//        moveCommand.execute();
-//
-//        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_right");
-//        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(-110,0));
-//        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(new Position(90,100));
-//
-//
-//    }
-//    @Test
-//    void moveLeftCommand() throws IOException {
-//        game.setCurrentScene("LOCATION");
-//        Location startLocation = Mockito.mock(Location.class);
-//
-//        HashMap<String, Location> locations = new HashMap<>();
-//        locations.put("Beach",startLocation);
-//        game.setLocations(locations);
-//        game.setCurrentLocation("Beach");
-//
-//        MainChar mainCharMock = Mockito.mock(MainChar.class);
-//        Background backgroundMock = Mockito.mock(Background.class);
-//        Interactable interactableMock = Mockito.mock(Interactable.class);
-//
-//        Mockito.when(startLocation.getBackground()).thenReturn(backgroundMock);
-//        Mockito.when(backgroundMock.getPosition()).thenReturn(new Position(-100,0));
-//        Mockito.when(interactableMock.getPosition()).thenReturn(new Position(100,100));
-//
-//        Mockito.when(startLocation.getMainChar()).thenReturn(mainCharMock);
-//        Mockito.when(startLocation.getInteractables()).thenReturn(List.of(interactableMock));
-//        Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
-//
-//        MoveCommand moveCommand = new MoveCommand(startLocation, 10);
-//        moveCommand.execute();
-//
-//        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
-//        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-90,0));
-//        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(110,100));
-//
-//        Mockito.when(mainCharMock.getName()).thenReturn("walk4_left");
-//        moveCommand.execute();
-//
-//        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_left");
-//        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(-90,0));
-//        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(new Position(110,100));
-//    }
-//
-//    @Test
-//    void moveCommand_MainIconsDontMove() throws IOException {
-//        game.setCurrentScene("LOCATION");
-//        Location startLocation = Mockito.mock(Location.class);
-//
-//        HashMap<String, Location> locations = new HashMap<>();
-//        locations.put("Beach",startLocation);
-//        game.setLocations(locations);
-//        game.setCurrentLocation("Beach");
-//
-//        MainChar mainCharMock = Mockito.mock(MainChar.class);
-//        Background backgroundMock = Mockito.mock(Background.class);
-//        Icon backpackMock = Mockito.mock(Icon.class);
-//        Icon mapMock = Mockito.mock(Icon.class);
-//        Icon iconMock = Mockito.mock(Icon.class);
-//
-//        Mockito.when(startLocation.getBackground()).thenReturn(backgroundMock);
-//        Mockito.when(backpackMock.getName()).thenReturn("Backpack_icon");
-//        Mockito.when(mapMock.getName()).thenReturn("Map_icon");
-//        Mockito.when(iconMock.getName()).thenReturn("Icon");
-//        Mockito.when(backgroundMock.getPosition()).thenReturn(new Position(-100,0));
-//        Mockito.when(backpackMock.getPosition()).thenReturn(new Position(100,100));
-//        Mockito.when(mapMock.getPosition()).thenReturn(new Position(120,100));
-//        Mockito.when(iconMock.getPosition()).thenReturn(new Position(140,100));
-//
-//        Mockito.when(startLocation.getMainChar()).thenReturn(mainCharMock);
-//        Mockito.when(startLocation.getInteractables()).thenReturn(List.of(backpackMock,mapMock,iconMock));
-//        Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
-//
-//        MoveCommand moveCommand = new MoveCommand(startLocation, 10);
-//        moveCommand.execute();
-//
-//        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-90,0));
-//        Mockito.verify(backpackMock,Mockito.never()).setPosition(new Position(110,100));
-//        Mockito.verify(mapMock,Mockito.never()).setPosition(new Position(130,100));
-//        Mockito.verify(iconMock,Mockito.times(1)).setPosition(new Position(150,100));
-//    }
+    @Test
+    void moveRightCommandNotLoopableLocation() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position backgroundPositionMock = Mockito.mock(Position.class);
+        Interactable interactableMock = Mockito.mock(Interactable.class);
+        Position interactablePositionMock = Mockito.mock(Position.class);
+
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.isIsloopable()).thenReturn(false);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
+        Mockito.when(backgroundPositionMock.getRight(-10)).thenReturn(new Position(-110,0));
+        Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
+        Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+        Mockito.when(interactablePositionMock.getRight(-10)).thenReturn(new Position(90,100));
+
+        MoveCommand moveCommand = new MoveCommand(locationMock, -10);
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_right");
+        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-110,0));
+        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(90,100));
+
+        Mockito.when(mainCharMock.getName()).thenReturn("walk4_right");
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_right");
+        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(-110,0));
+        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(new Position(90,100));
+    }
+    @Test
+    void moveLeftCommandNotLoopableLocation() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position backgroundPositionMock = Mockito.mock(Position.class);
+        Interactable interactableMock = Mockito.mock(Interactable.class);
+        Position interactablePositionMock = Mockito.mock(Position.class);
+
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.isIsloopable()).thenReturn(false);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
+        Mockito.when(backgroundPositionMock.getRight(10)).thenReturn(new Position(-110,0));
+        Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
+        Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+        Mockito.when(interactablePositionMock.getRight(10)).thenReturn(new Position(90,100));
+
+        MoveCommand moveCommand = new MoveCommand(locationMock, 10);
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
+        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-110,0));
+        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(90,100));
+
+        Mockito.when(mainCharMock.getName()).thenReturn("walk4_left");
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_left");
+        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(-110,0));
+        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(new Position(90,100));
+    }
+    @Test
+    void moveRightCommandLoopableLocation() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position backgroundPositionMock = Mockito.mock(Position.class);
+        Interactable interactableMock = Mockito.mock(Interactable.class);
+        Position interactablePositionMock = Mockito.mock(Position.class);
+
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.isIsloopable()).thenReturn(true);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
+        Mockito.when(backgroundMock.getWidth()).thenReturn(700);
+        Mockito.when(backgroundPositionMock.getX()).thenReturn(-100);
+        Mockito.when(backgroundPositionMock.getRight(-10)).thenReturn(new Position(-110,0));
+        Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
+        Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+        Mockito.when(interactablePositionMock.getRight(-10)).thenReturn(new Position(90,100));
+
+        MoveCommand moveCommand = new MoveCommand(locationMock, -10);
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_right");
+        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-110,0));
+        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(90,100));
+
+        Mockito.when(mainCharMock.getName()).thenReturn("walk4_right");
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_right");
+        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(-110,0));
+        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(new Position(90,100));
+    }
+    @Test
+    void moveLeftCommandLoopableLocation() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position backgroundPositionMock = Mockito.mock(Position.class);
+        Interactable interactableMock = Mockito.mock(Interactable.class);
+        Position interactablePositionMock = Mockito.mock(Position.class);
+
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.isIsloopable()).thenReturn(true);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
+        Mockito.when(backgroundMock.getWidth()).thenReturn(700);
+        Mockito.when(backgroundPositionMock.getX()).thenReturn(-120);
+        Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
+        Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+
+        MoveCommand moveCommand = new MoveCommand(locationMock, 10);
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
+        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(backgroundPositionMock.getRight(10));
+        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(interactablePositionMock.getRight(10));
+
+        Mockito.when(mainCharMock.getName()).thenReturn("walk4_left");
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk1_left");
+        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(backgroundPositionMock.getRight(10));
+        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(interactablePositionMock.getRight(10));
+    }
+
+    @Test
+    void moveCommandLoopableLocationAtBorder() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position backgroundPositionMock = Mockito.mock(Position.class);
+        Interactable interactableMock = Mockito.mock(Interactable.class);
+        Position interactablePositionMock = Mockito.mock(Position.class);
+
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.isIsloopable()).thenReturn(true);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
+        Mockito.when(backgroundMock.getWidth()).thenReturn(700);
+        Mockito.when(backgroundPositionMock.getX()).thenReturn(0);
+        Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
+        Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
+
+        MoveCommand moveCommand = new MoveCommand(locationMock, 10);
+        moveCommand.execute();
+
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
+        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-490,0));
+        Mockito.verify(interactableMock,Mockito.times(1)).setPosition(interactablePositionMock.getRight(-490));
+
+        Mockito.when(backgroundPositionMock.getX()).thenReturn(-500);
+
+        moveCommand = new MoveCommand(locationMock, -10);
+        moveCommand.execute();
+
+        Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-10,0));
+        Mockito.verify(interactableMock,Mockito.times(2)).setPosition(interactablePositionMock.getRight(-510));
+    }
+    @Test
+    void moveCommand_MainIconsDontMove() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position backgroundPositionMock = Mockito.mock(Position.class);
+        Icon backpackMock = Mockito.mock(Icon.class);
+        Icon mapMock = Mockito.mock(Icon.class);
+        Icon iconMock = Mockito.mock(Icon.class);
+        Position iconPositionMock = Mockito.mock(Position.class);
+
+        Mockito.when(backpackMock.getName()).thenReturn("Backpack_icon");
+        Mockito.when(mapMock.getName()).thenReturn("Map_icon");
+        Mockito.when(iconMock.getName()).thenReturn("Icon");
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.isIsloopable()).thenReturn(false);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
+        Mockito.when(backgroundPositionMock.getRight(-10)).thenReturn(new Position(-110,0));
+        Mockito.when(locationMock.getInteractables()).thenReturn(List.of(backpackMock,mapMock,iconMock));
+        Mockito.when(iconMock.getPosition()).thenReturn(iconPositionMock);
+
+        MoveCommand moveCommand = new MoveCommand(locationMock, -10);
+        moveCommand.execute();
+
+        Mockito.verify(backpackMock,Mockito.never()).setPosition(Mockito.any(Position.class));
+        Mockito.verify(mapMock,Mockito.never()).setPosition(Mockito.any(Position.class));
+        Mockito.verify(iconMock,Mockito.times(1)).setPosition(iconPositionMock.getRight(-10));
+    }
+
+    @Test
+    void pickUpCommand() {
+        Location currentLocationMock = Mockito.mock(Location.class);
+        Backpack backpackMock = Mockito.mock(Backpack.class);
+
+        Mockito.when(gameMock.getCurrentLocation()).thenReturn(currentLocationMock);
+        Mockito.when(gameMock.getBackpack()).thenReturn(backpackMock);
+
+        PickUpCommand pickUpCommand = new PickUpCommand(gameMock,"Test");
+        pickUpCommand.execute();
+
+        Mockito.verify(currentLocationMock).setInvisible("Test");
+        Mockito.verify(backpackMock).setVisible("Test_backpack");
+    }
+
+    @Test
+    void StartTalkCommand() {
+        Location locationMock = Mockito.mock(Location.class);
+
+        new StartTalkCommand(locationMock,"Test").execute();
+
+        Mockito.verify(locationMock).setTextDisplay("Test");
+    }
+
+    @Test
+    void AnswerCommand() throws IOException {
+        Location locationMock = Mockito.mock(Location.class);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        NPC NPCMock = Mockito.mock(NPC.class);
+        Mockito.when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(textDisplayMock.getElement()).thenReturn(NPCMock);
+        new AnswerCommand(locationMock).execute();
+
+        Mockito.verify(NPCMock).goToStateChoice();
+        Mockito.verify(textDisplayMock).setActiveChoice(false);
+    }
 
 }
