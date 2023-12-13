@@ -32,7 +32,7 @@ public class TextBoxViewer {
     public void drawTextBox(GUI gui, Backpack currentScene) throws IOException, InterruptedException, URISyntaxException {
         if (!gui.isBigger()) gui.resizeTerminal();
         gui.drawImage(new Position(2,151), "dialog");
-        ItemBackpack element = (ItemBackpack) currentScene.getBackpackItemInfo().getElement();
+        ItemBackpack element = (ItemBackpack) currentScene.getTextDisplay().getElement();
         String dialog = element.getDescription();
         gui.drawText(new Position(6,155),190, dialog,false);
     }
@@ -41,7 +41,7 @@ public class TextBoxViewer {
         gui.drawImage(new Position(2,151), "dialog");
         int offsety = 157;
         int offsetx = 50;
-        ItemBackpack item = (ItemBackpack) backpack.getBackpackItemInfo().getElement();
+        ItemBackpack item = (ItemBackpack) backpack.getTextDisplay().getElement();
         SelectionPanel selectionPanel = item.getItemOptions();
         for (int i = 0; i < selectionPanel.getNumberEntries(); i++) {
             gui.drawText(new Position(offsetx,offsety),190, selectionPanel.getEntry(i), i == selectionPanel.getCurrentEntry());

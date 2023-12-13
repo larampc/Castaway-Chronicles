@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class MainMenu extends SelectionPanel {
-
     public MainMenu() {
         super(Arrays.asList("Start", "Exit", "Continue", "Endings"));
     }

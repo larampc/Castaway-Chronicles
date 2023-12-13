@@ -1,34 +1,28 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.elements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
-import castaway_chronicles.model.game.scene.Scene;
+import castaway_chronicles.view.ScreenViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class LocationViewer extends SceneViewer<Location> {
+public class LocationViewer extends SceneViewer implements ScreenViewer<Location> {
     TextBoxViewer textBoxViewer;
     public LocationViewer() {
         this.textBoxViewer = new TextBoxViewer();
     }
 
-    private void drawMainChar(GUI gui, MainChar mainChar) {
-        if (mainChar == null) return;
-        gui.drawImage(mainChar.getPosition(), mainChar.getName());
-    }
-
     @Override
-    public void draw(Scene model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
-        drawBackground(gui, model.getBackground());
-        drawInteractables(gui, model.getVisibleInteractables());
-        drawMainChar(gui, ((Location) model).getMainChar());
-        if (((Location)model).getTextDisplay().isActiveChoice()) {
-            textBoxViewer.drawChoices(gui, (Location) model);
+    public void draw(Location model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawElement(gui, model.getBackground());
+        drawElements(gui, model.getVisibleInteractables());
+        if (model.getMainChar() != null) drawElement(gui, model.getMainChar());
+        if (model.getTextDisplay().isActiveChoice()) {
+            textBoxViewer.drawChoices(gui, model);
         }
-        else if (((Location)model).getTextDisplay().isActiveTextBox()) {
-            textBoxViewer.drawTextBox(gui, (Location) model);
+        else if (model.getTextDisplay().isActiveTextBox()) {
+            textBoxViewer.drawTextBox(gui, model);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }

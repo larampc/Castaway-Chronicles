@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 
 import java.util.List;
 
-public class EndingPageViewerTest {
+public class EndingScreenViewerTest {
     private GUI guiMock;
     private EndingPageViewer endingPageViewer;
 
@@ -25,7 +25,7 @@ public class EndingPageViewerTest {
 
     @Test
     void endingPageView() {
-        endingPageViewer.drawElements(guiMock);
+        endingPageViewer.drawScreen(guiMock);
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "EndingsMenu");
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(1, 1), "flower");
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(1, 1), "drink");

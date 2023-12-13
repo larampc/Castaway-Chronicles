@@ -34,7 +34,7 @@ public class BackpackViewerTest {
     @Test
     void locationViewer() throws IOException, URISyntaxException, InterruptedException {
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
-        Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
+        Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
 
@@ -49,7 +49,7 @@ public class BackpackViewerTest {
     @Test
     void activeBox() throws IOException, URISyntaxException, InterruptedException {
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
-        Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
+        Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
 
@@ -60,7 +60,7 @@ public class BackpackViewerTest {
     @Test
     void activeChoice() throws IOException, URISyntaxException, InterruptedException {
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
-        Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
+        Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(true);
 
@@ -72,7 +72,7 @@ public class BackpackViewerTest {
     @Test
     void resizeTerminal() throws IOException, URISyntaxException, InterruptedException {
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
-        Mockito.when(backpackMock.getBackpackItemInfo()).thenReturn(textDisplayMock);
+        Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(true);

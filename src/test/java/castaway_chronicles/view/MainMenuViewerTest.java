@@ -5,7 +5,7 @@ import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
 import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.view.game.PauseMenuViewer;
-import castaway_chronicles.view.menu.MenuViewer;
+import castaway_chronicles.view.menu.MainMenuViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MenuViewerTest {
+public class MainMenuViewerTest {
     private GUI guiMock;
 
     @BeforeEach
@@ -33,8 +33,8 @@ public class MenuViewerTest {
         Mockito.when(mainMenuMock.isSelected(1)).thenReturn(false);
         Mockito.when(mainMenuMock.isSelected(2)).thenReturn(false);
         Mockito.when(mainMenuMock.isSelected(3)).thenReturn(false);
-        MenuViewer menuViewer = new MenuViewer(mainMenuMock);
-        menuViewer.drawElements(guiMock);
+        MainMenuViewer mainMenuViewer = new MainMenuViewer(mainMenuMock);
+        mainMenuViewer.drawScreen(guiMock);
         Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "Menu");
         Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(98, 101), 160, "Start", true);
         Mockito.verify(guiMock, Mockito.times(1)).drawText(new Position(98, 121), 160, "Exit", false);

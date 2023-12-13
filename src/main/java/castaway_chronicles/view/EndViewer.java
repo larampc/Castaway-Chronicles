@@ -14,7 +14,7 @@ public class EndViewer extends Viewer<Ending> {
     }
 
     @Override
-    public void drawElements(GUI gui) throws IOException, URISyntaxException {
+    public void drawScreen(GUI gui) throws IOException, URISyntaxException {
         if (!((LanternaGUI)gui).imageIsLoad(getModel().getCurrentFrame())) ((LanternaGUI)gui).loadEnding(getModel().getName());
         if (gui.isBigger()) gui.resizeTerminal();
         gui.drawImage(new Position(0,0), getModel().getCurrentFrame());

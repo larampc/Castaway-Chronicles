@@ -11,7 +11,7 @@ public class Backpack extends Scene {
         super(background, interactables, visibleInteractables);
     }
 
-    public TextDisplay getBackpackItemInfo() {
+    public TextDisplay getTextDisplay() {
         return itemInfo;
     }
 }

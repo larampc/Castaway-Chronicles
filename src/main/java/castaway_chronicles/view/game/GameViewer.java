@@ -2,6 +2,7 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.view.ScreenViewer;
 import castaway_chronicles.view.Viewer;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class GameViewer extends Viewer<Game> {
     }
 
     @Override
-    public void drawElements(GUI gui) throws IOException, URISyntaxException, InterruptedException {
+    public void drawScreen(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
             case PAUSE:
                 drawScene(gui, getModel().getPauseMenu(), pauseMenuViewer);
@@ -38,7 +39,7 @@ public class GameViewer extends Viewer<Game> {
         }
     }
 
-    public <T> void drawScene(GUI gui, T model, PageViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
+    public <T> void drawScene(GUI gui, T model, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
         viewer.draw(model, gui);
     }
     public void setPauseMenuViewer(PauseMenuViewer pauseMenuViewer) {
