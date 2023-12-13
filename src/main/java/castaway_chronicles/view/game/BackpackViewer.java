@@ -11,14 +11,14 @@ public class BackpackViewer extends SceneViewer<Backpack> {
     public BackpackViewer(Backpack model) {
         super(model);
     }
-    public void draw(GUI gui) throws IOException, URISyntaxException, InterruptedException {
+    public void draw(GUI gui, TextBoxViewer textBoxViewer) throws IOException, URISyntaxException, InterruptedException {
         drawBackground(gui);
         drawInteractables(gui);
-        if (getModel().getBackpackSelection().isActiveTextBox() && !getModel().getBackpackSelection().isActiveChoice()) {
-            new TextBoxViewer(getModel().getBackpackSelection().getElement()).drawTextBox(gui, Game.SCENE.BACKPACK);
+        if (getModel().getBackpackItemInfo().isActiveTextBox() && !getModel().getBackpackItemInfo().isActiveChoice()) {
+            textBoxViewer.drawTextBox(gui, Game.SCENE.BACKPACK);
         }
-        else if (getModel().getBackpackSelection().isActiveChoice()) {
-            new TextBoxViewer(getModel().getBackpackSelection().getElement()).drawChoices(gui);
+        else if (getModel().getBackpackItemInfo().isActiveChoice()) {
+            textBoxViewer.drawChoices(gui);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }

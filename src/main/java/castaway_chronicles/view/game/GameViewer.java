@@ -19,7 +19,7 @@ public class GameViewer extends Viewer<Game> {
                 new PauseMenuViewer(getModel().getPauseMenu()).draw(gui);
                 break;
             case BACKPACK:
-                new BackpackViewer(getModel().getBackpack()).draw(gui);
+                new BackpackViewer(getModel().getBackpack()).draw(gui, new TextBoxViewer(getModel().getBackpack().getBackpackItemInfo().getElement()));
                 break;
             case MAP:
                 new MapViewer(getModel().getMap()).draw(gui);

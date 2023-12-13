@@ -26,37 +26,37 @@ public class BackpackController implements ControllerState {
     public void click(Position position, Application application) throws IOException {
         for (Interactable e: backpack.getVisibleInteractables()) {
             if (e.contains(position)) {
-                backpack.getBackpackSelection().activateTextBox((ItemBackpack) e);
+                backpack.getBackpackItemInfo().activateTextBox((ItemBackpack) e);
             }
         }
     }
 
     @Override
     public void keyUp() {
-        if (backpack.getBackpackSelection().isActiveChoice()) {
-            ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().previousEntry();
+        if (backpack.getBackpackItemInfo().isActiveChoice()) {
+            ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().previousEntry();
         }
     }
 
     @Override
     public void keyDown() {
-        if (backpack.getBackpackSelection().isActiveChoice()) {
-            ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().nextEntry();
+        if (backpack.getBackpackItemInfo().isActiveChoice()) {
+            ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().nextEntry();
         }
     }
 
     @Override
     public void keyLeft() {
-        if (!((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().getEntry(
-                ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().getCurrentEntry() + 2
+        if (!((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().getEntry(
+                ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().getCurrentEntry() + 2
         ).isEmpty()) {
-            ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().nextEntry();
-            ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().nextEntry();
-        } else if (!((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().getEntry(
-                ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().getCurrentEntry() - 2
+            ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().nextEntry();
+            ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().nextEntry();
+        } else if (!((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().getEntry(
+                ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().getCurrentEntry() - 2
         ).isEmpty()) {
-            ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().previousEntry();
-            ((ItemBackpack)backpack.getBackpackSelection().getElement()).getItemOptions().previousEntry();
+            ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().previousEntry();
+            ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getItemOptions().previousEntry();
         }
     }
 
@@ -67,14 +67,14 @@ public class BackpackController implements ControllerState {
 
     @Override
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
-        if (backpack.getBackpackSelection().isActiveTextBox() && !backpack.getBackpackSelection().isActiveChoice()) {
-            backpack.getBackpackSelection().setActiveChoice(true);
+        if (backpack.getBackpackItemInfo().isActiveTextBox() && !backpack.getBackpackItemInfo().isActiveChoice()) {
+            backpack.getBackpackItemInfo().setActiveChoice(true);
             return;
         }
-        if (!backpack.getBackpackSelection().isActiveChoice()) return;
+        if (!backpack.getBackpackItemInfo().isActiveChoice()) return;
 
-        String command = ((ItemBackpack)backpack.getBackpackSelection().getElement()).getCommand();
-        backpack.getBackpackSelection().closeTextBox();
+        String command = ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getCommand();
+        backpack.getBackpackItemInfo().closeTextBox();
         String[] s = command.split(" ", -1);
         if (s.length == 1) {
             if (s[0].equalsIgnoreCase("give")) {
@@ -83,7 +83,7 @@ public class BackpackController implements ControllerState {
                 gameController.setControllerState(gameController.getHandController());
             }
             else {
-                gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(backpack.getBackpackSelection().getElement());
+                gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(backpack.getBackpackItemInfo().getElement());
                 gameController.getModel().setCurrentScene("LOCATION");
                 gameController.setControllerState(gameController.getNarratorController());
             }
@@ -91,7 +91,7 @@ public class BackpackController implements ControllerState {
         else {
             CommandInvoker invoker = new CommandInvoker();
             if (s[0].equalsIgnoreCase("use")) {
-                Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)backpack.getBackpackSelection().getElement()).getEffects(), application);
+                Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)backpack.getBackpackItemInfo().getElement()).getEffects(), application);
                 invoker.setCommand(effects);
                 invoker.execute();
                 gameController.getModel().setCurrentScene("LOCATION");
@@ -107,12 +107,12 @@ public class BackpackController implements ControllerState {
 
     @Override
     public void escape() {
-        if (!(backpack.getBackpackSelection().isActiveChoice()|| backpack.getBackpackSelection().isActiveTextBox())) {
+        if (!(backpack.getBackpackItemInfo().isActiveChoice()|| backpack.getBackpackItemInfo().isActiveTextBox())) {
             gameController.getModel().setCurrentScene("LOCATION");
             gameController.setControllerState(gameController.getLocationController());
         }
         else {
-            backpack.getBackpackSelection().closeTextBox();
+            backpack.getBackpackItemInfo().closeTextBox();
         }
     }
 
