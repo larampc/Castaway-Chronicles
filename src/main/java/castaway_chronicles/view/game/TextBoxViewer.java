@@ -14,8 +14,7 @@ import java.net.URISyntaxException;
 
 
 public class TextBoxViewer {
-    public TextBoxViewer() {
-    }
+    public TextBoxViewer() {}
     public void init(GUI gui) throws IOException {
         if (!gui.isBigger()) gui.resizeTerminal();
         gui.drawImage(new Position(2,151), "dialog");

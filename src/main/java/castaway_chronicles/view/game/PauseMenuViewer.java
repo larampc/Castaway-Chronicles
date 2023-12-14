@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class PauseMenuViewer implements ScreenViewer<PauseMenu> {
-    private final SelectionPanelViewer selectionPanelViewer;
+    private SelectionPanelViewer selectionPanelViewer;
 
     public PauseMenuViewer() {
         selectionPanelViewer = new SelectionPanelViewer(new Position(97,101), 48,20);
@@ -19,5 +19,8 @@ public class PauseMenuViewer implements ScreenViewer<PauseMenu> {
     public void draw(PauseMenu model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
         gui.drawImage(new Position(0,0), "Menu");
         selectionPanelViewer.draw(model, gui);
+    }
+    public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
     }
 }

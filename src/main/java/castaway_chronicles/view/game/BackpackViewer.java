@@ -28,4 +28,10 @@ public class BackpackViewer extends SceneViewer implements ScreenViewer<Backpack
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }
+    public void setTextBoxViewer(TextBoxViewer textBoxViewer) {
+        this.textBoxViewer = textBoxViewer;
+    }
+    public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
+    }
 }

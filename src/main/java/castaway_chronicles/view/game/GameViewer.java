@@ -45,4 +45,13 @@ public class GameViewer extends Viewer<Game> {
     public void setPauseMenuViewer(PauseMenuViewer pauseMenuViewer) {
         this.pauseMenuViewer = pauseMenuViewer;
     }
+    public void setBackpackViewer(BackpackViewer backpackViewer) {
+        this.backpackViewer = backpackViewer;
+    }
+    public void setMapViewer(MapViewer mapViewer) {
+        this.mapViewer = mapViewer;
+    }
+    public void setLocationViewer(LocationViewer locationViewer) {
+        this.locationViewer = locationViewer;
+    }
 }

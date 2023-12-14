@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MainMenuViewer extends Viewer<MainMenu> {
-    private final SelectionPanelViewer selectionPanelViewer;
+    private SelectionPanelViewer selectionPanelViewer;
 
     public MainMenuViewer(MainMenu model) {
         super(model);
@@ -21,5 +21,9 @@ public class MainMenuViewer extends Viewer<MainMenu> {
     public void drawScreen(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         gui.drawImage(new Position(0,0), "Menu");
         selectionPanelViewer.draw(getModel(), gui);
+    }
+
+    public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
     }
 }
