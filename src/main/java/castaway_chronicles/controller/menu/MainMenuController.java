@@ -17,16 +17,16 @@ public class MainMenuController extends Controller<MainMenu> {
     }
     @Override
     public void step(Application application, Action action, long time) throws IOException {
-        switch (action.getType().charAt(0)) {
-            case 'U':
+        switch (action.getType()) {
+            case UP:
                 getModel().previousEntry();
                 if (getModel().isSelectedContinue() && !getModel().canContinue()) getModel().previousEntry();
                 break;
-            case 'D':
+            case DOWN:
                 getModel().nextEntry();
                 if (getModel().isSelectedContinue() && !getModel().canContinue()) getModel().nextEntry();
                 break;
-            case 'S':
+            case SELECT:
                 if (getModel().isSelectedExit()) application.setState(null);
                 if (getModel().isSelectedStart())
                     application.setState(new GameState(new GameBuilder().createGame(false)));
@@ -34,8 +34,8 @@ public class MainMenuController extends Controller<MainMenu> {
                     application.setState(new GameState(new GameBuilder().createGame(true)));
                 if (getModel().isSelectedEndings()) application.setState(new EndingPageState(new EndingPage()));
                 break;
-            case 'R':
-            case 'L':
+            case RIGHT:
+            case LEFT:
                 if (!getModel().getEntry(
                         getModel().getCurrentEntry() + 2
                 ).isEmpty()) {
@@ -52,6 +52,7 @@ public class MainMenuController extends Controller<MainMenu> {
                     getModel().previousEntry();
                 }
                 break;
+            default:
         }
     }
 }

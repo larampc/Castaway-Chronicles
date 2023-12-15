@@ -24,7 +24,7 @@ public class EndingPageController extends Controller<EndingPage> {
 
     @Override
     public void step(Application application, Action action, long startTime) throws URISyntaxException, IOException {
-        if (action.getType().equalsIgnoreCase("Click")) {
+        if (action.getType() == Action.ACTION.CLICK) {
             Position clicked = ((ClickAction)action).getPosition();
             for (EndingItem e: getModel().getVisibleEndings()) {
                 if (e.getName().equalsIgnoreCase("reset") && e.contains(clicked)){
@@ -38,7 +38,7 @@ public class EndingPageController extends Controller<EndingPage> {
                 }
             }
         }
-        if (action.getType().equalsIgnoreCase("escape")) {
+        if (action.getType() == Action.ACTION.ESCAPE) {
             application.setState(new MenuState(new MainMenu()));
         }
     }

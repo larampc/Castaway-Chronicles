@@ -44,13 +44,31 @@ public class GameController extends Controller<Game> {
     @Override
     public void step(Application application, Action action, long time) throws IOException, InterruptedException, URISyntaxException {
         current.none(time);
-        if (action.getType().equalsIgnoreCase("UP")) current.keyUp();
-        if (action.getType().equalsIgnoreCase("DOWN")) current.keyDown();
-        if (action.getType().equalsIgnoreCase("LEFT")) current.keyLeft();
-        if (action.getType().equalsIgnoreCase("RIGHT")) current.keyRight();
-        if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
-        if (action.getType().equalsIgnoreCase("ESCAPE")) current.escape();
-        if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition(), application);
+        switch (action.getType()){
+            case UP:
+                current.keyUp();
+                break;
+            case DOWN:
+                current.keyDown();
+                break;
+            case LEFT:
+                current.keyLeft();
+                break;
+            case RIGHT:
+                current.keyRight();
+                break;
+            case ESCAPE:
+                current.escape();
+                break;
+            case SELECT:
+                current.select(application);
+                break;
+            case CLICK:
+                current.click(((ClickAction)action).getPosition(), application);
+                break;
+            case NONE:
+                current.none(time);
+        }
     }
     public void setControllerState(ControllerState controllerState) {
         this.previous = this.current;

@@ -4,6 +4,7 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.ControllerStates.LocationController;
 import castaway_chronicles.controller.game.ControllerStates.MapController;
 import castaway_chronicles.controller.game.GameController;
+import castaway_chronicles.gui.Action;
 import castaway_chronicles.gui.ClickAction;
 import castaway_chronicles.gui.KeyAction;
 import castaway_chronicles.model.Position;
@@ -60,7 +61,7 @@ public class MapControllerTest {
 
     @Test
     public void clickIcon() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new ClickAction("Click", new Position(6,6)),10);
+        gameController.step(application, new ClickAction(Action.ACTION.CLICK, new Position(6,6)),10);
         assertEquals(gameController.getCurrent(),gameController.getLocationController());
         assertEquals(gameController.getModel().getScene(), Game.SCENE.LOCATION);
         assertEquals(game.getLocation("City"),game.getCurrentLocation());
@@ -68,14 +69,14 @@ public class MapControllerTest {
 
     @Test
     public void clickInvisibleIcon() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new ClickAction("Click", new Position(25,25)),10);
+        gameController.step(application, new ClickAction(Action.ACTION.CLICK, new Position(25,25)),10);
         assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
         assertTrue(gameController.getCurrent() instanceof MapController);
     }
 
     @Test
     public void escape() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new KeyAction("ESCAPE"),0);
+        gameController.step(application, new KeyAction(Action.ACTION.ESCAPE),0);
         assertEquals(Game.SCENE.LOCATION,gameController.getModel().getScene());
         assertTrue(gameController.getCurrent() instanceof LocationController);
     }

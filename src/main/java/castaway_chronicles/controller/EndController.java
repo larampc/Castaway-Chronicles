@@ -21,6 +21,6 @@ public class EndController extends Controller<Ending> {
             getModel().setNext();
             lastFrame = startTime;
         }
-        if (action.getType().equalsIgnoreCase("select") && getModel().getMax() == getModel().getCurrent()) application.setState(new EndingPageState(new EndingPage()));
+        if (action.getType()== Action.ACTION.SELECT && getModel().getMax() == getModel().getCurrent()) application.setState(new EndingPageState(new EndingPage()));
     }
 }
