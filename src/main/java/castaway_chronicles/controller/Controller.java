@@ -4,6 +4,7 @@ import castaway_chronicles.Application;
 import castaway_chronicles.gui.Action;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public abstract class Controller<T> {
     private final T model;
@@ -16,5 +17,5 @@ public abstract class Controller<T> {
         return model;
     }
 
-    public abstract void step(Application application, Action action, long startTime) throws IOException, InterruptedException;
+    public abstract void step(Application application, Action action, long startTime) throws IOException, InterruptedException, URISyntaxException;
 }

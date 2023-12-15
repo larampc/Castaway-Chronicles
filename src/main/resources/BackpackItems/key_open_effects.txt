@@ -1,0 +1,3 @@
+Forest witchNewHouseNPC I
+Forest WitchNewHouse_door V
+GO WitchNewHouse

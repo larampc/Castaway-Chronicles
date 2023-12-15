@@ -3,28 +3,29 @@ package castaway_chronicles.model.game;
 import castaway_chronicles.model.game.scene.*;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class GameBuilder {
-    public Game createGame() throws IOException {
+    public Game createGame(boolean saved) throws IOException {
         Game game = new Game();
-        game.setMap(createMap());
-        game.setBackpack(createBackpack());
-        game.setLocations(createLocations());
+        String dir = saved? "Scenes_saved":"Scenes";
+        game.setMap(createMap(dir));
+        game.setBackpack(createBackpack(dir));
+        game.setLocations(createLocations(dir));
         game.setCurrentScene("LOCATION");
-        game.setCurrentLocation(getCurrentLocation());
+        game.setCurrentLocation(getCurrentLocation(dir));
         game.setPauseMenu(createPauseMenu());
         return game;
     }
 
-    private String getCurrentLocation() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Scenes/Location/Locations.txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+    private String getCurrentLocation(String dir) throws IOException {
+        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/" + dir + "/Locations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
         for (String line; (line = br.readLine()) != null; ){
             String[] s = line.split(" ",-1);
             if (s.length == 2) { return s[0];}
@@ -32,22 +33,21 @@ public class GameBuilder {
         return "";
     }
 
-    public Map createMap() throws IOException {
-        SceneLoader mapBuilder = new SceneLoader("Map", "Map");
+    public Map createMap(String dir) throws IOException {
+        SceneLoader mapBuilder = new SceneLoader(dir, "Map", "Map");
         return (Map) mapBuilder.createScene();
     }
-    public Backpack createBackpack() throws IOException {
-        SceneLoader backpackBuilder = new SceneLoader("Backpack", "Backpack");
+    public Backpack createBackpack(String dir) throws IOException {
+        SceneLoader backpackBuilder = new SceneLoader(dir, "Backpack", "Backpack");
         return (Backpack) backpackBuilder.createScene();
     }
-    public HashMap<String, Location> createLocations() throws IOException {
+    public HashMap<String, Location> createLocations(String dir) throws IOException {
         HashMap<String, Location> locations = new HashMap<>();
-        URL resource = getClass().getClassLoader().getResource("Scenes/Location/Locations.txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
+        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/" + dir + "/Locations.txt");
+        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
         for (String line; (line = br.readLine()) != null; ){
             String[] s = line.split(" ",-1);
-            SceneLoader locationsBuilder = new SceneLoader(s[0], "Location");
+            SceneLoader locationsBuilder = new SceneLoader(dir, s[0], "Location");
             locations.put(s[0], (Location) locationsBuilder.createScene());
         }
         return locations;

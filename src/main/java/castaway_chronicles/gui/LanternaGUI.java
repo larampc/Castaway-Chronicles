@@ -23,8 +23,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
 
 public class LanternaGUI implements GUI{
     private final Screen screen;
@@ -115,8 +113,15 @@ public class LanternaGUI implements GUI{
             loadFiles(f, images);
         }
     }
+    public void loadEnding(String name) throws URISyntaxException, IOException {
+        URL resource = getClass().getClassLoader().getResource("Endings/"+name);
+        assert resource != null;
+        File fontFile = new File(resource.toURI());
+        loadFiles(fontFile, images);
+    }
     @Override
-    public void resizeTerminal() throws IOException {
+    public void resizeTerminal() {
+        screen.doResizeIfNecessary();
         if (bigger) {
             terminal.setSize(terminal.getWidth(), 637);
         }
@@ -124,9 +129,7 @@ public class LanternaGUI implements GUI{
             terminal.setSize(terminal.getWidth(), 765);
         }
         bigger = !bigger;
-        screen.refresh(Screen.RefreshType.COMPLETE);
-        while (screen.doResizeIfNecessary() != null);
-        screen.refresh(Screen.RefreshType.COMPLETE);
+        while (screen.doResizeIfNecessary() == null);
     }
     @Override
     public boolean isBigger() {
@@ -138,7 +141,7 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text, int waitTime, boolean underlined) throws IOException, InterruptedException {
+    public void drawText(Position startPosition, int maxsize, String text, boolean underlined) throws IOException, InterruptedException {
         String[] arrOfStr = text.split(" ", -1);
         Position position = new Position(startPosition.getX(), startPosition.getY());
         for (String word : arrOfStr) {
@@ -150,10 +153,6 @@ public class LanternaGUI implements GUI{
             if(underlined) drawLine(position.getDown(8).getLeft(1),wordsize+2);
             for(int i = 0; i < word.length(); i++) {
                 drawImage(position, String.valueOf(word.charAt(i)));
-                if (waitTime != 0) {
-                    screen.refresh();
-                    TimeUnit.MILLISECONDS.sleep(waitTime);
-                }
                 position = position.getRight(images.get(String.valueOf(word.charAt(i))).getWidth());
             }
             position = position.getRight(2);
@@ -185,5 +184,8 @@ public class LanternaGUI implements GUI{
         Action return_action = action;
         action = new KeyAction("NONE");
         return return_action;
+    }
+    public boolean imageIsLoad(String name) {
+        return images.get(name) != null;
     }
 }

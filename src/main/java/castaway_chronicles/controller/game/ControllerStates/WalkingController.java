@@ -8,15 +8,16 @@ import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static java.lang.Math.abs;
 
 public class WalkingController implements ControllerState{
-    private GameController gameController;
+    private final GameController gameController;
     private int toWalk = 0;
     private long lastMovementTime = 0;
     private boolean goRight = false;
-    private static int dx = 10;
+    private static final int dx = 10;
     public WalkingController(GameController gameController) {
         this.gameController = gameController;
     }
@@ -29,10 +30,11 @@ public class WalkingController implements ControllerState{
         int offset = (character_x - walkto.getX()) + location.getMainChar().getWidth()/2;
         int next_x = background_x + location.getMainChar().getWidth()/2 + offset;
         goRight = (offset < 0);
-        if (abs(offset) < 2*dx || (background_x == 0 && !goRight) || (background_x-dx <= max_background_x && goRight)) {
+        if (abs(offset) < 2*dx || (!location.getBackground().isIsloopable() && ((background_x == 0 && !goRight) || (background_x-dx <= max_background_x && goRight)))) {
             toWalk = 0;
             return false;
         }
+        if (location.getBackground().isIsloopable()) {toWalk = offset/dx; return true;}
         if (next_x <= 0 && next_x >= max_background_x) {
             toWalk = offset/dx;
             toWalk += (toWalk < 0) ? 1 : -1;
@@ -46,18 +48,10 @@ public class WalkingController implements ControllerState{
         return true;
     }
 
-    public boolean canwalk() {
-        if (toWalk == 0) {
-            gameController.setControllerState(gameController.getPrevious());
-            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
-            return false;
-        }
-        return true;
-    }
-
     @Override
-    public void click(Position position) throws IOException, InterruptedException {
+    public void click(Position position, Application application) throws IOException, InterruptedException {
         setTowalk(position);
+        ((LocationController)gameController.getLocationController()).setLastCommandNull();
     }
 
     @Override
@@ -91,10 +85,15 @@ public class WalkingController implements ControllerState{
     }
 
     @Override
-    public void none(long time) throws IOException, InterruptedException {
-        if (canwalk() && time- lastMovementTime >150) {
+    public void none(long time) throws IOException, InterruptedException, URISyntaxException {
+        if (toWalk == 0) {
+            gameController.getModel().getCurrentLocation().getMainChar().setName("standing_" + (goRight ? "right" : "left"));
+            gameController.setControllerState(gameController.getPrevious());
+            return;
+        }
+        if (time - lastMovementTime > 150) {
             Location location = gameController.getModel().getCurrentLocation();
-            CommandInvoker invoker = new CommandInvoker();
+            CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
             MoveCommand move = new MoveCommand(location,goRight ? -dx : dx);
             invoker.setCommand(move);
             invoker.execute();
@@ -102,4 +101,10 @@ public class WalkingController implements ControllerState{
             lastMovementTime = time;
         }
     }
+
+    public int getToWalk() {
+        return toWalk;
+    }
+
+    public boolean isFacingRight() {return goRight;}
 }

@@ -1,6 +1,7 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;
@@ -16,15 +17,12 @@ public class LocationViewer extends SceneViewer<Location> {
         drawBackground(gui);
         drawInteractables(gui);
         drawMainChar(gui);
-        if (getModel().getBackpackAnswer().isActive()) {
-            new BackpackAnswerViewer(getModel().getBackpackAnswer().getItem()).drawBackpackAnswer(gui);
-        }
-        else if (getModel().getDialogState().isActiveDialog()) {
-            new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialog(gui);
+        if (getModel().getTextDisplay().isActiveTextBox()) {
+            new TextBoxViewer(getModel().getTextDisplay().getElement()).drawTextBox(gui, Game.SCENE.LOCATION);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
-        if (getModel().getDialogState().isActiveChoice()) {
-            new NPCDialogViewer(getModel().getDialogState().getNPCDialog()).drawNPCDialogChoices(gui);
+        if (getModel().getTextDisplay().isActiveChoice()) {
+            new TextBoxViewer(getModel().getTextDisplay().getElement()).drawChoices(gui);
         }
     }
 

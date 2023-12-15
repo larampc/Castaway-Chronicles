@@ -2,7 +2,7 @@ package castaway_chronicles.model.game.elements;
 
 import castaway_chronicles.model.Position;
 
-public abstract class Element {
+public class Element {
     private Position position;
     private final int width;
     private final int height;

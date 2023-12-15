@@ -1,0 +1,4 @@
+GO Forest
+City forestEntryNPC I
+City Forest_entry V
+Map Forest_icon V

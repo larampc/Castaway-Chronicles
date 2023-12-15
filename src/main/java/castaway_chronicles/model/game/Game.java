@@ -20,6 +20,11 @@ public class Game {
     public Map getMap() {
         return map;
     }
+
+    public HashMap<String, Location> getLocations() {
+        return locations;
+    }
+
     public Location getLocation(String name) {
         return locations.get(name);
     }
