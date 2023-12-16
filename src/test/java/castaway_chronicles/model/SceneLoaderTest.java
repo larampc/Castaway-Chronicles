@@ -1,8 +1,6 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Icon;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.elements.*;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.SceneLoader;
 import castaway_chronicles.model.game.scene.Scene;
@@ -19,7 +17,10 @@ public class SceneLoaderTest {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
-                new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_icon"));
+                new NPC(1,2,3,4,"witch",0),
+                new Icon(2,2,23,17,"MAP_icon"),
+                new Item(1, 2, 3, 4, "rope"),
+                new ItemBackpack(1, 2, 3, 4, "rope_backpack"));
         assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
