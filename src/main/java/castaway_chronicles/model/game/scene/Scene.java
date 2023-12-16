@@ -30,5 +30,4 @@ public abstract class Scene {
     public void setInvisible(String name){
         visibleInteractables.remove(name);
     }
-    protected void addInteractable(Interactable i) {interactables.put(i.getName(),i); visibleInteractables.put(i.getName(), i);}
 }
