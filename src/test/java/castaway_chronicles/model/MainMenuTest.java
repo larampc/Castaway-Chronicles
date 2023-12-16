@@ -19,6 +19,8 @@ public class MainMenuTest {
     public void getEntry(){
         assertEquals("Start", mainMenu.getEntry(0));
         assertEquals("Exit", mainMenu.getEntry(1));
+        assertEquals("Continue", mainMenu.getEntry(2));
+        assertEquals("Endings", mainMenu.getEntry(3));
     }
 
     @Test
@@ -36,6 +38,8 @@ public class MainMenuTest {
     public void isSelected(){
         assertTrue(mainMenu.isSelected(0));
         assertFalse(mainMenu.isSelected(1));
+        assertFalse(mainMenu.isSelected(2));
+        assertFalse(mainMenu.isSelected(3));
     }
 
     @Test
@@ -50,6 +54,23 @@ public class MainMenuTest {
         assertTrue(mainMenu.isSelectedStart());
         mainMenu.nextEntry();
         assertFalse(mainMenu.isSelectedStart());
+    }
+
+    @Test
+    public void isSelectedContinue(){
+        assertFalse(mainMenu.isSelectedContinue());
+        mainMenu.nextEntry();
+        mainMenu.nextEntry();
+        assertTrue(mainMenu.isSelectedContinue());
+    }
+
+    @Test
+    public void isSelectedEndings(){
+        assertFalse(mainMenu.isSelectedEndings());
+        mainMenu.nextEntry();
+        mainMenu.nextEntry();
+        mainMenu.nextEntry();
+        assertTrue(mainMenu.isSelectedEndings());
     }
 
     @Test
