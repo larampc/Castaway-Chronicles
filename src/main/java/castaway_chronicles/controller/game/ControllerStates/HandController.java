@@ -28,7 +28,7 @@ public class HandController implements ControllerState {
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         if (toGive.isEmpty()) {
-            gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getBackpackSelection().getElement());
+            gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getTextDisplay().getElement());
             gameController.getModel().setCurrentScene("LOCATION");
             gameController.setControllerState(gameController.getNarratorController());
         }
@@ -36,7 +36,7 @@ public class HandController implements ControllerState {
             for (Interactable e: gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
                     CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
-                    Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)gameController.getModel().getBackpack().getBackpackSelection().getElement()).getEffects(), application);
+                    Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)gameController.getModel().getBackpack().getTextDisplay().getElement()).getEffects(), application);
                     invoker.setCommand(effects);
                     invoker.execute();
                     gameController.getModel().setCurrentScene("LOCATION");
@@ -47,7 +47,7 @@ public class HandController implements ControllerState {
                     return;
                 }
             }
-            gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getBackpackSelection().getElement());
+            gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getTextDisplay().getElement());
             gameController.getModel().setCurrentScene("LOCATION");
             gameController.setControllerState(gameController.getNarratorController());
         }

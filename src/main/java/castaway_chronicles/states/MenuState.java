@@ -4,7 +4,7 @@ import castaway_chronicles.controller.Controller;
 import castaway_chronicles.controller.menu.MainMenuController;
 import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.view.Viewer;
-import castaway_chronicles.view.menu.MenuViewer;
+import castaway_chronicles.view.menu.MainMenuViewer;
 
 public class MenuState extends State<MainMenu>{
     public MenuState(MainMenu model) {
@@ -12,7 +12,7 @@ public class MenuState extends State<MainMenu>{
     }
     @Override
     protected Viewer<MainMenu> getViewer() {
-        return new MenuViewer(getModel());
+        return new MainMenuViewer(getModel());
     }
 
     @Override

@@ -3,24 +3,24 @@ package castaway_chronicles.view.game;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
+import castaway_chronicles.view.SelectionPanelViewer;
+import castaway_chronicles.view.ScreenViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class PauseMenuViewer {
-    private final PauseMenu pauseMenu;
-    public PauseMenuViewer(PauseMenu model) {
-        this.pauseMenu = model;
-    }
+public class PauseMenuViewer implements ScreenViewer<PauseMenu> {
+    private SelectionPanelViewer selectionPanelViewer;
 
-    public void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
+    public PauseMenuViewer() {
+        selectionPanelViewer = new SelectionPanelViewer(new Position(97,101), 48,20);
+    }
+    @Override
+    public void draw(PauseMenu model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
         gui.drawImage(new Position(0,0), "Menu");
-        int i = 101;
-        int x = 97;
-        for (int j = 0; j < pauseMenu.getNumberEntries(); j++) {
-            gui.drawText(new Position(x, i), 160, pauseMenu.getEntry(j), pauseMenu.isSelected(j));
-            i+=20;
-            if (j == 1) {x+=48; i = 101;}
-        }
+        selectionPanelViewer.draw(model, gui);
+    }
+    public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
     }
 }

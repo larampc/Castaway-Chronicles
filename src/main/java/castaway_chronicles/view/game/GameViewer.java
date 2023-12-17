@@ -2,31 +2,56 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.view.ScreenViewer;
 import castaway_chronicles.view.Viewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameViewer extends Viewer<Game> {
+    private PauseMenuViewer pauseMenuViewer;
+    private MapViewer mapViewer;
+    private BackpackViewer backpackViewer;
+    private LocationViewer locationViewer;
     public GameViewer(Game model) {
         super(model);
+        pauseMenuViewer = new PauseMenuViewer();
+        mapViewer = new MapViewer();
+        backpackViewer = new BackpackViewer();
+        locationViewer = new LocationViewer();
     }
 
     @Override
-    protected void drawElements(GUI gui) throws IOException, URISyntaxException, InterruptedException {
+    public void drawScreen(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
             case PAUSE:
-                new PauseMenuViewer(getModel().getPauseMenu()).draw(gui);
+                drawScene(gui, getModel().getPauseMenu(), pauseMenuViewer);
                 break;
             case BACKPACK:
-                new BackpackViewer(getModel().getBackpack()).draw(gui);
+                drawScene(gui, getModel().getBackpack(), backpackViewer);
                 break;
             case MAP:
-                new MapViewer(getModel().getMap()).draw(gui);
+                drawScene(gui, getModel().getMap(), mapViewer);
                 break;
             case LOCATION:
-                new LocationViewer(getModel().getCurrentLocation()).draw(gui);
+                drawScene(gui, getModel().getCurrentLocation(), locationViewer);
                 break;
         }
+    }
+
+    public <T> void drawScene(GUI gui, T model, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
+        viewer.draw(model, gui);
+    }
+    public void setPauseMenuViewer(PauseMenuViewer pauseMenuViewer) {
+        this.pauseMenuViewer = pauseMenuViewer;
+    }
+    public void setBackpackViewer(BackpackViewer backpackViewer) {
+        this.backpackViewer = backpackViewer;
+    }
+    public void setMapViewer(MapViewer mapViewer) {
+        this.mapViewer = mapViewer;
+    }
+    public void setLocationViewer(LocationViewer locationViewer) {
+        this.locationViewer = locationViewer;
     }
 }

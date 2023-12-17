@@ -1,23 +1,17 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.scene.Scene;
+import castaway_chronicles.model.game.elements.Element;
 
-public abstract class SceneViewer<T extends Scene> {
-    private final T model;
-    public SceneViewer(T model) {
-        this.model = model;
-    }
-    public T getModel() {
-        return model;
-    }
-    public void drawInteractables(GUI gui) {
-        for(Interactable interactable: model.getVisibleInteractables()) {
-            gui.drawImage(interactable.getPosition(), interactable.getName());
+import java.util.List;
+
+public abstract class SceneViewer {
+    public <E extends Element> void drawElements(GUI gui, List<E> elementList) {
+        for(E element: elementList) {
+            drawElement(gui, element);
         }
     }
-    public void drawBackground(GUI gui) {
-        gui.drawImage(model.getBackground().getPosition(), model.getBackground().getName());
+    public void drawElement(GUI gui, Element element) {
+        gui.drawImage(element.getPosition(), element.getName());
     }
 }

@@ -137,11 +137,13 @@ public class LanternaGUI implements GUI{
     }
     @Override
     public void drawImage(Position position, String name) {
-        images.get(name).drawSprite(position, graphics);
+        if (images.get(name) != null) {
+            images.get(name).drawSprite(position, graphics);
+        }
     }
 
     @Override
-    public void drawText(Position startPosition, int maxsize, String text, boolean underlined) throws IOException, InterruptedException {
+    public void drawText(Position startPosition, int maxsize, String text, boolean underlined) {
         String[] arrOfStr = text.split(" ", -1);
         Position position = new Position(startPosition.getX(), startPosition.getY());
         for (String word : arrOfStr) {
@@ -185,7 +187,7 @@ public class LanternaGUI implements GUI{
         action = new KeyAction("NONE");
         return return_action;
     }
-    public boolean imageIsLoad(String name) {
+    public boolean imageIsLoaded(String name) {
         return images.get(name) != null;
     }
 }

@@ -2,14 +2,15 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.scene.Map;
+import castaway_chronicles.view.ScreenViewer;
 
-public class MapViewer extends SceneViewer<Map> {
-    public MapViewer(Map model) {
-        super(model);
-    }
+import java.io.IOException;
+import java.net.URISyntaxException;
 
-    public void draw(GUI gui) {
-        drawBackground(gui);
-        drawInteractables(gui);
+public class MapViewer extends SceneViewer implements ScreenViewer<Map> {
+    @Override
+    public void draw(Map model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawElement(gui, model.getBackground());
+        drawElements(gui, model.getVisibleInteractables());
     }
 }

@@ -30,5 +30,4 @@ public class Sprite {
         }
     }
     public int getWidth() {return sprite.getWidth();}
-    public int getHeight() {return sprite.getHeight();}
 }

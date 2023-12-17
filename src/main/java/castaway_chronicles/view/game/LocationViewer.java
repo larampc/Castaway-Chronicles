@@ -1,33 +1,40 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.view.ScreenViewer;
+import castaway_chronicles.view.SelectionPanelViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class LocationViewer extends SceneViewer<Location> {
-
-    public LocationViewer(Location model) {
-        super(model);
+public class LocationViewer extends SceneViewer implements ScreenViewer<Location> {
+    TextBoxViewer textBoxViewer;
+    SelectionPanelViewer selectionPanelViewer;
+    public LocationViewer() {
+        this.textBoxViewer = new TextBoxViewer();
+        this.selectionPanelViewer = new SelectionPanelViewer(new Position(6,155), 0, 10);
     }
 
-    public void draw(GUI gui) throws IOException, InterruptedException, URISyntaxException {
-        drawBackground(gui);
-        drawInteractables(gui);
-        drawMainChar(gui);
-        if (getModel().getTextDisplay().isActiveTextBox()) {
-            new TextBoxViewer(getModel().getTextDisplay().getElement()).drawTextBox(gui, Game.SCENE.LOCATION);
+    @Override
+    public void draw(Location model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawElement(gui, model.getBackground());
+        drawElements(gui, model.getVisibleInteractables());
+        if (model.getMainChar() != null) drawElement(gui, model.getMainChar());
+        if (model.getTextDisplay().isActiveChoice()) {
+            textBoxViewer.drawChoices(gui, model, selectionPanelViewer);
+        }
+        else if (model.getTextDisplay().isActiveTextBox()) {
+            textBoxViewer.drawTextBox(gui, model);
         }
         else if (gui.isBigger()) gui.resizeTerminal();
-        if (getModel().getTextDisplay().isActiveChoice()) {
-            new TextBoxViewer(getModel().getTextDisplay().getElement()).drawChoices(gui);
-        }
     }
 
-    private void drawMainChar(GUI gui) {
-        if (getModel().getMainChar() == null) return;
-        gui.drawImage(getModel().getMainChar().getPosition(), getModel().getMainChar().getName());
+    public void setTextBoxViewer(TextBoxViewer textBoxViewer) {
+        this.textBoxViewer = textBoxViewer;
+    }
+    public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
     }
 }

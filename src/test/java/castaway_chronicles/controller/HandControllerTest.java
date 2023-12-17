@@ -51,7 +51,7 @@ public class HandControllerTest {
         when(backpackSelectionMock.getElement()).thenReturn(itemBackpack);
 
         Backpack backpackMock = mock(Backpack.class);
-        when(backpackMock.getBackpackSelection()).thenReturn(backpackSelectionMock);
+        when(backpackMock.getTextDisplay()).thenReturn(backpackSelectionMock);
 
         game.setBackpack(backpackMock);
 
@@ -83,7 +83,7 @@ public class HandControllerTest {
         when(backpackSelectionMock.getElement()).thenReturn(itemBackpackMock);
 
         Backpack backpackMock = mock(Backpack.class);
-        when(backpackMock.getBackpackSelection()).thenReturn(backpackSelectionMock);
+        when(backpackMock.getTextDisplay()).thenReturn(backpackSelectionMock);
 
         game.setBackpack(backpackMock);
 
@@ -128,7 +128,7 @@ public class HandControllerTest {
         when(backpackSelectionMock.getElement()).thenReturn(itemBackpackMock);
 
         Backpack backpackMock = mock(Backpack.class);
-        when(backpackMock.getBackpackSelection()).thenReturn(backpackSelectionMock);
+        when(backpackMock.getTextDisplay()).thenReturn(backpackSelectionMock);
 
         game.setBackpack(backpackMock);
 
