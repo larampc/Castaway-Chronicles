@@ -1,8 +1,8 @@
 package castaway_chronicles;
 
 import castaway_chronicles.gui.LanternaGUI;
-import castaway_chronicles.model.menu.MainMenu;
-import castaway_chronicles.states.MenuState;
+import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.states.MainPageState;
 import castaway_chronicles.states.State;
 
 import java.awt.*;
@@ -15,7 +15,7 @@ public class Application {
 
     public Application() throws FontFormatException, IOException, URISyntaxException {
         this.gui = new LanternaGUI(200, 150);
-        this.state = new MenuState(new MainMenu());
+        this.state = new MainPageState(new MainPage());
     }
 
     public static void main(String[] args) throws IOException, FontFormatException, URISyntaxException, InterruptedException {

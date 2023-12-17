@@ -4,26 +4,25 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.view.SelectionPanelViewer;
-import castaway_chronicles.view.Viewer;
+import castaway_chronicles.view.game.SceneViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MainMenuViewer extends Viewer<MainMenu> {
+public class MainMenuViewer extends SceneViewer<MainMenu> {
     private SelectionPanelViewer selectionPanelViewer;
 
-    public MainMenuViewer(MainMenu model) {
-        super(model);
+    public MainMenuViewer() {
         selectionPanelViewer = new SelectionPanelViewer(new Position(98,101), 42,20);
-    }
-
-    @Override
-    public void drawScreen(GUI gui) throws IOException, InterruptedException, URISyntaxException {
-        gui.drawImage(new Position(0,0), "Menu");
-        selectionPanelViewer.draw(getModel(), gui);
     }
 
     public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
         this.selectionPanelViewer = selectionPanelViewer;
+    }
+
+    @Override
+    public void draw(MainMenu model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawElement(gui, model.getBackground());
+        selectionPanelViewer.draw(model.getSelectionPanel(), gui);
     }
 }

@@ -5,8 +5,8 @@ import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
-import castaway_chronicles.model.menu.MainMenu;
-import castaway_chronicles.states.MenuState;
+import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.states.MainPageState;
 
 import java.io.IOException;
 
@@ -28,26 +28,26 @@ public class PauseController implements ControllerState {
 
     @Override
     public void keyUp() {
-        pauseMenu.previousEntry();
+        pauseMenu.getSelectionPanel().previousEntry();
     }
 
     @Override
     public void keyDown(){
-        pauseMenu.nextEntry();
+        pauseMenu.getSelectionPanel().nextEntry();
     }
 
     @Override
     public void keyRight() {
-        if (!pauseMenu.getEntry(
-                pauseMenu.getCurrentEntry() + 2
+        if (!pauseMenu.getSelectionPanel().getEntry(
+                pauseMenu.getSelectionPanel().getCurrentEntry() + 2
         ).isEmpty()) {
-            pauseMenu.nextEntry();
-            pauseMenu.nextEntry();
-        } else if (!pauseMenu.getEntry(
-                pauseMenu.getCurrentEntry() - 2
+            pauseMenu.getSelectionPanel().nextEntry();
+            pauseMenu.getSelectionPanel().nextEntry();
+        } else if (!pauseMenu.getSelectionPanel().getEntry(
+                pauseMenu.getSelectionPanel().getCurrentEntry() - 2
         ).isEmpty()) {
-            pauseMenu.previousEntry();
-            pauseMenu.previousEntry();
+            pauseMenu.getSelectionPanel().previousEntry();
+            pauseMenu.getSelectionPanel().previousEntry();
         }
     }
 
@@ -58,7 +58,7 @@ public class PauseController implements ControllerState {
 
     @Override
     public void select(Application application) throws IOException {
-        if (pauseMenu.isSelectedMenu()) application.setState(new MenuState(new MainMenu()));
+        if (pauseMenu.isSelectedMenu()) application.setState(new MainPageState(new MainPage()));
         if (pauseMenu.isSelectedExit()) application.setState(null);
         if (pauseMenu.isSelectedResume()) {
             gameController.getModel().setCurrentScene("LOCATION");

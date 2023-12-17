@@ -4,12 +4,11 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
 import castaway_chronicles.view.SelectionPanelViewer;
-import castaway_chronicles.view.ScreenViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class PauseMenuViewer implements ScreenViewer<PauseMenu> {
+public class PauseMenuViewer extends SceneViewer<PauseMenu> {
     private SelectionPanelViewer selectionPanelViewer;
 
     public PauseMenuViewer() {
@@ -17,8 +16,8 @@ public class PauseMenuViewer implements ScreenViewer<PauseMenu> {
     }
     @Override
     public void draw(PauseMenu model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
-        gui.drawImage(new Position(0,0), "Menu");
-        selectionPanelViewer.draw(model, gui);
+        drawElement(gui, model.getBackground());
+        selectionPanelViewer.draw(model.getSelectionPanel(), gui);
     }
     public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
         this.selectionPanelViewer = selectionPanelViewer;

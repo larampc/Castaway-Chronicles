@@ -1,21 +1,16 @@
 package castaway_chronicles.view.menu;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.elements.Element;
-import castaway_chronicles.model.Position;
 import castaway_chronicles.model.menu.EndingPage;
-import castaway_chronicles.view.Viewer;
+import castaway_chronicles.view.game.SceneViewer;
 
-public class EndingPageViewer extends Viewer<EndingPage> {
-    public EndingPageViewer(EndingPage model) {
-        super(model);
-    }
+import java.io.IOException;
+import java.net.URISyntaxException;
 
+public class EndingPageViewer extends SceneViewer<EndingPage> {
     @Override
-    public void drawScreen(GUI gui) {
-        gui.drawImage(new Position(0,0), "EndingsMenu");
-        for (Element e: getModel().getVisibleEndings()) {
-            gui.drawImage(e.getPosition(), e.getName());
-        }
+    public void draw(EndingPage model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+        drawElement(gui, model.getBackground());
+        drawElements(gui, model.getVisibleEndings());
     }
 }

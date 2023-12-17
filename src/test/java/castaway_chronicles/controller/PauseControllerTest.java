@@ -4,10 +4,11 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.ControllerStates.PauseController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.controller.game.GameSaver;
+import castaway_chronicles.model.SelectionPanel;
 import castaway_chronicles.model.game.Game;
 
 import castaway_chronicles.model.game.scene.PauseMenu;
-import castaway_chronicles.states.MenuState;
+import castaway_chronicles.states.MainPageState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,6 +24,7 @@ public class PauseControllerTest {
     private Game gameMock;
     private GameController gameController;
     private GameSaver gameSaverMock;
+    private SelectionPanel selectionPanelMock;
 
     @BeforeEach
     void setUp() {
@@ -30,8 +32,9 @@ public class PauseControllerTest {
         pauseMenuMock = Mockito.mock(PauseMenu.class);
         applicationMock = Mockito.mock(Application.class);
         gameSaverMock = Mockito.mock(GameSaver.class);
-
+        selectionPanelMock = Mockito.mock(SelectionPanel.class);
         Mockito.when(gameMock.getPauseMenu()).thenReturn(pauseMenuMock);
+        Mockito.when(pauseMenuMock.getSelectionPanel()).thenReturn(selectionPanelMock);
         gameController = new GameController(gameMock);
         pauseController = (PauseController) gameController.getPauseController();
         pauseController.setGameSaver(gameSaverMock);
@@ -41,9 +44,9 @@ public class PauseControllerTest {
     @Test
     void pressed_ArrowKey() {
         pauseController.keyUp();
-        Mockito.verify(pauseMenuMock).previousEntry();
+        Mockito.verify(selectionPanelMock).previousEntry();
         pauseController.keyDown();
-        Mockito.verify(pauseMenuMock).nextEntry();
+        Mockito.verify(selectionPanelMock).nextEntry();
     }
 
     @Test
@@ -88,6 +91,6 @@ public class PauseControllerTest {
         Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(false);
 
         pauseController.select(applicationMock);
-        Mockito.verify(applicationMock).setState(Mockito.any(MenuState.class));
+        Mockito.verify(applicationMock).setState(Mockito.any(MainPageState.class));
     }
 }

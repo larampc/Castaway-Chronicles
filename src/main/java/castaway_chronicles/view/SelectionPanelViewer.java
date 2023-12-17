@@ -7,7 +7,7 @@ import castaway_chronicles.model.SelectionPanel;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class SelectionPanelViewer implements ScreenViewer<SelectionPanel> {
+public class SelectionPanelViewer {
     private final int offsety;
     private final int offsetx;
     private final Position initialPosition;
@@ -16,7 +16,6 @@ public class SelectionPanelViewer implements ScreenViewer<SelectionPanel> {
         this.offsetx = offsetx;
         this.offsety = offsety;
     }
-    @Override
     public void draw(SelectionPanel model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
         int y = initialPosition.getY();
         int x = initialPosition.getX();

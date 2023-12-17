@@ -3,13 +3,12 @@ package castaway_chronicles.view.game;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Backpack;
-import castaway_chronicles.view.ScreenViewer;
 import castaway_chronicles.view.SelectionPanelViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class BackpackViewer extends SceneViewer implements ScreenViewer<Backpack> {
+public class BackpackViewer extends SceneViewer<Backpack> {
     TextBoxViewer textBoxViewer;
     SelectionPanelViewer selectionPanelViewer;
     public BackpackViewer() {

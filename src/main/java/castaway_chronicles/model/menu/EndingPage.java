@@ -1,5 +1,6 @@
 package castaway_chronicles.model.menu;
 
+import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Element;
 
 import java.io.BufferedReader;
@@ -15,9 +16,11 @@ import java.util.List;
 public class EndingPage {
     private List<EndingItem> visibleEndings;
     private List<EndingItem> endings;
+    private final Background background;
 
     public EndingPage() throws IOException {
         setup();
+        background = new Background(0, 0, 200, 150, "EndingsMenu", false);
     }
 
     private void setup() throws IOException {
@@ -57,5 +60,9 @@ public class EndingPage {
     public List<EndingItem> getVisibleEndings() {return visibleEndings;}
     public void reset() throws IOException {
         setup();
+    }
+
+    public Background getBackground() {
+        return background;
     }
 }
