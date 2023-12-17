@@ -21,11 +21,10 @@ public class EndController extends Controller<Ending> {
             getModel().setNext();
             lastFrame = startTime;
         }
-        if (action.getType().equalsIgnoreCase("select") && getModel().getMax() == getModel().getCurrent()) {
+        if (action.getType()== Action.ACTION.SELECT && getModel().getMax() == getModel().getCurrent()) {
             MainPage mainPage  = new MainPage();
             mainPage.setCurrent(MainPage.PAGE.ENDINGS);
             application.setState(new MainPageState(mainPage));
         }
-
     }
 }

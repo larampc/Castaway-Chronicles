@@ -30,7 +30,7 @@ public class LanternaGUI implements GUI{
     private final HashMap<String, Sprite> images = new HashMap<>();
     private final AWTTerminalFrame terminal;
     private boolean bigger;
-    private Action action = new KeyAction("NONE");
+    private Action action = new KeyAction(Action.ACTION.NONE);
 
     public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
@@ -65,21 +65,34 @@ public class LanternaGUI implements GUI{
         MouseAdapter mouseAdapter = new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
-                action = new ClickAction("CLICK", new Position(e.getX()/4, e.getY()/4));
+                action = new ClickAction(Action.ACTION.CLICK, new Position(e.getX()/4, e.getY()/4));
             }
         };
         ((AWTTerminalFrame)terminal).getComponent(0).addMouseListener(mouseAdapter);
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String key = "NONE";
-                if (e.getKeyCode() == KeyEvent.VK_UP) key = "UP";
-                if (e.getKeyCode() == KeyEvent.VK_DOWN) key = "DOWN";
-                if (e.getKeyCode() == KeyEvent.VK_LEFT) key = "LEFT";
-                if (e.getKeyCode() == KeyEvent.VK_RIGHT) key = "RIGHT";
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) key = "SELECT";
-                if (e.getKeyCode() == KeyEvent.VK_ESCAPE) key = "ESCAPE";
-                action = new KeyAction(key);
+                switch (e.getKeyCode()){
+                    case KeyEvent.VK_UP:
+                        action = new KeyAction(Action.ACTION.UP);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        action = new KeyAction(Action.ACTION.DOWN);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        action = new KeyAction(Action.ACTION.LEFT);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        action = new KeyAction(Action.ACTION.RIGHT);
+                        break;
+                    case KeyEvent.VK_ENTER:
+                        action = new KeyAction(Action.ACTION.SELECT);
+                        break;
+                    case KeyEvent.VK_ESCAPE:
+                        action = new KeyAction(Action.ACTION.ESCAPE);
+                        break;
+
+                }
             }
         });
         return (AWTTerminalFrame) terminal;
@@ -184,7 +197,7 @@ public class LanternaGUI implements GUI{
     @Override
     public Action getNextAction() {
         Action return_action = action;
-        action = new KeyAction("NONE");
+        action = new KeyAction(Action.ACTION.NONE);
         return return_action;
     }
     public boolean imageIsLoaded(String name) {

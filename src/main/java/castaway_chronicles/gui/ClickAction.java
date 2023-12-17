@@ -4,7 +4,7 @@ import castaway_chronicles.model.Position;
 
 public class ClickAction extends Action{
     private final Position position;
-    public ClickAction(String type, Position position) {
+    public ClickAction(ACTION type, Position position) {
         super(type);
         this.position = position;
     }
