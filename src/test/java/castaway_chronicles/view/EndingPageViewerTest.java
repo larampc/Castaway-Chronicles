@@ -24,7 +24,7 @@ public class EndingPageViewerTest {
         Position positionMock = Mockito.mock(Position.class);
         Background backgroundMock = Mockito.mock(Background.class);
 
-        Mockito.when(endingPageMock.getVisibleEndings()).thenReturn(List.of(itemMock1, itemMock2));
+        Mockito.when(endingPageMock.getVisibleInteractables()).thenReturn(List.of(itemMock1, itemMock2));
         Mockito.when(endingPageMock.getBackground()).thenReturn(backgroundMock);
         Mockito.when(backgroundMock.getName()).thenReturn("EndingsMenu");
         Mockito.when(itemMock1.getName()).thenReturn("flower");

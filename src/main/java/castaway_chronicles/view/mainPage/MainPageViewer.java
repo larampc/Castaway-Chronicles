@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MainPageViewer extends Viewer<MainPage> {
-    private final EndingPageViewer endingPageViewer;
-    private final MainMenuViewer mainMenuViewer;
+    private EndingPageViewer endingPageViewer;
+    private MainMenuViewer mainMenuViewer;
     public MainPageViewer(MainPage model) {
         super(model);
         endingPageViewer = new EndingPageViewer();
@@ -26,5 +26,11 @@ public class MainPageViewer extends Viewer<MainPage> {
                 endingPageViewer.draw(getModel().getEndingPage(), gui);
                 break;
         }
+    }
+    public void setMainMenuViewer(MainMenuViewer mainMenuViewer) {
+        this.mainMenuViewer = mainMenuViewer;
+    }
+    public void setEndingPageViewer(EndingPageViewer endingPageViewer) {
+        this.endingPageViewer = endingPageViewer;
     }
 }

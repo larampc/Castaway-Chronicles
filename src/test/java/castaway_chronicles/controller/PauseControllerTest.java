@@ -1,7 +1,7 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.ControllerStates.PauseController;
+import castaway_chronicles.controller.game.scenes.PauseController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.SelectionPanel;

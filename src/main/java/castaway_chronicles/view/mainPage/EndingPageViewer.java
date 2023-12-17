@@ -11,6 +11,6 @@ public class EndingPageViewer extends SceneViewer<EndingPage> {
     @Override
     public void draw(EndingPage model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
         drawElement(gui, model.getBackground());
-        drawElements(gui, model.getVisibleEndings());
+        drawElements(gui, model.getVisibleInteractables());
     }
 }

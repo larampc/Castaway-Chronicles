@@ -4,7 +4,7 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.mainPage.EndingItem;
+import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.EndState;
 
@@ -29,7 +29,7 @@ public class EndingPageController implements ControllerState {
     }
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
-        for (EndingItem e: mainPageController.getModel().getEndingPage().getVisibleEndings()) {
+        for (Interactable e: mainPageController.getModel().getEndingPage().getVisibleInteractables()) {
             if (e.getName().equalsIgnoreCase("reset") && e.contains(position)){
                 File achievedEnd = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
                 achievedEnd.delete();

@@ -47,4 +47,11 @@ public class PauseMenuTest {
         assertFalse(pauseMenu.isSelectedMenu());
         assertFalse(pauseMenu.isSelectedExit());
     }
+
+    @Test
+    void getBackground() {
+        assertEquals(pauseMenu.getBackground().getName(), "Menu");
+        assertEquals(pauseMenu.getBackground().getPosition().getX(), 0);
+        assertEquals(pauseMenu.getBackground().getPosition().getY(), 0);
+    }
 }

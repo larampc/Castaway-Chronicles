@@ -3,7 +3,7 @@ package castaway_chronicles.controller;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.MoveCommand;
-import castaway_chronicles.controller.game.ControllerStates.WalkingController;
+import castaway_chronicles.controller.game.LocationControllers.WalkingController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
@@ -21,7 +21,6 @@ import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WalkingControllerTest {
-    private Game game;
     private WalkingController walkingController;
     private GameController gameController;
     private Application application;
@@ -29,7 +28,7 @@ public class WalkingControllerTest {
 
     @BeforeEach
     void init() {
-        game = Mockito.mock(Game.class);
+        Game game = Mockito.mock(Game.class);
         gameController = new GameController(game);
         commandInvoker = Mockito.mock(CommandInvoker.class);
         gameController.setCommandInvoker(commandInvoker);

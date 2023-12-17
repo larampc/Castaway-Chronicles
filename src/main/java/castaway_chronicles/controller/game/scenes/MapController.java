@@ -1,4 +1,4 @@
-package castaway_chronicles.controller.game.ControllerStates;
+package castaway_chronicles.controller.game.scenes;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;

@@ -36,7 +36,7 @@ public class MainPageController extends Controller<MainPage> {
             current.key(((KeyEvent)action).getKeyCode(), application);
         }
         if (action instanceof MouseEvent) {
-            current.click(new Position(((MouseEvent)action).getX(), ((MouseEvent)action).getY()), application);
+            current.click(new Position(((MouseEvent)action).getX()/4, ((MouseEvent)action).getY()/4), application);
         }
     }
 

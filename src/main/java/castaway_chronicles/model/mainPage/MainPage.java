@@ -4,11 +4,11 @@ import java.io.IOException;
 
 public class MainPage {
     private final MainMenu mainMenu;
-    private final EndingPage endingPage;
+    private EndingPage endingPage;
     private PAGE current;
     public MainPage() throws IOException {
         mainMenu = new MainMenu();
-        endingPage = new EndingPage();
+        endingPage = new EndingPageBuilder().createEndingPage();
         current = PAGE.MENU;
     }
     public MainMenu getMainMenu() {

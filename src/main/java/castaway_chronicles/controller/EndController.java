@@ -22,7 +22,7 @@ public class EndController extends Controller<Ending> {
             getModel().setNext();
             lastFrame = startTime;
         }
-        if (((KeyEvent)action).getKeyCode() == KeyEvent.VK_ENTER && getModel().getMax() == getModel().getCurrent()) {
+        if (action instanceof KeyEvent && ((KeyEvent)action).getKeyCode() == KeyEvent.VK_ENTER && getModel().getMax() == getModel().getCurrent()) {
             MainPage mainPage  = new MainPage();
             mainPage.setCurrent(MainPage.PAGE.ENDINGS);
             application.setState(new MainPageState(mainPage));

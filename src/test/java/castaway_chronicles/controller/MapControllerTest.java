@@ -1,8 +1,8 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.ControllerStates.LocationController;
-import castaway_chronicles.controller.game.ControllerStates.MapController;
+import castaway_chronicles.controller.game.scenes.LocationController;
+import castaway_chronicles.controller.game.scenes.MapController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Background;
