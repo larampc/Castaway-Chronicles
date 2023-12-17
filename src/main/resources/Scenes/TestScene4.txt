@@ -1,7 +1,5 @@
-B Beach 1 2 3 4
+B Beach 1 2 3 4 L
 I NPC engineer 1 2 3 4 0 V
 I NPC witch 1 2 3 4 0
 I Icon MAP_icon 2 2 23 17 V
-I Item rope 1 2 3 4
-I BItem rope_backpack 1 2 3 4
 M 1 2 3 4

@@ -17,6 +17,8 @@ public class MainMenuTest {
 
     @Test
     public void getEntry(){
+        assertEquals("Continue", mainMenu.getSelectionPanel().getEntry(2));
+        assertEquals("Endings", mainMenu.getSelectionPanel().getEntry(3));
         assertEquals("Start", mainMenu.getSelectionPanel().getEntry(0));
         assertEquals("Exit", mainMenu.getSelectionPanel().getEntry(1));
     }
@@ -34,6 +36,8 @@ public class MainMenuTest {
 
     @Test
     public void isSelected(){
+        assertFalse(mainMenu.getSelectionPanel().isSelected(2));
+        assertFalse(mainMenu.getSelectionPanel().isSelected(3));
         assertTrue(mainMenu.getSelectionPanel().isSelected(0));
         assertFalse(mainMenu.getSelectionPanel().isSelected(1));
     }
@@ -50,6 +54,23 @@ public class MainMenuTest {
         assertTrue(mainMenu.isSelectedStart());
         mainMenu.getSelectionPanel().nextEntry();
         assertFalse(mainMenu.isSelectedStart());
+    }
+
+    @Test
+    public void isSelectedContinue(){
+        assertFalse(mainMenu.isSelectedContinue());
+        mainMenu.getSelectionPanel().nextEntry();
+        mainMenu.getSelectionPanel().nextEntry();
+        assertTrue(mainMenu.isSelectedContinue());
+    }
+
+    @Test
+    public void isSelectedEndings(){
+        assertFalse(mainMenu.isSelectedEndings());
+        mainMenu.getSelectionPanel().nextEntry();
+        mainMenu.getSelectionPanel().nextEntry();
+        mainMenu.getSelectionPanel().nextEntry();
+        assertTrue(mainMenu.isSelectedEndings());
     }
 
     @Test

@@ -3,6 +3,7 @@ package castaway_chronicles.model;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.scene.Backpack;
+import castaway_chronicles.model.game.scene.TextDisplay;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -48,5 +49,10 @@ public class BackpackTest {
         interactables.remove(mockinteractable1.getName());
 
         assertEquals(List.copyOf(interactables.values()), backpack.getInteractables());
+    }
+
+    @Test
+    public void getBackpackSelection(){
+        assertEquals(TextDisplay.class, backpack.getTextDisplay().getClass());
     }
 }

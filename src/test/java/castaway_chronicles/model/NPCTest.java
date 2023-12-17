@@ -28,9 +28,30 @@ public class NPCTest {
     }
 
     @Test
-    void changeState() throws IOException {
+    void goToStateChoice() throws IOException {
         npcDialog.goToStateChoice();
-        assertEquals(npcDialog.getEffects(),List.of("Beach rope V",
-                "NPC toot 2"));
+        assertEquals(List.of("Beach rope V", "NPC toot 2"), npcDialog.getEffects());
+        assertEquals(0, npcDialog.getLine());
+        assertEquals("Hmm, where did I leave them?", npcDialog.getCurrentLine());
+        assertEquals(1, npcDialog.getState());
+    }
+
+    @Test
+    void goToState() throws IOException {
+        npcDialog.goToState(3);
+        assertEquals(List.of("NPC toot 5 W", "Map City_icon V"), npcDialog.getEffects());
+        assertEquals(0, npcDialog.getLine());
+        assertEquals("Your loss my friend.", npcDialog.getCurrentLine());
+        assertEquals(1, npcDialog.getMax());
+        assertEquals(3, npcDialog.getState());
+    }
+
+    @Test
+    void nextLine() {
+        assertEquals(0, npcDialog.getLine());
+        assertEquals("Hello stranger, you look new around here.", npcDialog.getCurrentLine());
+        npcDialog.nextLine();
+        assertEquals(1, npcDialog.getLine());
+        assertEquals("I'm Oriole...", npcDialog.getCurrentLine());
     }
 }

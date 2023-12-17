@@ -1,8 +1,7 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Icon;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.SceneLoader;
 import castaway_chronicles.model.game.scene.Scene;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,10 @@ public class SceneLoaderTest {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene","Location");
         Scene scene = sceneBuilder.createScene();
         List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
-                new NPC(1,2,3,4,"witch",0), new Icon(2,2,23,17,"MAP_icon"));
+                new NPC(1,2,3,4,"witch",0),
+                new Icon(2,2,23,17,"MAP_icon"),
+                new Item(1, 2, 3, 4, "rope"),
+                new ItemBackpack(1, 2, 3, 4, "rope_backpack"));
         assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
@@ -34,6 +36,7 @@ public class SceneLoaderTest {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene", "Location");
         Scene scene = sceneBuilder.createScene();
         assertEquals("Beach", scene.getBackground().getName());
+        assertFalse(scene.getBackground().isLoopable());
 
         sceneBuilder = new SceneLoader("Scenes", "TestScene2", "Location");
         scene = sceneBuilder.createScene();
@@ -42,21 +45,26 @@ public class SceneLoaderTest {
         sceneBuilder = new SceneLoader("Scenes","TestScene3", "Location");
         scene = sceneBuilder.createScene();
         assertNull(scene.getBackground());
+
+        sceneBuilder = new SceneLoader("Scenes","TestScene4", "Location");
+        scene = sceneBuilder.createScene();
+        assertEquals("Beach", scene.getBackground().getName());
+        assertTrue(scene.getBackground().isLoopable());
     }
-//    @Test
-//    public void hasMainChar() throws IOException {
-//        SceneLoader sceneBuilder = new SceneLoader("TestScene2", "Location");
-//        Scene scene = sceneBuilder.createScene();
-//        assertNotNull(scene);
-//        assertTrue(((Location) scene).hasMainChar());
-//    }
-//    @Test
-//    public void hasNotMainChar() throws IOException {
-//        SceneLoader sceneBuilder = new SceneLoader("TestScene", "Location");
-//        Scene scene = sceneBuilder.createScene();
-//        assertNotNull(scene);
-//        assertFalse(((Location) scene).hasMainChar());
-//    }
+
+    @Test
+    public void hasMainChar() throws IOException {
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene", "Location");
+        Scene scene = sceneBuilder.createScene();
+        assertNotNull(((Location) scene).getMainChar());
+    }
+    @Test
+    public void hasNotMainChar() throws IOException {
+        SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene3", "Location");
+        Scene scene = sceneBuilder.createScene();
+        assertNotNull(scene);
+        assertNull(((Location) scene).getMainChar());
+    }
 
 
     @Test

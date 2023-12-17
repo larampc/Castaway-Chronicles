@@ -8,14 +8,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ItemBackpack extends Interactable {
     private SelectionPanel itemOptions;
-    private HashMap<String, String> optionCommand = new HashMap<>();
-    private List<String> defaultAnswers = new ArrayList<>();
+    private final HashMap<String, String> optionCommand = new HashMap<>();
+    private final List<String> defaultAnswers = new ArrayList<>();
     private String description;
     public ItemBackpack(int x, int y, int w, int h, String name) throws IOException {
         super(x, y, w, h, name);
@@ -54,7 +55,7 @@ public class ItemBackpack extends Interactable {
     public List<String> getEffects() throws IOException {
         String[] s = getName().split("_",-1);
         URL resource = getClass().getClassLoader().getResource("BackpackItems/" + s[0] + "_" + itemOptions.getEntry(itemOptions.getCurrentEntry()).replaceAll(" ", "").toLowerCase() + "_effects.txt");
-        if (resource == null) return new ArrayList<>();
+        if (resource == null) return Collections.emptyList();
         BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
         return br.lines().collect(Collectors.toList());
     }
