@@ -9,6 +9,7 @@ import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.Item;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -40,34 +41,11 @@ public class MapController implements ControllerState {
     }
 
     @Override
-    public void keyUp() {
-        //does nothing
-    }
-
-    @Override
-    public void keyDown() {
-        //does nothing
-    }
-
-    @Override
-    public void keyRight() {
-
-    }
-
-    @Override
-    public void keyLeft() {
-
-    }
-
-    @Override
-    public void select(Application application) {
-        //does nothing
-    }
-
-    @Override
-    public void escape() {
-        gameController.getModel().setCurrentScene("LOCATION");
-        gameController.setControllerState(gameController.getLocationController());
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
+        if (key == KeyEvent.VK_ESCAPE) {
+            gameController.getModel().setCurrentScene("LOCATION");
+            gameController.setControllerState(gameController.getLocationController());
+        }
     }
 
     @Override

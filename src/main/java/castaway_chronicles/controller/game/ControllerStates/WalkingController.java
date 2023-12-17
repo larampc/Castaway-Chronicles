@@ -55,33 +55,8 @@ public class WalkingController implements ControllerState{
     }
 
     @Override
-    public void keyUp() {
-        //do nothing
-    }
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
 
-    @Override
-    public void keyDown() {
-        //do nothing
-    }
-
-    @Override
-    public void keyRight() {
-
-    }
-
-    @Override
-    public void keyLeft() {
-
-    }
-
-    @Override
-    public void select(Application application) {
-        //do nothing
-    }
-
-    @Override
-    public void escape() {
-        //do nothing
     }
 
     @Override

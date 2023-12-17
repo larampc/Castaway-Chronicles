@@ -2,6 +2,7 @@ package castaway_chronicles.gui;
 
 import castaway_chronicles.model.Position;
 
+import java.awt.event.InputEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -15,5 +16,5 @@ public interface GUI {
     void close() throws IOException;
     void resizeTerminal() throws IOException;
     boolean isBigger();
-    Action getNextAction();
+    InputEvent getNextAction();
 }

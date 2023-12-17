@@ -11,6 +11,7 @@ import castaway_chronicles.model.game.elements.Item;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -67,36 +68,14 @@ public class LocationController implements ControllerState {
     }
 
     @Override
-    public void keyUp() {
-
+    public void key(int key, Application application) {
+        if (key == KeyEvent.VK_ESCAPE) {
+            gameController.getModel().setCurrentScene("PAUSE");
+            gameController.setControllerState(gameController.getLocationController());
+            gameController.setControllerState(gameController.getPauseController());
+        }
     }
 
-    @Override
-    public void keyDown() {
-
-    }
-
-    @Override
-    public void keyRight() {
-
-    }
-
-    @Override
-    public void keyLeft() {
-
-    }
-
-    @Override
-    public void select(Application application) {
-
-    }
-
-    @Override
-    public void escape() {
-        gameController.getModel().setCurrentScene("PAUSE");
-        gameController.setControllerState(gameController.getLocationController());
-        gameController.setControllerState(gameController.getPauseController());
-    }
 
     @Override
     public void none(long time) throws IOException, InterruptedException, URISyntaxException {

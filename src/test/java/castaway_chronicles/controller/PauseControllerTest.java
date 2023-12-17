@@ -13,7 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,10 +44,10 @@ public class PauseControllerTest {
     }
 
     @Test
-    void pressed_ArrowKey() {
-        pauseController.keyUp();
+    void pressed_ArrowKey() throws IOException, URISyntaxException, InterruptedException {
+        pauseController.key(KeyEvent.VK_UP, applicationMock);
         Mockito.verify(selectionPanelMock).previousEntry();
-        pauseController.keyDown();
+        pauseController.key(KeyEvent.VK_DOWN, applicationMock);
         Mockito.verify(selectionPanelMock).nextEntry();
     }
 

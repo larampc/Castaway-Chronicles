@@ -8,11 +8,6 @@ import java.net.URISyntaxException;
 
 public interface ControllerState {
     void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException;
-    void keyUp();
-    void keyDown();
-    void keyRight();
-    void keyLeft();
-    void select(Application application) throws IOException, InterruptedException, URISyntaxException;
-    void escape() throws IOException, URISyntaxException, InterruptedException;
+    void key(int keyCode, Application application) throws IOException, URISyntaxException, InterruptedException;
     void none(long time) throws IOException, InterruptedException, URISyntaxException;
 }

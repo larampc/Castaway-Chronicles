@@ -3,10 +3,12 @@ package castaway_chronicles.controller.menu;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
 import castaway_chronicles.controller.game.ControllerStates.ControllerState;
-import castaway_chronicles.gui.Action;
-import castaway_chronicles.gui.ClickAction;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.menu.MainPage;
 
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -28,30 +30,13 @@ public class MainPageController extends Controller<MainPage> {
     }
 
     @Override
-    public void step(Application application, Action action, long startTime) throws IOException, InterruptedException, URISyntaxException {
+    public void step(Application application, InputEvent action, long startTime) throws IOException, InterruptedException, URISyntaxException {
         current.none(startTime);
-        switch (action.getType()){
-            case UP:
-                current.keyUp();
-                break;
-            case DOWN:
-                current.keyDown();
-                break;
-            case LEFT:
-                current.keyLeft();
-                break;
-            case RIGHT:
-                current.keyRight();
-                break;
-            case ESCAPE:
-                current.escape();
-                break;
-            case SELECT:
-                current.select(application);
-                break;
-            case CLICK:
-                current.click(((ClickAction)action).getPosition(), application);
-                break;
+        if (action instanceof KeyEvent) {
+            current.key(((KeyEvent)action).getKeyCode(), application);
+        }
+        if (action instanceof MouseEvent) {
+            current.click(new Position(((MouseEvent)action).getX(), ((MouseEvent)action).getY()), application);
         }
     }
 

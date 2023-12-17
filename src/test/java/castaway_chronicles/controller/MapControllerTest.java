@@ -4,10 +4,6 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.ControllerStates.LocationController;
 import castaway_chronicles.controller.game.ControllerStates.MapController;
 import castaway_chronicles.controller.game.GameController;
-import castaway_chronicles.gui.Action;
-import castaway_chronicles.gui.ClickAction;
-import castaway_chronicles.gui.KeyAction;
-import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Icon;
@@ -20,6 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -61,7 +59,10 @@ public class MapControllerTest {
 
     @Test
     public void clickIcon() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new ClickAction(Action.ACTION.CLICK, new Position(6,6)),10);
+        MouseEvent mouseEventMock = Mockito.mock(MouseEvent.class);
+        Mockito.when(mouseEventMock.getX()).thenReturn(6*4);
+        Mockito.when(mouseEventMock.getY()).thenReturn(6*4);
+        gameController.step(application, mouseEventMock,10);
         assertEquals(gameController.getCurrent(),gameController.getLocationController());
         assertEquals(gameController.getModel().getScene(), Game.SCENE.LOCATION);
         assertEquals(game.getLocation("City"),game.getCurrentLocation());
@@ -69,14 +70,19 @@ public class MapControllerTest {
 
     @Test
     public void clickInvisibleIcon() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new ClickAction(Action.ACTION.CLICK, new Position(25,25)),10);
+        MouseEvent mouseEventMock = Mockito.mock(MouseEvent.class);
+        Mockito.when(mouseEventMock.getX()).thenReturn(25*4);
+        Mockito.when(mouseEventMock.getY()).thenReturn(25*4);
+        gameController.step(application, mouseEventMock,10);
         assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
         assertTrue(gameController.getCurrent() instanceof MapController);
     }
 
     @Test
     public void escape() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new KeyAction(Action.ACTION.ESCAPE),0);
+        KeyEvent keyEventMock = Mockito.mock(KeyEvent.class);
+        Mockito.when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ESCAPE);
+        gameController.step(application, keyEventMock,0);
         assertEquals(Game.SCENE.LOCATION,gameController.getModel().getScene());
         assertTrue(gameController.getCurrent() instanceof LocationController);
     }

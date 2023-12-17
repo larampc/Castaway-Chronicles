@@ -10,6 +10,7 @@ import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -32,20 +33,39 @@ public class BackpackController implements ControllerState {
     }
 
     @Override
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
+        switch (key) {
+            case KeyEvent.VK_UP:
+                keyUp();
+                break;
+            case KeyEvent.VK_DOWN:
+                keyDown();
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_LEFT:
+                keyLeft();
+                break;
+            case KeyEvent.VK_ENTER:
+                select(application);
+                break;
+            case KeyEvent.VK_ESCAPE:
+                escape();
+            default:
+        }
+    }
+
     public void keyUp() {
         if (backpack.getTextDisplay().isActiveChoice()) {
             ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().previousEntry();
         }
     }
 
-    @Override
     public void keyDown() {
         if (backpack.getTextDisplay().isActiveChoice()) {
             ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().nextEntry();
         }
     }
 
-    @Override
     public void keyLeft() {
         if (!((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().getEntry(
                 ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().getCurrentEntry() + 2
@@ -60,12 +80,6 @@ public class BackpackController implements ControllerState {
         }
     }
 
-    @Override
-    public void keyRight() {
-        keyLeft();
-    }
-
-    @Override
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         if (backpack.getTextDisplay().isActiveTextBox() && !backpack.getTextDisplay().isActiveChoice()) {
             backpack.getTextDisplay().setActiveChoice(true);
@@ -105,7 +119,6 @@ public class BackpackController implements ControllerState {
         }
     }
 
-    @Override
     public void escape() {
         if (!(backpack.getTextDisplay().isActiveChoice()|| backpack.getTextDisplay().isActiveTextBox())) {
             gameController.getModel().setCurrentScene("LOCATION");

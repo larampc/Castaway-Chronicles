@@ -2,10 +2,10 @@ package castaway_chronicles.states;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
-import castaway_chronicles.gui.Action;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.view.Viewer;
 
+import java.awt.event.InputEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -29,7 +29,7 @@ public abstract class State<T> {
     }
 
     public void step(Application application, GUI gui, long startTime) throws IOException, URISyntaxException, InterruptedException {
-        Action action = gui.getNextAction();
+        InputEvent action = gui.getNextAction();
         controller.step(application, action, startTime);
         viewer.draw(gui);
     }

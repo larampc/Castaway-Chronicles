@@ -8,6 +8,7 @@ import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.NPC;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -20,10 +21,24 @@ public class DialogController implements ControllerState {
 
     @Override
     public void click(Position position, Application application) {
-        //does nothing
     }
 
     @Override
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
+        switch (key) {
+            case KeyEvent.VK_UP:
+                keyUp();
+                break;
+            case KeyEvent.VK_DOWN:
+                keyDown();
+                break;
+            case KeyEvent.VK_ENTER:
+                select(application);
+                break;
+            default:
+        }
+    }
+
     public void keyUp() {
         if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveChoice()) {
             ((NPC)gameController.getModel().getCurrentLocation()
@@ -31,7 +46,6 @@ public class DialogController implements ControllerState {
         }
     }
 
-    @Override
     public void keyDown() {
         if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveChoice()) {
             ((NPC)gameController.getModel().getCurrentLocation()
@@ -39,17 +53,6 @@ public class DialogController implements ControllerState {
         }
     }
 
-    @Override
-    public void keyRight() {
-
-    }
-
-    @Override
-    public void keyLeft() {
-
-    }
-
-    @Override
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveChoice()) {
             HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getCurrentLocation().getTextDisplay().getElement()).getEffects(), application);
@@ -69,11 +72,6 @@ public class DialogController implements ControllerState {
             gameController.getCommandInvoker().execute();
             if (!gameController.getModel().getCurrentLocation().getTextDisplay().isActiveTextBox()) gameController.setControllerState(gameController.getLocationController());
         }
-    }
-
-    @Override
-    public void escape() {
-
     }
 
     @Override

@@ -4,7 +4,9 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class NarratorController implements ControllerState {
 
@@ -19,34 +21,11 @@ public class NarratorController implements ControllerState {
     }
 
     @Override
-    public void keyUp() {
-
-    }
-
-    @Override
-    public void keyDown() {
-
-    }
-
-    @Override
-    public void keyRight() {
-
-    }
-
-    @Override
-    public void keyLeft() {
-
-    }
-
-    @Override
-    public void select(Application application) throws IOException, InterruptedException {
-        gameController.getModel().getCurrentLocation().getTextDisplay().closeTextBox();
-        gameController.setControllerState(gameController.getLocationController());
-    }
-
-    @Override
-    public void escape() {
-
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
+        if (key == KeyEvent.VK_ENTER) {
+            gameController.getModel().getCurrentLocation().getTextDisplay().closeTextBox();
+            gameController.setControllerState(gameController.getLocationController());
+        }
     }
 
     @Override

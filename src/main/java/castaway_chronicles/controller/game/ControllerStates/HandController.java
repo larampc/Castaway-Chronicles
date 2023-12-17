@@ -11,6 +11,7 @@ import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.elements.NPC;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -54,36 +55,13 @@ public class HandController implements ControllerState {
     }
 
     @Override
-    public void keyUp() {
-        //does nothing
-    }
-
-    @Override
-    public void keyDown() {
-        //does nothing
-    }
-
-    @Override
-    public void keyRight() {
-
-    }
-
-    @Override
-    public void keyLeft() {
-
-    }
-
-    @Override
-    public void select(Application application) {
-        //does nothing
-    }
-
-    @Override
-    public void escape() throws IOException, URISyntaxException, InterruptedException {
-        ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "BACKPACK");
-        gameController.getCommandInvoker().setCommand(changeScene2);
-        gameController.setControllerState(gameController.getBackpackController());
-        gameController.getCommandInvoker().execute();
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
+        if (key == KeyEvent.VK_ESCAPE) {
+            ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "BACKPACK");
+            gameController.getCommandInvoker().setCommand(changeScene2);
+            gameController.setControllerState(gameController.getBackpackController());
+            gameController.getCommandInvoker().execute();
+        }
     }
 
     @Override

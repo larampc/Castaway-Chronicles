@@ -13,10 +13,7 @@ import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFontConfiguration;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -30,7 +27,7 @@ public class LanternaGUI implements GUI{
     private final HashMap<String, Sprite> images = new HashMap<>();
     private final AWTTerminalFrame terminal;
     private boolean bigger;
-    private Action action = new KeyAction(Action.ACTION.NONE);
+    private InputEvent action;
 
     public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws URISyntaxException, IOException {
         this.screen = screen;
@@ -65,34 +62,14 @@ public class LanternaGUI implements GUI{
         MouseAdapter mouseAdapter = new MouseAdapter(){
             @Override
             public void mousePressed(MouseEvent e) {
-                action = new ClickAction(Action.ACTION.CLICK, new Position(e.getX()/4, e.getY()/4));
+                action = e;
             }
         };
         ((AWTTerminalFrame)terminal).getComponent(0).addMouseListener(mouseAdapter);
         ((AWTTerminalFrame)terminal).getComponent(0).addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                switch (e.getKeyCode()){
-                    case KeyEvent.VK_UP:
-                        action = new KeyAction(Action.ACTION.UP);
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        action = new KeyAction(Action.ACTION.DOWN);
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        action = new KeyAction(Action.ACTION.LEFT);
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        action = new KeyAction(Action.ACTION.RIGHT);
-                        break;
-                    case KeyEvent.VK_ENTER:
-                        action = new KeyAction(Action.ACTION.SELECT);
-                        break;
-                    case KeyEvent.VK_ESCAPE:
-                        action = new KeyAction(Action.ACTION.ESCAPE);
-                        break;
-
-                }
+               action = e;
             }
         });
         return (AWTTerminalFrame) terminal;
@@ -195,9 +172,9 @@ public class LanternaGUI implements GUI{
     }
 
     @Override
-    public Action getNextAction() {
-        Action return_action = action;
-        action = new KeyAction(Action.ACTION.NONE);
+    public InputEvent getNextAction() {
+        InputEvent return_action = action;
+        action = null;
         return return_action;
     }
     public boolean imageIsLoaded(String name) {

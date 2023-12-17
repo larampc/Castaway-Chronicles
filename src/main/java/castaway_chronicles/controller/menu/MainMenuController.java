@@ -8,6 +8,7 @@ import castaway_chronicles.model.menu.MainMenu;
 import castaway_chronicles.model.menu.MainPage;
 import castaway_chronicles.states.GameState;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -25,23 +26,34 @@ public class MainMenuController implements ControllerState {
     }
 
     @Override
+    public void key(int keyCode, Application application) throws IOException, URISyntaxException, InterruptedException {
+        switch (keyCode){
+            case KeyEvent.VK_UP:
+                keyUp();
+                break;
+            case KeyEvent.VK_DOWN:
+                keyDown();
+                break;
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_LEFT:
+                keyLeft();
+                break;
+            case KeyEvent.VK_ENTER:
+                select(application);
+                break;
+            default:
+        }
+    }
+
     public void keyUp() {
         mainMenu.getSelectionPanel().previousEntry();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) mainMenu.getSelectionPanel().previousEntry();
     }
 
-    @Override
     public void keyDown() {
         mainMenu.getSelectionPanel().nextEntry();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) mainMenu.getSelectionPanel().nextEntry();
     }
-
-    @Override
-    public void keyRight() {
-        keyLeft();
-    }
-
-    @Override
     public void keyLeft() {
         if (!mainMenu.getSelectionPanel().getEntry(
                 mainMenu.getSelectionPanel().getCurrentEntry() + 2
@@ -60,8 +72,7 @@ public class MainMenuController implements ControllerState {
         }
     }
 
-    @Override
-    public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
+    public void select(Application application) throws IOException {
         if (mainMenu.isSelectedExit()) application.setState(null);
         if (mainMenu.isSelectedStart())
             application.setState(new GameState(new GameBuilder().createGame(false)));
@@ -71,11 +82,6 @@ public class MainMenuController implements ControllerState {
             mainPageController.getModel().setCurrent(MainPage.PAGE.ENDINGS);
             mainPageController.setCurrent(mainPageController.getEndingPageController());
         }
-    }
-
-    @Override
-    public void escape() throws IOException, URISyntaxException, InterruptedException {
-
     }
 
     @Override

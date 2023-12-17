@@ -5,10 +5,12 @@ import castaway_chronicles.controller.Controller;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
 import castaway_chronicles.controller.game.ControllerStates.*;
-import castaway_chronicles.gui.Action;
-import castaway_chronicles.gui.ClickAction;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -42,30 +44,13 @@ public class GameController extends Controller<Game> {
     }
 
     @Override
-    public void step(Application application, Action action, long time) throws IOException, InterruptedException, URISyntaxException {
+    public void step(Application application, InputEvent action, long time) throws IOException, InterruptedException, URISyntaxException {
         current.none(time);
-        switch (action.getType()){
-            case UP:
-                current.keyUp();
-                break;
-            case DOWN:
-                current.keyDown();
-                break;
-            case LEFT:
-                current.keyLeft();
-                break;
-            case RIGHT:
-                current.keyRight();
-                break;
-            case ESCAPE:
-                current.escape();
-                break;
-            case SELECT:
-                current.select(application);
-                break;
-            case CLICK:
-                current.click(((ClickAction)action).getPosition(), application);
-                break;
+        if (action instanceof KeyEvent) {
+            current.key(((KeyEvent)action).getKeyCode(), application);
+        }
+        if (action instanceof MouseEvent) {
+            current.click(new Position(((MouseEvent)action).getX()/4, ((MouseEvent)action).getY()/4), application);
         }
     }
     public void setControllerState(ControllerState controllerState) {

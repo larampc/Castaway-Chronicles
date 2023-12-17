@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -159,7 +160,7 @@ public class HandControllerTest {
 
     @Test
     public void escape() throws IOException, URISyntaxException, InterruptedException {
-        handController.escape();
+        handController.key(KeyEvent.VK_ESCAPE, applicationMock);
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeSceneCommand.class)); //new ChangeSceneCommand(gameController.getModel(), "BACKPACK")
         assertEquals(gameController.getBackpackController(),gameController.getCurrent());
         Mockito.verify(commandInvokerMock).execute();

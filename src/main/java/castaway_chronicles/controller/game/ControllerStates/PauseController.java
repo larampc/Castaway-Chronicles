@@ -8,7 +8,9 @@ import castaway_chronicles.model.game.scene.PauseMenu;
 import castaway_chronicles.model.menu.MainPage;
 import castaway_chronicles.states.MainPageState;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class PauseController implements ControllerState {
     private final GameController gameController;
@@ -27,16 +29,25 @@ public class PauseController implements ControllerState {
     }
 
     @Override
-    public void keyUp() {
-        pauseMenu.getSelectionPanel().previousEntry();
+    public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
+        switch (key) {
+            case KeyEvent.VK_UP:
+                pauseMenu.getSelectionPanel().previousEntry();
+                break;
+            case KeyEvent.VK_DOWN:
+                pauseMenu.getSelectionPanel().nextEntry();
+                break;
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_RIGHT:
+                keyRight();
+                break;
+            case KeyEvent.VK_ENTER:
+                select(application);
+                break;
+            default:
+        }
     }
 
-    @Override
-    public void keyDown(){
-        pauseMenu.getSelectionPanel().nextEntry();
-    }
-
-    @Override
     public void keyRight() {
         if (!pauseMenu.getSelectionPanel().getEntry(
                 pauseMenu.getSelectionPanel().getCurrentEntry() + 2
@@ -51,12 +62,7 @@ public class PauseController implements ControllerState {
         }
     }
 
-    @Override
-    public void keyLeft() {
-        keyRight();
-    }
 
-    @Override
     public void select(Application application) throws IOException {
         if (pauseMenu.isSelectedMenu()) application.setState(new MainPageState(new MainPage()));
         if (pauseMenu.isSelectedExit()) application.setState(null);
@@ -69,10 +75,6 @@ public class PauseController implements ControllerState {
         }
     }
 
-    @Override
-    public void escape() {
-        //does nothing
-    }
 
     @Override
     public void none(long time) {
