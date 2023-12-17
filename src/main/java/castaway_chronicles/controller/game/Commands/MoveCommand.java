@@ -18,7 +18,7 @@ public class MoveCommand implements Command{
     public void execute() throws IOException {
         int next = (Character.digit(location.getMainChar().getName().charAt(4),10) % 4) + 1 ;
         location.getMainChar().setName("walk" + next + ((offset < 0) ? "_right" : "_left"));
-        if(location.getBackground().isIsloopable()){
+        if(location.getBackground().isLoopable()){
             if (location.getBackground().getPosition().getX() + offset > 0) {
                 offset = 200 - location.getBackground().getWidth() + offset;
                 location.getBackground().setPosition(new Position(offset,0));

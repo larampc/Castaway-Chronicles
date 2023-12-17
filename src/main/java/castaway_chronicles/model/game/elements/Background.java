@@ -1,10 +1,10 @@
 package castaway_chronicles.model.game.elements;
 
 public class Background extends Element {
-    private boolean isloopable;
-    public Background(int x, int y, int w, int h, String name, boolean isloopable) {
+    private final boolean loopable;
+    public Background(int x, int y, int w, int h, String name, boolean loopable) {
         super(x, y, w, h, name);
-        this.isloopable = isloopable;
+        this.loopable = loopable;
     }
-    public boolean isIsloopable() {return isloopable;}
+    public boolean isLoopable() {return loopable;}
 }

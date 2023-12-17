@@ -66,7 +66,7 @@ public class GameSaver {
         File file = new File(toSave.getAbsolutePath()+"/" + name + ".txt");
         Writer writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()));
         Background bg = location.getBackground();
-        String loopable = bg.isIsloopable()?" L":"";
+        String loopable = bg.isLoopable()?" L":"";
         writer.write("B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + loopable + "\n");
         for (Interactable i: location.getInteractables()) {
             String npcState = i instanceof NPC ? " " +((NPC) i).getState() : "";

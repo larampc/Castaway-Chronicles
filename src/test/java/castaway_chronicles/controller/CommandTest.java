@@ -28,7 +28,7 @@ public class CommandTest {
     private Application applicationMock;
     private boolean exists;
     private File endings;
-    private List<String> lines = new ArrayList<>();
+    private final List<String> lines = new ArrayList<>();
     @BeforeAll
     void init() throws IOException {
         exists = true;
@@ -172,7 +172,7 @@ public class CommandTest {
         Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
         Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.isIsloopable()).thenReturn(false);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundPositionMock.getRight(-10)).thenReturn(new Position(-110,0));
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
@@ -205,7 +205,7 @@ public class CommandTest {
         Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
         Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.isIsloopable()).thenReturn(false);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundPositionMock.getRight(10)).thenReturn(new Position(-110,0));
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
@@ -238,7 +238,7 @@ public class CommandTest {
         Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
         Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.isIsloopable()).thenReturn(true);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(true);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundMock.getWidth()).thenReturn(700);
         Mockito.when(backgroundPositionMock.getX()).thenReturn(-100);
@@ -273,7 +273,7 @@ public class CommandTest {
         Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
         Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.isIsloopable()).thenReturn(true);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(true);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundMock.getWidth()).thenReturn(700);
         Mockito.when(backgroundPositionMock.getX()).thenReturn(-120);
@@ -309,7 +309,7 @@ public class CommandTest {
         Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
         Mockito.when(mainCharMock.getName()).thenReturn("walk1_left");
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.isIsloopable()).thenReturn(true);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(true);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundMock.getWidth()).thenReturn(700);
         Mockito.when(backgroundPositionMock.getX()).thenReturn(0);
@@ -350,7 +350,7 @@ public class CommandTest {
         Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
         Mockito.when(mainCharMock.getName()).thenReturn("walk1_right");
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.isIsloopable()).thenReturn(false);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundPositionMock.getRight(-10)).thenReturn(new Position(-110,0));
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(backpackMock,mapMock,iconMock));
