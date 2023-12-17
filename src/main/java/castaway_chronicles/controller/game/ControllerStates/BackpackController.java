@@ -50,6 +50,7 @@ public class BackpackController implements ControllerState {
                 break;
             case KeyEvent.VK_ESCAPE:
                 escape();
+                break;
             default:
         }
     }
