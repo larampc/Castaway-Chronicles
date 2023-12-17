@@ -1,5 +1,5 @@
 package castaway_chronicles.model;
-import castaway_chronicles.model.menu.MainMenu;
+import castaway_chronicles.model.mainPage.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

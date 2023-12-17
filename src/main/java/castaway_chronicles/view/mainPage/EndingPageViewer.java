@@ -1,8 +1,8 @@
-package castaway_chronicles.view.menu;
+package castaway_chronicles.view.mainPage;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.menu.EndingPage;
-import castaway_chronicles.view.game.SceneViewer;
+import castaway_chronicles.model.mainPage.EndingPage;
+import castaway_chronicles.view.SceneViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

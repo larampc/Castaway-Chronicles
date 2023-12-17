@@ -2,6 +2,7 @@ package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Controller;
+import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
 import castaway_chronicles.controller.game.ControllerStates.*;

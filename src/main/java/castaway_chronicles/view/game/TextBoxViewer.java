@@ -14,7 +14,10 @@ import java.net.URISyntaxException;
 
 
 public class TextBoxViewer {
-    public TextBoxViewer() {}
+    private final SelectionPanelViewer selectionPanelViewer;
+    public TextBoxViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
+    }
     public void init(GUI gui) throws IOException {
         if (!gui.isBigger()) gui.resizeTerminal();
         gui.drawImage(new Position(2,151), "dialog");
@@ -22,29 +25,28 @@ public class TextBoxViewer {
     public void drawTextBox(GUI gui, Location location) throws IOException, InterruptedException, URISyntaxException {
         init(gui);
         String dialog;
+
         Element element = location.getTextDisplay().getElement();
         if (element instanceof ItemBackpack) {
             dialog = ((ItemBackpack)element).getAnswer();
         }
         else {
+            if (location.getTextDisplay().isActiveChoice()) {
+                selectionPanelViewer.draw(((NPC)element).getChoices(), gui);
+                return;
+            }
             dialog = ((NPC)element).getCurrentLine();
         }
         gui.drawText(new Position(6,155),190, dialog,false);
     }
-    public void drawTextBox(GUI gui, Backpack currentScene) throws IOException, InterruptedException, URISyntaxException {
+    public void drawTextBox(GUI gui, Backpack backpack) throws IOException, InterruptedException, URISyntaxException {
         init(gui);
-        ItemBackpack element = (ItemBackpack) currentScene.getTextDisplay().getElement();
+        ItemBackpack element = (ItemBackpack) backpack.getTextDisplay().getElement();
+        if (backpack.getTextDisplay().isActiveChoice()) {
+            selectionPanelViewer.draw(element.getItemOptions(), gui);
+            return;
+        }
         String dialog = element.getDescription();
         gui.drawText(new Position(6,155),190, dialog,false);
-    }
-    public void drawChoices(GUI gui, Backpack backpack, SelectionPanelViewer selectionPanelViewer) throws IOException, InterruptedException, URISyntaxException {
-        init(gui);
-        ItemBackpack item = (ItemBackpack) backpack.getTextDisplay().getElement();
-        selectionPanelViewer.draw(item.getItemOptions(), gui);
-    }
-    public void drawChoices(GUI gui, Location location, SelectionPanelViewer selectionPanelViewer) throws IOException, InterruptedException, URISyntaxException {
-        init(gui);
-        NPC npc = (NPC)location.getTextDisplay().getElement();
-        selectionPanelViewer.draw(npc.getChoices(), gui);
     }
 }

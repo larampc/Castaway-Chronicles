@@ -2,7 +2,7 @@ package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.model.Ending;
-import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.MainPageState;
 
 import java.awt.event.InputEvent;

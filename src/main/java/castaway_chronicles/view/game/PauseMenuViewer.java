@@ -3,6 +3,7 @@ package castaway_chronicles.view.game;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
+import castaway_chronicles.view.SceneViewer;
 import castaway_chronicles.view.SelectionPanelViewer;
 
 import java.io.IOException;

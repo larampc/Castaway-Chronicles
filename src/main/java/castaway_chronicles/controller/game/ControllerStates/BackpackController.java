@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.Command;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;

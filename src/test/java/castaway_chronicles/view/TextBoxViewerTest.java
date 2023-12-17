@@ -33,8 +33,9 @@ public class TextBoxViewerTest {
         Mockito.when(textDisplayMock.getElement()).thenReturn(elementMock);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
         Mockito.when(elementMock.getCurrentLine()).thenReturn("hi");
+        SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
 
-        TextBoxViewer textBoxViewer = new TextBoxViewer();
+        TextBoxViewer textBoxViewer = new TextBoxViewer(selectionPanelViewerMock);
         textBoxViewer.drawTextBox(guiMock, locationMock);
 
         Mockito.verify(guiMock).resizeTerminal();
@@ -52,8 +53,9 @@ public class TextBoxViewerTest {
         Mockito.when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.getElement()).thenReturn(elementMock);
         Mockito.when(elementMock.getAnswer()).thenReturn("hi");
+        SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
 
-        TextBoxViewer textBoxViewer = new TextBoxViewer();
+        TextBoxViewer textBoxViewer = new TextBoxViewer(selectionPanelViewerMock);
         textBoxViewer.drawTextBox(guiMock, locationMock);
 
         Mockito.verify(guiMock, Mockito.never()).resizeTerminal();
@@ -70,8 +72,9 @@ public class TextBoxViewerTest {
         Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.getElement()).thenReturn(elementMock);
         Mockito.when(elementMock.getDescription()).thenReturn("hi");
+        SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
 
-        TextBoxViewer textBoxViewer = new TextBoxViewer();
+        TextBoxViewer textBoxViewer = new TextBoxViewer(selectionPanelViewerMock);
         textBoxViewer.drawTextBox(guiMock, backpackMock);
 
         Mockito.verify(guiMock, Mockito.never()).resizeTerminal();
@@ -88,11 +91,12 @@ public class TextBoxViewerTest {
         ItemBackpack elementMock = Mockito.mock(ItemBackpack.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
         Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(true);
         Mockito.when(textDisplayMock.getElement()).thenReturn(elementMock);
         Mockito.when(elementMock.getItemOptions()).thenReturn(selectionPanelMock);
 
-        TextBoxViewer textBoxViewer = new TextBoxViewer();
-        textBoxViewer.drawChoices(guiMock, backpackMock, selectionPanelViewerMock);
+        TextBoxViewer textBoxViewer = new TextBoxViewer(selectionPanelViewerMock);
+        textBoxViewer.drawTextBox(guiMock, backpackMock);
 
         Mockito.verify(guiMock).resizeTerminal();
         Mockito.verify(selectionPanelViewerMock).draw(selectionPanelMock, guiMock);
@@ -107,11 +111,12 @@ public class TextBoxViewerTest {
         NPC elementMock = Mockito.mock(NPC.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
         Mockito.when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(true);
         Mockito.when(textDisplayMock.getElement()).thenReturn(elementMock);
         Mockito.when(elementMock.getChoices()).thenReturn(selectionPanelMock);
 
-        TextBoxViewer textBoxViewer = new TextBoxViewer();
-        textBoxViewer.drawChoices(guiMock, locationMock, selectionPanelViewerMock);
+        TextBoxViewer textBoxViewer = new TextBoxViewer(selectionPanelViewerMock);
+        textBoxViewer.drawTextBox(guiMock, locationMock);
 
         Mockito.verify(guiMock).resizeTerminal();
         Mockito.verify(selectionPanelViewerMock).draw(selectionPanelMock, guiMock);

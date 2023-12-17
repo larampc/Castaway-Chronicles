@@ -1,10 +1,10 @@
-package castaway_chronicles.view.menu;
+package castaway_chronicles.view.mainPage;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.menu.MainMenu;
+import castaway_chronicles.model.mainPage.MainMenu;
 import castaway_chronicles.view.SelectionPanelViewer;
-import castaway_chronicles.view.game.SceneViewer;
+import castaway_chronicles.view.SceneViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

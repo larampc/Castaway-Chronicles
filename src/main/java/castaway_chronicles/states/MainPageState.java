@@ -1,10 +1,10 @@
 package castaway_chronicles.states;
 
 import castaway_chronicles.controller.Controller;
-import castaway_chronicles.controller.menu.MainPageController;
-import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.controller.mainPage.MainPageController;
+import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.view.Viewer;
-import castaway_chronicles.view.menu.MainPageViewer;
+import castaway_chronicles.view.mainPage.MainPageViewer;
 
 public class MainPageState extends State<MainPage> {
     public MainPageState(MainPage model) {

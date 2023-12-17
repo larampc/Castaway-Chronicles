@@ -1,4 +1,4 @@
-package castaway_chronicles.view.game;
+package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.elements.Element;

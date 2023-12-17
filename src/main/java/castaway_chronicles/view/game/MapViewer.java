@@ -2,6 +2,7 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.scene.Map;
+import castaway_chronicles.view.SceneViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

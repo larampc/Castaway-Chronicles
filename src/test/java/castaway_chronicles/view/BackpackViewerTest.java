@@ -64,13 +64,11 @@ public class BackpackViewerTest {
         Mockito.when(backpackMock.getTextDisplay()).thenReturn(textDisplayMock);
         Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(true);
-        SelectionPanelViewer selectionPanelViewer = Mockito.mock(SelectionPanelViewer.class);
         backpackViewer.setTextBoxViewer(textBoxViewerMock);
-        backpackViewer.setSelectionPanelViewer(selectionPanelViewer);
 
         backpackViewer.draw(backpackMock, guiMock);
 
-        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawChoices(guiMock, backpackMock, selectionPanelViewer);
+        Mockito.verify(textBoxViewerMock, Mockito.times(1)).drawTextBox(guiMock, backpackMock);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package castaway_chronicles.model.menu;
+package castaway_chronicles.model.mainPage;
 
 import java.io.IOException;
 

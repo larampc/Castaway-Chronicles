@@ -2,6 +2,7 @@ package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.view.SceneViewer;
 import castaway_chronicles.view.Viewer;
 
 import java.io.IOException;

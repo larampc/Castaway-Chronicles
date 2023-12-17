@@ -1,7 +1,7 @@
 package castaway_chronicles;
 
 import castaway_chronicles.gui.LanternaGUI;
-import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.MainPageState;
 import castaway_chronicles.states.State;
 

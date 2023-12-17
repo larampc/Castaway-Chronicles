@@ -1,11 +1,11 @@
-package castaway_chronicles.controller.menu;
+package castaway_chronicles.controller.mainPage;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.ControllerStates.ControllerState;
+import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.menu.EndingItem;
-import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.model.mainPage.EndingItem;
+import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.EndState;
 
 import java.awt.event.KeyEvent;

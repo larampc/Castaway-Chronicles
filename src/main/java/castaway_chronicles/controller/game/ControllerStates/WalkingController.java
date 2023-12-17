@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.MoveCommand;
 import castaway_chronicles.controller.game.GameController;
@@ -12,7 +13,7 @@ import java.net.URISyntaxException;
 
 import static java.lang.Math.abs;
 
-public class WalkingController implements ControllerState{
+public class WalkingController implements ControllerState {
     private final GameController gameController;
     private int toWalk = 0;
     private long lastMovementTime = 0;

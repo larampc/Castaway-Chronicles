@@ -3,9 +3,9 @@ package castaway_chronicles.view;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.menu.EndingItem;
-import castaway_chronicles.model.menu.EndingPage;
-import castaway_chronicles.view.menu.EndingPageViewer;
+import castaway_chronicles.model.mainPage.EndingItem;
+import castaway_chronicles.model.mainPage.EndingPage;
+import castaway_chronicles.view.mainPage.EndingPageViewer;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

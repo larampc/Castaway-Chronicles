@@ -1,7 +1,7 @@
-package castaway_chronicles.view.menu;
+package castaway_chronicles.view.mainPage;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.view.Viewer;
 
 import java.io.IOException;

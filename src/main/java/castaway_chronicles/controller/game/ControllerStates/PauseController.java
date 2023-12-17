@@ -1,11 +1,12 @@
 package castaway_chronicles.controller.game.ControllerStates;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
-import castaway_chronicles.model.menu.MainPage;
+import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.MainPageState;
 
 import java.awt.event.KeyEvent;
