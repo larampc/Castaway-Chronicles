@@ -5,7 +5,7 @@ import castaway_chronicles.controller.game.Commands.AnswerCommand;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
-import castaway_chronicles.controller.game.LocationControllers.DialogController;
+import castaway_chronicles.controller.game.locationControllers.DialogController;
 import castaway_chronicles.controller.game.GameController;
 
 import castaway_chronicles.model.SelectionPanel;

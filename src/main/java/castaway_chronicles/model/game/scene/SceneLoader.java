@@ -1,5 +1,6 @@
 package castaway_chronicles.model.game.scene;
 
+import castaway_chronicles.model.Scene;
 import castaway_chronicles.model.game.elements.*;
 
 import java.io.*;

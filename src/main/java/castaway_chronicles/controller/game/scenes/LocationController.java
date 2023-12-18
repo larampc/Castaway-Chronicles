@@ -4,7 +4,7 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.*;
-import castaway_chronicles.controller.game.LocationControllers.WalkingController;
+import castaway_chronicles.controller.game.locationControllers.*;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Icon;

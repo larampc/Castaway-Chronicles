@@ -1,7 +1,7 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.LocationControllers.NarratorController;
+import castaway_chronicles.controller.game.locationControllers.NarratorController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.scene.Location;

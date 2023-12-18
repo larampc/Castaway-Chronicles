@@ -1,4 +1,4 @@
-package castaway_chronicles.controller.game.LocationControllers;
+package castaway_chronicles.controller.game.locationControllers;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;

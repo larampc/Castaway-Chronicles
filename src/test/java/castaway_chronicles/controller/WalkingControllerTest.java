@@ -3,7 +3,7 @@ package castaway_chronicles.controller;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.MoveCommand;
-import castaway_chronicles.controller.game.LocationControllers.WalkingController;
+import castaway_chronicles.controller.game.locationControllers.WalkingController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;

@@ -5,7 +5,7 @@ import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.Command;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
-import castaway_chronicles.controller.game.LocationControllers.HandController;
+import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Interactable;

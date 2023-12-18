@@ -3,7 +3,6 @@ package castaway_chronicles.model;
 import castaway_chronicles.model.game.elements.*;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.SceneLoader;
-import castaway_chronicles.model.game.scene.Scene;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
