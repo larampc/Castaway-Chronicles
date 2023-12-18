@@ -37,11 +37,11 @@ public class PauseControllerTest {
         selectionPanelMock = Mockito.mock(SelectionPanel.class);
         Mockito.when(gameMock.getPauseMenu()).thenReturn(pauseMenuMock);
         Mockito.when(pauseMenuMock.getSelectionPanel()).thenReturn(selectionPanelMock);
-        gameController = new GameController(gameMock);
+        gameController = Mockito.mock(GameController.class);
+        Mockito.when(gameController.getCurrent()).thenReturn(pauseController);
+        Mockito.when(gameController.getModel()).thenReturn(gameMock);
         Mockito.when(gameController.getGameSaver()).thenReturn(gameSaverMock);
-        pauseController = (PauseController) gameController.getPauseController();
-//        gameController.getGameSaver().saveGame();
-        gameController.setControllerState(pauseController);
+        pauseController = new PauseController(gameController);
     }
 
     @Test
