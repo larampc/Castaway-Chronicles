@@ -41,9 +41,4 @@ public class EndingPageController implements ControllerState {
             }
         }
     }
-
-    @Override
-    public void none(long time) throws IOException, InterruptedException, URISyntaxException {
-
-    }
 }

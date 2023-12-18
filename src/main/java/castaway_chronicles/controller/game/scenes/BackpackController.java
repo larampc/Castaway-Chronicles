@@ -132,8 +132,4 @@ public class BackpackController implements ControllerState {
         }
     }
 
-    @Override
-    public void none(long time) {
-
-    }
 }

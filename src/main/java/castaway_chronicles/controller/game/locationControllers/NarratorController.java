@@ -28,9 +28,4 @@ public class NarratorController implements ControllerState {
             gameController.setControllerState(gameController.getLocationController());
         }
     }
-
-    @Override
-    public void none(long time) throws IOException, InterruptedException {
-
-    }
 }

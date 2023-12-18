@@ -31,7 +31,6 @@ public class MainPageController extends Controller<MainPage> {
 
     @Override
     public void step(Application application, InputEvent action, long startTime) throws IOException, InterruptedException, URISyntaxException {
-        current.none(startTime);
         if (action instanceof KeyEvent) {
             current.key(((KeyEvent)action).getKeyCode(), application);
         }

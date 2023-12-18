@@ -64,9 +64,4 @@ public class HandController implements ControllerState {
             gameController.getCommandInvoker().execute();
         }
     }
-
-    @Override
-    public void none(long time) {
-
-    }
 }

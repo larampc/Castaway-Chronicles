@@ -1,13 +1,14 @@
 package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.ContinuousControllerState;
 import castaway_chronicles.controller.Controller;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
 import castaway_chronicles.controller.game.locationControllers.*;
 import castaway_chronicles.controller.game.scenes.BackpackController;
-import castaway_chronicles.controller.game.scenes.LocationController;
+import castaway_chronicles.controller.game.locationControllers.StandingController;
 import castaway_chronicles.controller.game.scenes.MapController;
 import castaway_chronicles.controller.game.scenes.PauseController;
 import castaway_chronicles.model.Position;
@@ -36,7 +37,7 @@ public class GameController extends Controller<Game> {
     public GameController(Game model) {
         super(model);
         gameSaver = new GameSaver(model);
-        locationController = new LocationController(this);
+        locationController = new StandingController(this);
         backpackController = new BackpackController(this);
         mapController = new MapController(this);
         dialogController = new DialogController(this);
@@ -50,7 +51,9 @@ public class GameController extends Controller<Game> {
 
     @Override
     public void step(Application application, InputEvent action, long time) throws IOException, InterruptedException, URISyntaxException {
-        current.none(time);
+        if (current instanceof ContinuousControllerState) {
+            ((ContinuousControllerState)current).none(time);
+        }
         if (action instanceof KeyEvent) {
             current.key(((KeyEvent)action).getKeyCode(), application);
         }

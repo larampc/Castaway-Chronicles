@@ -49,8 +49,4 @@ public class MapController implements ControllerState {
         }
     }
 
-    @Override
-    public void none(long time) {
-
-    }
 }

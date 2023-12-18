@@ -1,7 +1,7 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.scenes.LocationController;
+import castaway_chronicles.controller.game.locationControllers.StandingController;
 import castaway_chronicles.controller.game.scenes.MapController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.game.Game;
@@ -84,7 +84,7 @@ public class MapControllerTest {
         Mockito.when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ESCAPE);
         gameController.step(application, keyEventMock,0);
         assertEquals(Game.SCENE.LOCATION,gameController.getModel().getScene());
-        assertTrue(gameController.getCurrent() instanceof LocationController);
+        assertTrue(gameController.getCurrent() instanceof StandingController);
     }
 
 //    @Test

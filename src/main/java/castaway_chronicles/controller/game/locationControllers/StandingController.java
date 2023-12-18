@@ -1,10 +1,9 @@
-package castaway_chronicles.controller.game.scenes;
+package castaway_chronicles.controller.game.locationControllers;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.ControllerState;
+import castaway_chronicles.controller.ContinuousControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.*;
-import castaway_chronicles.controller.game.locationControllers.*;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Icon;
@@ -17,12 +16,12 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class LocationController implements ControllerState {
+public class StandingController implements ContinuousControllerState {
 
     private final GameController gameController;
     private Command lastCommand = null;
 
-    public LocationController(GameController gameController) {
+    public StandingController(GameController gameController) {
         this.gameController = gameController;
     }
     public void setLastCommandNull() {lastCommand = null;}
@@ -61,7 +60,7 @@ public class LocationController implements ControllerState {
         }
         invoker.execute();
         location = gameController.getModel().getCurrentLocation();
-        if (location.getMainChar() != null && gameController.getCurrent() instanceof LocationController) {
+        if (location.getMainChar() != null && gameController.getCurrent() instanceof StandingController) {
             if (((WalkingController) gameController.getWalkingController()).setTowalk(position)) {
                 location.getMainChar().setName("walk1" + ((location.getMainChar().getPosition().getX() - position.getX() < 0) ? "_right" : "_left"));
             }

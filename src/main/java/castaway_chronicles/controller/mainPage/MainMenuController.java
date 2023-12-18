@@ -83,9 +83,4 @@ public class MainMenuController implements ControllerState {
             mainPageController.setCurrent(mainPageController.getEndingPageController());
         }
     }
-
-    @Override
-    public void none(long time) throws IOException, InterruptedException, URISyntaxException {
-
-    }
 }

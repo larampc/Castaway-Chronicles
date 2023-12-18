@@ -77,10 +77,6 @@ public class PauseController implements ControllerState {
     }
 
 
-    @Override
-    public void none(long time) {
-
-    }
     public void setGameSaver(GameSaver gameSaver) {
         this.gameSaver = gameSaver;
     }

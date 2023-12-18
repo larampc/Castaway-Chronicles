@@ -1,11 +1,10 @@
 package castaway_chronicles.controller.game.locationControllers;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.ControllerState;
+import castaway_chronicles.controller.ContinuousControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.MoveCommand;
 import castaway_chronicles.controller.game.GameController;
-import castaway_chronicles.controller.game.scenes.LocationController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Location;
 
@@ -14,7 +13,7 @@ import java.net.URISyntaxException;
 
 import static java.lang.Math.abs;
 
-public class WalkingController implements ControllerState {
+public class WalkingController implements ContinuousControllerState {
     private final GameController gameController;
     private int toWalk = 0;
     private long lastMovementTime = 0;
@@ -53,7 +52,7 @@ public class WalkingController implements ControllerState {
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException {
         setTowalk(position);
-        ((LocationController)gameController.getLocationController()).setLastCommandNull();
+        ((StandingController)gameController.getLocationController()).setLastCommandNull();
     }
 
     @Override

@@ -74,9 +74,4 @@ public class DialogController implements ControllerState {
             if (!gameController.getModel().getCurrentLocation().getTextDisplay().isActiveTextBox()) gameController.setControllerState(gameController.getLocationController());
         }
     }
-
-    @Override
-    public void none(long time) {
-
-    }
 }
