@@ -51,4 +51,8 @@ public class MainPageController extends Controller<MainPage> {
     public void setCurrent(ControllerState current) {
         this.current = current;
     }
+    public ControllerState getCurrent() {
+        return current;
+    }
+
 }
