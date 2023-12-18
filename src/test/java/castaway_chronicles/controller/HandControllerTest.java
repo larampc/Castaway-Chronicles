@@ -53,7 +53,7 @@ public class HandControllerTest {
         Backpack backpackMock = mock(Backpack.class);
         when(backpackMock.getTextDisplay()).thenReturn(backpackSelectionMock);
 
-        game.setBackpack(backpackMock);
+        Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 
         Location locationMock = mock(Location.class);
         TextDisplay backpackAnswer = mock(TextDisplay.class);
@@ -69,8 +69,7 @@ public class HandControllerTest {
         handController.click(new Position(0, 0), applicationMock);
 
         Mockito.verify(backpackAnswer,times(1)).activateTextBox(itemBackpack);
-
-        assertEquals(Game.SCENE.LOCATION, game.getScene());
+        Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }
 
@@ -132,7 +131,7 @@ public class HandControllerTest {
         Backpack backpackMock = mock(Backpack.class);
         when(backpackMock.getTextDisplay()).thenReturn(backpackSelectionMock);
 
-        game.setBackpack(backpackMock);
+        Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 
         Location locationMock = mock(Location.class);
         TextDisplay backpackAnswer = mock(TextDisplay.class);
@@ -141,8 +140,8 @@ public class HandControllerTest {
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
 
-        game.setLocations(locations);
-        game.setCurrentLocation("StartLocation");
+        Mockito.when(game.getLocations()).thenReturn(locations);
+        Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
 
         NPC npcMock = mock(NPC.class);
         when(npcMock.getName()).thenReturn("NPC_NAME");
@@ -155,7 +154,7 @@ public class HandControllerTest {
         handController.click(position, applicationMock);
 
         Mockito.verify(backpackAnswer,times(1)).activateTextBox(itemBackpackMock);
-        assertEquals(Game.SCENE.LOCATION, game.getScene());
+        Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }
 
