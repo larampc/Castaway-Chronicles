@@ -4,10 +4,12 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.Command;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
@@ -69,18 +71,10 @@ public class BackpackController implements ControllerState {
         }
     }
 
-    public void keyLeft() {
-        if (!((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().getEntry(
-                ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().getCurrentEntry() + 2
-        ).isEmpty()) {
-            ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().nextEntry();
-            ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().nextEntry();
-        } else if (!((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().getEntry(
-                ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().getCurrentEntry() - 2
-        ).isEmpty()) {
-            ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().previousEntry();
-            ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().previousEntry();
-        }
+    public void keyLeft() throws IOException, URISyntaxException, InterruptedException {
+        GetSideOptionCommand getSide = new GetSideOptionCommand(((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions());
+        gameController.getCommandInvoker().setCommand(getSide);
+        gameController.getCommandInvoker().execute();
     }
 
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
@@ -95,13 +89,13 @@ public class BackpackController implements ControllerState {
         String[] s = command.split(" ", -1);
         if (s.length == 1) {
             if (s[0].equalsIgnoreCase("give")) {
-                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 ((HandController)gameController.getHandController()).setToGive("");
                 gameController.setControllerState(gameController.getHandController());
             }
             else {
                 gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(backpack.getTextDisplay().getElement());
-                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 gameController.setControllerState(gameController.getNarratorController());
             }
         }
@@ -111,11 +105,11 @@ public class BackpackController implements ControllerState {
                 Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)backpack.getTextDisplay().getElement()).getEffects(), application);
                 invoker.setCommand(effects);
                 invoker.execute();
-                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 gameController.setControllerState(gameController.getLocationController());
             }
             if (s[0].equalsIgnoreCase("give")) {
-                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 ((HandController)gameController.getHandController()).setToGive(s[1]);
                 gameController.setControllerState(gameController.getHandController());
             }
@@ -124,7 +118,7 @@ public class BackpackController implements ControllerState {
 
     public void escape() {
         if (!(backpack.getTextDisplay().isActiveChoice()|| backpack.getTextDisplay().isActiveTextBox())) {
-            gameController.getModel().setCurrentScene("LOCATION");
+            gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
             gameController.setControllerState(gameController.getLocationController());
         }
         else {

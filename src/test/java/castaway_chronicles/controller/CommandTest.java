@@ -71,13 +71,13 @@ public class CommandTest {
         Mockito.verify(gameMock).setCurrentLocation("City");
     }
 
-    @Test
-    void changeScene() {
-        ChangeSceneCommand changeSceneCommand = new ChangeSceneCommand(gameMock,"BACKPACK");
-        changeSceneCommand.execute();
-
-        Mockito.verify(gameMock).setCurrentScene("BACKPACK");
-    }
+//    @Test
+//    void changeScene() {
+//        ChangeSceneCommand changeSceneCommand = new ChangeSceneCommand(gameMock,"BACKPACK");
+//        changeSceneCommand.execute();
+//
+//        Mockito.verify(gameMock).setCurrentScene("BACKPACK");
+//    }
 
     @Test
     void executeGoEffect() throws IOException, InterruptedException, URISyntaxException {

@@ -38,8 +38,9 @@ public class PauseControllerTest {
         Mockito.when(gameMock.getPauseMenu()).thenReturn(pauseMenuMock);
         Mockito.when(pauseMenuMock.getSelectionPanel()).thenReturn(selectionPanelMock);
         gameController = new GameController(gameMock);
+        Mockito.when(gameController.getGameSaver()).thenReturn(gameSaverMock);
         pauseController = (PauseController) gameController.getPauseController();
-        pauseController.setGameSaver(gameSaverMock);
+//        gameController.getGameSaver().saveGame();
         gameController.setControllerState(pauseController);
     }
 
@@ -59,7 +60,7 @@ public class PauseControllerTest {
         Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(false);
 
         pauseController.select(applicationMock);
-        Mockito.verify(gameMock).setCurrentScene("LOCATION");
+        Mockito.verify(gameMock).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getLocationController(),gameController.getCurrent());
     }
 

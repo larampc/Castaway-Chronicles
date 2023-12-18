@@ -2,6 +2,9 @@ package castaway_chronicles.controller.mainPage;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
+import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
+import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.GameBuilder;
 import castaway_chronicles.model.mainPage.MainMenu;
@@ -15,9 +18,11 @@ import java.net.URISyntaxException;
 public class MainMenuController implements ControllerState {
     private final MainPageController mainPageController;
     private final MainMenu mainMenu;
+    private GenericCommandInvoker commandInvoker;
     public MainMenuController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
         mainMenu = mainPageController.getModel().getMainMenu();
+        commandInvoker = new CommandInvoker();
     }
 
     @Override
@@ -54,18 +59,10 @@ public class MainMenuController implements ControllerState {
         mainMenu.getSelectionPanel().nextEntry();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) mainMenu.getSelectionPanel().nextEntry();
     }
-    public void keyLeft() {
-        if (!mainMenu.getSelectionPanel().getEntry(
-                mainMenu.getSelectionPanel().getCurrentEntry() + 2
-        ).isEmpty()) {
-            mainMenu.getSelectionPanel().nextEntry();
-            mainMenu.getSelectionPanel().nextEntry();
-        } else if (!mainMenu.getSelectionPanel().getEntry(
-                mainMenu.getSelectionPanel().getCurrentEntry() - 2
-        ).isEmpty()) {
-            mainMenu.getSelectionPanel().previousEntry();
-            mainMenu.getSelectionPanel().previousEntry();
-        }
+    public void keyLeft() throws IOException, URISyntaxException, InterruptedException {
+        GetSideOptionCommand getSide = new GetSideOptionCommand(mainMenu.getSelectionPanel());
+        commandInvoker.setCommand(getSide);
+        commandInvoker.execute();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) {
             mainMenu.getSelectionPanel().previousEntry();
             mainMenu.getSelectionPanel().previousEntry();
@@ -82,5 +79,9 @@ public class MainMenuController implements ControllerState {
             mainPageController.getModel().setCurrent(MainPage.PAGE.ENDINGS);
             mainPageController.setCurrent(mainPageController.getEndingPageController());
         }
+    }
+
+    public void setCommandInvoker(GenericCommandInvoker commandInvoker) {
+        this.commandInvoker = commandInvoker;
     }
 }

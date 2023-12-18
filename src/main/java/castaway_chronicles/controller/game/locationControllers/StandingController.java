@@ -6,6 +6,7 @@ import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.*;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.Item;
@@ -41,13 +42,11 @@ public class StandingController implements ContinuousControllerState {
                 else if (e instanceof Icon) {
                     String[] split = e.getName().split("_", -1);
                     if (split[0].equalsIgnoreCase("Backpack")) {
-                        ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "BACKPACK");
-                        invoker.setCommand(changeScene2);
+                        gameController.getModel().setCurrentScene(Game.SCENE.BACKPACK);
                         gameController.setControllerState(gameController.getBackpackController());
                     }
                     else if (split[0].equalsIgnoreCase("Map")) {
-                        ChangeSceneCommand changeScene2 = new ChangeSceneCommand(gameController.getModel(), "MAP");
-                        invoker.setCommand(changeScene2);
+                        gameController.getModel().setCurrentScene(Game.SCENE.MAP);
                         gameController.setControllerState(gameController.getMapController());
                     }
                     else {
@@ -71,7 +70,7 @@ public class StandingController implements ContinuousControllerState {
     @Override
     public void key(int key, Application application) {
         if (key == KeyEvent.VK_ESCAPE) {
-            gameController.getModel().setCurrentScene("PAUSE");
+            gameController.getModel().setCurrentScene(Game.SCENE.PAUSE);
             gameController.setControllerState(gameController.getLocationController());
             gameController.setControllerState(gameController.getPauseController());
         }

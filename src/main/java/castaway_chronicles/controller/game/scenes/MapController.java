@@ -6,6 +6,7 @@ import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.ChangeLocationCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Icon;
 import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.Item;
@@ -29,7 +30,7 @@ public class MapController implements ControllerState {
                 ChangeLocationCommand changeLocation = new ChangeLocationCommand(gameController.getModel(), split[0]);
                 invoker.setCommand(changeLocation);
                 invoker.execute();
-                gameController.getModel().setCurrentScene("LOCATION");
+                gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 gameController.setControllerState(gameController.getLocationController());
                 break;
             }
@@ -44,7 +45,7 @@ public class MapController implements ControllerState {
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if (key == KeyEvent.VK_ESCAPE) {
-            gameController.getModel().setCurrentScene("LOCATION");
+            gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
             gameController.setControllerState(gameController.getLocationController());
         }
     }

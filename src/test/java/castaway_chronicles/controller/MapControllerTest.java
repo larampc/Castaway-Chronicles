@@ -42,7 +42,7 @@ public class MapControllerTest {
         interactables.put("Icon",new Icon(20,20,10,10,"Beach"));
 
         game.setMap(new Map(new Background(0,0,200,150,"map", false),interactables,visibleInteractables));
-        game.setCurrentScene("MAP");
+        game.setCurrentScene(Game.SCENE.MAP);
 
         HashMap<String, Location> locations = new HashMap<>();
         locations.put("Beach",new Location(new Background(0,0,700,150,"Beach", false),

@@ -46,8 +46,8 @@ public class Game {
     public SCENE getScene() {
         return currentScene;
     }
-    public void setCurrentScene(String scene) {
-        currentScene = SCENE.valueOf(scene);
+    public void setCurrentScene(SCENE scene) {
+        currentScene = scene;
     }
     public void setCurrentLocation(String name) {
         currentLocation = getLocation(name);

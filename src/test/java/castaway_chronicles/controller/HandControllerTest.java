@@ -1,7 +1,6 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.ChangeSceneCommand;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.locationControllers.HandController;
@@ -35,7 +34,7 @@ public class HandControllerTest {
 
     @BeforeEach
     void setUp() {
-        game = new Game();
+        game = Mockito.mock(Game.class);
         gameController = new GameController(game);
         commandInvokerMock = Mockito.mock(CommandInvoker.class);
         gameController.setCommandInvoker(commandInvokerMock);
@@ -56,16 +55,16 @@ public class HandControllerTest {
 
         game.setBackpack(backpackMock);
 
-
         Location locationMock = mock(Location.class);
         TextDisplay backpackAnswer = mock(TextDisplay.class);
         when(locationMock.getTextDisplay()).thenReturn(backpackAnswer);
 
+
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
 
-        game.setLocations(locations);
-        game.setCurrentLocation("StartLocation");
+        Mockito.when(game.getLocations()).thenReturn(locations);
+        Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
 
         handController.click(new Position(0, 0), applicationMock);
 
@@ -91,16 +90,18 @@ public class HandControllerTest {
         Location locationMock = mock(Location.class);
         TextDisplay backpackAnswer = mock(TextDisplay.class);
         when(locationMock.getTextDisplay()).thenReturn(backpackAnswer);
+        Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
 
-        HashMap<String,Location> locations = new HashMap<>();
-        locations.put("StartLocation",locationMock);
-
-        game.setLocations(locations);
-        game.setCurrentLocation("StartLocation");
+//        HashMap<String,Location> locations = new HashMap<>();
+//        locations.put("StartLocation",locationMock);
+//
+//        game.setLocations(locations);
+//        game.setCurrentLocation("StartLocation");
 
         NPC npcMock = mock(NPC.class);
         when(npcMock.getName()).thenReturn("NPC_NAME");
-        when(npcMock.contains(new Position(0, 0))).thenReturn(true);
+        Position positionMock = Mockito.mock(Position.class);
+        when(npcMock.contains(positionMock)).thenReturn(true);
 
         when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
 
@@ -112,7 +113,7 @@ public class HandControllerTest {
         when(textDisplayMock.isActiveTextBox()).thenReturn(true);
 
         handController.setToGive("NPC_NAME");
-        handController.click(new Position(0, 0), applicationMock);
+        handController.click(positionMock, applicationMock);
 
         verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
         verify(commandInvokerMock, times(1)).execute();
@@ -145,12 +146,13 @@ public class HandControllerTest {
 
         NPC npcMock = mock(NPC.class);
         when(npcMock.getName()).thenReturn("NPC_NAME");
-        when(npcMock.contains(new Position(0, 0))).thenReturn(true);
+        Position position = Mockito.mock(Position.class);
+        when(npcMock.contains(position)).thenReturn(false);
 
         when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
 
         handController.setToGive("NPC_NAME");
-        handController.click(new Position(5, 5), applicationMock);
+        handController.click(position, applicationMock);
 
         Mockito.verify(backpackAnswer,times(1)).activateTextBox(itemBackpackMock);
         assertEquals(Game.SCENE.LOCATION, game.getScene());
@@ -161,7 +163,7 @@ public class HandControllerTest {
     @Test
     public void escape() throws IOException, URISyntaxException, InterruptedException {
         handController.key(KeyEvent.VK_ESCAPE, applicationMock);
-        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeSceneCommand.class)); //new ChangeSceneCommand(gameController.getModel(), "BACKPACK")
+        Mockito.verify(game).setCurrentScene(Game.SCENE.BACKPACK);
         assertEquals(gameController.getBackpackController(),gameController.getCurrent());
         Mockito.verify(commandInvokerMock).execute();
     }

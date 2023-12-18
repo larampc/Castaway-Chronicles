@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GameTest {
     private Game game;
@@ -56,14 +55,14 @@ public class GameTest {
 
     @Test
     public void Scene() {
-        game.setCurrentScene("BACKPACK");
+        game.setCurrentScene(Game.SCENE.BACKPACK);
         assertEquals("BACKPACK", game.getScene().name());
-        game.setCurrentScene("MAP");
+        game.setCurrentScene(Game.SCENE.MAP);
         assertEquals("MAP", game.getScene().name());
-        game.setCurrentScene("LOCATION");
+        game.setCurrentScene(Game.SCENE.LOCATION);
         assertEquals("LOCATION", game.getScene().name());
-        game.setCurrentScene("PAUSE");
+        game.setCurrentScene(Game.SCENE.PAUSE);
         assertEquals("PAUSE", game.getScene().name());
-        assertThrows(Throwable.class, () -> game.setCurrentScene("TEST"));
+//        assertThrows(Throwable.class, () -> game.setCurrentScene());
     }
 }

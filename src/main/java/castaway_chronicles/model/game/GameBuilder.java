@@ -17,7 +17,7 @@ public class GameBuilder {
         game.setMap(createMap(dir));
         game.setBackpack(createBackpack(dir));
         game.setLocations(createLocations(dir));
-        game.setCurrentScene("LOCATION");
+        game.setCurrentScene(Game.SCENE.LOCATION);
         game.setCurrentLocation(getCurrentLocation(dir));
         game.setPauseMenu(createPauseMenu());
         return game;
