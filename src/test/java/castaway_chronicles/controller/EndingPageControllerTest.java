@@ -8,6 +8,7 @@ import castaway_chronicles.model.mainPage.EndingItem;
 import castaway_chronicles.model.mainPage.EndingPage;
 import castaway_chronicles.model.mainPage.MainPage;
 
+import castaway_chronicles.states.EndState;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
@@ -92,5 +93,19 @@ public class EndingPageControllerTest {
         endingPageController.click(positionMock, applicationMock);
 
         Mockito.verify(endingPageMock).reset();
+    }
+    @Test
+    void clickEnding() throws IOException, URISyntaxException, InterruptedException {
+        EndingPage endingPageMock = Mockito.mock(EndingPage.class);
+        EndingItem endingMock = Mockito.mock(EndingItem.class);
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(mainPageMock.getEndingPage()).thenReturn(endingPageMock);
+        Mockito.when(endingPageMock.getVisibleInteractables()).thenReturn(List.of(endingMock));
+        Mockito.when(endingMock.getName()).thenReturn("TestEnd");
+        Mockito.when(endingMock.contains(positionMock)).thenReturn(true);
+
+        endingPageController.click(positionMock, applicationMock);
+
+        Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
     }
 }
