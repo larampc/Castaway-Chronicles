@@ -1,6 +1,5 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Interactable;
 import castaway_chronicles.model.game.elements.InteractableWithText;
 import castaway_chronicles.model.game.scene.TextDisplay;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TextDisplayTest {
     private TextDisplay textDisplay;
-    private Interactable mockinteractable;
+    private InteractableWithText mockinteractable;
     @BeforeEach
     void setUp() {
         textDisplay = new TextDisplay();
@@ -21,18 +20,22 @@ public class TextDisplayTest {
     @Test
     public void activeTextBox(){
         assertFalse(textDisplay.isActiveTextBox());
-        textDisplay.activateTextBox((InteractableWithText) mockinteractable);
+        textDisplay.activateTextBox(mockinteractable);
         assertTrue(textDisplay.isActiveTextBox());
-        textDisplay.activateTextBox((InteractableWithText) mockinteractable);
+        textDisplay.activateTextBox(mockinteractable);
         assertTrue(textDisplay.isActiveTextBox());
         textDisplay.closeTextBox();
         assertFalse(textDisplay.isActiveTextBox());
+        textDisplay.activateTextBox();
+        assertTrue(textDisplay.isActiveTextBox());
+        textDisplay.activateTextBox();
+        assertTrue(textDisplay.isActiveTextBox());
     }
 
     @Test
     public void element(){
         assertNull(textDisplay.getInteractable());
-        textDisplay.activateTextBox((InteractableWithText) mockinteractable);
+        textDisplay.activateTextBox(mockinteractable);
         assertEquals(mockinteractable, textDisplay.getInteractable());
     }
 

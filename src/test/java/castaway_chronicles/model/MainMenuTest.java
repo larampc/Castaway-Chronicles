@@ -1,4 +1,5 @@
 package castaway_chronicles.model;
+import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.mainPage.MainMenu;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,14 @@ public class MainMenuTest {
     @Test
     public void getCurrentEntry(){
         assertEquals(0, mainMenu.getSelectionPanel().getCurrentEntry());
+    }
+
+    @Test
+    public void getBackground(){
+        assertEquals(new Background(0, 0, 200, 150, "Menu", false).getName(), mainMenu.getBackground().getName());
+        assertEquals(new Background(0, 0, 200, 150, "Menu", false).getPosition(), mainMenu.getBackground().getPosition());
+        assertEquals(new Background(0, 0, 200, 150, "Menu", false).getHeight(), mainMenu.getBackground().getHeight());
+        assertEquals(new Background(0, 0, 200, 150, "Menu", false).getWidth(), mainMenu.getBackground().getWidth());
     }
 
     @Test
