@@ -39,7 +39,7 @@ public class PauseController implements ControllerState {
                 break;
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_RIGHT:
-                keyRight();
+                keySide();
                 break;
             case KeyEvent.VK_ENTER:
                 select(application);
@@ -48,7 +48,7 @@ public class PauseController implements ControllerState {
         }
     }
 
-    public void keyRight() throws IOException, URISyntaxException, InterruptedException {
+    public void keySide() throws IOException, URISyntaxException, InterruptedException {
         GetSideOptionCommand getSide = new GetSideOptionCommand(pauseMenu.getSelectionPanel());
         gameController.getCommandInvoker().setCommand(getSide);
         gameController.getCommandInvoker().execute();

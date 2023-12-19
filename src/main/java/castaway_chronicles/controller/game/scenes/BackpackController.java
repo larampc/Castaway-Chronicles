@@ -47,7 +47,7 @@ public class BackpackController implements ControllerState {
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_LEFT:
-                keyLeft();
+                keySide();
                 break;
             case KeyEvent.VK_ENTER:
                 select(application);
@@ -71,7 +71,7 @@ public class BackpackController implements ControllerState {
         }
     }
 
-    public void keyLeft() throws IOException, URISyntaxException, InterruptedException {
+    public void keySide() throws IOException, URISyntaxException, InterruptedException {
         GetSideOptionCommand getSide = new GetSideOptionCommand(((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions());
         gameController.getCommandInvoker().setCommand(getSide);
         gameController.getCommandInvoker().execute();

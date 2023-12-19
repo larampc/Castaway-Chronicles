@@ -41,7 +41,7 @@ public class MainMenuController implements ControllerState {
                 break;
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_LEFT:
-                keyLeft();
+                keySide();
                 break;
             case KeyEvent.VK_ENTER:
                 select(application);
@@ -59,7 +59,7 @@ public class MainMenuController implements ControllerState {
         mainMenu.getSelectionPanel().nextEntry();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) mainMenu.getSelectionPanel().nextEntry();
     }
-    public void keyLeft() throws IOException, URISyntaxException, InterruptedException {
+    public void keySide() throws IOException, URISyntaxException, InterruptedException {
         GetSideOptionCommand getSide = new GetSideOptionCommand(mainMenu.getSelectionPanel());
         commandInvoker.setCommand(getSide);
         commandInvoker.execute();
