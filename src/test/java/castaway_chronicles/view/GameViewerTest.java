@@ -44,7 +44,7 @@ public class GameViewerTest {
 
     @Test
     void drawBackpack() throws IOException, URISyntaxException, InterruptedException {
-        GameSceneViewer gameSceneViewer = Mockito.mock(GameSceneViewer.class);
+        SceneViewer gameSceneViewer = Mockito.mock(SceneViewer.class);
         GUI gui = mock(GUI.class);
         GameViewer gameViewer = new GameViewer(gameMock);
         gameViewer.setGameSceneViewer(gameSceneViewer);
@@ -66,7 +66,7 @@ public class GameViewerTest {
 
     @Test
     void drawMap() throws IOException, URISyntaxException, InterruptedException {
-        GameSceneViewer gameSceneViewer = Mockito.mock(GameSceneViewer.class);
+        SceneViewer gameSceneViewer = Mockito.mock(SceneViewer.class);
         GUI gui = mock(GUI.class);
         GameViewer gameViewer = new GameViewer(gameMock);
         gameViewer.setGameSceneViewer(gameSceneViewer);
@@ -86,7 +86,7 @@ public class GameViewerTest {
 
     @Test
     void drawLocation() throws IOException, URISyntaxException, InterruptedException {
-        GameSceneViewer gameSceneViewer = Mockito.mock(GameSceneViewer.class);
+        SceneViewer gameSceneViewer = Mockito.mock(SceneViewer.class);
         GUI gui = mock(GUI.class);
         GameViewer gameViewer = new GameViewer(gameMock);
         gameViewer.setGameSceneViewer(gameSceneViewer);
@@ -114,7 +114,7 @@ public class GameViewerTest {
 
     @Test
     void draw() throws IOException, URISyntaxException, InterruptedException {
-        GameSceneViewer gameSceneViewer = Mockito.mock(GameSceneViewer.class);
+        SceneViewer gameSceneViewer = Mockito.mock(SceneViewer.class);
         GameViewer gameViewer = new GameViewer(gameMock);
         gameViewer.setGameSceneViewer(gameSceneViewer);
         when(gameMock.getScene()).thenReturn(Game.SCENE.LOCATION);

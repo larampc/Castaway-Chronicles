@@ -4,12 +4,12 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.mainPage.MainMenu;
 import castaway_chronicles.view.SelectionPanelViewer;
-import castaway_chronicles.view.SceneViewer;
+import castaway_chronicles.view.ScreenViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class MainMenuViewer extends SceneViewer<MainMenu> {
+public class MainMenuViewer extends ScreenViewer<MainMenu> {
     private SelectionPanelViewer selectionPanelViewer;
 
     public MainMenuViewer() {

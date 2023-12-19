@@ -4,7 +4,6 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.mainPage.EndingPage;
 import castaway_chronicles.model.mainPage.MainMenu;
 import castaway_chronicles.model.mainPage.MainPage;
-import castaway_chronicles.view.mainPage.EndingPageViewer;
 import castaway_chronicles.view.mainPage.MainMenuViewer;
 import castaway_chronicles.view.mainPage.MainPageViewer;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,7 @@ public class MainPageViewerTest {
     void mainPageViewerEnding() throws IOException, URISyntaxException, InterruptedException {
         MainPage mainPageMock = Mockito.mock(MainPage.class);
         Mockito.when(mainPageMock.getCurrent()).thenReturn(MainPage.PAGE.ENDINGS);
-        EndingPageViewer endingPageViewerMock = Mockito.mock(EndingPageViewer.class);
+        SceneViewer endingPageViewerMock = Mockito.mock(SceneViewer.class);
         EndingPage endingPageMock = Mockito.mock(EndingPage.class);
         Mockito.when(mainPageMock.getEndingPage()).thenReturn(endingPageMock);
         GUI guiMock = Mockito.mock(GUI.class);
