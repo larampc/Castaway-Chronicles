@@ -9,7 +9,6 @@ import castaway_chronicles.model.game.elements.MainChar;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
-import castaway_chronicles.view.game.GameSceneViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

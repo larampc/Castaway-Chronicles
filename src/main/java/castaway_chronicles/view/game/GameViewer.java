@@ -4,6 +4,7 @@ import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.view.SceneViewer;
+import castaway_chronicles.view.ScreenViewer;
 import castaway_chronicles.view.SelectionPanelViewer;
 import castaway_chronicles.view.Viewer;
 
@@ -12,13 +13,13 @@ import java.net.URISyntaxException;
 
 public class GameViewer extends Viewer<Game> {
     private PauseMenuViewer pauseMenuViewer;
-    private GameSceneViewer gameSceneViewer;
+    private SceneViewer gameSceneViewer;
     private TextBoxViewer textBoxViewer;
     private SelectionPanelViewer selectionPanelViewer;
     public GameViewer(Game model) {
         super(model);
         pauseMenuViewer = new PauseMenuViewer();
-        gameSceneViewer = new GameSceneViewer();
+        gameSceneViewer = new SceneViewer();
         textBoxViewer = new TextBoxViewer();
         selectionPanelViewer = new SelectionPanelViewer();
     }
@@ -47,7 +48,7 @@ public class GameViewer extends Viewer<Game> {
         else if (gui.isBigger()) gui.resizeTerminal();
     }
 
-    public <T> void drawScene(GUI gui, T model, SceneViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
+    public <T> void drawScene(GUI gui, T model, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
         viewer.draw(model, gui);
     }
     public void setPauseMenuViewer(PauseMenuViewer pauseMenuViewer) {
@@ -60,7 +61,7 @@ public class GameViewer extends Viewer<Game> {
         this.textBoxViewer = textBoxViewer;
     }
 
-    public void setGameSceneViewer(GameSceneViewer gameSceneViewer) {
+    public void setGameSceneViewer(SceneViewer gameSceneViewer) {
         this.gameSceneViewer = gameSceneViewer;
     }
 }

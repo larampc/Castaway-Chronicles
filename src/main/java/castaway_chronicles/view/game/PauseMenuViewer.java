@@ -3,13 +3,13 @@ package castaway_chronicles.view.game;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.PauseMenu;
-import castaway_chronicles.view.SceneViewer;
+import castaway_chronicles.view.ScreenViewer;
 import castaway_chronicles.view.SelectionPanelViewer;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class PauseMenuViewer extends SceneViewer<PauseMenu> {
+public class PauseMenuViewer extends ScreenViewer<PauseMenu> {
     private SelectionPanelViewer selectionPanelViewer;
 
     public PauseMenuViewer() {
