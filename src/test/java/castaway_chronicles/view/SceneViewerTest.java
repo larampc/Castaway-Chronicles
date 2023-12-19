@@ -17,19 +17,19 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-public class GameSceneViewerTest {
+public class SceneViewerTest {
     private GUI guiMock;
     private Location locationMock;
     private Backpack backpackMock;
     private Map mapMock;
-    private GameSceneViewer gameSceneViewer;
+    private SceneViewer gameSceneViewer;
     @BeforeEach
     void setUp() {
         guiMock = Mockito.mock(GUI.class);
         locationMock = Mockito.mock(Location.class);
         backpackMock = Mockito.mock(Backpack.class);
         mapMock = Mockito.mock(Map.class);
-        gameSceneViewer = new GameSceneViewer();
+        gameSceneViewer = new SceneViewer();
         Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(new Item(0,0,0,0, "people"), new Icon(10,10, 10, 10, "forestRock")));
         Mockito.when(locationMock.getBackground()).thenReturn(new Background(10,10,10, 10, "Menu", false));
     }
