@@ -41,37 +41,35 @@ public class DialogController implements ControllerState {
     }
 
     public void keyUp() {
-        if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveChoice()) {
-            ((NPC)gameController.getModel().getCurrentLocation()
-                    .getTextDisplay().getElement()).getChoices().previousEntry();
+        if (gameController.getModel().getTextDisplay().isActiveChoice()) {
+            gameController.getModel().getTextDisplay().getInteractable().getChoices().previousEntry();
         }
     }
 
     public void keyDown() {
-        if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveChoice()) {
-            ((NPC)gameController.getModel().getCurrentLocation()
-                    .getTextDisplay().getElement()).getChoices().nextEntry();
+        if (gameController.getModel().getTextDisplay().isActiveChoice()) {
+            gameController.getModel().getTextDisplay().getInteractable().getChoices().nextEntry();
         }
     }
 
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
-        if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveChoice()) {
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getCurrentLocation().getTextDisplay().getElement()).getEffects(), application);
+        if (gameController.getModel().getTextDisplay().isActiveChoice()) {
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getTextDisplay().getInteractable()).getEffects(), application);
             gameController.getCommandInvoker().setCommand(effects);
             gameController.getCommandInvoker().execute();
-            AnswerCommand answer = new AnswerCommand(gameController.getModel().getCurrentLocation());
+            AnswerCommand answer = new AnswerCommand(gameController.getModel());
             gameController.getCommandInvoker().setCommand(answer);
         }
         else {
-            TalkCommand talk = new TalkCommand(gameController.getModel().getCurrentLocation());
+            TalkCommand talk = new TalkCommand(gameController.getModel());
             gameController.getCommandInvoker().setCommand(talk);
         }
         gameController.getCommandInvoker().execute();
-        if(!gameController.getModel().getCurrentLocation().getTextDisplay().isActiveTextBox()){
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getCurrentLocation().getTextDisplay().getElement()).getEffects(), application);
+        if(!gameController.getModel().getTextDisplay().isActiveTextBox()){
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getTextDisplay().getInteractable()).getEffects(), application);
             gameController.getCommandInvoker().setCommand(effects);
             gameController.getCommandInvoker().execute();
-            if (!gameController.getModel().getCurrentLocation().getTextDisplay().isActiveTextBox()) gameController.setControllerState(gameController.getLocationController());
+            if (!gameController.getModel().getTextDisplay().isActiveTextBox()) gameController.setControllerState(gameController.getLocationController());
         }
     }
 }

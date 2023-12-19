@@ -23,7 +23,7 @@ public class NPCTest {
                 "Sure, why not","Forget this Toot Oriole nonsense, I'm smart"
         ));
         assertEquals(npcDialog.getNextStates(), List.of(1,3
-        ));
+        )); //rever
         assertTrue(npcDialog.getEffects().isEmpty());
     }
 

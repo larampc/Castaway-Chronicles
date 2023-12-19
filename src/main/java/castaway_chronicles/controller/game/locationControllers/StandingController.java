@@ -37,7 +37,7 @@ public class StandingController implements ContinuousControllerState {
                     lastCommand = new PickUpCommand(gameController.getModel(), e.getName());
                 }
                 else if (e instanceof NPC) {
-                    lastCommand = new StartTalkCommand(location, e.getName());
+                    lastCommand = new StartTalkCommand(gameController.getModel(), e.getName());
                 }
                 else if (e instanceof Icon) {
                     String[] split = e.getName().split("_", -1);

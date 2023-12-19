@@ -1,8 +1,10 @@
 package castaway_chronicles.view.game;
 
 import castaway_chronicles.gui.GUI;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.view.SceneViewer;
+import castaway_chronicles.view.SelectionPanelViewer;
 import castaway_chronicles.view.Viewer;
 
 import java.io.IOException;
@@ -10,15 +12,15 @@ import java.net.URISyntaxException;
 
 public class GameViewer extends Viewer<Game> {
     private PauseMenuViewer pauseMenuViewer;
-    private MapViewer mapViewer;
-    private BackpackViewer backpackViewer;
-    private LocationViewer locationViewer;
+    private GameSceneViewer gameSceneViewer;
+    private TextBoxViewer textBoxViewer;
+    private SelectionPanelViewer selectionPanelViewer;
     public GameViewer(Game model) {
         super(model);
         pauseMenuViewer = new PauseMenuViewer();
-        mapViewer = new MapViewer();
-        backpackViewer = new BackpackViewer();
-        locationViewer = new LocationViewer();
+        gameSceneViewer = new GameSceneViewer();
+        textBoxViewer = new TextBoxViewer();
+        selectionPanelViewer = new SelectionPanelViewer();
     }
 
     @Override
@@ -28,15 +30,21 @@ public class GameViewer extends Viewer<Game> {
                 drawScene(gui, getModel().getPauseMenu(), pauseMenuViewer);
                 break;
             case BACKPACK:
-                drawScene(gui, getModel().getBackpack(), backpackViewer);
+                drawScene(gui, getModel().getBackpack(), gameSceneViewer);
+                selectionPanelViewer.setDefinitions( 75, 10, new Position(50, 157));
                 break;
             case MAP:
-                drawScene(gui, getModel().getMap(), mapViewer);
+                drawScene(gui, getModel().getMap(), gameSceneViewer);
                 break;
             case LOCATION:
-                drawScene(gui, getModel().getCurrentLocation(), locationViewer);
+                drawScene(gui, getModel().getCurrentLocation(), gameSceneViewer);
+                selectionPanelViewer.setDefinitions(0, 10, new Position(6,155));
                 break;
         }
+        if (getModel().getTextDisplay().isActiveTextBox()) {
+            textBoxViewer.drawTextBox(gui, getModel().getTextDisplay().getInteractable() , getModel().getTextDisplay().isActiveChoice(), selectionPanelViewer);
+        }
+        else if (gui.isBigger()) gui.resizeTerminal();
     }
 
     public <T> void drawScene(GUI gui, T model, SceneViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
@@ -45,13 +53,14 @@ public class GameViewer extends Viewer<Game> {
     public void setPauseMenuViewer(PauseMenuViewer pauseMenuViewer) {
         this.pauseMenuViewer = pauseMenuViewer;
     }
-    public void setBackpackViewer(BackpackViewer backpackViewer) {
-        this.backpackViewer = backpackViewer;
+    public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {
+        this.selectionPanelViewer = selectionPanelViewer;
     }
-    public void setMapViewer(MapViewer mapViewer) {
-        this.mapViewer = mapViewer;
+    public void setTextBoxViewer(TextBoxViewer textBoxViewer) {
+        this.textBoxViewer = textBoxViewer;
     }
-    public void setLocationViewer(LocationViewer locationViewer) {
-        this.locationViewer = locationViewer;
+
+    public void setGameSceneViewer(GameSceneViewer gameSceneViewer) {
+        this.gameSceneViewer = gameSceneViewer;
     }
 }

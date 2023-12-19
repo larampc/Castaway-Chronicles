@@ -11,6 +11,7 @@ import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.game.elements.InteractableWithText;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.scene.Backpack;
 
@@ -31,7 +32,8 @@ public class BackpackController implements ControllerState {
     public void click(Position position, Application application) throws IOException {
         for (Interactable e: backpack.getVisibleInteractables()) {
             if (e.contains(position)) {
-                backpack.getTextDisplay().activateTextBox(e);
+                ((ItemBackpack)e).setInHand(false);
+                gameController.getModel().getTextDisplay().activateTextBox((InteractableWithText) e);
             }
         }
     }
@@ -60,32 +62,32 @@ public class BackpackController implements ControllerState {
     }
 
     public void keyUp() {
-        if (backpack.getTextDisplay().isActiveChoice()) {
-            ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().previousEntry();
+        if (gameController.getModel().getTextDisplay().isActiveChoice()) {
+            gameController.getModel().getTextDisplay().getInteractable().getChoices().previousEntry();
         }
     }
 
     public void keyDown() {
-        if (backpack.getTextDisplay().isActiveChoice()) {
-            ((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions().nextEntry();
+        if (gameController.getModel().getTextDisplay().isActiveChoice()) {
+            gameController.getModel().getTextDisplay().getInteractable().getChoices().nextEntry();
         }
     }
 
     public void keySide() throws IOException, URISyntaxException, InterruptedException {
-        GetSideOptionCommand getSide = new GetSideOptionCommand(((ItemBackpack)backpack.getTextDisplay().getElement()).getItemOptions());
+        GetSideOptionCommand getSide = new GetSideOptionCommand(gameController.getModel().getTextDisplay().getInteractable().getChoices());
         gameController.getCommandInvoker().setCommand(getSide);
         gameController.getCommandInvoker().execute();
     }
 
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
-        if (backpack.getTextDisplay().isActiveTextBox() && !backpack.getTextDisplay().isActiveChoice()) {
-            backpack.getTextDisplay().setActiveChoice(true);
+        if (gameController.getModel().getTextDisplay().isActiveTextBox() && !gameController.getModel().getTextDisplay().isActiveChoice()) {
+            gameController.getModel().getTextDisplay().setActiveChoice(true);
             return;
         }
-        if (!backpack.getTextDisplay().isActiveChoice()) return;
+        if (!gameController.getModel().getTextDisplay().isActiveChoice()) return;
 
-        String command = ((ItemBackpack)backpack.getTextDisplay().getElement()).getCommand();
-        backpack.getTextDisplay().closeTextBox();
+        String command = ((ItemBackpack)gameController.getModel().getTextDisplay().getInteractable()).getCommand();
+        gameController.getModel().getTextDisplay().closeTextBox();
         String[] s = command.split(" ", -1);
         if (s.length == 1) {
             if (s[0].equalsIgnoreCase("give")) {
@@ -94,7 +96,8 @@ public class BackpackController implements ControllerState {
                 gameController.setControllerState(gameController.getHandController());
             }
             else {
-                gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(backpack.getTextDisplay().getElement());
+                ((ItemBackpack) gameController.getModel().getTextDisplay().getInteractable()).setInHand(true);
+                gameController.getModel().getTextDisplay().activateTextBox();
                 gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 gameController.setControllerState(gameController.getNarratorController());
             }
@@ -102,7 +105,7 @@ public class BackpackController implements ControllerState {
         else {
             CommandInvoker invoker = new CommandInvoker();
             if (s[0].equalsIgnoreCase("use")) {
-                Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack)backpack.getTextDisplay().getElement()).getEffects(), application);
+                Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextDisplay().getInteractable().getEffects(), application);
                 invoker.setCommand(effects);
                 invoker.execute();
                 gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
@@ -117,12 +120,12 @@ public class BackpackController implements ControllerState {
     }
 
     public void escape() {
-        if (!(backpack.getTextDisplay().isActiveChoice()|| backpack.getTextDisplay().isActiveTextBox())) {
+        if (!(gameController.getModel().getTextDisplay().isActiveChoice()|| gameController.getModel().getTextDisplay().isActiveTextBox())) {
             gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
             gameController.setControllerState(gameController.getLocationController());
         }
         else {
-            backpack.getTextDisplay().closeTextBox();
+            gameController.getModel().getTextDisplay().closeTextBox();
         }
     }
 

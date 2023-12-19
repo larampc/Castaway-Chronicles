@@ -1,16 +1,17 @@
 package castaway_chronicles.controller.game.Commands;
 
-import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.InteractableWithText;
 
 public class StartTalkCommand implements Command {
-    private final Location location;
+    private final Game game;
     private final String name;
-    public StartTalkCommand(Location location, String name) {
-        this.location = location;
+    public StartTalkCommand(Game game, String name) {
+        this.game = game;
         this.name = name;
     }
     @Override
     public void execute() {
-        location.setTextDisplay(name);
+        game.setTextDisplay((InteractableWithText) game.getCurrentLocation().getInteractable(name));
     }
 }

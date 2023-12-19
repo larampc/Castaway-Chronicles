@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class NPC extends Interactable {
+public class NPC extends InteractableWithText {
     private int state;
     private int line;
     private List<String> dialog;
-    private SelectionPanel choices;
     private List<Integer> nextStates;
     private List<String> effects;
     public NPC(int x, int y, int w, int h, String name, int initialState) throws IOException {
@@ -44,11 +43,13 @@ public class NPC extends Interactable {
             choices.add(lines.get(i));
             nextStates.add(Integer.parseInt(lines.get(i+count)));
         }
-        this.choices = new SelectionPanel(choices);
+        setChoices(new SelectionPanel(choices));
         readEffects(state);
     }
-    public SelectionPanel getChoices() {
-        return choices;
+
+    @Override
+    public String getText() {
+        return getCurrentLine();
     }
 
     public List<Integer> getNextStates() {
@@ -56,7 +57,7 @@ public class NPC extends Interactable {
     }
 
     public void goToStateChoice() throws IOException {
-        state = nextStates.get(choices.getCurrentEntry());
+        state = nextStates.get(getChoices().getCurrentEntry());
         init();
     }
     public void goToState(int i) throws IOException {
@@ -76,6 +77,7 @@ public class NPC extends Interactable {
             this.effects = br.lines().collect(Collectors.toList());
         }
     }
+    @Override
     public List<String> getEffects() {
         return effects;
     }

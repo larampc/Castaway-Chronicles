@@ -102,18 +102,19 @@ public class CommandTest {
     @Test
     void executeNPCEffectNoWait() throws IOException, InterruptedException, URISyntaxException {
         Location currentLocationMock = Mockito.mock(Location.class);
+        Game gameMock = Mockito.mock(Game.class);
         NPC NPCMock = Mockito.mock(NPC.class);
         NPC NPCMock2 = Mockito.mock(NPC.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         Mockito.when(gameMock.getCurrentLocation()).thenReturn(currentLocationMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC")).thenReturn(NPCMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC2")).thenReturn(NPCMock2);
-        Mockito.when(currentLocationMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("NPC TestNPC 1","NPC TestNPC2 2 W"), applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(NPCMock).goToState(1);
-        Mockito.verify(currentLocationMock).setTextDisplay("TestNPC");
+        Mockito.verify(gameMock).setTextDisplay(NPCMock);
         Mockito.verify(NPCMock2).goToState(2);
         Mockito.verify(textDisplayMock).closeTextBox();
     }
@@ -383,20 +384,22 @@ public class CommandTest {
     @Test
     void StartTalkCommand() {
         Location locationMock = Mockito.mock(Location.class);
+        Mockito.when(gameMock.getCurrentLocation()).thenReturn(locationMock);
+        NPC npcMock = Mockito.mock(NPC.class);
+        Mockito.when(locationMock.getInteractable("Test")).thenReturn(npcMock);
+        new StartTalkCommand(gameMock,"Test").execute();
 
-        new StartTalkCommand(locationMock,"Test").execute();
-
-        Mockito.verify(locationMock).setTextDisplay("Test");
+        Mockito.verify(gameMock).setTextDisplay(npcMock);
     }
 
     @Test
     void AnswerCommand() throws IOException {
-        Location locationMock = Mockito.mock(Location.class);
+        Game gameMock = Mockito.mock(Game.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC NPCMock = Mockito.mock(NPC.class);
-        Mockito.when(locationMock.getTextDisplay()).thenReturn(textDisplayMock);
-        Mockito.when(textDisplayMock.getElement()).thenReturn(NPCMock);
-        new AnswerCommand(locationMock).execute();
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(textDisplayMock.getInteractable()).thenReturn(NPCMock);
+        new AnswerCommand(gameMock).execute();
 
         Mockito.verify(NPCMock).goToStateChoice();
         Mockito.verify(textDisplayMock).setActiveChoice(false);

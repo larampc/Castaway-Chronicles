@@ -1,16 +1,16 @@
 package castaway_chronicles.controller.game.Commands;
 
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.NPC;
-import castaway_chronicles.model.game.scene.Location;
 
 public class TalkCommand implements Command{
-    private final Location location;
-    public TalkCommand(Location location) {
+    private final Game location;
+    public TalkCommand(Game location) {
         this.location = location;
     }
     @Override
     public void execute() {
-        NPC npcDialog = (NPC)location.getTextDisplay().getElement();
+        NPC npcDialog = (NPC)location.getTextDisplay().getInteractable();
         if (npcDialog.getLine() == npcDialog.getMax() && npcDialog.getChoices().getNumberEntries() == 0) {
             location.getTextDisplay().closeTextBox();
         }

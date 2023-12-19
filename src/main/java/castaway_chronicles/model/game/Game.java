@@ -1,5 +1,6 @@
 package castaway_chronicles.model.game;
 
+import castaway_chronicles.model.game.elements.InteractableWithText;
 import castaway_chronicles.model.game.scene.*;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class Game {
     private PauseMenu pauseMenu;
     private Location currentLocation;
     private SCENE currentScene;
+    private final TextDisplay textDisplay = new TextDisplay();
 
     public Game() {}
     public Backpack getBackpack() {
@@ -51,6 +53,10 @@ public class Game {
     }
     public void setCurrentLocation(String name) {
         currentLocation = getLocation(name);
+    }
+    public TextDisplay getTextDisplay() {return textDisplay;}
+    public void setTextDisplay(InteractableWithText element) {
+        textDisplay.activateTextBox(element);
     }
     public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE}
 }

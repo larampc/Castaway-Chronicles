@@ -33,18 +33,19 @@ public class HandController implements ControllerState {
             for (Interactable e : gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
                     CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
-                    Command effects = new HandleEffectsCommand(gameController.getModel(), ((ItemBackpack) gameController.getModel().getBackpack().getTextDisplay().getElement()).getEffects(), application);
+                    Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextDisplay().getInteractable().getEffects(), application);
                     invoker.setCommand(effects);
                     invoker.execute();
                     gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
-                    if (gameController.getModel().getCurrentLocation().getTextDisplay().isActiveTextBox()) {
+                    if (gameController.getModel().getTextDisplay().isActiveTextBox()) {
                         gameController.setControllerState(gameController.getDialogController());
                     } else gameController.setControllerState(gameController.getLocationController());
                     return;
                 }
             }
         }
-        gameController.getModel().getCurrentLocation().getTextDisplay().activateTextBox(gameController.getModel().getBackpack().getTextDisplay().getElement());
+        ((ItemBackpack)gameController.getModel().getTextDisplay().getInteractable()).setInHand(true);
+        gameController.getModel().getTextDisplay().activateTextBox();
         gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
         gameController.setControllerState(gameController.getNarratorController());
     }

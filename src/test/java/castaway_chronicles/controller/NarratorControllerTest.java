@@ -34,7 +34,7 @@ public class NarratorControllerTest {
         Location currentLocation = Mockito.mock(Location.class);
         Mockito.when(game.getCurrentLocation()).thenReturn(currentLocation);
         TextDisplay backpackAnswer = Mockito.mock(TextDisplay.class);
-        Mockito.when(currentLocation.getTextDisplay()).thenReturn(backpackAnswer);
+        Mockito.when(game.getTextDisplay()).thenReturn(backpackAnswer);
 
         narratorController.key(KeyEvent.VK_ENTER,Mockito.mock(Application.class));
         Mockito.verify(backpackAnswer,Mockito.times(1)).closeTextBox();

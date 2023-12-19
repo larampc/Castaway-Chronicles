@@ -24,10 +24,12 @@ public class ItemBackpackTest {
 
     @Test
     public void ItemBackpackContent() throws IOException {
-        assertEquals(List.of("GIVE"), itemBackpack.getItemOptions().getEntries());
-        assertEquals("The perfect rope to make nests with", itemBackpack.getDescription());
+        assertEquals(List.of("GIVE"), itemBackpack.getChoices().getEntries());
+        itemBackpack.setInHand(false);
+        assertEquals("The perfect rope to make nests with", itemBackpack.getText());
         assertEquals("give toot", itemBackpack.getCommand());
-        assertEquals("No...", itemBackpack.getAnswer());
+        itemBackpack.setInHand(true);
+        assertEquals("No...", itemBackpack.getText());
         assertEquals(List.of("NPC toot 4", "Backpack rope I"), itemBackpack.getEffects());
     }
 
@@ -36,10 +38,12 @@ public class ItemBackpackTest {
         assertEquals("rope_backpack", itemBackpack.getName());
         itemBackpack.setNameBackpack("rock_backpack");
         assertEquals("rock_backpack", itemBackpack.getName());
-        assertEquals(List.of("DRINK", "THROW", "GIVE"), itemBackpack.getItemOptions().getEntries());
-        assertEquals("A very heavy rock", itemBackpack.getDescription());
+        assertEquals(List.of("DRINK", "THROW", "GIVE"), itemBackpack.getChoices().getEntries());
+        itemBackpack.setInHand(false);
+        assertEquals("A very heavy rock", itemBackpack.getText());
         assertEquals("use", itemBackpack.getCommand());
-        assertEquals("No...", itemBackpack.getAnswer());
+        itemBackpack.setInHand(true);
+        assertEquals("No...", itemBackpack.getText());
         assertEquals(Collections.emptyList(), itemBackpack.getEffects());
     }
 //    @Test

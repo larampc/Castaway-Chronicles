@@ -24,7 +24,7 @@ public class NarratorController implements ControllerState {
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if (key == KeyEvent.VK_ENTER) {
-            gameController.getModel().getCurrentLocation().getTextDisplay().closeTextBox();
+            gameController.getModel().getTextDisplay().closeTextBox();
             gameController.setControllerState(gameController.getLocationController());
         }
     }

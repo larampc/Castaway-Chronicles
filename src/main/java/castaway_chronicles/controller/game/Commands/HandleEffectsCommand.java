@@ -3,6 +3,7 @@ package castaway_chronicles.controller.game.Commands;
 import castaway_chronicles.Application;
 import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.InteractableWithText;
 import castaway_chronicles.model.game.elements.ItemBackpack;
 import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
@@ -83,8 +84,8 @@ public class HandleEffectsCommand implements Command{
     }
     private void executeNPCEffects(String[] s) throws IOException {
         ((NPC)game.getCurrentLocation().getInteractable(s[1])).goToState(Integer.parseInt(s[2]));
-        if (s.length != 4) game.getCurrentLocation().setTextDisplay(s[1]);
-        else game.getCurrentLocation().getTextDisplay().closeTextBox();
+        if (s.length != 4) game.setTextDisplay((InteractableWithText) game.getCurrentLocation().getInteractable(s[1]));
+        else game.getTextDisplay().closeTextBox();
     }
     private void executeMapEffects(String[] s) {
         if (s[2].equalsIgnoreCase("V")) {
