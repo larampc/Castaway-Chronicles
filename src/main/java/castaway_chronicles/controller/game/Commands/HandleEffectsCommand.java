@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.InteractableWithText;
@@ -9,18 +10,7 @@ import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.states.EndState;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
 
 public class HandleEffectsCommand implements Command{
     private final Game game;
@@ -33,7 +23,7 @@ public class HandleEffectsCommand implements Command{
     }
 
     @Override
-    public void execute() throws IOException, InterruptedException, URISyntaxException {
+    public void execute()  {
         if (effects.isEmpty()) return;
         for (String effect: effects) {
             String[] s = effect.split(" ", -1);
@@ -60,7 +50,7 @@ public class HandleEffectsCommand implements Command{
             executeLocationEffects(s);
         }
     }
-    private void executeLocationEffects(String[] s){
+    private void executeLocationEffects(String[] s) {
         Location location = game.getLocation(s[0]);
         if (s[2].equalsIgnoreCase("V")) {
             location.setVisible(s[1]);
@@ -69,22 +59,15 @@ public class HandleEffectsCommand implements Command{
             location.setInvisible(s[1]);
         }
     }
-    private void executeEnd(String[] s) throws IOException, URISyntaxException {
-        Path path = Paths.get("");
-        File toDelete = new File(path.toAbsolutePath()+"/src/main/resources/Scenes_saved");
-        File[] allContents = toDelete.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                file.delete();
-            }
-        }
-        File endings = new File(path.toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
-        Writer fr = Files.newBufferedWriter(endings.toPath(), UTF_8, CREATE, APPEND);
-        fr.write(s[1]+"\n");
-        fr.close();
+    private void executeEnd(String[] s) {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("Scenes_saved");
+        resourceManager.deleteResourceFile();
+        resourceManager.setPath("achieved_endings.txt");
+        resourceManager.writeToFile(s[1]+"\n");
         application.setState(new EndState(new Ending(s[1])));
     }
-    private void executeNPCEffects(String[] s) throws IOException {
+    private void executeNPCEffects(String[] s) {
         ((NPC)game.getCurrentLocation().getInteractable(s[1])).goToState(Integer.parseInt(s[2]));
         if (s.length != 4) game.setTextDisplay((InteractableWithText) game.getCurrentLocation().getInteractable(s[1]));
         else game.getTextDisplay().closeTextBox();
@@ -97,7 +80,7 @@ public class HandleEffectsCommand implements Command{
             game.getMap().setInvisible(s[1]);
         }
     }
-    private void executeBackpackEffects(String[] s) throws IOException {
+    private void executeBackpackEffects(String[] s) {
         if (s[2].equalsIgnoreCase("V")) {
             game.getBackpack().setVisible(s[1]+"_backpack");
         }
