@@ -57,14 +57,18 @@ public class HandleEffectsCommand implements Command{
                 executeBackpackEffects(s);
                 continue;
             }
-            //executeLocationEffects
-            Location location = game.getLocation(s[0]);
-            if (s[2].equalsIgnoreCase("V")) {
-                location.setVisible(s[1]);
+            if (s[0].equalsIgnoreCase("location")) {
+                executeLocationEffects(s);
             }
-            if (s[2].equalsIgnoreCase("I")) {
-                location.setInvisible(s[1]);
-            }
+        }
+    }
+    private void executeLocationEffects(String[] s){
+        Location location = game.getLocation(s[0]);
+        if (s[2].equalsIgnoreCase("V")) {
+            location.setVisible(s[1]);
+        }
+        if (s[2].equalsIgnoreCase("I")) {
+            location.setInvisible(s[1]);
         }
     }
     private void executeEnd(String[] s) throws IOException, URISyntaxException {
