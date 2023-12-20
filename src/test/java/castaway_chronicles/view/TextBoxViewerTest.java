@@ -18,11 +18,10 @@ public class TextBoxViewerTest {
         TextBoxViewer textBoxViewer = new TextBoxViewer();
         GUI guiMock = Mockito.mock(GUI.class);
         InteractableWithText interactableMock = Mockito.mock(InteractableWithText.class);
-        SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
         Mockito.when(interactableMock.getText()).thenReturn("hello");
 
-        textBoxViewer.drawTextBox(guiMock, interactableMock, false, selectionPanelViewerMock);
+        textBoxViewer.drawTextBox(guiMock, interactableMock, false);
 
         Mockito.verify(guiMock).resizeTerminal();
         Mockito.verify(guiMock).drawImage(new Position(2,151), "dialog");
@@ -39,8 +38,9 @@ public class TextBoxViewerTest {
         Mockito.when(interactableMock.getText()).thenReturn("hello");
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
         Mockito.when(interactableMock.getChoices()).thenReturn(selectionPanelMock);
+        textBoxViewer.setSelectionPanelViewer(selectionPanelViewerMock);
 
-        textBoxViewer.drawTextBox(guiMock, interactableMock, true, selectionPanelViewerMock);
+        textBoxViewer.drawTextBox(guiMock, interactableMock, true);
 
         Mockito.verify(guiMock).resizeTerminal();
         Mockito.verify(selectionPanelViewerMock).draw(selectionPanelMock, guiMock);

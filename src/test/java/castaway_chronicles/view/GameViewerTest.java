@@ -56,7 +56,9 @@ public class GameViewerTest {
         when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
         when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         when(gui.isBigger()).thenReturn(false);
-        gameViewer.setSelectionPanelViewer(selectionPanelViewerMock);
+        TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
+        gameViewer.setTextBoxViewer(textBoxViewerMock);
+        Mockito.when(textBoxViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);
 
         gameViewer.drawScreen(gui);
 
@@ -98,16 +100,16 @@ public class GameViewerTest {
         when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         when(gui.isBigger()).thenReturn(false);
         SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
-        gameViewer.setSelectionPanelViewer(selectionPanelViewerMock);
         InteractableWithText interactableMock = Mockito.mock(InteractableWithText.class);
         when(textDisplayMock.getInteractable()).thenReturn(interactableMock);
         when(textDisplayMock.isActiveChoice()).thenReturn(false);
         TextBoxViewer textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
         gameViewer.setTextBoxViewer(textBoxViewerMock);
+        Mockito.when(textBoxViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);
 
         gameViewer.drawScreen(gui);
 
-        verify(textBoxViewerMock).drawTextBox(gui, interactableMock, false, selectionPanelViewerMock);
+        verify(textBoxViewerMock).drawTextBox(gui, interactableMock, false);
         verify(selectionPanelViewerMock).setDefinitions(0, 10, new Position(6,155));
         verify(gameSceneViewer, times(1)).draw(locationMock, gui);
     }
