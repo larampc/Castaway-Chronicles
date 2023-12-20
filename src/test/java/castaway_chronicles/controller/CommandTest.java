@@ -456,4 +456,31 @@ public class CommandTest {
         Mockito.verify(textDisplayMock).setActiveChoice(true);
     }
 
+    @Test
+    void GetSideOptionCommand() throws IOException, URISyntaxException, InterruptedException {
+        SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
+
+        Mockito.when(selectionPanelMock.getCurrentEntry()).thenReturn(0);
+        Mockito.when(selectionPanelMock.getEntry(2)).thenReturn("");
+        Mockito.when(selectionPanelMock.getEntry(-2)).thenReturn("");
+
+        new GetSideOptionCommand(selectionPanelMock).execute();
+
+        Mockito.verify(selectionPanelMock, Mockito.times(0)).nextEntry();
+        Mockito.verify(selectionPanelMock, Mockito.times(0)).previousEntry();
+
+        Mockito.when(selectionPanelMock.getEntry(-2)).thenReturn("test");
+
+        new GetSideOptionCommand(selectionPanelMock).execute();
+
+        Mockito.verify(selectionPanelMock, Mockito.times(0)).nextEntry();
+        Mockito.verify(selectionPanelMock, Mockito.times(2)).previousEntry();
+
+        Mockito.when(selectionPanelMock.getEntry(2)).thenReturn("test");
+
+        new GetSideOptionCommand(selectionPanelMock).execute();
+
+        Mockito.verify(selectionPanelMock, Mockito.times(2)).nextEntry();
+        Mockito.verify(selectionPanelMock, Mockito.times(2)).previousEntry();
+    }
 }
