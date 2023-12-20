@@ -30,8 +30,11 @@ public class WalkingController implements ContinuousControllerState {
         int max_background_x = 200 - location.getBackground().getWidth();
         int offset = (character_x - walkto.getX()) + location.getMainChar().getWidth()/2;
         int next_x = background_x + location.getMainChar().getWidth()/2 + offset;
+        final boolean tooCLose = abs(offset) < 2*dx;
+        final boolean atLeftBorder = background_x == 0 && !goRight;
+        final boolean atRightBorder = background_x-dx <= max_background_x && goRight;
         goRight = (offset < 0);
-        if (abs(offset) < 2*dx || (!location.getBackground().isLoopable() && ((background_x == 0 && !goRight) || (background_x-dx <= max_background_x && goRight)))) {
+        if (tooCLose || (!location.getBackground().isLoopable() && (atLeftBorder || atRightBorder))) {
             toWalk = 0;
             return false;
         }
