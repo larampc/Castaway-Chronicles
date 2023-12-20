@@ -3,6 +3,7 @@ package castaway_chronicles.controller;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.*;
 import castaway_chronicles.model.Position;
+import castaway_chronicles.model.SelectionPanel;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.*;
 import castaway_chronicles.model.game.scene.Backpack;
@@ -408,7 +409,6 @@ public class CommandTest {
 
     @Test
     void AnswerCommand() throws IOException {
-        Game gameMock = Mockito.mock(Game.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC NPCMock = Mockito.mock(NPC.class);
         Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
@@ -417,6 +417,43 @@ public class CommandTest {
 
         Mockito.verify(NPCMock).goToStateChoice();
         Mockito.verify(textDisplayMock).setActiveChoice(false);
+    }
+
+    @Test
+    void TalkCommand() {
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        NPC NPCMock = Mockito.mock(NPC.class);
+        SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(textDisplayMock.getInteractable()).thenReturn(NPCMock);
+        Mockito.when(NPCMock.getChoices()).thenReturn(selectionPanelMock);
+
+        Mockito.when(NPCMock.getLine()).thenReturn(4);
+        Mockito.when(NPCMock.getMax()).thenReturn(5);
+        Mockito.when(selectionPanelMock.getNumberEntries()).thenReturn(1);
+        new TalkCommand(gameMock).execute();
+
+        Mockito.verify(NPCMock).nextLine();
+        Mockito.verify(textDisplayMock, Mockito.times(0)).closeTextBox();
+        Mockito.verify(textDisplayMock, Mockito.times(0)).setActiveChoice(true);
+
+        Mockito.when(NPCMock.getLine()).thenReturn(4);
+        Mockito.when(NPCMock.getMax()).thenReturn(4);
+        Mockito.when(selectionPanelMock.getNumberEntries()).thenReturn(1);
+        new TalkCommand(gameMock).execute();
+
+        Mockito.verify(NPCMock).nextLine();
+        Mockito.verify(textDisplayMock, Mockito.times(0)).closeTextBox();
+        Mockito.verify(textDisplayMock).setActiveChoice(true);
+
+        Mockito.when(NPCMock.getLine()).thenReturn(4);
+        Mockito.when(NPCMock.getMax()).thenReturn(4);
+        Mockito.when(selectionPanelMock.getNumberEntries()).thenReturn(0);
+        new TalkCommand(gameMock).execute();
+
+        Mockito.verify(NPCMock).nextLine();
+        Mockito.verify(textDisplayMock).closeTextBox();
+        Mockito.verify(textDisplayMock).setActiveChoice(true);
     }
 
 }
