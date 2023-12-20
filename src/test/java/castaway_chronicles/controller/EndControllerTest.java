@@ -12,6 +12,8 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class EndControllerTest {
     private Application applicationMock;
     private EndController endController;
@@ -31,31 +33,74 @@ public class EndControllerTest {
     }
 
     @Test
-    void stepForward() throws IOException {
-        Mockito.when(endingMock.getMax()).thenReturn(10);
-        Mockito.when(endingMock.getCurrent()).thenReturn(5);
-        InputEvent inputEventMock = Mockito.mock(InputEvent.class);
-
-        endController.step(applicationMock, inputEventMock, 300);
-
-        Mockito.verify(endingMock).setNext();
+    void EndControllerContent() {
+        assertEquals(endingMock, endController.getModel());
+        assertEquals(MainPage.class, new EndController(endingMock).getMainPage().getClass());
     }
+
     @Test
-    void LastFrame() throws IOException {
-        Mockito.when(endingMock.getMax()).thenReturn(10);
-        Mockito.when(endingMock.getCurrent()).thenReturn(10);
+    void step1() throws IOException {
         InputEvent inputEventMock = Mockito.mock(InputEvent.class);
 
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(0);
+        endController.step(applicationMock, inputEventMock, 200);
+        Mockito.verify(endingMock, Mockito.times(0)).setNext();
+
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(1);
+        endController.step(applicationMock, inputEventMock, 200);
+        Mockito.verify(endingMock, Mockito.times(0)).setNext();
+
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(0);
+        endController.step(applicationMock, inputEventMock, 201);
+        Mockito.verify(endingMock, Mockito.times(0)).setNext();
+
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(1);
+        endController.step(applicationMock, inputEventMock, 201);
+        Mockito.verify(endingMock).setNext();
+
         endController.step(applicationMock, inputEventMock, 300);
+        Mockito.verify(endingMock, Mockito.times(1)).setNext();
 
-        Mockito.verify(endingMock,Mockito.never()).setNext();
+        endController.step(applicationMock, inputEventMock, 402);
+        Mockito.verify(endingMock, Mockito.times(2)).setNext();
+    }
 
-        KeyEvent keyEventMock = Mockito.mock(KeyEvent.class);
-        Mockito.when(keyEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ENTER);
+    @Test
+    void step2() throws IOException {
+        KeyEvent inputEventMock = Mockito.mock(KeyEvent.class);
+        Mockito.when(mainPageMock.getCurrent()).thenReturn(MainPage.PAGE.MENU);
 
-        //endController.step(applicationMock, keyEventMock, 600);
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(1);
+        Mockito.when(inputEventMock.getKeyCode()).thenReturn(KeyEvent.VK_E);
+        endController.step(applicationMock, inputEventMock, 0);
+        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(applicationMock, Mockito.times(0)).setState(Mockito.any(MainPageState.class));
 
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(0);
+        Mockito.when(inputEventMock.getKeyCode()).thenReturn(KeyEvent.VK_E);
+        endController.step(applicationMock, inputEventMock, 0);
+        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(applicationMock, Mockito.times(0)).setState(Mockito.any(MainPageState.class));
+
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(1);
+        Mockito.when(inputEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ENTER);
+        endController.step(applicationMock, inputEventMock, 0);
+        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(applicationMock, Mockito.times(0)).setState(Mockito.any(MainPageState.class));
+
+        Mockito.when(endingMock.getCurrent()).thenReturn(0);
+        Mockito.when(endingMock.getMax()).thenReturn(0);
+        Mockito.when(inputEventMock.getKeyCode()).thenReturn(KeyEvent.VK_ENTER);
+        endController.step(applicationMock, inputEventMock, 0);
         Mockito.verify(mainPageMock).setCurrent(MainPage.PAGE.ENDINGS);
         Mockito.verify(applicationMock).setState(Mockito.any(MainPageState.class));
     }
 }
+
