@@ -1,5 +1,6 @@
 package castaway_chronicles.gui;
 
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.Position;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -16,8 +17,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -29,14 +28,14 @@ public class LanternaGUI implements GUI{
     private boolean bigger;
     private InputEvent action;
 
-    public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws URISyntaxException, IOException {
+    public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws IOException {
         this.screen = screen;
         this.graphics = screen.newTextGraphics();
         this.terminal = terminal;
         loadSprites();
     }
 
-    public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
+    public LanternaGUI(int width, int height) throws IOException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         this.terminal = createTerminal(width, height, fontConfig);
         this.screen = createScreen(terminal);
@@ -75,22 +74,20 @@ public class LanternaGUI implements GUI{
         return (AWTTerminalFrame) terminal;
     }
 
-    private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
-        assert resource != null;
-        File fontFile = new File(resource.toURI());
-        Font font =  Font.createFont(Font.TRUETYPE_FONT, fontFile);
+    private AWTTerminalFontConfiguration loadSquareFont() throws IOException, FontFormatException {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("fonts/square.ttf");
+        Font font =  Font.createFont(Font.TRUETYPE_FONT, resourceManager.getFile());
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
         Font newfont = font.deriveFont(Font.PLAIN, 4);
         return new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING, newfont);
     }
 
-    private void loadSprites() throws URISyntaxException, IOException {
-        URL resource = getClass().getClassLoader().getResource("Images");
-        assert resource != null;
-        File fontFile = new File(resource.toURI());
-        loadFiles(fontFile, images);
+    private void loadSprites() throws IOException {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("Images");
+        loadFiles(resourceManager.getFile(), images);
     }
     private void loadFiles(File dir, HashMap<String, Sprite> images) throws IOException {
         if (!dir.isDirectory()) {
@@ -103,11 +100,10 @@ public class LanternaGUI implements GUI{
             loadFiles(f, images);
         }
     }
-    public void loadEnding(String name) throws URISyntaxException, IOException {
-        URL resource = getClass().getClassLoader().getResource("Endings/"+name);
-        assert resource != null;
-        File fontFile = new File(resource.toURI());
-        loadFiles(fontFile, images);
+    public void loadEnding(String name) throws IOException {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("Endings/" + name);
+        loadFiles(resourceManager.getFile(), images);
     }
     @Override
     public void resizeTerminal() {
