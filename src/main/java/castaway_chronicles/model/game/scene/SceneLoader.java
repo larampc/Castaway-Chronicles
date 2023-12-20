@@ -1,12 +1,10 @@
 package castaway_chronicles.model.game.scene;
 
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.Scene;
 import castaway_chronicles.model.game.elements.*;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,21 +15,14 @@ public class SceneLoader {
     private final String type;
 
     public SceneLoader(String dir, String filename, String type) throws IOException {
-        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/"+dir + "/" + filename + ".txt");
-        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
-        lines = readLines(br);
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath(dir + "/" + filename + ".txt");
+        lines = resourceManager.readCurrentTimeResourceFile();
         this.type = type;
         getInteractables();
     }
     public Scene createScene() {
-        Scene scene = SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
-        return scene;
-    }
-    private List<String> readLines(BufferedReader br) throws IOException {
-        List<String> lines = new ArrayList<>();
-        for (String line; (line = br.readLine()) != null; )
-            lines.add(line);
-        return lines;
+        return SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
     }
 
     protected Background getBackground() {
@@ -71,7 +62,6 @@ public class SceneLoader {
                 if (line.charAt(0) == 'M') {
                     String[] s = line.split(" ",-1);
                     int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
-                    //FACTORY?
                     return new MainChar(x,y,w,h, "standing_right");
                 }
             }
