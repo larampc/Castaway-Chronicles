@@ -26,7 +26,7 @@ public class GameViewerTest {
 
     @Test
     void drawPause() throws IOException, URISyntaxException, InterruptedException {
-        PauseMenuViewer pauseMenuViewer = Mockito.mock(PauseMenuViewer.class);
+        MenuViewer pauseMenuViewer = Mockito.mock(MenuViewer.class);
         GUI gui = mock(GUI.class);
         GameViewer gameViewer = new GameViewer(gameMock);
         gameViewer.setPauseMenuViewer(pauseMenuViewer);

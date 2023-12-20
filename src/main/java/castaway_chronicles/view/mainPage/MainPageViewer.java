@@ -1,7 +1,9 @@
 package castaway_chronicles.view.mainPage;
 
 import castaway_chronicles.gui.GUI;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.mainPage.MainPage;
+import castaway_chronicles.view.MenuViewer;
 import castaway_chronicles.view.SceneViewer;
 import castaway_chronicles.view.Viewer;
 
@@ -10,11 +12,12 @@ import java.net.URISyntaxException;
 
 public class MainPageViewer extends Viewer<MainPage> {
     private SceneViewer endingPageViewer;
-    private MainMenuViewer mainMenuViewer;
+    private MenuViewer mainMenuViewer;
     public MainPageViewer(MainPage model) {
         super(model);
         endingPageViewer = new SceneViewer();
-        mainMenuViewer = new MainMenuViewer();
+        mainMenuViewer = new MenuViewer();
+        mainMenuViewer.getSelectionPanelViewer().setDefinitions(42,20, new Position(98,101));
     }
 
     @Override
@@ -28,7 +31,7 @@ public class MainPageViewer extends Viewer<MainPage> {
                 break;
         }
     }
-    public void setMainMenuViewer(MainMenuViewer mainMenuViewer) {
+    public void setMainMenuViewer(MenuViewer mainMenuViewer) {
         this.mainMenuViewer = mainMenuViewer;
     }
     public void setEndingPageViewer(SceneViewer endingPageViewer) {

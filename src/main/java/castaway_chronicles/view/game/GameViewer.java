@@ -3,22 +3,20 @@ package castaway_chronicles.view.game;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.view.SceneViewer;
-import castaway_chronicles.view.ScreenViewer;
-import castaway_chronicles.view.SelectionPanelViewer;
-import castaway_chronicles.view.Viewer;
+import castaway_chronicles.view.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameViewer extends Viewer<Game> {
-    private PauseMenuViewer pauseMenuViewer;
+    private MenuViewer pauseMenuViewer;
     private SceneViewer gameSceneViewer;
     private TextBoxViewer textBoxViewer;
     private SelectionPanelViewer selectionPanelViewer;
     public GameViewer(Game model) {
         super(model);
-        pauseMenuViewer = new PauseMenuViewer();
+        pauseMenuViewer = new MenuViewer();
+        pauseMenuViewer.getSelectionPanelViewer().setDefinitions(48,20, new Position(97,101));
         gameSceneViewer = new SceneViewer();
         textBoxViewer = new TextBoxViewer();
         selectionPanelViewer = new SelectionPanelViewer();
@@ -51,7 +49,7 @@ public class GameViewer extends Viewer<Game> {
     public <T> void drawScene(GUI gui, T model, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
         viewer.draw(model, gui);
     }
-    public void setPauseMenuViewer(PauseMenuViewer pauseMenuViewer) {
+    public void setPauseMenuViewer(MenuViewer pauseMenuViewer) {
         this.pauseMenuViewer = pauseMenuViewer;
     }
     public void setSelectionPanelViewer(SelectionPanelViewer selectionPanelViewer) {

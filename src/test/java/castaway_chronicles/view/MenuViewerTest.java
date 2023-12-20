@@ -5,8 +5,6 @@ import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.scene.PauseMenu;
 import castaway_chronicles.model.mainPage.MainMenu;
-import castaway_chronicles.view.game.PauseMenuViewer;
-import castaway_chronicles.view.mainPage.MainMenuViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,7 +24,7 @@ public class MenuViewerTest {
     void mainMenuTest() throws IOException, URISyntaxException, InterruptedException {
         MainMenu mainMenuMock = Mockito.mock(MainMenu.class);
         SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
-        MainMenuViewer mainMenuViewer = new MainMenuViewer();
+        MenuViewer mainMenuViewer = new MenuViewer();
         mainMenuViewer.setSelectionPanelViewer(selectionPanelViewerMock);
         Background backgroundMock = Mockito.mock(Background.class);
         Position positionMock = Mockito.mock(Position.class);
@@ -53,7 +51,7 @@ public class MenuViewerTest {
 
         Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
 
-        PauseMenuViewer pauseMenuViewer = new PauseMenuViewer();
+        MenuViewer pauseMenuViewer = new MenuViewer();
         pauseMenuViewer.setSelectionPanelViewer(selectionPanelViewerMock);
         pauseMenuViewer.draw(pauseMenuMock, guiMock);
 
