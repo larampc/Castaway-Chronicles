@@ -43,9 +43,11 @@ public class StateTest {
         GUI guiMock = Mockito.mock(GUI.class);
         InputEvent inputEventMock = Mockito.mock(InputEvent.class);
         Mockito.when(guiMock.getNextAction()).thenReturn(inputEventMock);
+
         state.step(applicationMock, guiMock, 0);
-        Mockito.verify(guiMock, Mockito.times(1)).getNextAction();
-        Mockito.verify(controllerMock, Mockito.times(1)).step(applicationMock, inputEventMock, 0);
-        Mockito.verify(viewerMock, Mockito.times(1)).draw(guiMock);
+
+        Mockito.verify(guiMock).getNextAction();
+        Mockito.verify(controllerMock).step(applicationMock, inputEventMock, 0);
+        Mockito.verify(viewerMock).draw(guiMock);
     }
 }

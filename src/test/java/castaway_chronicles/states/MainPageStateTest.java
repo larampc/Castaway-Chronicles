@@ -22,7 +22,7 @@ public class MainPageStateTest {
 
     @Test
     void MainPageContent() {
-        Mockito.verify(modelMock, Mockito.times(1)).getCurrent();
+        Mockito.verify(modelMock).getCurrent();
         assertEquals(modelMock, mainPageState.getModel());
         assertEquals(MainPageViewer.class, mainPageState.getViewer().getClass());
         assertEquals(MainPageController.class, mainPageState.getController().getClass());
