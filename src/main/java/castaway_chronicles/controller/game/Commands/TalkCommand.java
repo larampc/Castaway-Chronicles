@@ -10,12 +10,12 @@ public class TalkCommand implements Command{
     }
     @Override
     public void execute() {
-        NPC npcDialog = (NPC)location.getTextDisplay().getInteractable();
+        NPC npcDialog = (NPC)location.getTextBox().getInteractable();
         if (npcDialog.dialogEnded() && npcDialog.getChoices().getNumberEntries() == 0) {
-            location.getTextDisplay().closeTextBox();
+            location.getTextBox().closeTextBox();
         }
         else if (npcDialog.dialogEnded()) {
-            location.getTextDisplay().setActiveChoice(true);
+            location.getTextBox().setActiveChoice(true);
         }
         else npcDialog.nextLine();
     }

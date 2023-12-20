@@ -86,8 +86,8 @@ public class HandleEffectsCommand implements Command{
     }
     private void executeNPCEffects(String[] s) throws IOException {
         ((NPC)game.getCurrentLocation().getInteractable(s[1])).goToState(Integer.parseInt(s[2]));
-        if (s.length != 4) game.setTextDisplay((InteractableWithText) game.getCurrentLocation().getInteractable(s[1]));
-        else game.getTextDisplay().closeTextBox();
+        if (s.length != 4) game.setTextBox((InteractableWithText) game.getCurrentLocation().getInteractable(s[1]));
+        else game.getTextBox().closeTextBox();
     }
     private void executeMapEffects(String[] s) {
         if (s[2].equalsIgnoreCase("V")) {

@@ -36,7 +36,7 @@ public class GameViewerTest {
         textBoxMock = Mockito.mock(TextBox.class);
         selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
         Mockito.when(menuViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
         gameViewer = new GameViewer(gameMock) {
             @Override
             public MenuViewer getPauseMenuViewer() {
@@ -72,7 +72,7 @@ public class GameViewerTest {
         Backpack backpackMock = Mockito.mock(Backpack.class);
         Mockito.when(gameMock.getBackpack()).thenReturn(backpackMock);
         SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
         Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
         Mockito.when(textBoxViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);

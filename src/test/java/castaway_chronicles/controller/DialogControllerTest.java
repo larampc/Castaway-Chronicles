@@ -47,7 +47,7 @@ public class DialogControllerTest {
         NPC npcMock = Mockito.mock(NPC.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textBoxMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
         when(textBoxMock.isActiveChoice()).thenReturn(true);
         when(textBoxMock.isActiveTextBox()).thenReturn(true);
         when(textBoxMock.getInteractable()).thenReturn(npcMock);
@@ -69,7 +69,7 @@ public class DialogControllerTest {
         TextBox textBoxMock = Mockito.mock(TextBox.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textBoxMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
         when(textBoxMock.isActiveChoice()).thenReturn(false);
         when(textBoxMock.isActiveTextBox()).thenReturn(true);
 
@@ -90,7 +90,7 @@ public class DialogControllerTest {
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textBoxMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
         when(textBoxMock.isActiveChoice()).thenReturn(true);
         when(textBoxMock.isActiveTextBox()).thenReturn(true);
         when(textBoxMock.getInteractable()).thenReturn(npcMock);
@@ -111,7 +111,7 @@ public class DialogControllerTest {
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textBoxMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
         when(textBoxMock.isActiveChoice()).thenReturn(true);
         when(textBoxMock.isActiveTextBox()).thenReturn(true);
         when(textBoxMock.getInteractable()).thenReturn(npcMock);

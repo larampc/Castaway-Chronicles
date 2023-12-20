@@ -12,6 +12,6 @@ public class StartTalkCommand implements Command {
     }
     @Override
     public void execute() {
-        game.setTextDisplay((InteractableWithText) game.getCurrentLocation().getInteractable(name));
+        game.setTextBox((InteractableWithText) game.getCurrentLocation().getInteractable(name));
     }
 }

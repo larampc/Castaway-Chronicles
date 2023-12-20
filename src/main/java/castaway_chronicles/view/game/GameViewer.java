@@ -38,8 +38,8 @@ public class GameViewer extends Viewer<Game> {
                 getTextBoxViewer().getSelectionPanelViewer().setDefinitions(0, 10, new Position(6,155));
                 break;
         }
-        if (getModel().getTextDisplay().isActiveTextBox()) {
-            getTextBoxViewer().drawTextBox(gui, getModel().getTextDisplay().getInteractable() , getModel().getTextDisplay().isActiveChoice());
+        if (getModel().getTextBox().isActiveTextBox()) {
+            getTextBoxViewer().drawTextBox(gui, getModel().getTextBox().getInteractable() , getModel().getTextBox().isActiveChoice());
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }

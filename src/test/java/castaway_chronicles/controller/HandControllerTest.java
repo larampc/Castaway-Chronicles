@@ -49,7 +49,7 @@ public class HandControllerTest {
 
         TextBox textBox = mock(TextBox.class);
         Backpack backpackMock = mock(Backpack.class);
-        when(game.getTextDisplay()).thenReturn(textBox);
+        when(game.getTextBox()).thenReturn(textBox);
         Mockito.when(textBox.getInteractable()).thenReturn(backpackItem);
 
         Mockito.when(game.getBackpack()).thenReturn(backpackMock);
@@ -84,7 +84,7 @@ public class HandControllerTest {
         when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
         when(npcMock.contains(positionMock)).thenReturn(true);
         when(npcMock.getName()).thenReturn("NPC_NAME");
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
+        when(game.getTextBox()).thenReturn(textDisplayMock);
         when(textDisplayMock.getInteractable()).thenReturn(backpackItemMock);
         when(backpackItemMock.getEffects()).thenReturn(new ArrayList<>());
         Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
@@ -119,7 +119,7 @@ public class HandControllerTest {
         when(textBox.getInteractable()).thenReturn(backpackItemMock);
 
         Backpack backpackMock = mock(Backpack.class);
-        when(game.getTextDisplay()).thenReturn(textBox);
+        when(game.getTextBox()).thenReturn(textBox);
 
         Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 

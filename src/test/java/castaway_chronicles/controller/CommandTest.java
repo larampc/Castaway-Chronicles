@@ -110,12 +110,12 @@ public class CommandTest {
         Mockito.when(gameMock.getCurrentLocation()).thenReturn(currentLocationMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC")).thenReturn(NPCMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC2")).thenReturn(NPCMock2);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("NPC TestNPC 1","NPC TestNPC2 2 W"), applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(NPCMock).goToState(1);
-        Mockito.verify(gameMock).setTextDisplay(NPCMock);
+        Mockito.verify(gameMock).setTextBox(NPCMock);
         Mockito.verify(NPCMock2).goToState(2);
         Mockito.verify(textBoxMock).closeTextBox();
     }
@@ -390,7 +390,7 @@ public class CommandTest {
         Mockito.when(locationMock.getInteractable("Test")).thenReturn(npcMock);
         new StartTalkCommand(gameMock,"Test").execute();
 
-        Mockito.verify(gameMock).setTextDisplay(npcMock);
+        Mockito.verify(gameMock).setTextBox(npcMock);
     }
 
     @Test
@@ -398,7 +398,7 @@ public class CommandTest {
         Game gameMock = Mockito.mock(Game.class);
         TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC NPCMock = Mockito.mock(NPC.class);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
         Mockito.when(textBoxMock.getInteractable()).thenReturn(NPCMock);
         new AnswerCommand(gameMock).execute();
 

@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NPCTest {
     private NPC npcDialog;
@@ -36,7 +35,6 @@ public class NPCTest {
     void goToStateChoice() throws IOException {
         npcDialog.goToStateChoice();
         assertEquals(List.of("Beach rope V", "NPC toot 2"), npcDialog.getEffects());
-//        assertEquals(0, npcDialog.getLine());
         assertEquals("Hmm, where did I leave them?", npcDialog.getText());
         assertEquals(1, npcDialog.getState());
     }
@@ -45,18 +43,18 @@ public class NPCTest {
     void goToState() throws IOException {
         npcDialog.goToState(3);
         assertEquals(List.of("NPC toot 5 W", "Map City_icon V"), npcDialog.getEffects());
-//        assertEquals(0, npcDialog.getLine());
         assertEquals("Your loss my friend.", npcDialog.getText());
-//        assertEquals(1, npcDialog.getMax());
         assertEquals(3, npcDialog.getState());
     }
 
     @Test
     void nextLine() {
-//        assertEquals(0, npcDialog.getLine());
         assertEquals("Hello stranger, you look new around here.", npcDialog.getText());
         npcDialog.nextLine();
-//        assertEquals(1, npcDialog.getLine());
         assertEquals("I'm Oriole...", npcDialog.getText());
+        assertFalse(npcDialog.dialogEnded());
+        npcDialog.nextLine();
+        npcDialog.nextLine();
+        assertTrue(npcDialog.dialogEnded());
     }
 }

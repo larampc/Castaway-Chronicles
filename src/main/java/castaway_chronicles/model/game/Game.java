@@ -49,9 +49,9 @@ public class Game {
     public void setCurrentLocation(String name) {
         currentLocation = getLocation(name);
     }
-    public TextBox getTextDisplay() {return textBox;}
-    public void setTextDisplay(InteractableWithText element) {
-        textBox.activateTextBox(element);
+    public TextBox getTextBox() {return textBox;}
+    public void setTextBox(InteractableWithText interactable) {
+        textBox.activateTextBox(interactable);
     }
     public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE}
 }
