@@ -13,7 +13,6 @@ import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.model.game.gameElements.BackpackItem;
-import castaway_chronicles.model.game.scene.Backpack;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -21,16 +20,14 @@ import java.net.URISyntaxException;
 
 
 public class BackpackController implements ControllerState {
-    private final Backpack backpack;
     private final GameController gameController;
     public BackpackController(GameController gameController) {
         this.gameController = gameController;
-        backpack = gameController.getModel().getBackpack();
     }
 
     @Override
     public void click(Position position, Application application) throws IOException {
-        for (Interactable e: backpack.getVisibleInteractables()) {
+        for (Interactable e: gameController.getModel().getBackpack().getVisibleInteractables()) {
             if (e.contains(position)) {
                 ((BackpackItem)e).setInHand(false);
                 gameController.getModel().getTextBox().activateTextBox((InteractableWithText) e);
