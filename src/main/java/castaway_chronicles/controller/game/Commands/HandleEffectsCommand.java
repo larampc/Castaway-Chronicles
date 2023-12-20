@@ -57,9 +57,7 @@ public class HandleEffectsCommand implements Command{
                 executeBackpackEffects(s);
                 continue;
             }
-            if (s[0].equalsIgnoreCase("location")) {
-                executeLocationEffects(s);
-            }
+            executeLocationEffects(s);
         }
     }
     private void executeLocationEffects(String[] s){
