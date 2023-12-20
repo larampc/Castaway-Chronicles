@@ -18,6 +18,7 @@ public class SceneLoader {
         ResourceManager resourceManager = ResourceManager.getInstance();
         resourceManager.setPath(dir + "/" + filename + ".txt");
         lines = resourceManager.readCurrentTimeResourceFile();
+        //SETTER PARA LINES PARA TESTE
         this.type = type;
         getInteractables();
     }

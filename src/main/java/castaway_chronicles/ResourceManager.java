@@ -22,6 +22,7 @@ public class ResourceManager {
     }
     private String path;
     private Path fullPath;
+    private File file;
     public List<String> readStaticResourceFile(){
         URL resource = getClass().getClassLoader().getResource(path);
         assert resource != null;
@@ -42,9 +43,8 @@ public class ResourceManager {
             throw new RuntimeException("File " + path + " doesn't exist");
         }
     }
-    public void deleteResourceFile() {
-        File toDelete = new File(fullPath.toString());
-        File[] allContents = toDelete.listFiles();
+    public void deleteResourceFileContent() {
+        File[] allContents = file.listFiles();
         if (allContents != null) {
             for (File file : allContents) {
                 file.delete();
@@ -52,27 +52,26 @@ public class ResourceManager {
         }
     }
     public void writeToFile(String line){
-        File toWrite = new File(fullPath.toString());
         try {
-            Writer fr = Files.newBufferedWriter(toWrite.toPath(), UTF_8, CREATE, APPEND);
+            Writer fr = Files.newBufferedWriter(file.toPath(), UTF_8, CREATE, APPEND);
             fr.write(line);
             fr.close();
-
         } catch (IOException e) {
             throw new RuntimeException("File " + path + " doesn't exist");
         }
     }
     public int countFiles(){
         if(!existsStaticResourceFile()) return 0;
-        return Objects.requireNonNull(new File(fullPath.toString()).listFiles()).length;
+        return Objects.requireNonNull(file.listFiles()).length;
     }
 
     public void setPath(String path) {
         this.path = path;
         fullPath = Path.of("src", "main", "resources",path);
+        file = new File(fullPath.toString());
     }
     public File getFile(){
-        return new File(fullPath.toString());
+        return file;
     }
 }
 
