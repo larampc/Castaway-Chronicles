@@ -213,10 +213,14 @@ public class CommandTest {
         Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
         Mockito.when(interactablePositionMock.getRight(10)).thenReturn(new Position(90,100));
 
+        MoveCommand moveCommand1 = new MoveCommand(locationMock, 0);
+        moveCommand1.execute();
+        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
+
         MoveCommand moveCommand = new MoveCommand(locationMock, 10);
         moveCommand.execute();
 
-        Mockito.verify(mainCharMock,Mockito.times(1)).setName("walk2_left");
+        Mockito.verify(mainCharMock,Mockito.times(2)).setName("walk2_left");
         Mockito.verify(backgroundMock,Mockito.times(1)).setPosition(new Position(-110,0));
         Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(90,100));
 
@@ -313,7 +317,8 @@ public class CommandTest {
         Mockito.when(backgroundMock.isLoopable()).thenReturn(true);
         Mockito.when(backgroundMock.getPosition()).thenReturn(backgroundPositionMock);
         Mockito.when(backgroundMock.getWidth()).thenReturn(700);
-        Mockito.when(backgroundPositionMock.getX()).thenReturn(0);
+        Mockito.when(backgroundPositionMock.getX()).thenReturn(-9);
+        Mockito.when(backgroundPositionMock.getRight(Mockito.anyInt())).thenReturn(new Position(2,2));
         Mockito.when(locationMock.getInteractables()).thenReturn(List.of(interactableMock));
         Mockito.when(interactableMock.getPosition()).thenReturn(interactablePositionMock);
         Mockito.when(interactablePositionMock.getRight(-490)).thenReturn(new Position(0,0));
@@ -326,13 +331,22 @@ public class CommandTest {
         Mockito.verify(backgroundMock).setPosition(new Position(-490,0));
         Mockito.verify(interactableMock).setPosition(new Position(0,0));
 
-        Mockito.when(backgroundPositionMock.getX()).thenReturn(-500);
+        moveCommand = new MoveCommand(locationMock, 9);
+        moveCommand.execute();
+        Mockito.verify(backgroundMock).setPosition(new Position(2,2));
+        Mockito.verify(interactableMock).setPosition(new Position(0,0));
+
+        Mockito.when(backgroundPositionMock.getX()).thenReturn(-491);
 
         moveCommand = new MoveCommand(locationMock, -10);
         moveCommand.execute();
 
         Mockito.verify(backgroundMock).setPosition(new Position(-10,0));
         Mockito.verify(interactableMock,Mockito.times(1)).setPosition(new Position(1,1));
+
+        moveCommand = new MoveCommand(locationMock, -9);
+        moveCommand.execute();
+        Mockito.verify(backgroundMock,Mockito.times(2)).setPosition(new Position(2,2));
     }
     @Test
     void moveCommand_MainIconsDontMove() throws IOException {
