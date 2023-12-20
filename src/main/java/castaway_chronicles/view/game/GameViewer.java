@@ -9,13 +9,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameViewer extends Viewer<Game> {
-    private MenuViewer pauseMenuViewer;
-    private SceneViewer gameSceneViewer;
-    private TextBoxViewer textBoxViewer;
+    private final MenuViewer pauseMenuViewer;
+    private final SceneViewer gameSceneViewer;
+    private final TextBoxViewer textBoxViewer;
     public GameViewer(Game model) {
         super(model);
         pauseMenuViewer = new MenuViewer();
-        pauseMenuViewer.getSelectionPanelViewer().setDefinitions(48,20, new Position(97,101));
+        getPauseMenuViewer().getSelectionPanelViewer().setDefinitions(48,20, new Position(97,101));
         gameSceneViewer = new SceneViewer();
         textBoxViewer = new TextBoxViewer();
     }
@@ -24,22 +24,22 @@ public class GameViewer extends Viewer<Game> {
     public void drawScreen(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
             case PAUSE:
-                drawScene(gui, getModel().getPauseMenu(), pauseMenuViewer);
+                drawScene(gui, getModel().getPauseMenu(), getPauseMenuViewer());
                 break;
             case BACKPACK:
-                drawScene(gui, getModel().getBackpack(), gameSceneViewer);
-                textBoxViewer.getSelectionPanelViewer().setDefinitions( 75, 10, new Position(50, 157));
+                drawScene(gui, getModel().getBackpack(), getGameSceneViewer());
+                getTextBoxViewer().getSelectionPanelViewer().setDefinitions( 75, 10, new Position(50, 157));
                 break;
             case MAP:
-                drawScene(gui, getModel().getMap(), gameSceneViewer);
+                drawScene(gui, getModel().getMap(), getGameSceneViewer());
                 break;
             case LOCATION:
-                drawScene(gui, getModel().getCurrentLocation(), gameSceneViewer);
-                textBoxViewer.getSelectionPanelViewer().setDefinitions(0, 10, new Position(6,155));
+                drawScene(gui, getModel().getCurrentLocation(), getGameSceneViewer());
+                getTextBoxViewer().getSelectionPanelViewer().setDefinitions(0, 10, new Position(6,155));
                 break;
         }
         if (getModel().getTextDisplay().isActiveTextBox()) {
-            textBoxViewer.drawTextBox(gui, getModel().getTextDisplay().getInteractable() , getModel().getTextDisplay().isActiveChoice());
+            getTextBoxViewer().drawTextBox(gui, getModel().getTextDisplay().getInteractable() , getModel().getTextDisplay().isActiveChoice());
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }
@@ -47,14 +47,14 @@ public class GameViewer extends Viewer<Game> {
     public <T> void drawScene(GUI gui, T model, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
         viewer.draw(model, gui);
     }
-    public void setPauseMenuViewer(MenuViewer pauseMenuViewer) {
-        this.pauseMenuViewer = pauseMenuViewer;
+    public MenuViewer getPauseMenuViewer() {
+        return pauseMenuViewer;
     }
-    public void setTextBoxViewer(TextBoxViewer textBoxViewer) {
-        this.textBoxViewer = textBoxViewer;
+    public TextBoxViewer getTextBoxViewer() {
+        return textBoxViewer;
     }
 
-    public void setGameSceneViewer(SceneViewer gameSceneViewer) {
-        this.gameSceneViewer = gameSceneViewer;
+    public SceneViewer getGameSceneViewer() {
+        return gameSceneViewer;
     }
 }
