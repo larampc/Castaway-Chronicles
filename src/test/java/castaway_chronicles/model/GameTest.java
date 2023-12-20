@@ -1,6 +1,7 @@
 package castaway_chronicles.model;
 
 import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.elements.InteractableWithText;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
@@ -64,5 +65,11 @@ public class GameTest {
         game.setCurrentScene(Game.SCENE.PAUSE);
         assertEquals("PAUSE", game.getScene().name());
 //        assertThrows(Throwable.class, () -> game.setCurrentScene());
+    }
+    @Test
+    public void TextDisplay() {
+        InteractableWithText mockInteractable = Mockito.mock(InteractableWithText.class);
+        game.setTextDisplay(mockInteractable);
+        assertEquals(mockInteractable, game.getTextDisplay().getInteractable());
     }
 }

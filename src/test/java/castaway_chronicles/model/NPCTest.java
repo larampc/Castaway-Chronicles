@@ -28,6 +28,11 @@ public class NPCTest {
     }
 
     @Test
+    void getText() {
+        assertEquals("Hello stranger, you look new around here.", npcDialog.getText());
+    }
+
+    @Test
     void goToStateChoice() throws IOException {
         npcDialog.goToStateChoice();
         assertEquals(List.of("Beach rope V", "NPC toot 2"), npcDialog.getEffects());
