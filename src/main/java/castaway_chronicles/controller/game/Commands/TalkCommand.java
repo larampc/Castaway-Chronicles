@@ -1,7 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.gameElements.NPC;
 
 public class TalkCommand implements Command{
     private final Game location;
@@ -11,10 +11,10 @@ public class TalkCommand implements Command{
     @Override
     public void execute() {
         NPC npcDialog = (NPC)location.getTextDisplay().getInteractable();
-        if (npcDialog.getLine() == npcDialog.getMax() && npcDialog.getChoices().getNumberEntries() == 0) {
+        if (npcDialog.dialogEnded() && npcDialog.getChoices().getNumberEntries() == 0) {
             location.getTextDisplay().closeTextBox();
         }
-        else if (npcDialog.getLine() == npcDialog.getMax()) {
+        else if (npcDialog.dialogEnded()) {
             location.getTextDisplay().setActiveChoice(true);
         }
         else npcDialog.nextLine();

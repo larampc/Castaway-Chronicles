@@ -2,10 +2,10 @@ package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Icon;
-import castaway_chronicles.model.game.elements.Item;
-import castaway_chronicles.model.game.elements.MainChar;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.game.gameElements.Icon;
+import castaway_chronicles.model.game.gameElements.Item;
+import castaway_chronicles.model.game.gameElements.MainChar;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import org.junit.jupiter.api.BeforeEach;

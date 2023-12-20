@@ -3,7 +3,7 @@ package castaway_chronicles.view;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.SelectionPanel;
-import castaway_chronicles.model.game.elements.InteractableWithText;
+import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.view.game.TextBoxViewer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

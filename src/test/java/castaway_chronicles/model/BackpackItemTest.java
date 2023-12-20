@@ -1,6 +1,6 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.ItemBackpack;
+import castaway_chronicles.model.game.gameElements.BackpackItem;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -10,41 +10,41 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ItemBackpackTest {
-    private static ItemBackpack itemBackpack;
+public class BackpackItemTest {
+    private static BackpackItem backpackItem;
     @BeforeAll
     public static void setup() throws IOException {
-        itemBackpack = new ItemBackpack(1,2,3,4,"rope_backpack");
+        backpackItem = new BackpackItem(1,2,3,4,"rope_backpack");
     }
 
     @Test
     public void constructor() {
-        assertThrows(Throwable.class, () -> new ItemBackpack(1, 2, 3, 4, "test"));
+        assertThrows(Throwable.class, () -> new BackpackItem(1, 2, 3, 4, "test"));
     }
 
     @Test
     public void ItemBackpackContent() throws IOException {
-        assertEquals(List.of("GIVE"), itemBackpack.getChoices().getEntries());
-        itemBackpack.setInHand(false);
-        assertEquals("The perfect rope to make nests with", itemBackpack.getText());
-        assertEquals("give toot", itemBackpack.getCommand());
-        itemBackpack.setInHand(true);
-        assertEquals("No...", itemBackpack.getText());
-        assertEquals(List.of("NPC toot 4", "Backpack rope I"), itemBackpack.getEffects());
+        assertEquals(List.of("GIVE"), backpackItem.getChoices().getEntries());
+        backpackItem.setInHand(false);
+        assertEquals("The perfect rope to make nests with", backpackItem.getText());
+        assertEquals("give toot", backpackItem.getCommand());
+        backpackItem.setInHand(true);
+        assertEquals("No...", backpackItem.getText());
+        assertEquals(List.of("NPC toot 4", "Backpack rope I"), backpackItem.getEffects());
     }
 
     @Test
     public void setNameBackpack() throws IOException {
-        assertEquals("rope_backpack", itemBackpack.getName());
-        itemBackpack.setNameBackpack("rock_backpack");
-        assertEquals("rock_backpack", itemBackpack.getName());
-        assertEquals(List.of("DRINK", "THROW", "GIVE"), itemBackpack.getChoices().getEntries());
-        itemBackpack.setInHand(false);
-        assertEquals("A very heavy rock", itemBackpack.getText());
-        assertEquals("use", itemBackpack.getCommand());
-        itemBackpack.setInHand(true);
-        assertEquals("No...", itemBackpack.getText());
-        assertEquals(Collections.emptyList(), itemBackpack.getEffects());
+        assertEquals("rope_backpack", backpackItem.getName());
+        backpackItem.setNameBackpack("rock_backpack");
+        assertEquals("rock_backpack", backpackItem.getName());
+        assertEquals(List.of("DRINK", "THROW", "GIVE"), backpackItem.getChoices().getEntries());
+        backpackItem.setInHand(false);
+        assertEquals("A very heavy rock", backpackItem.getText());
+        assertEquals("use", backpackItem.getCommand());
+        backpackItem.setInHand(true);
+        assertEquals("No...", backpackItem.getText());
+        assertEquals(Collections.emptyList(), backpackItem.getEffects());
     }
 //    @Test
 //    public void interactable() {

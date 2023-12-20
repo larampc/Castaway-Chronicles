@@ -3,7 +3,7 @@ package castaway_chronicles.view;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.InteractableWithText;
+import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.model.game.scene.*;
 import castaway_chronicles.view.game.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ public class GameViewerTest {
     private MenuViewer menuViewerMock;
     private TextBoxViewer textBoxViewerMock;
     private GameViewer gameViewer;
-    private TextDisplay textDisplayMock;
+    private TextBox textBoxMock;
     private SelectionPanelViewer selectionPanelViewerMock;
 
     @BeforeEach
@@ -33,10 +33,10 @@ public class GameViewerTest {
         menuViewerMock = Mockito.mock(MenuViewer.class);
         sceneViewerMock = Mockito.mock(SceneViewer.class);
         textBoxViewerMock = Mockito.mock(TextBoxViewer.class);
-        textDisplayMock = Mockito.mock(TextDisplay.class);
+        textBoxMock = Mockito.mock(TextBox.class);
         selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
         Mockito.when(menuViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
         gameViewer = new GameViewer(gameMock) {
             @Override
             public MenuViewer getPauseMenuViewer() {
@@ -58,7 +58,7 @@ public class GameViewerTest {
         Mockito.when(gameMock.getScene()).thenReturn(Game.SCENE.PAUSE);
         PauseMenu pauseMenuMock = Mockito.mock(PauseMenu.class);
         Mockito.when(gameMock.getPauseMenu()).thenReturn(pauseMenuMock);
-        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
 
         gameViewer.drawScreen(guiMock);
@@ -72,8 +72,8 @@ public class GameViewerTest {
         Backpack backpackMock = Mockito.mock(Backpack.class);
         Mockito.when(gameMock.getBackpack()).thenReturn(backpackMock);
         SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
-        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
         Mockito.when(textBoxViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);
 
@@ -88,7 +88,7 @@ public class GameViewerTest {
         Mockito.when(gameMock.getScene()).thenReturn(Game.SCENE.MAP);
         Map mapMock = Mockito.mock(Map.class);
         Mockito.when(gameMock.getMap()).thenReturn(mapMock);
-        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(true);
 
         gameViewer.drawScreen(guiMock);
@@ -102,12 +102,12 @@ public class GameViewerTest {
         Mockito.when(gameMock.getScene()).thenReturn(Game.SCENE.LOCATION);
         Location locationMock = Mockito.mock(Location.class);
         Mockito.when(gameMock.getCurrentLocation()).thenReturn(locationMock);
-        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(true);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
         SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
         InteractableWithText interactableMock = Mockito.mock(InteractableWithText.class);
-        Mockito.when(textDisplayMock.getInteractable()).thenReturn(interactableMock);
-        Mockito.when(textDisplayMock.isActiveChoice()).thenReturn(false);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(interactableMock);
+        Mockito.when(textBoxMock.isActiveChoice()).thenReturn(false);
         Mockito.when(textBoxViewerMock.getSelectionPanelViewer()).thenReturn(selectionPanelViewerMock);
 
         gameViewer.drawScreen(guiMock);
@@ -122,7 +122,7 @@ public class GameViewerTest {
         Mockito.when(gameMock.getScene()).thenReturn(Game.SCENE.MAP);
         Map mapMock = Mockito.mock(Map.class);
         Mockito.when(gameMock.getMap()).thenReturn(mapMock);
-        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false);
         Mockito.when(guiMock.isBigger()).thenReturn(false);
 
         gameViewer.draw(guiMock);

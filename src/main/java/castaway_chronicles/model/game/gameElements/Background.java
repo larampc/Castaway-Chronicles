@@ -1,4 +1,6 @@
-package castaway_chronicles.model.game.elements;
+package castaway_chronicles.model.game.gameElements;
+
+import castaway_chronicles.model.Element;
 
 public class Background extends Element {
     private final boolean loopable;

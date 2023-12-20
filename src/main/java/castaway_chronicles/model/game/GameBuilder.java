@@ -12,15 +12,8 @@ import java.util.HashMap;
 
 public class GameBuilder {
     public Game createGame(boolean saved) throws IOException {
-        Game game = new Game();
         String dir = saved? "Scenes_saved":"Scenes";
-        game.setMap(createMap(dir));
-        game.setBackpack(createBackpack(dir));
-        game.setLocations(createLocations(dir));
-        game.setCurrentScene(Game.SCENE.LOCATION);
-        game.setCurrentLocation(getCurrentLocation(dir));
-        game.setPauseMenu(createPauseMenu());
-        return game;
+        return new Game(createMap(dir), createBackpack(dir), createLocations(dir), createPauseMenu(), getCurrentLocation(dir));
     }
 
     private String getCurrentLocation(String dir) throws IOException {

@@ -5,7 +5,7 @@ import castaway_chronicles.controller.game.locationControllers.NarratorControlle
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.scene.Location;
-import castaway_chronicles.model.game.scene.TextDisplay;
+import castaway_chronicles.model.game.scene.TextBox;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,7 +33,7 @@ public class NarratorControllerTest {
     public void select() throws IOException, URISyntaxException, InterruptedException {
         Location currentLocation = Mockito.mock(Location.class);
         Mockito.when(game.getCurrentLocation()).thenReturn(currentLocation);
-        TextDisplay backpackAnswer = Mockito.mock(TextDisplay.class);
+        TextBox backpackAnswer = Mockito.mock(TextBox.class);
         Mockito.when(game.getTextDisplay()).thenReturn(backpackAnswer);
 
         narratorController.key(KeyEvent.VK_ENTER,Mockito.mock(Application.class));

@@ -2,7 +2,7 @@ package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Scene;
-import castaway_chronicles.model.game.elements.MainChar;
+import castaway_chronicles.model.game.gameElements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;

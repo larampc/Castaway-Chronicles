@@ -1,7 +1,7 @@
 package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.elements.Element;
+import castaway_chronicles.model.Element;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

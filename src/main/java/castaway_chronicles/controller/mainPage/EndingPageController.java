@@ -4,7 +4,7 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.EndState;
 

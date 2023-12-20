@@ -1,6 +1,6 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

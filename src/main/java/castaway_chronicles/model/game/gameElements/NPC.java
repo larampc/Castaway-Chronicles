@@ -1,5 +1,6 @@
-package castaway_chronicles.model.game.elements;
+package castaway_chronicles.model.game.gameElements;
 
+import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.model.SelectionPanel;
 
 import java.io.BufferedReader;
@@ -49,7 +50,7 @@ public class NPC extends InteractableWithText {
 
     @Override
     public String getText() {
-        return getCurrentLine();
+        return dialog.get(line);
     }
 
     public List<Integer> getNextStates() {
@@ -60,15 +61,14 @@ public class NPC extends InteractableWithText {
         state = nextStates.get(getChoices().getCurrentEntry());
         init();
     }
-    public void goToState(int i) throws IOException {
-        state = i;
+    public void goToState(int state) throws IOException {
+        this.state = state;
         init();
     }
-    public int getLine() { return line;}
+    public boolean dialogEnded() { return line == dialog.size()-1;}
     public void nextLine() {
         line++;
     }
-    public int getMax() {return dialog.size()-1;}
     public void readEffects(int state) throws IOException {
         URL resource = getClass().getClassLoader().getResource("Dialog/" + getName() + "/effect_" + getName() + state + ".txt");
         effects = new ArrayList<>();
@@ -81,6 +81,5 @@ public class NPC extends InteractableWithText {
     public List<String> getEffects() {
         return effects;
     }
-    public String getCurrentLine() {return dialog.get(line);}
     public int getState() {return state;}
 }

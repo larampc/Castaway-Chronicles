@@ -1,6 +1,4 @@
-package castaway_chronicles.model.game.elements;
-
-import castaway_chronicles.model.Position;
+package castaway_chronicles.model;
 
 public class Element {
     private Position position;

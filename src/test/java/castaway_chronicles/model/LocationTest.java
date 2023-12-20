@@ -1,8 +1,7 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.MainChar;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.game.gameElements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

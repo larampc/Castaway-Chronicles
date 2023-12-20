@@ -7,8 +7,8 @@ import castaway_chronicles.controller.game.locationControllers.WalkingController
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.MainChar;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.game.gameElements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
 
 import org.junit.jupiter.api.BeforeEach;

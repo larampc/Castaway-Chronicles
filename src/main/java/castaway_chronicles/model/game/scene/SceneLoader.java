@@ -1,7 +1,8 @@
 package castaway_chronicles.model.game.scene;
 
+import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.Scene;
-import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.game.gameElements.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -24,8 +25,7 @@ public class SceneLoader {
         getInteractables();
     }
     public Scene createScene() {
-        Scene scene = SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
-        return scene;
+        return SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
     }
     private List<String> readLines(BufferedReader br) throws IOException {
         List<String> lines = new ArrayList<>();
@@ -55,7 +55,7 @@ public class SceneLoader {
                 String type = s[1];
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]), state = 0;
                 if (type.equalsIgnoreCase("npc")) state = Integer.parseInt(s[7]);
-                Interactable interactable = InteractableFactory.getInteractable(type,x,y,w,h,name,state);
+                Interactable interactable = GameInteractableFactory.getInteractable(type,x,y,w,h,name,state);
                 if (line.charAt(line.length()-1)=='V') {
                     visibleInteractables.put(name,interactable);
                 }

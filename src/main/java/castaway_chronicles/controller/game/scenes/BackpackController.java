@@ -10,9 +10,9 @@ import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.InteractableWithText;
-import castaway_chronicles.model.game.elements.ItemBackpack;
+import castaway_chronicles.model.Interactable;
+import castaway_chronicles.model.InteractableWithText;
+import castaway_chronicles.model.game.gameElements.BackpackItem;
 import castaway_chronicles.model.game.scene.Backpack;
 
 import java.awt.event.KeyEvent;
@@ -32,7 +32,7 @@ public class BackpackController implements ControllerState {
     public void click(Position position, Application application) throws IOException {
         for (Interactable e: backpack.getVisibleInteractables()) {
             if (e.contains(position)) {
-                ((ItemBackpack)e).setInHand(false);
+                ((BackpackItem)e).setInHand(false);
                 gameController.getModel().getTextDisplay().activateTextBox((InteractableWithText) e);
             }
         }
@@ -86,7 +86,7 @@ public class BackpackController implements ControllerState {
         }
         if (!gameController.getModel().getTextDisplay().isActiveChoice()) return;
 
-        String command = ((ItemBackpack)gameController.getModel().getTextDisplay().getInteractable()).getCommand();
+        String command = ((BackpackItem)gameController.getModel().getTextDisplay().getInteractable()).getCommand();
         gameController.getModel().getTextDisplay().closeTextBox();
         String[] s = command.split(" ", -1);
         if (s.length == 1) {
@@ -96,7 +96,7 @@ public class BackpackController implements ControllerState {
                 gameController.setControllerState(gameController.getHandController());
             }
             else {
-                ((ItemBackpack) gameController.getModel().getTextDisplay().getInteractable()).setInHand(true);
+                ((BackpackItem) gameController.getModel().getTextDisplay().getInteractable()).setInHand(true);
                 gameController.getModel().getTextDisplay().activateTextBox();
                 gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                 gameController.setControllerState(gameController.getNarratorController());

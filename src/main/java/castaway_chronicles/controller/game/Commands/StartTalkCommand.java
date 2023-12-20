@@ -1,7 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.InteractableWithText;
+import castaway_chronicles.model.InteractableWithText;
 
 public class StartTalkCommand implements Command {
     private final Game game;

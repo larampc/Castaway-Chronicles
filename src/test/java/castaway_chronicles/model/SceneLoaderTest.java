@@ -1,6 +1,6 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.SceneLoader;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ public class SceneLoaderTest {
                 new NPC(1,2,3,4,"witch",0),
                 new Icon(2,2,23,17,"MAP_icon"),
                 new Item(1, 2, 3, 4, "rope"),
-                new ItemBackpack(1, 2, 3, 4, "rope_backpack"));
+                new BackpackItem(1, 2, 3, 4, "rope_backpack"));
         assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test

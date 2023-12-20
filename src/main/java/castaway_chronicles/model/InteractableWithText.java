@@ -1,6 +1,4 @@
-package castaway_chronicles.model.game.elements;
-
-import castaway_chronicles.model.SelectionPanel;
+package castaway_chronicles.model;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +13,7 @@ public abstract class InteractableWithText extends Interactable {
         return choices;
     }
     public abstract List<String> getEffects() throws IOException;
-    public void setChoices(SelectionPanel selectionPanel) {
-        this.choices = selectionPanel;
+    public void setChoices(SelectionPanel choices) {
+        this.choices = choices;
     }
 }

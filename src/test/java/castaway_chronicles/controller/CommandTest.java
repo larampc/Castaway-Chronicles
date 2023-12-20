@@ -2,13 +2,14 @@ package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.*;
+import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
-import castaway_chronicles.model.game.scene.TextDisplay;
+import castaway_chronicles.model.game.scene.TextBox;
 
 import castaway_chronicles.states.EndState;
 import org.junit.jupiter.api.*;
@@ -105,18 +106,18 @@ public class CommandTest {
         Game gameMock = Mockito.mock(Game.class);
         NPC NPCMock = Mockito.mock(NPC.class);
         NPC NPCMock2 = Mockito.mock(NPC.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         Mockito.when(gameMock.getCurrentLocation()).thenReturn(currentLocationMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC")).thenReturn(NPCMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC2")).thenReturn(NPCMock2);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("NPC TestNPC 1","NPC TestNPC2 2 W"), applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(NPCMock).goToState(1);
         Mockito.verify(gameMock).setTextDisplay(NPCMock);
         Mockito.verify(NPCMock2).goToState(2);
-        Mockito.verify(textDisplayMock).closeTextBox();
+        Mockito.verify(textBoxMock).closeTextBox();
     }
 
     @Test
@@ -134,16 +135,16 @@ public class CommandTest {
     @Test
     void executeBackPackEffect() throws IOException, InterruptedException, URISyntaxException {
         Backpack backpackMock = Mockito.mock(Backpack.class);
-        ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
+        BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
         Mockito.when(gameMock.getBackpack()).thenReturn(backpackMock);
-        Mockito.when(backpackMock.getInteractable("TestIcon3_backpack")).thenReturn(itemBackpackMock);
+        Mockito.when(backpackMock.getInteractable("TestIcon3_backpack")).thenReturn(backpackItemMock);
 
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("BACKPACK TestIcon I","backpack TestIcon2 V","backpack TestIcon3 NewTestIcon3"), applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(backpackMock,Mockito.times(1)).setInvisible("TestIcon_backpack");
         Mockito.verify(backpackMock,Mockito.times(1)).setVisible("TestIcon2_backpack");
-        Mockito.verify(itemBackpackMock).setNameBackpack("NewTestIcon3_backpack");
+        Mockito.verify(backpackItemMock).setNameBackpack("NewTestIcon3_backpack");
     }
 
     @Test
@@ -395,14 +396,14 @@ public class CommandTest {
     @Test
     void AnswerCommand() throws IOException {
         Game gameMock = Mockito.mock(Game.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC NPCMock = Mockito.mock(NPC.class);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
-        Mockito.when(textDisplayMock.getInteractable()).thenReturn(NPCMock);
+        Mockito.when(gameMock.getTextDisplay()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(NPCMock);
         new AnswerCommand(gameMock).execute();
 
         Mockito.verify(NPCMock).goToStateChoice();
-        Mockito.verify(textDisplayMock).setActiveChoice(false);
+        Mockito.verify(textBoxMock).setActiveChoice(false);
     }
 
 }

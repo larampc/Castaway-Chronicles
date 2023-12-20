@@ -8,9 +8,9 @@ import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.ItemBackpack;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.Interactable;
+import castaway_chronicles.model.game.gameElements.BackpackItem;
+import castaway_chronicles.model.game.gameElements.NPC;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class HandController implements ControllerState {
                 }
             }
         }
-        ((ItemBackpack)gameController.getModel().getTextDisplay().getInteractable()).setInHand(true);
+        ((BackpackItem)gameController.getModel().getTextDisplay().getInteractable()).setInHand(true);
         gameController.getModel().getTextDisplay().activateTextBox();
         gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
         gameController.setControllerState(gameController.getNarratorController());

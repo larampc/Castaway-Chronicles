@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class MainPage {
     private final MainMenu mainMenu;
-    private EndingPage endingPage;
+    private final EndingPage endingPage;
     private PAGE current;
     public MainPage() throws IOException {
         mainMenu = new MainMenu();

@@ -1,8 +1,8 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.elements.Icon;
-import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.game.gameElements.Icon;
+import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.io.IOException;

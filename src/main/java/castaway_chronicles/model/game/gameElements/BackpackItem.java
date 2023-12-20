@@ -1,5 +1,6 @@
-package castaway_chronicles.model.game.elements;
+package castaway_chronicles.model.game.gameElements;
 
+import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.model.SelectionPanel;
 
 import java.io.BufferedReader;
@@ -13,12 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ItemBackpack extends InteractableWithText {
+public class BackpackItem extends InteractableWithText {
     private final HashMap<String, String> optionCommand = new HashMap<>();
     private final List<String> defaultAnswers = new ArrayList<>();
     private String description;
     private boolean inHand = false;
-    public ItemBackpack(int x, int y, int w, int h, String name) throws IOException {
+    public BackpackItem(int x, int y, int w, int h, String name) throws IOException {
         super(x, y, w, h, name);
         getInfo();
     }

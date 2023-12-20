@@ -7,7 +7,7 @@ import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.Commands.TalkCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.gameElements.NPC;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
