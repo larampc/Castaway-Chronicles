@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
 public class MainMenuController implements ControllerState {
     private final MainPageController mainPageController;
     private final MainMenu mainMenu;
-    private GenericCommandInvoker commandInvoker;
+    private final GenericCommandInvoker commandInvoker;
     public MainMenuController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
         mainMenu = mainPageController.getModel().getMainMenu();
@@ -79,9 +79,5 @@ public class MainMenuController implements ControllerState {
             mainPageController.getModel().setCurrent(MainPage.PAGE.ENDINGS);
             mainPageController.setCurrent(mainPageController.getEndingPageController());
         }
-    }
-
-    public void setCommandInvoker(GenericCommandInvoker commandInvoker) {
-        this.commandInvoker = commandInvoker;
     }
 }

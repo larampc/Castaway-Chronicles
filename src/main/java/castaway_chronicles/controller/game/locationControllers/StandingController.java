@@ -60,7 +60,7 @@ public class StandingController implements ContinuousControllerState {
         invoker.execute();
         location = gameController.getModel().getCurrentLocation();
         if (location.getMainChar() != null && gameController.getCurrent() instanceof StandingController) {
-            if (((WalkingController) gameController.getWalkingController()).setTowalk(position)) {
+            if (((WalkingController) gameController.getWalkingController()).setToWalk(position)) {
                 location.getMainChar().setName("walk1" + ((location.getMainChar().getPosition().getX() - position.getX() < 0) ? "_right" : "_left"));
             }
             gameController.setControllerState(gameController.getWalkingController());

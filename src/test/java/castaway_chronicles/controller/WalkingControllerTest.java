@@ -58,7 +58,7 @@ public class WalkingControllerTest {
         assertEquals (0,walkingController.getToWalk());
         assertFalse (walkingController.isFacingRight());
 
-        boolean walked = walkingController.setTowalk(new Position(200,123));
+        boolean walked = walkingController.setToWalk(new Position(200,123));
         assertTrue (walked);
         assertTrue (walkingController.getToWalk() < 0);
         assertTrue (walkingController.isFacingRight());
@@ -69,7 +69,7 @@ public class WalkingControllerTest {
         assertEquals (0,walkingController.getToWalk());
         assertFalse (walkingController.isFacingRight());
 
-        boolean walked = walkingController.setTowalk(new Position(50,123));
+        boolean walked = walkingController.setToWalk(new Position(50,123));
         assertTrue (walked);
         assertTrue (walkingController.getToWalk() > 0);
         assertFalse (walkingController.isFacingRight());
