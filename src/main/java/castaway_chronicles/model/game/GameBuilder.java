@@ -1,14 +1,11 @@
 package castaway_chronicles.model.game;
 
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.game.scene.*;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 
 public class GameBuilder {
     public Game createGame(boolean saved) throws IOException {
@@ -23,10 +20,11 @@ public class GameBuilder {
         return game;
     }
 
-    private String getCurrentLocation(String dir) throws IOException {
-        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/" + dir + "/Locations.txt");
-        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
-        for (String line; (line = br.readLine()) != null; ){
+    private String getCurrentLocation(String dir) {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath(dir + "/Locations.txt");
+        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        for (String line : lines){
             String[] s = line.split(" ",-1);
             if (s.length == 2) { return s[0];}
         }
@@ -43,9 +41,10 @@ public class GameBuilder {
     }
     public HashMap<String, Location> createLocations(String dir) throws IOException {
         HashMap<String, Location> locations = new HashMap<>();
-        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/" + dir + "/Locations.txt");
-        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
-        for (String line; (line = br.readLine()) != null; ){
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath(dir + "/Locations.txt");
+        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        for (String line : lines ){
             String[] s = line.split(" ",-1);
             SceneLoader locationsBuilder = new SceneLoader(dir, s[0], "Location");
             locations.put(s[0], (Location) locationsBuilder.createScene());

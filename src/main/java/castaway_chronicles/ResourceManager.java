@@ -71,5 +71,8 @@ public class ResourceManager {
         this.path = path;
         fullPath = Path.of("src", "main", "resources",path);
     }
+    public File getFile(){
+        return new File(fullPath.toString());
+    }
 }
 
