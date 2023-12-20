@@ -4,18 +4,18 @@ import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.NPC;
 
 public class TalkCommand implements Command{
-    private final Game location;
-    public TalkCommand(Game location) {
-        this.location = location;
+    private final Game game;
+    public TalkCommand(Game game) {
+        this.game = game;
     }
     @Override
     public void execute() {
-        NPC npcDialog = (NPC)location.getTextBox().getInteractable();
+        NPC npcDialog = (NPC) game.getTextBox().getInteractable();
         if (npcDialog.dialogEnded() && npcDialog.getChoices().getNumberEntries() == 0) {
-            location.getTextBox().closeTextBox();
+            game.getTextBox().closeTextBox();
         }
         else if (npcDialog.dialogEnded()) {
-            location.getTextBox().setActiveChoice(true);
+            game.getTextBox().setActiveChoice(true);
         }
         else npcDialog.nextLine();
     }

@@ -44,8 +44,8 @@ public class GameViewer extends Viewer<Game> {
         else if (gui.isBigger()) gui.resizeTerminal();
     }
 
-    public <T> void drawScene(GUI gui, T model, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
-        viewer.draw(model, gui);
+    public <T> void drawScene(GUI gui, T scene, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
+        viewer.draw(scene, gui);
     }
     public MenuViewer getPauseMenuViewer() {
         return pauseMenuViewer;

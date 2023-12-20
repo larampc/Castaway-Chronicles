@@ -8,8 +8,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 public abstract class ScreenViewer<T> {
-    public <E extends Element> void drawElements(GUI gui, List<E> elementList) {
-        for(E element: elementList) {
+    public <E extends Element> void drawElements(GUI gui, List<E> elements) {
+        for(E element: elements) {
             drawElement(gui, element);
         }
     }

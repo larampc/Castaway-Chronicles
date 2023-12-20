@@ -21,11 +21,11 @@ public class SelectionPanelViewer {
         offsetX = 0;
         offsetY = 10;
     }
-    public void draw(SelectionPanel model, GUI gui) throws IOException, URISyntaxException, InterruptedException {
+    public void draw(SelectionPanel options, GUI gui) throws IOException, URISyntaxException, InterruptedException {
         int y = initialPosition.getY();
         int x = initialPosition.getX();
-        for (int j = 0; j < model.getNumberEntries(); j++) {
-            gui.drawText(new Position(x, y), 190, model.getEntry(j), model.isSelected(j));
+        for (int j = 0; j < options.getNumberEntries(); j++) {
+            gui.drawText(new Position(x, y), 190, options.getEntry(j), options.isSelected(j));
             y+= offsetY;
             if (j == 1) {x+= offsetX; y = initialPosition.getY();}
         }
