@@ -1,10 +1,9 @@
 package castaway_chronicles.model.mainPage;
 
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.Menu;
 import castaway_chronicles.model.SelectionPanel;
 
-import java.io.File;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class MainMenu extends Menu {
@@ -23,8 +22,9 @@ public class MainMenu extends Menu {
     }
     public boolean isSelectedEndings() {return getSelectionPanel().isSelected(3);}
     public boolean canContinue() {
-        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/Scenes_saved");
-        if (!f.exists()) return false;
-        return f.list().length > 0;
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("Scenes_saved");
+        if(!resourceManager.existsStaticResourceFile()) return false;
+        return resourceManager.countFiles() > 0;
     }
 }
