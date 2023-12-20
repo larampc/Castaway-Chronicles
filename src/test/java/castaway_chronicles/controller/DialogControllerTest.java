@@ -17,10 +17,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import static java.awt.event.KeyEvent.VK_ENTER;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
@@ -29,19 +31,20 @@ public class DialogControllerTest {
     private DialogController dialogController;
     private GameController gameController;
     private Game game;
+    private CommandInvoker commandInvokerMock;
 
     @BeforeEach
     void setUp() {
         game = Mockito.mock(Game.class);
-        gameController = new GameController(game);
+        gameController = Mockito.mock(GameController.class);
+        Mockito.when(gameController.getModel()).thenReturn(game);
         dialogController = new DialogController(gameController);
+        commandInvokerMock = Mockito.mock(CommandInvoker.class);
+        when(gameController.getCommandInvoker()).thenReturn(commandInvokerMock);
     }
 
     @Test
     void testSelectWhenActiveChoice() throws IOException, InterruptedException, URISyntaxException {
-        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
-        gameController.setCommandInvoker(commandInvokerMock);
-
         Location currentLocationMock = Mockito.mock(Location.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC npcMock = Mockito.mock(NPC.class);
@@ -53,7 +56,7 @@ public class DialogControllerTest {
         when(textDisplayMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
-        dialogController.select(Mockito.mock(Application.class));
+        dialogController.key(VK_ENTER, Mockito.mock(Application.class));
 
         verify(commandInvokerMock).setCommand(any(AnswerCommand.class));
         verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
@@ -62,9 +65,6 @@ public class DialogControllerTest {
 
     @Test
     void testSelectWhenDialogNotActiveChoice() throws IOException, InterruptedException, URISyntaxException {
-        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
-        gameController.setCommandInvoker(commandInvokerMock);
-
         Location currentLocationMock = Mockito.mock(Location.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
 
@@ -80,10 +80,28 @@ public class DialogControllerTest {
     }
 
     @Test
-    void keyUp() {
-        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
-        gameController.setCommandInvoker(commandInvokerMock);
+    void testSelectWhenNotActiveTextBox() throws IOException, InterruptedException, URISyntaxException {
+        Location currentLocationMock = Mockito.mock(Location.class);
+        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        NPC npcMock = Mockito.mock(NPC.class);
 
+        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
+        when(game.getTextDisplay()).thenReturn(textDisplayMock);
+        when(textDisplayMock.isActiveChoice()).thenReturn(false);
+        when(textDisplayMock.isActiveTextBox()).thenReturn(false);
+        when(textDisplayMock.getInteractable()).thenReturn(npcMock);
+        when(npcMock.getEffects()).thenReturn(new ArrayList<>());
+
+        dialogController.select(mock(Application.class));
+
+        verify(commandInvokerMock).setCommand(any(TalkCommand.class));
+        verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
+        verify(commandInvokerMock, times(2)).execute();
+        verify(gameController).setControllerState(gameController.getLocationController());
+    }
+
+    @Test
+    void keyUp() throws IOException, URISyntaxException, InterruptedException {
         Location currentLocationMock = Mockito.mock(Location.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC npcMock = Mockito.mock(NPC.class);
@@ -96,15 +114,12 @@ public class DialogControllerTest {
         when(textDisplayMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
-        dialogController.keyUp();
+        dialogController.key(KeyEvent.VK_UP, Mockito.mock(Application.class));
 
         verify(selectionPanelMock,times(1)).previousEntry();
     }
     @Test
-    void keyDown() {
-        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
-        gameController.setCommandInvoker(commandInvokerMock);
-
+    void keyDown() throws IOException, URISyntaxException, InterruptedException {
         Location currentLocationMock = Mockito.mock(Location.class);
         TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
         NPC npcMock = Mockito.mock(NPC.class);
@@ -117,7 +132,7 @@ public class DialogControllerTest {
         when(textDisplayMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
-        dialogController.keyDown();
+        dialogController.key(KeyEvent.VK_DOWN, Mockito.mock(Application.class));
 
         verify(selectionPanelMock,times(1)).nextEntry();
     }
