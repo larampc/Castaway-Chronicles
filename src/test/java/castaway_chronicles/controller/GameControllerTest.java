@@ -52,6 +52,8 @@ public class GameControllerTest {
         InputEvent inputEventMock = Mockito.mock(InputEvent.class);
         KeyEvent keyEventMock = Mockito.mock(KeyEvent.class);
         MouseEvent mouseEventMock = Mockito.mock(MouseEvent.class);
+        Mockito.when(mouseEventMock.getX()).thenReturn(8);
+        Mockito.when(mouseEventMock.getY()).thenReturn(16);
         Mockito.when(keyEventMock.getKeyCode()).thenReturn(3);
         ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
         gameController.setControllerState(controllerStateMock);

@@ -2,15 +2,16 @@ package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.game.Commands.*;
+import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.SelectionPanel;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
-import castaway_chronicles.model.game.scene.TextDisplay;
 
+import castaway_chronicles.model.game.scene.TextBox;
 import castaway_chronicles.states.EndState;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
@@ -22,6 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CommandTest {
@@ -66,6 +69,16 @@ public class CommandTest {
     }
 
     @Test
+    void commandInvoker() throws IOException, URISyntaxException, InterruptedException {
+        CommandInvoker commandInvoker = new CommandInvoker();
+        Command commandMock = Mockito.mock(Command.class);
+        assertDoesNotThrow(commandInvoker::execute);
+        commandInvoker.setCommand(commandMock);
+        commandInvoker.execute();
+        Mockito.verify(commandMock).execute();
+    }
+
+    @Test
     void changeLocation() {
         ChangeLocationCommand changeLocationCommand = new ChangeLocationCommand(gameMock,"City");
         changeLocationCommand.execute();
@@ -106,18 +119,18 @@ public class CommandTest {
         Game gameMock = Mockito.mock(Game.class);
         NPC NPCMock = Mockito.mock(NPC.class);
         NPC NPCMock2 = Mockito.mock(NPC.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         Mockito.when(gameMock.getCurrentLocation()).thenReturn(currentLocationMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC")).thenReturn(NPCMock);
         Mockito.when(currentLocationMock.getInteractable("TestNPC2")).thenReturn(NPCMock2);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("NPC TestNPC 1","NPC TestNPC2 2 W"), applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(NPCMock).goToState(1);
-        Mockito.verify(gameMock).setTextDisplay(NPCMock);
+        Mockito.verify(gameMock).setTextBox(NPCMock);
         Mockito.verify(NPCMock2).goToState(2);
-        Mockito.verify(textDisplayMock).closeTextBox();
+        Mockito.verify(textBoxMock).closeTextBox();
     }
 
     @Test
@@ -135,16 +148,16 @@ public class CommandTest {
     @Test
     void executeBackPackEffect() throws IOException, InterruptedException, URISyntaxException {
         Backpack backpackMock = Mockito.mock(Backpack.class);
-        ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
+        BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
         Mockito.when(gameMock.getBackpack()).thenReturn(backpackMock);
-        Mockito.when(backpackMock.getInteractable("TestIcon3_backpack")).thenReturn(itemBackpackMock);
+        Mockito.when(backpackMock.getInteractable("TestIcon3_backpack")).thenReturn(backpackItemMock);
 
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("BACKPACK TestIcon I","backpack TestIcon2 V","backpack TestIcon3 NewTestIcon3"), applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(backpackMock,Mockito.times(1)).setInvisible("TestIcon_backpack");
         Mockito.verify(backpackMock,Mockito.times(1)).setVisible("TestIcon2_backpack");
-        Mockito.verify(itemBackpackMock).setNameBackpack("NewTestIcon3_backpack");
+        Mockito.verify(backpackItemMock).setNameBackpack("NewTestIcon3_backpack");
     }
 
     @Test
@@ -404,56 +417,53 @@ public class CommandTest {
         Mockito.when(locationMock.getInteractable("Test")).thenReturn(npcMock);
         new StartTalkCommand(gameMock,"Test").execute();
 
-        Mockito.verify(gameMock).setTextDisplay(npcMock);
+        Mockito.verify(gameMock).setTextBox(npcMock);
     }
 
     @Test
     void AnswerCommand() throws IOException {
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC NPCMock = Mockito.mock(NPC.class);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
-        Mockito.when(textDisplayMock.getInteractable()).thenReturn(NPCMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(NPCMock);
         new AnswerCommand(gameMock).execute();
 
         Mockito.verify(NPCMock).goToStateChoice();
-        Mockito.verify(textDisplayMock).setActiveChoice(false);
+        Mockito.verify(textBoxMock).setActiveChoice(false);
     }
 
     @Test
     void TalkCommand() {
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC NPCMock = Mockito.mock(NPC.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
-        Mockito.when(gameMock.getTextDisplay()).thenReturn(textDisplayMock);
-        Mockito.when(textDisplayMock.getInteractable()).thenReturn(NPCMock);
+        Mockito.when(gameMock.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(NPCMock);
         Mockito.when(NPCMock.getChoices()).thenReturn(selectionPanelMock);
 
-        Mockito.when(NPCMock.getLine()).thenReturn(4);
-        Mockito.when(NPCMock.getMax()).thenReturn(5);
+        Mockito.when(NPCMock.dialogEnded()).thenReturn(false);
         Mockito.when(selectionPanelMock.getNumberEntries()).thenReturn(1);
         new TalkCommand(gameMock).execute();
 
         Mockito.verify(NPCMock).nextLine();
-        Mockito.verify(textDisplayMock, Mockito.times(0)).closeTextBox();
-        Mockito.verify(textDisplayMock, Mockito.times(0)).setActiveChoice(true);
+        Mockito.verify(textBoxMock, Mockito.times(0)).closeTextBox();
+        Mockito.verify(textBoxMock, Mockito.times(0)).setActiveChoice(true);
 
-        Mockito.when(NPCMock.getLine()).thenReturn(4);
-        Mockito.when(NPCMock.getMax()).thenReturn(4);
+        Mockito.when(NPCMock.dialogEnded()).thenReturn(true);
         Mockito.when(selectionPanelMock.getNumberEntries()).thenReturn(1);
         new TalkCommand(gameMock).execute();
 
         Mockito.verify(NPCMock).nextLine();
-        Mockito.verify(textDisplayMock, Mockito.times(0)).closeTextBox();
-        Mockito.verify(textDisplayMock).setActiveChoice(true);
+        Mockito.verify(textBoxMock, Mockito.times(0)).closeTextBox();
+        Mockito.verify(textBoxMock).setActiveChoice(true);
 
-        Mockito.when(NPCMock.getLine()).thenReturn(4);
-        Mockito.when(NPCMock.getMax()).thenReturn(4);
+        Mockito.when(NPCMock.dialogEnded()).thenReturn(true);
         Mockito.when(selectionPanelMock.getNumberEntries()).thenReturn(0);
         new TalkCommand(gameMock).execute();
 
         Mockito.verify(NPCMock).nextLine();
-        Mockito.verify(textDisplayMock).closeTextBox();
-        Mockito.verify(textDisplayMock).setActiveChoice(true);
+        Mockito.verify(textBoxMock).closeTextBox();
+        Mockito.verify(textBoxMock).setActiveChoice(true);
     }
 
     @Test

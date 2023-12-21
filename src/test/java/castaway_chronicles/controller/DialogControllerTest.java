@@ -77,19 +77,20 @@ public class DialogControllerTest {
 
         verify(commandInvokerMock).setCommand(any(TalkCommand.class));
         verify(commandInvokerMock, times(1)).execute();
+        verify(gameController, times(0)).setControllerState(gameController.getLocationController());
     }
 
     @Test
     void testSelectWhenNotActiveTextBox() throws IOException, InterruptedException, URISyntaxException {
         Location currentLocationMock = Mockito.mock(Location.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC npcMock = Mockito.mock(NPC.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
-        when(textDisplayMock.isActiveChoice()).thenReturn(false);
-        when(textDisplayMock.isActiveTextBox()).thenReturn(false);
-        when(textDisplayMock.getInteractable()).thenReturn(npcMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
+        when(textBoxMock.isActiveChoice()).thenReturn(false);
+        when(textBoxMock.isActiveTextBox()).thenReturn(false);
+        when(textBoxMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
         dialogController.select(mock(Application.class));
