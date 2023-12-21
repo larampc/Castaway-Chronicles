@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.mainPage;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.Position;
@@ -9,10 +10,8 @@ import castaway_chronicles.model.mainPage.MainPage;
 import castaway_chronicles.states.EndState;
 
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Paths;
 
 public class EndingPageController implements ControllerState {
     private final MainPageController mainPageController;
@@ -31,8 +30,9 @@ public class EndingPageController implements ControllerState {
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         for (Interactable e: mainPageController.getModel().getEndingPage().getVisibleInteractables()) {
             if (e.getName().equalsIgnoreCase("reset") && e.contains(position)){
-                File achievedEnd = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/achieved_endings.txt");
-                achievedEnd.delete();
+                ResourceManager resourceManager = ResourceManager.getInstance();
+                resourceManager.setPath("achieved_endings.txt");
+                resourceManager.deleteResourceFile();
                 mainPageController.getModel().getEndingPage().reset();
                 break;
             }

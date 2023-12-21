@@ -14,7 +14,7 @@ import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class ResourceManager {
-    private static ResourceManager instance;
+    private static ResourceManager instance = null;
     public static ResourceManager getInstance() {
         if (instance == null)
             instance = new ResourceManager();
@@ -48,11 +48,15 @@ public class ResourceManager {
     public void deleteResourceFileContent() {
         File[] allContents = file.listFiles();
         if (allContents != null) {
-            for (File file : allContents) {
-                boolean deleted = file.delete();
+            for (File fileToDelete : allContents) {
+                boolean deleted = fileToDelete.delete();
                 assert(deleted);
             }
         }
+    }
+    public void deleteResourceFile() {
+        deleteResourceFileContent();
+        file.delete();
     }
     public void writeToFile(String line){
         try {
