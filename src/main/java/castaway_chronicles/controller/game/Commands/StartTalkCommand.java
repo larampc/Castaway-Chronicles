@@ -1,7 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.InteractableWithText;
+import castaway_chronicles.model.InteractableWithText;
 
 public class StartTalkCommand implements Command {
     private final Game game;
@@ -12,6 +12,6 @@ public class StartTalkCommand implements Command {
     }
     @Override
     public void execute() {
-        game.setTextDisplay((InteractableWithText) game.getCurrentLocation().getInteractable(name));
+        game.setTextBox((InteractableWithText) game.getCurrentLocation().getInteractable(name));
     }
 }

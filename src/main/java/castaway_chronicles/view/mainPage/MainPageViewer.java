@@ -11,30 +11,30 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MainPageViewer extends Viewer<MainPage> {
-    private SceneViewer endingPageViewer;
-    private MenuViewer mainMenuViewer;
+    private final SceneViewer endingPageViewer;
+    private final MenuViewer mainMenuViewer;
     public MainPageViewer(MainPage model) {
         super(model);
         endingPageViewer = new SceneViewer();
         mainMenuViewer = new MenuViewer();
-        mainMenuViewer.getSelectionPanelViewer().setDefinitions(42,20, new Position(98,101));
+        getMainMenuViewer().getSelectionPanelViewer().setDefinitions(42,20, new Position(98,101));
     }
 
     @Override
     public void drawScreen(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         switch (getModel().getCurrent()) {
             case MENU:
-                mainMenuViewer.draw(getModel().getMainMenu(), gui);
+                getMainMenuViewer().draw(getModel().getMainMenu(), gui);
                 break;
             case ENDINGS:
-                endingPageViewer.draw(getModel().getEndingPage(), gui);
+                getEndingPageViewer().draw(getModel().getEndingPage(), gui);
                 break;
         }
     }
-    public void setMainMenuViewer(MenuViewer mainMenuViewer) {
-        this.mainMenuViewer = mainMenuViewer;
+    public MenuViewer getMainMenuViewer() {
+        return mainMenuViewer;
     }
-    public void setEndingPageViewer(SceneViewer endingPageViewer) {
-        this.endingPageViewer = endingPageViewer;
+    public SceneViewer getEndingPageViewer() {
+        return endingPageViewer;
     }
 }

@@ -7,10 +7,10 @@ import castaway_chronicles.controller.game.Commands.*;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Icon;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.Item;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.gameElements.Icon;
+import castaway_chronicles.model.Interactable;
+import castaway_chronicles.model.game.gameElements.Item;
+import castaway_chronicles.model.game.gameElements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 
 import java.awt.event.KeyEvent;
@@ -60,7 +60,7 @@ public class StandingController implements ContinuousControllerState {
         invoker.execute();
         location = gameController.getModel().getCurrentLocation();
         if (location.getMainChar() != null && gameController.getCurrent() instanceof StandingController) {
-            if (((WalkingController) gameController.getWalkingController()).setTowalk(position)) {
+            if (((WalkingController) gameController.getWalkingController()).setToWalk(position)) {
                 location.getMainChar().setName("walk1" + ((location.getMainChar().getPosition().getX() - position.getX() < 0) ? "_right" : "_left"));
             }
             gameController.setControllerState(gameController.getWalkingController());

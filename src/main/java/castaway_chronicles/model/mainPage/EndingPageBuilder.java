@@ -1,7 +1,7 @@
 package castaway_chronicles.model.mainPage;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.Interactable;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

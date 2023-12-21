@@ -1,15 +1,15 @@
 package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
-import castaway_chronicles.model.game.elements.Element;
+import castaway_chronicles.model.Element;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
 public abstract class ScreenViewer<T> {
-    public <E extends Element> void drawElements(GUI gui, List<E> elementList) {
-        for(E element: elementList) {
+    public <E extends Element> void drawElements(GUI gui, List<E> elements) {
+        for(E element: elements) {
             drawElement(gui, element);
         }
     }

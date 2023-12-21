@@ -3,7 +3,6 @@ package castaway_chronicles.controller.mainPage;
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
 import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.GameBuilder;
@@ -18,7 +17,7 @@ import java.net.URISyntaxException;
 public class MainMenuController implements ControllerState {
     private final MainPageController mainPageController;
     private final MainMenu mainMenu;
-    private GenericCommandInvoker commandInvoker;
+    private final CommandInvoker commandInvoker;
     public MainMenuController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
         mainMenu = mainPageController.getModel().getMainMenu();
@@ -79,9 +78,5 @@ public class MainMenuController implements ControllerState {
             mainPageController.getModel().setCurrent(MainPage.PAGE.ENDINGS);
             mainPageController.setCurrent(mainPageController.getEndingPageController());
         }
-    }
-
-    public void setCommandInvoker(GenericCommandInvoker commandInvoker) {
-        this.commandInvoker = commandInvoker;
     }
 }

@@ -1,10 +1,10 @@
 package castaway_chronicles.controller.game;
 
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.MainChar;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.Interactable;
+import castaway_chronicles.model.game.gameElements.MainChar;
+import castaway_chronicles.model.game.gameElements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
 

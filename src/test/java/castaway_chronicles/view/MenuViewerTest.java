@@ -1,10 +1,9 @@
 package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
+import castaway_chronicles.model.Menu;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.scene.PauseMenu;
-import castaway_chronicles.model.mainPage.MainMenu;
+import castaway_chronicles.model.game.gameElements.Background;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,48 +13,34 @@ import java.net.URISyntaxException;
 
 public class MenuViewerTest {
     private GUI guiMock;
+    private MenuViewer menuViewer;
+    private SelectionPanelViewer selectionPanelViewerMock;
 
     @BeforeEach
     void setUP() {
         guiMock = Mockito.mock(GUI.class);
+        selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
+        menuViewer = new MenuViewer() {
+            @Override
+            public SelectionPanelViewer getSelectionPanelViewer() {
+                return selectionPanelViewerMock;
+            }
+        };
     }
 
     @Test
     void mainMenuTest() throws IOException, URISyntaxException, InterruptedException {
-        MainMenu mainMenuMock = Mockito.mock(MainMenu.class);
-        SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
-        MenuViewer mainMenuViewer = new MenuViewer();
-        mainMenuViewer.setSelectionPanelViewer(selectionPanelViewerMock);
+        Menu menuMock = Mockito.mock(Menu.class);
         Background backgroundMock = Mockito.mock(Background.class);
         Position positionMock = Mockito.mock(Position.class);
 
-        Mockito.when(mainMenuMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(menuMock.getBackground()).thenReturn(backgroundMock);
         Mockito.when(backgroundMock.getName()).thenReturn("Menu");
 
         Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
-        mainMenuViewer.draw(mainMenuMock, guiMock);
+        menuViewer.draw(menuMock, guiMock);
 
         Mockito.verify(guiMock).drawImage(positionMock, "Menu");
-        Mockito.verify(selectionPanelViewerMock).draw(mainMenuMock.getSelectionPanel(), guiMock);
-    }
-
-    @Test
-    void pauseMenuTest() throws IOException, URISyntaxException, InterruptedException {
-        PauseMenu pauseMenuMock = Mockito.mock(PauseMenu.class);
-        SelectionPanelViewer selectionPanelViewerMock = Mockito.mock(SelectionPanelViewer.class);
-        Background backgroundMock = Mockito.mock(Background.class);
-        Position positionMock = Mockito.mock(Position.class);
-
-        Mockito.when(pauseMenuMock.getBackground()).thenReturn(backgroundMock);
-        Mockito.when(backgroundMock.getName()).thenReturn("Menu");
-
-        Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
-
-        MenuViewer pauseMenuViewer = new MenuViewer();
-        pauseMenuViewer.setSelectionPanelViewer(selectionPanelViewerMock);
-        pauseMenuViewer.draw(pauseMenuMock, guiMock);
-
-        Mockito.verify(guiMock).drawImage(positionMock, "Menu");
-        Mockito.verify(selectionPanelViewerMock).draw(pauseMenuMock.getSelectionPanel(), guiMock);
+        Mockito.verify(selectionPanelViewerMock).draw(menuMock.getSelectionPanel(), guiMock);
     }
 }

@@ -10,8 +10,8 @@ import castaway_chronicles.controller.game.GameController;
 
 import castaway_chronicles.model.SelectionPanel;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.NPC;
-import castaway_chronicles.model.game.scene.TextDisplay;
+import castaway_chronicles.model.game.gameElements.NPC;
+import castaway_chronicles.model.game.scene.TextBox;
 import castaway_chronicles.model.game.scene.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,14 +46,14 @@ public class DialogControllerTest {
     @Test
     void testSelectWhenActiveChoice() throws IOException, InterruptedException, URISyntaxException {
         Location currentLocationMock = Mockito.mock(Location.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC npcMock = Mockito.mock(NPC.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
-        when(textDisplayMock.isActiveChoice()).thenReturn(true);
-        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
-        when(textDisplayMock.getInteractable()).thenReturn(npcMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
+        when(textBoxMock.isActiveChoice()).thenReturn(true);
+        when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        when(textBoxMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
         dialogController.key(VK_ENTER, Mockito.mock(Application.class));
@@ -66,12 +66,12 @@ public class DialogControllerTest {
     @Test
     void testSelectWhenDialogNotActiveChoice() throws IOException, InterruptedException, URISyntaxException {
         Location currentLocationMock = Mockito.mock(Location.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
-        when(textDisplayMock.isActiveChoice()).thenReturn(false);
-        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
+        when(game.getTextBox()).thenReturn(textBoxMock);
+        when(textBoxMock.isActiveChoice()).thenReturn(false);
+        when(textBoxMock.isActiveTextBox()).thenReturn(true);
 
         dialogController.select(mock(Application.class));
 
@@ -103,15 +103,15 @@ public class DialogControllerTest {
     @Test
     void keyUp() throws IOException, URISyntaxException, InterruptedException {
         Location currentLocationMock = Mockito.mock(Location.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC npcMock = Mockito.mock(NPC.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
-        when(textDisplayMock.isActiveChoice()).thenReturn(true);
-        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
-        when(textDisplayMock.getInteractable()).thenReturn(npcMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
+        when(textBoxMock.isActiveChoice()).thenReturn(true);
+        when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        when(textBoxMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
         dialogController.key(KeyEvent.VK_UP, Mockito.mock(Application.class));
@@ -121,15 +121,15 @@ public class DialogControllerTest {
     @Test
     void keyDown() throws IOException, URISyntaxException, InterruptedException {
         Location currentLocationMock = Mockito.mock(Location.class);
-        TextDisplay textDisplayMock = Mockito.mock(TextDisplay.class);
+        TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC npcMock = Mockito.mock(NPC.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
-        when(textDisplayMock.isActiveChoice()).thenReturn(true);
-        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
-        when(textDisplayMock.getInteractable()).thenReturn(npcMock);
+        when(game.getTextBox()).thenReturn(textBoxMock);
+        when(textBoxMock.isActiveChoice()).thenReturn(true);
+        when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        when(textBoxMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
         dialogController.key(KeyEvent.VK_DOWN, Mockito.mock(Application.class));

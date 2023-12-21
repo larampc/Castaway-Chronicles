@@ -23,12 +23,12 @@ public class WalkingController implements ContinuousControllerState {
         this.gameController = gameController;
     }
 
-    public boolean setTowalk(Position walkto) {
+    public boolean setToWalk(Position walkTo) {
         Location location = gameController.getModel().getCurrentLocation();
         int background_x = location.getBackground().getPosition().getX();
         int character_x = location.getMainChar().getPosition().getX();
         int max_background_x = 200 - location.getBackground().getWidth();
-        int offset = (character_x - walkto.getX()) + location.getMainChar().getWidth()/2;
+        int offset = (character_x - walkTo.getX()) + location.getMainChar().getWidth()/2;
         int next_x = background_x + location.getMainChar().getWidth()/2 + offset;
         final boolean tooCLose = abs(offset) < 2*dx;
         final boolean atLeftBorder = background_x == 0 && !goRight;
@@ -54,7 +54,7 @@ public class WalkingController implements ContinuousControllerState {
 
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException {
-        setTowalk(position);
+        setToWalk(position);
         ((StandingController)gameController.getLocationController()).setLastCommandNull();
     }
 

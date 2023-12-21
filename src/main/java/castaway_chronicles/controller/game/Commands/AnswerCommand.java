@@ -1,7 +1,7 @@
 package castaway_chronicles.controller.game.Commands;
 
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.gameElements.NPC;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ public class AnswerCommand implements Command {
     }
     @Override
     public void execute() throws IOException {
-        ((NPC) game.getTextDisplay().getInteractable()).goToStateChoice();
-        game.getTextDisplay().setActiveChoice(false);
+        ((NPC) game.getTextBox().getInteractable()).goToStateChoice();
+        game.getTextBox().setActiveChoice(false);
     }
 }

@@ -5,7 +5,6 @@ import castaway_chronicles.controller.ContinuousControllerState;
 import castaway_chronicles.controller.Controller;
 import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
 import castaway_chronicles.controller.game.locationControllers.*;
 import castaway_chronicles.controller.game.scenes.BackpackController;
 import castaway_chronicles.controller.game.locationControllers.StandingController;
@@ -32,7 +31,7 @@ public class GameController extends Controller<Game> {
     private ControllerState previous;
     private final ControllerState narratorController;
     private final GameSaver gameSaver;
-    private GenericCommandInvoker commandInvoker;
+    private CommandInvoker commandInvoker;
 
     public GameController(Game model) {
         super(model);
@@ -100,8 +99,8 @@ public class GameController extends Controller<Game> {
         return previous;
     }
 
-    public GenericCommandInvoker getCommandInvoker() {return commandInvoker;}
-    public void setCommandInvoker(GenericCommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
+    public CommandInvoker getCommandInvoker() {return commandInvoker;}
+    public void setCommandInvoker(CommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
 
     public GameSaver getGameSaver() {return gameSaver;}
 }

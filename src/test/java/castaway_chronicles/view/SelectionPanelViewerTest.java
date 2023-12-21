@@ -3,7 +3,6 @@ package castaway_chronicles.view;
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.SelectionPanel;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -11,15 +10,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class SelectionPanelViewerTest {
-    private GUI guiMock;
-
-    @BeforeEach
-    void setUp() {
-        guiMock = Mockito.mock(GUI.class);
-    }
 
     @Test
     void selectionPanelTest() throws IOException, URISyntaxException, InterruptedException {
+        GUI guiMock = Mockito.mock(GUI.class);
         SelectionPanel selectionPanel = Mockito.mock(SelectionPanel.class);
         Mockito.when(selectionPanel.getNumberEntries()).thenReturn(3);
         Mockito.when(selectionPanel.getEntry(0)).thenReturn("Start");

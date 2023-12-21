@@ -1,7 +1,6 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
+import castaway_chronicles.model.game.gameElements.Background;
 
 import java.util.ArrayList;
 import java.util.HashMap;

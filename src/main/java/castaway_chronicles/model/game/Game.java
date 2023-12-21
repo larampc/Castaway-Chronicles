@@ -1,20 +1,27 @@
 package castaway_chronicles.model.game;
 
-import castaway_chronicles.model.game.elements.InteractableWithText;
+import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.model.game.scene.*;
 
 import java.util.HashMap;
 
 public class Game {
-    private Map map;
-    private Backpack backpack;
-    private HashMap<String, Location> locations = new HashMap<>();
-    private PauseMenu pauseMenu;
+    private final Map map;
+    private final Backpack backpack;
+    private final HashMap<String, Location> locations;
+    private final PauseMenu pauseMenu;
     private Location currentLocation;
     private SCENE currentScene;
-    private final TextDisplay textDisplay = new TextDisplay();
+    private final TextBox textBox = new TextBox();
 
-    public Game() {}
+    public Game(Map map, Backpack backpack, HashMap<String, Location> locations, PauseMenu pauseMenu, String currentLocation) {
+        this.map = map;
+        this.backpack = backpack;
+        this.pauseMenu = pauseMenu;
+        this.locations = locations;
+        this.currentLocation = locations.get(currentLocation);
+        this.currentScene = SCENE.LOCATION;
+    }
     public Backpack getBackpack() {
         return backpack;
     }
@@ -33,18 +40,6 @@ public class Game {
     public Location getCurrentLocation() {
         return currentLocation;
     }
-    public void setMap(Map map) {
-        this.map = map;
-    }
-    public void setBackpack(Backpack backpack) {
-        this.backpack = backpack;
-    }
-    public void setLocations(HashMap<String, Location> locations) {
-        this.locations = locations;
-    }
-    public void setPauseMenu(PauseMenu pauseMenu) {
-        this.pauseMenu = pauseMenu;
-    }
     public SCENE getScene() {
         return currentScene;
     }
@@ -54,9 +49,9 @@ public class Game {
     public void setCurrentLocation(String name) {
         currentLocation = getLocation(name);
     }
-    public TextDisplay getTextDisplay() {return textDisplay;}
-    public void setTextDisplay(InteractableWithText element) {
-        textDisplay.activateTextBox(element);
+    public TextBox getTextBox() {return textBox;}
+    public void setTextBox(InteractableWithText interactable) {
+        textBox.activateTextBox(interactable);
     }
     public enum SCENE{BACKPACK, MAP, LOCATION, PAUSE}
 }

@@ -3,7 +3,7 @@ package castaway_chronicles.controller.game.Commands;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class CommandInvoker extends GenericCommandInvoker {
+public class CommandInvoker {
     public Command command = null;
     public CommandInvoker() {
     }

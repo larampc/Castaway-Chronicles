@@ -1,11 +1,7 @@
 package castaway_chronicles.model;
 
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.InteractableWithText;
-import castaway_chronicles.model.game.scene.Backpack;
-import castaway_chronicles.model.game.scene.Location;
-import castaway_chronicles.model.game.scene.Map;
-import castaway_chronicles.model.game.scene.PauseMenu;
+import castaway_chronicles.model.game.scene.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -16,42 +12,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameTest {
     private Game game;
+    private Map mapMock;
+    private Backpack backpackMock;
+    private HashMap<String, Location> locations;
+    private Location locationMock1;
+    private Location locationMock2;
+    private PauseMenu pauseMenuMock;
+
     @BeforeEach
     public void init() {
-        game = new Game();
+        mapMock = Mockito.mock(Map.class);
+        backpackMock = Mockito.mock(Backpack.class);
+        pauseMenuMock = Mockito.mock(PauseMenu.class);
+        locationMock1 = Mockito.mock(Location.class);
+        locationMock2 = Mockito.mock(Location.class);
+        locations = new HashMap<>();
+        locations.put("test", locationMock1);
+        locations.put("test2", locationMock2);
+        game = new Game(mapMock, backpackMock, locations, pauseMenuMock, "test");
     }
 
     @Test
-    public void Backpack() {
-        Backpack backpack = Mockito.mock(Backpack.class);
-        game.setBackpack(backpack);
-        assertEquals(backpack, game.getBackpack());
-    }
-
-    @Test
-    public void Locations() {
-        Location location = Mockito.mock(Location.class);
-        HashMap<String, Location> locationHashMap = new HashMap<>();
-        locationHashMap.put("test", location);
-        game.setLocations(locationHashMap);
-        assertEquals(locationHashMap, game.getLocations());
-        assertEquals(location, game.getLocation("test"));
-        game.setCurrentLocation("test");
-        assertEquals(location, game.getCurrentLocation());
-    }
-
-    @Test
-    public void Map() {
-        Map map = Mockito.mock(Map.class);
-        game.setMap(map);
-        assertEquals(map, game.getMap());
-    }
-
-    @Test
-    public void PauseMenu() {
-        PauseMenu pauseMenu = Mockito.mock(PauseMenu.class);
-        game.setPauseMenu(pauseMenu);
-        assertEquals(pauseMenu, game.getPauseMenu());
+    public void GameContent() {
+        assertEquals(backpackMock, game.getBackpack());
+        assertEquals(locations, game.getLocations());
+        assertEquals(locationMock1, game.getLocation("test"));
+        assertEquals(locationMock1, game.getCurrentLocation());
+        assertEquals(mapMock, game.getMap());
+        assertEquals(pauseMenuMock, game.getPauseMenu());
+        assertEquals(TextBox.class, game.getTextBox().getClass());
     }
 
     @Test
@@ -64,12 +53,24 @@ public class GameTest {
         assertEquals("LOCATION", game.getScene().name());
         game.setCurrentScene(Game.SCENE.PAUSE);
         assertEquals("PAUSE", game.getScene().name());
-//        assertThrows(Throwable.class, () -> game.setCurrentScene());
+    }
+
+    @Test
+    public void Location() {
+        assertEquals(locationMock1, game.getCurrentLocation());
+        game.setCurrentLocation("test");
+        assertEquals(locationMock1, game.getCurrentLocation());
+        game.setCurrentLocation("test2");
+        assertEquals(locationMock2, game.getCurrentLocation());
+        game.setCurrentLocation("test2");
+        assertEquals(locationMock2, game.getCurrentLocation());
+        game.setCurrentLocation("test");
+        assertEquals(locationMock1, game.getCurrentLocation());
     }
     @Test
-    public void TextDisplay() {
+    public void TextBox() {
         InteractableWithText mockInteractable = Mockito.mock(InteractableWithText.class);
-        game.setTextDisplay(mockInteractable);
-        assertEquals(mockInteractable, game.getTextDisplay().getInteractable());
+        game.setTextBox(mockInteractable);
+        assertEquals(mockInteractable, game.getTextBox().getInteractable());
     }
 }

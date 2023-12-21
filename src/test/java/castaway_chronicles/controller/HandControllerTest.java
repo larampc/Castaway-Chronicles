@@ -7,8 +7,8 @@ import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.ItemBackpack;
-import castaway_chronicles.model.game.elements.NPC;
+import castaway_chronicles.model.game.gameElements.BackpackItem;
+import castaway_chronicles.model.game.gameElements.NPC;
 import castaway_chronicles.model.game.scene.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,12 +45,12 @@ public class HandControllerTest {
 
     @Test
     void testClickWithEmptyToGive() throws IOException, InterruptedException, URISyntaxException {
-        ItemBackpack itemBackpack = Mockito.mock(ItemBackpack.class);
+        BackpackItem backpackItem = Mockito.mock(BackpackItem.class);
 
-        TextDisplay textDisplay = mock(TextDisplay.class);
+        TextBox textBox = mock(TextBox.class);
         Backpack backpackMock = mock(Backpack.class);
-        when(game.getTextDisplay()).thenReturn(textDisplay);
-        Mockito.when(textDisplay.getInteractable()).thenReturn(itemBackpack);
+        when(game.getTextBox()).thenReturn(textBox);
+        Mockito.when(textBox.getInteractable()).thenReturn(backpackItem);
 
         Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 
@@ -64,16 +64,16 @@ public class HandControllerTest {
 
         handController.click(new Position(0, 0), applicationMock);
 
-        Mockito.verify(itemBackpack).setInHand(true);
-        Mockito.verify(textDisplay).activateTextBox();
+        Mockito.verify(backpackItem).setInHand(true);
+        Mockito.verify(textBox).activateTextBox();
         Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }
 
     @Test
     void testNPCClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
-        ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
-        TextDisplay textDisplayMock = mock(TextDisplay.class);
+        BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
+        TextBox textDisplayMock = mock(TextBox.class);
         Location locationMock = mock(Location.class);
         NPC npcMock = mock(NPC.class);
         Position positionMock = Mockito.mock(Position.class);
@@ -84,9 +84,9 @@ public class HandControllerTest {
         when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
         when(npcMock.contains(positionMock)).thenReturn(true);
         when(npcMock.getName()).thenReturn("NPC_NAME");
-        when(game.getTextDisplay()).thenReturn(textDisplayMock);
-        when(textDisplayMock.getInteractable()).thenReturn(itemBackpackMock);
-        when(itemBackpackMock.getEffects()).thenReturn(new ArrayList<>());
+        when(game.getTextBox()).thenReturn(textDisplayMock);
+        when(textDisplayMock.getInteractable()).thenReturn(backpackItemMock);
+        when(backpackItemMock.getEffects()).thenReturn(new ArrayList<>());
         Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
@@ -113,13 +113,13 @@ public class HandControllerTest {
 
     @Test
     void testEmptyClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
-        ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
+        BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
 
-        TextDisplay textDisplay = mock(TextDisplay.class);
-        when(textDisplay.getInteractable()).thenReturn(itemBackpackMock);
+        TextBox textBox = mock(TextBox.class);
+        when(textBox.getInteractable()).thenReturn(backpackItemMock);
 
         Backpack backpackMock = mock(Backpack.class);
-        when(game.getTextDisplay()).thenReturn(textDisplay);
+        when(game.getTextBox()).thenReturn(textBox);
 
         Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 
@@ -141,7 +141,7 @@ public class HandControllerTest {
         handController.setToGive("NPC_NAME");
         handController.click(position, applicationMock);
 
-        Mockito.verify(textDisplay,times(1)).activateTextBox();
+        Mockito.verify(textBox,times(1)).activateTextBox();
         Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }
