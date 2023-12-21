@@ -6,7 +6,10 @@ public class Ending {
     private final String name;
     private int current = 1;
     private int max = 0;
-    public Ending(String name) {this.name = name;setMax();}
+    public Ending(String name) {
+        this.name = name;
+        setMax();
+    }
     public void setMax() {
         ResourceManager resourceManager = ResourceManager.getInstance();
         resourceManager.setPath("Endings/"+name);

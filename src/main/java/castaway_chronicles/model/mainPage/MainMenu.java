@@ -24,7 +24,7 @@ public class MainMenu extends Menu {
     public boolean canContinue() {
         ResourceManager resourceManager = ResourceManager.getInstance();
         resourceManager.setPath("Scenes_saved");
-        if(!resourceManager.existsStaticResourceFile()) return false;
+        if(resourceManager.notExistsCurrentTimeResourceFile()) return false;
         return resourceManager.countFiles() > 0;
     }
 }

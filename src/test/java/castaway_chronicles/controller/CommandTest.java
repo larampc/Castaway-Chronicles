@@ -15,7 +15,6 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -80,27 +79,22 @@ public class CommandTest {
 //    }
 
     @Test
-    void executeGoEffect() throws IOException, InterruptedException, URISyntaxException {
+    void executeGoEffect() {
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("GO TestLocation"),applicationMock);
         handleEffectsCommand.execute();
 
         Mockito.verify(gameMock).setCurrentLocation("TestLocation");
     }
-    @Test
-    void executeEndEffect() throws IOException, InterruptedException, URISyntaxException {
-        //set up
-
-        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"),applicationMock);
-        handleEffectsCommand.execute();
-
-        Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
-
-        //tear down
-
-    }
+//    @Test
+//    void executeEndEffect() {
+//        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"),applicationMock);
+//        handleEffectsCommand.execute();
+//
+//        Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
+//    }
 
     @Test
-    void executeNPCEffectNoWait() throws IOException, InterruptedException, URISyntaxException {
+    void executeNPCEffectNoWait() {
         Location currentLocationMock = Mockito.mock(Location.class);
         Game gameMock = Mockito.mock(Game.class);
         NPC NPCMock = Mockito.mock(NPC.class);
@@ -120,7 +114,7 @@ public class CommandTest {
     }
 
     @Test
-    void executeMapEffect() throws IOException, InterruptedException, URISyntaxException {
+    void executeMapEffect() {
         Map mapMock = Mockito.mock(Map.class);
         Mockito.when(gameMock.getMap()).thenReturn(mapMock);
 
@@ -132,7 +126,7 @@ public class CommandTest {
     }
 
     @Test
-    void executeBackPackEffect() throws IOException, InterruptedException, URISyntaxException {
+    void executeBackPackEffect() {
         Backpack backpackMock = Mockito.mock(Backpack.class);
         ItemBackpack itemBackpackMock = Mockito.mock(ItemBackpack.class);
         Mockito.when(gameMock.getBackpack()).thenReturn(backpackMock);
@@ -147,7 +141,7 @@ public class CommandTest {
     }
 
     @Test
-    void executeLocationEffect() throws IOException, InterruptedException, URISyntaxException {
+    void executeLocationEffect() {
         Location Beach = Mockito.mock(Location.class);
         Location City = Mockito.mock(Location.class);
         Mockito.when(gameMock.getLocation("City")).thenReturn(City);

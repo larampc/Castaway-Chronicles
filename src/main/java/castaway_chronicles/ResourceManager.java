@@ -25,29 +25,32 @@ public class ResourceManager {
     private File file;
     public List<String> readStaticResourceFile(){
         URL resource = getClass().getClassLoader().getResource(path);
-        assert resource != null;
         try {
             return new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
-        } catch (IOException e) {
-            throw new RuntimeException("File " + path + " doesn't exist");
+        } catch (IOException | NullPointerException e){
+            throw new RuntimeException("Couldn't read from file: " + path);
         }
     }
     public boolean existsStaticResourceFile(){
         return getClass().getClassLoader().getResource(path) != null;
+    }
+    public boolean notExistsCurrentTimeResourceFile(){
+        return !file.exists();
     }
 
     public List<String> readCurrentTimeResourceFile(){
         try {
             return Files.readAllLines(fullPath);
         } catch (IOException e) {
-            throw new RuntimeException("File " + path + " doesn't exist");
+            throw new RuntimeException("Couldn't read from file: " + path);
         }
     }
     public void deleteResourceFileContent() {
         File[] allContents = file.listFiles();
         if (allContents != null) {
             for (File file : allContents) {
-                file.delete();
+                boolean deleted = file.delete();
+                assert(deleted);
             }
         }
     }
@@ -57,11 +60,11 @@ public class ResourceManager {
             fr.write(line);
             fr.close();
         } catch (IOException e) {
-            throw new RuntimeException("File " + path + " doesn't exist");
+            throw new RuntimeException("Error Writing to file: " + path);
         }
     }
     public int countFiles(){
-        if(!existsStaticResourceFile()) return 0;
+        if(notExistsCurrentTimeResourceFile()) return 0;
         return Objects.requireNonNull(file.listFiles()).length;
     }
 

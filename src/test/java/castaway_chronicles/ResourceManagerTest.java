@@ -4,19 +4,19 @@ import org.junit.jupiter.api.*;
 
 import java.io.*;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourceManagerTest {
-
     private File newFile;
     private File newDir;
     private ResourceManager resourceManager;
     @BeforeEach
     void init() {
         resourceManager = ResourceManager.getInstance();
+        assertNotNull(resourceManager);
         newFile = new File("src/main/resources/Testing/resourceTest.txt");
         newDir = new File("src/main/resources/Testing/resourceDir");
+
         try {
             boolean success = newFile.createNewFile();
             assertTrue(success);
@@ -37,7 +37,7 @@ public class ResourceManagerTest {
     void tearDown() {
         boolean success =  newFile.delete();
         assertTrue(success);
-        resourceManager.setPath("resourceDir");
+        resourceManager.setPath("Testing/resourceDir");
         resourceManager.deleteResourceFileContent();
         success = newDir.delete();
         assertTrue(success);
@@ -61,8 +61,7 @@ public class ResourceManagerTest {
     @Test
     void failToReadStaticResourceFile() {
         resourceManager.setPath("Testing/resourceTest2.txt");
-
-        Assertions.assertThrows(RuntimeException.class, resourceManager::readCurrentTimeResourceFile);
+        assertThrows(RuntimeException.class,resourceManager::readStaticResourceFile);
     }
     @Test
     void readCurrentTimeResourceFile() {
@@ -76,13 +75,26 @@ public class ResourceManagerTest {
     @Test
     void failToReadCurrentTimeResourceFile() {
         resourceManager.setPath("Testing/resourceTest2");
-
-        Assertions.assertThrows(RuntimeException.class, resourceManager::readCurrentTimeResourceFile);
+        assertThrows(RuntimeException.class,resourceManager::readCurrentTimeResourceFile);
+    }
+    @Test
+    void failToWriteToResourceFile() throws IOException {
+        resourceManager.setPath("Testing/resourceTest2.png");
+        File file = resourceManager.getFile();
+        boolean success = file.createNewFile();
+        assertTrue(success);
+        assertThrows(Exception.class,()->{
+            boolean successFullReadOnly = file.setReadOnly();
+            assertTrue(successFullReadOnly);
+            resourceManager.writeToFile("test");
+        });
+        success = file.delete();
+        assertTrue(success);
     }
     @Test
     void countFiles() {
-        resourceManager.setPath("Testing/resourceTest2");
+        resourceManager.setPath("Testing/testDir");
 
-        Assertions.assertThrows(RuntimeException.class, resourceManager::readCurrentTimeResourceFile);
+        assertEquals(2,resourceManager.countFiles());
     }
 }
