@@ -1,16 +1,11 @@
 package castaway_chronicles.model.game.gameElements;
 
 import castaway_chronicles.model.InteractableWithText;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.SelectionPanel;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class NPC extends InteractableWithText {
     private int state;
@@ -18,16 +13,15 @@ public class NPC extends InteractableWithText {
     private List<String> dialog;
     private List<Integer> nextStates;
     private List<String> effects;
-    public NPC(int x, int y, int w, int h, String name, int initialState) throws IOException {
+    public NPC(int x, int y, int w, int h, String name, int initialState) {
         super(x, y, w, h, name);
         this.state = initialState;
         init();
     }
-    protected void init() throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Dialog/" + getName() + "/" + getName() + state + ".txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        List<String> lines = br.lines().collect(Collectors.toList());
+    protected void init() {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("Dialog/" + getName() + "/" + getName() + state + ".txt");
+        List<String> lines = resourceManager.readStaticResourceFile();
         line = 0;
         nextStates = new ArrayList<>();
         dialog = new ArrayList<>();
@@ -57,11 +51,11 @@ public class NPC extends InteractableWithText {
         return nextStates;
     }
 
-    public void goToStateChoice() throws IOException {
+    public void goToStateChoice() {
         state = nextStates.get(getChoices().getCurrentEntry());
         init();
     }
-    public void goToState(int state) throws IOException {
+    public void goToState(int state) {
         this.state = state;
         init();
     }
@@ -69,13 +63,13 @@ public class NPC extends InteractableWithText {
     public void nextLine() {
         line++;
     }
-    public void readEffects(int state) throws IOException {
-        URL resource = getClass().getClassLoader().getResource("Dialog/" + getName() + "/effect_" + getName() + state + ".txt");
-        effects = new ArrayList<>();
-        if (resource!=null) {
-            BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-            this.effects = br.lines().collect(Collectors.toList());
+    public void readEffects(int state) {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("Dialog/" + getName() + "/effect_" + getName() + state + ".txt");
+        if(resourceManager.existsStaticResourceFile()){
+            effects = resourceManager.readStaticResourceFile();
         }
+        else effects = new ArrayList<>();
     }
     @Override
     public List<String> getEffects() {

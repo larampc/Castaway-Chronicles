@@ -1,6 +1,5 @@
 package castaway_chronicles.model;
 
-import java.io.IOException;
 import java.util.List;
 
 public abstract class InteractableWithText extends Interactable {
@@ -12,7 +11,7 @@ public abstract class InteractableWithText extends Interactable {
     public SelectionPanel getChoices() {
         return choices;
     }
-    public abstract List<String> getEffects() throws IOException;
+    public abstract List<String> getEffects();
     public void setChoices(SelectionPanel choices) {
         this.choices = choices;
     }

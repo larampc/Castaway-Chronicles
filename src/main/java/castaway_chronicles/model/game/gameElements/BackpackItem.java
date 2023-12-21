@@ -1,18 +1,14 @@
 package castaway_chronicles.model.game.gameElements;
 
 import castaway_chronicles.model.InteractableWithText;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.SelectionPanel;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BackpackItem extends InteractableWithText {
     private final HashMap<String, String> optionCommand = new HashMap<>();
@@ -23,12 +19,11 @@ public class BackpackItem extends InteractableWithText {
         super(x, y, w, h, name);
         getInfo();
     }
-    public void getInfo() throws IOException {
+    public void getInfo() {
         String[] s1 = getName().split("_",-1);
-        URL resource = getClass().getClassLoader().getResource("BackpackItems/" + s1[0] + ".txt");
-        assert resource != null;
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        List<String> lines = br.lines().collect(Collectors.toList());
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.setPath("BackpackItems/" + s1[0] + ".txt");
+        List<String> lines = resourceManager.readStaticResourceFile();
         List<String> entries = new ArrayList<>();
         description = lines.get(0);
         for (int i = 1; i < lines.size(); i+=2) {
@@ -42,17 +37,17 @@ public class BackpackItem extends InteractableWithText {
     public String getCommand() {
         return optionCommand.get(getChoices().getEntry(getChoices().getCurrentEntry()));
     }
-    public void setNameBackpack(String name) throws IOException {
+    public void setNameBackpack(String name) {
         setName(name);
         getInfo();
     }
     @Override
-    public List<String> getEffects() throws IOException {
+    public List<String> getEffects() {
+        ResourceManager resourceManager = ResourceManager.getInstance();
         String[] s = getName().split("_",-1);
-        URL resource = getClass().getClassLoader().getResource("BackpackItems/" + s[0] + "_" + getChoices().getEntry(getChoices().getCurrentEntry()).replaceAll(" ", "").toLowerCase() + "_effects.txt");
-        if (resource == null) return Collections.emptyList();
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8));
-        return br.lines().collect(Collectors.toList());
+        resourceManager.setPath("BackpackItems/" + s[0] + "_" + getChoices().getEntry(getChoices().getCurrentEntry()).replaceAll(" ", "").toLowerCase() + "_effects.txt");
+        if (!resourceManager.existsStaticResourceFile()) return Collections.emptyList();
+        return resourceManager.readStaticResourceFile();
     }
 
     @Override
