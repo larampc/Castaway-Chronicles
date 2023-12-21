@@ -2,10 +2,10 @@ package castaway_chronicles.controller.game.scenes;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
-import castaway_chronicles.controller.game.Commands.Command;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
+import castaway_chronicles.controller.Commands.Command;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.GetSideOptionCommand;
+import castaway_chronicles.controller.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;

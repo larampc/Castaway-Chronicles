@@ -1,7 +1,7 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.*;
+import castaway_chronicles.controller.Commands.*;
 import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
@@ -11,7 +11,6 @@ import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
 import castaway_chronicles.model.game.scene.TextBox;
 
-import castaway_chronicles.states.EndState;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 

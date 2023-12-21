@@ -1,8 +1,8 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;

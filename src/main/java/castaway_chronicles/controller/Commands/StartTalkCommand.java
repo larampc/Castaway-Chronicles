@@ -1,4 +1,4 @@
-package castaway_chronicles.controller.game.Commands;
+package castaway_chronicles.controller.Commands;
 
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.InteractableWithText;

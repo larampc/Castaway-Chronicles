@@ -2,9 +2,9 @@ package castaway_chronicles.controller.game.locationControllers;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
-import castaway_chronicles.controller.game.Commands.Command;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
+import castaway_chronicles.controller.Commands.Command;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
@@ -32,7 +32,7 @@ public class HandController implements ControllerState {
         if (!toGive.isEmpty()) {
             for (Interactable e : gameController.getModel().getCurrentLocation().getVisibleInteractables()) {
                 if (e instanceof NPC && e.contains(position) && e.getName().equalsIgnoreCase(toGive)) {
-                    CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
+                    CommandInvoker invoker = gameController.getCommandInvoker();
                     Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextBox().getInteractable().getEffects(), application);
                     invoker.setCommand(effects);
                     invoker.execute();
