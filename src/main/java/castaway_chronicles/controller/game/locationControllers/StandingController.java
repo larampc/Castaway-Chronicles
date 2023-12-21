@@ -30,7 +30,7 @@ public class StandingController implements ContinuousControllerState {
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         Location location = gameController.getModel().getCurrentLocation();
-        CommandInvoker invoker = new CommandInvoker();
+        CommandInvoker invoker = gameController.getCommandInvoker();
         for (Interactable e: location.getVisibleInteractables()) {
             if (e.contains(position)) {
                 if (e instanceof Item) {
@@ -80,7 +80,7 @@ public class StandingController implements ContinuousControllerState {
     @Override
     public void none(long time) throws IOException, InterruptedException, URISyntaxException {
         if (lastCommand != null) {
-            CommandInvoker invoker = new CommandInvoker();
+            CommandInvoker invoker = gameController.getCommandInvoker();
             invoker.setCommand(lastCommand);
             invoker.execute();
             if (lastCommand instanceof StartTalkCommand) {
