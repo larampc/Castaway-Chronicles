@@ -137,30 +137,4 @@ public class DialogControllerTest {
 
         verify(selectionPanelMock,times(1)).nextEntry();
     }
-
-//    @Test
-//    void testSelectWhenNotDialog() throws IOException, InterruptedException {
-//        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
-//        gameController.setCommandInvoker(commandInvokerMock);
-//
-//        Location currentLocationMock = Mockito.mock(Location.class);
-//        DialogState dialogStateMock = Mockito.mock(DialogState.class);
-//        NPC npcMock = Mockito.mock(NPC.class);
-//        NPCDialog npcDialogMock = Mockito.mock(NPCDialog.class);
-//
-//        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-//        when(currentLocationMock.getDialogState()).thenReturn(dialogStateMock);
-//        when(dialogStateMock.isActiveChoice()).thenReturn(false);
-//        when(dialogStateMock.isActiveDialog()).thenReturn(false);
-//        when(dialogStateMock.getNPCDialog()).thenReturn(npcMock);
-//        when(npcMock.getDialogState()).thenReturn(npcDialogMock);
-//        when(npcDialogMock.getEffects()).thenReturn(List.of("Test"));
-//
-//        dialogController.select(mock(Application.class));
-//
-//        verify(commandInvokerMock).setCommand(any(TalkCommand.class));
-//        verify(commandInvokerMock).setCommand(new HandleEffectsCommand(game, List.of("Test")));
-//
-//        verify(commandInvokerMock, times(2)).execute();
-//    }
 }
