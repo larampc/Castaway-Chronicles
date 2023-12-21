@@ -6,7 +6,6 @@ import castaway_chronicles.model.Ending;
 import castaway_chronicles.model.Position;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class EndViewer extends Viewer<Ending> {
     public EndViewer(Ending model) {
@@ -14,7 +13,7 @@ public class EndViewer extends Viewer<Ending> {
     }
 
     @Override
-    public void drawScreen(GUI gui) throws IOException, URISyntaxException {
+    public void drawScreen(GUI gui) throws IOException {
         if (!((LanternaGUI)gui).imageIsLoaded(getModel().getCurrentFrame())) ((LanternaGUI)gui).loadEnding(getModel().getName());
         if (gui.isBigger()) gui.resizeTerminal();
         gui.drawImage(new Position(0,0), getModel().getCurrentFrame());

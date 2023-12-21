@@ -48,9 +48,4 @@ public class BackpackTest {
 
         assertEquals(List.copyOf(interactables.values()), backpack.getInteractables());
     }
-
-//    @Test
-//    public void getBackpackSelection(){
-//        assertEquals(TextDisplay.class, backpack.getTextDisplay().getClass());
-//    }
 }

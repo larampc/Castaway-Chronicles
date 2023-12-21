@@ -17,6 +17,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,7 @@ public class EndingPageControllerTest {
             writer.close();
         }
         else {
-            new File(Paths.get("").toAbsolutePath() + "/src/main/resources/achieved_endings.txt").delete();
+            new File(Path.of("src","main","resources","achieved_endings.txt").toString()).delete();
         }
     }
 
