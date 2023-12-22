@@ -23,8 +23,7 @@ public class MainMenu extends Menu {
     public boolean isSelectedEndings() {return getSelectionPanel().isSelected(3);}
     public boolean canContinue() {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Scenes_saved");
-        if(resourceManager.notExistsCurrentTimeResourceFile()) return false;
-        return resourceManager.countFiles() > 0;
+        if(resourceManager.notExistsCurrentTimeResourceFile("Scenes_saved")) return false;
+        return resourceManager.countFiles("Scenes_saved") > 0;
     }
 }

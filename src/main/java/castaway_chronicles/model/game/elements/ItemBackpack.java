@@ -21,8 +21,7 @@ public class ItemBackpack extends InteractableWithText {
     public void getInfo() {
         String[] s1 = getName().split("_",-1);
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("BackpackItems/" + s1[0] + ".txt");
-        List<String> lines = resourceManager.readStaticResourceFile();
+        List<String> lines = resourceManager.readStaticResourceFile("BackpackItems/" + s1[0] + ".txt");
         List<String> entries = new ArrayList<>();
         description = lines.get(0);
         for (int i = 1; i < lines.size(); i+=2) {
@@ -44,9 +43,11 @@ public class ItemBackpack extends InteractableWithText {
     public List<String> getEffects() {
         ResourceManager resourceManager = ResourceManager.getInstance();
         String[] s = getName().split("_",-1);
-        resourceManager.setPath("BackpackItems/" + s[0] + "_" + getChoices().getEntry(getChoices().getCurrentEntry()).replaceAll(" ", "").toLowerCase() + "_effects.txt");
-        if (!resourceManager.existsStaticResourceFile()) return Collections.emptyList();
-        return resourceManager.readStaticResourceFile();
+        String path = "BackpackItems/" + s[0] + "_" +
+                getChoices().getEntry(getChoices().getCurrentEntry()).replaceAll(" ", "").toLowerCase() +
+                "_effects.txt";
+        if (!resourceManager.existsStaticResourceFile(path)) return Collections.emptyList();
+        return resourceManager.readStaticResourceFile(path);
     }
 
     @Override

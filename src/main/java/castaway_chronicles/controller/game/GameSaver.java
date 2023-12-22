@@ -1,5 +1,6 @@
 package castaway_chronicles.controller.game;
 
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.elements.Background;
 import castaway_chronicles.model.game.elements.Interactable;
@@ -8,86 +9,78 @@ import castaway_chronicles.model.game.elements.NPC;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.Map;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 public class GameSaver {
     private final Game game;
-    private final File toSave;
+
     public GameSaver(Game game) {
         this.game = game;
-        this.toSave = new File(Paths.get("").toAbsolutePath()+"/src/main/resources/Scenes_saved");
-        toSave.mkdirs();
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.createResourceDir("Scenes_saved");
     }
     public void emptySave() {
-        File[] allContents = toSave.listFiles();
-        if (allContents != null) {
-            for (File file : allContents) {
-                file.delete();
-            }
-        }
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        resourceManager.deleteResourceFileContent("Scenes_saved");
     }
-    public void saveGame() throws IOException {
+    public void saveGame() {
         emptySave();
         saveBackpack();
         saveLocations();
         saveMap();
     }
-    public void saveBackpack() throws IOException {
-        File backpack = new File(toSave.getAbsolutePath()+"/Backpack.txt");
-        Writer writer = Files.newBufferedWriter(Paths.get(backpack.getAbsolutePath()));
+    public void saveBackpack() {
+        ResourceManager resourceManager = ResourceManager.getInstance();
         Background bg = game.getBackpack().getBackground();
-        writer.write("B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + "\n");
-        for (Interactable i: game.getBackpack().getInteractables()) {
+        resourceManager.writeToFile("Scenes_saved/Backpack.txt", "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + "\n");
+           for (Interactable i: game.getBackpack().getInteractables()) {
             String visible = game.getBackpack().getVisibleInteractables().contains(i)? " V":"";
-            writer.write("I BItem "+ i.getName() + " " + i.getPosition().getX() + " " + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
+            resourceManager.writeToFile("Scenes_saved/Backpack.txt","I BItem "+ i.getName() + " " + i.getPosition().getX() + " " + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
         }
-        writer.close();
     }
 
-    public void saveLocations() throws IOException {
-        File locations = new File(toSave.getAbsolutePath()+"/Locations.txt");
-        Writer writer = Files.newBufferedWriter(Paths.get(locations.getAbsolutePath()));
+    public void saveLocations() {
+        ResourceManager resourceManager = ResourceManager.getInstance();
         for (String l: game.getLocations().keySet()) {
-            writer.write(l);
+            resourceManager.writeToFile("Scenes_saved/Locations.txt",l);
             if (game.getLocation(l) == game.getCurrentLocation()) {
-                writer.write(" S");
+                resourceManager.writeToFile("Scenes_saved/Locations.txt"," S");
             }
-            writer.write("\n");
+            resourceManager.writeToFile("Scenes_saved/Locations.txt","\n");
             saveLocation(l, game.getLocation(l));
         }
-        writer.close();
     }
 
-    public void saveLocation(String name, Location location) throws IOException {
-        File file = new File(toSave.getAbsolutePath()+"/" + name + ".txt");
-        Writer writer = Files.newBufferedWriter(Paths.get(file.getAbsolutePath()));
+    public void saveLocation(String name, Location location) {
+        ResourceManager resourceManager = ResourceManager.getInstance();
         Background bg = location.getBackground();
         String loopable = bg.isLoopable()?" L":"";
-        writer.write("B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + loopable + "\n");
+        resourceManager.writeToFile("Scenes_saved/" + name + ".txt",
+                "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() +
+                        " " + bg.getWidth() + " " + bg.getHeight() + loopable + "\n");
         for (Interactable i: location.getInteractables()) {
             String npcState = i instanceof NPC ? " " +((NPC) i).getState() : "";
             String visible = location.getVisibleInteractables().contains(i)? " V":"";
-            writer.write("I "+ i.getClass().getSimpleName() + " " + i.getName() + " " + i.getPosition().getX() + " " + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + npcState + visible + "\n");
+            resourceManager.writeToFile("Scenes_saved/" + name + ".txt",
+                    "I "+ i.getClass().getSimpleName() + " " + i.getName() + " " + i.getPosition().getX() + " "
+                            + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + npcState + visible + "\n");
         }
         if (location.getMainChar() != null) {
             MainChar mc = location.getMainChar();
-            writer.write("M " + mc.getPosition().getX() + " " + mc.getPosition().getY() + " " + mc.getWidth() + " " + mc.getHeight() + "\n");
+            resourceManager.writeToFile("Scenes_saved/" + name + ".txt",
+                    "M " + mc.getPosition().getX() + " " + mc.getPosition().getY() + " "
+                            + mc.getWidth() + " " + mc.getHeight() + "\n");
         }
-        writer.close();
     }
-    public void saveMap() throws IOException {
-        File backpack = new File(toSave.getAbsolutePath()+"/Map.txt");
-        Writer writer = Files.newBufferedWriter(Paths.get(backpack.getAbsolutePath()));
+    public void saveMap() {
+        ResourceManager resourceManager = ResourceManager.getInstance();
         Map map = game.getMap();
         Background bg = map.getBackground();
-        writer.write("B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + "\n");
+        resourceManager.writeToFile("Scenes_saved/Map.txt",
+                "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + "\n");
         for (Interactable i: map.getInteractables()) {
             String visible = map.getVisibleInteractables().contains(i)? " V":"";
-            writer.write("I "+ i.getClass().getSimpleName() + " " + i.getName() + " " + i.getPosition().getX() + " " + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
+            resourceManager.writeToFile("Scenes_saved/Map.txt",
+                    "I "+ i.getClass().getSimpleName() + " " + i.getName() + " " + i.getPosition().getX() + " "
+                            + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
         }
-        writer.close();}
+    }
 }

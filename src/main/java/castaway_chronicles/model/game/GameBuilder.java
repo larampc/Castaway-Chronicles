@@ -22,8 +22,7 @@ public class GameBuilder {
 
     private String getCurrentLocation(String dir) {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath(dir + "/Locations.txt");
-        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        List<String> lines = resourceManager.readCurrentTimeResourceFile(dir + "/Locations.txt");
         for (String line : lines){
             String[] s = line.split(" ",-1);
             if (s.length == 2) { return s[0];}
@@ -42,8 +41,7 @@ public class GameBuilder {
     public HashMap<String, Location> createLocations(String dir) throws IOException {
         HashMap<String, Location> locations = new HashMap<>();
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath(dir + "/Locations.txt");
-        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        List<String> lines = resourceManager.readCurrentTimeResourceFile(dir + "/Locations.txt");
         for (String line : lines ){
             String[] s = line.split(" ",-1);
             SceneLoader locationsBuilder = new SceneLoader(dir, s[0], "Location");

@@ -31,8 +31,7 @@ public class EndingPageController implements ControllerState {
         for (Interactable e: mainPageController.getModel().getEndingPage().getVisibleInteractables()) {
             if (e.getName().equalsIgnoreCase("reset") && e.contains(position)){
                 ResourceManager resourceManager = ResourceManager.getInstance();
-                resourceManager.setPath("achieved_endings.txt");
-                resourceManager.deleteResourceFile();
+                resourceManager.deleteResourceFile("achieved_endings.txt");
                 mainPageController.getModel().getEndingPage().reset();
                 break;
             }

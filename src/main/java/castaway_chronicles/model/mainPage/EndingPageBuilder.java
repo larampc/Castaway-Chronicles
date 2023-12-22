@@ -14,8 +14,7 @@ public class EndingPageBuilder {
         HashMap<String, Interactable> visibleEndings = new HashMap<>();
         HashMap<String, Integer> questionItem = new HashMap<>();
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("endings.txt");
-        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        List<String> lines = resourceManager.readCurrentTimeResourceFile("endings.txt");
         Integer count = 0;
         for (String line : lines){
             String[] s = line.split(" ", -1);
