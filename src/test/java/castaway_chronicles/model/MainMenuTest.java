@@ -1,19 +1,32 @@
 package castaway_chronicles.model;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.game.gameElements.Background;
 import castaway_chronicles.model.mainPage.MainMenu;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 public class MainMenuTest {
     MainMenu mainMenu;
+    ResourceManager resourceManagerMock;
+
     @BeforeEach
-    public void init(){
-        mainMenu = new MainMenu();
+    void init(){
+        resourceManagerMock = Mockito.mock(ResourceManager.class);
+        mainMenu = new MainMenu(){
+            @Override
+            public ResourceManager getResourceManager(){
+                return resourceManagerMock;
+            }
+        };
+    }
+
+    @Test
+    public void MainMenuContent(){
+        assertEquals(ResourceManager.class, new MainMenu().getResourceManager().getClass());
     }
 
     @Test
@@ -25,12 +38,12 @@ public class MainMenuTest {
     }
 
     @Test
-    public void getCurrentEntry(){
+    void getCurrentEntry(){
         assertEquals(0, mainMenu.getSelectionPanel().getCurrentEntry());
     }
 
     @Test
-    public void getBackground(){
+    void getBackground(){
         assertEquals(new Background(0, 0, 200, 150, "Menu", false).getName(), mainMenu.getBackground().getName());
         assertEquals(new Background(0, 0, 200, 150, "Menu", false).getPosition(), mainMenu.getBackground().getPosition());
         assertEquals(new Background(0, 0, 200, 150, "Menu", false).getHeight(), mainMenu.getBackground().getHeight());
@@ -38,13 +51,13 @@ public class MainMenuTest {
     }
 
     @Test
-    public void getEntries(){
+    void getEntries(){
         List<String> entries = Arrays.asList("Start", "Exit", "Continue", "Endings");
         assertEquals(entries, mainMenu.getSelectionPanel().getEntries());
     }
 
     @Test
-    public void isSelected(){
+    void isSelected(){
         assertFalse(mainMenu.getSelectionPanel().isSelected(2));
         assertFalse(mainMenu.getSelectionPanel().isSelected(3));
         assertTrue(mainMenu.getSelectionPanel().isSelected(0));
@@ -52,21 +65,21 @@ public class MainMenuTest {
     }
 
     @Test
-    public void isSelectedExit(){
+    void isSelectedExit(){
         assertFalse(mainMenu.isSelectedExit());
         mainMenu.getSelectionPanel().nextEntry();
         assertTrue(mainMenu.isSelectedExit());
     }
 
     @Test
-    public void isSelectedStart(){
+    void isSelectedStart(){
         assertTrue(mainMenu.isSelectedStart());
         mainMenu.getSelectionPanel().nextEntry();
         assertFalse(mainMenu.isSelectedStart());
     }
 
     @Test
-    public void isSelectedContinue(){
+    void isSelectedContinue(){
         assertFalse(mainMenu.isSelectedContinue());
         mainMenu.getSelectionPanel().nextEntry();
         mainMenu.getSelectionPanel().nextEntry();
@@ -74,7 +87,7 @@ public class MainMenuTest {
     }
 
     @Test
-    public void isSelectedEndings(){
+    void isSelectedEndings(){
         assertFalse(mainMenu.isSelectedEndings());
         mainMenu.getSelectionPanel().nextEntry();
         mainMenu.getSelectionPanel().nextEntry();
@@ -83,11 +96,11 @@ public class MainMenuTest {
     }
 
     @Test
-    public void getNumberEntries(){
+    void getNumberEntries(){
         assertEquals(4, mainMenu.getSelectionPanel().getNumberEntries());
     }
     @Test
-    public void nextEntry(){
+    void nextEntry(){
         mainMenu.getSelectionPanel().nextEntry();
         assertTrue(mainMenu.getSelectionPanel().isSelected(1));
         assertFalse(mainMenu.getSelectionPanel().isSelected(0));
@@ -107,7 +120,7 @@ public class MainMenuTest {
     }
 
     @Test
-    public void previousEntry(){
+    void previousEntry(){
         mainMenu.getSelectionPanel().previousEntry();
         assertTrue(mainMenu.getSelectionPanel().isSelected(3));
         assertFalse(mainMenu.getSelectionPanel().isSelected(0));
@@ -124,5 +137,25 @@ public class MainMenuTest {
         assertTrue(mainMenu.getSelectionPanel().isSelected(0));
         assertFalse(mainMenu.getSelectionPanel().isSelected(1));
         assertEquals(0, mainMenu.getSelectionPanel().getCurrentEntry());
+    }
+
+    @Test
+    void cantContinueNotExistsScenesSaved() {
+        Mockito.when(resourceManagerMock.notExistsCurrentTimeResourceFile("Scenes_saved")).thenReturn(true);
+        assertFalse(mainMenu.canContinue());
+    }
+    @Test
+    void cantContinueButExistsScenesSaved(){
+        Mockito.when(resourceManagerMock.notExistsCurrentTimeResourceFile("Scenes_saved")).thenReturn(false);
+        Mockito.when(resourceManagerMock.countFiles("Scenes_saved")).thenReturn(0);
+        assertFalse(mainMenu.canContinue());
+        Mockito.when(resourceManagerMock.countFiles("Scenes_saved")).thenReturn(-1);
+        assertFalse(mainMenu.canContinue());
+    }
+    @Test
+    void canContinue(){
+        Mockito.when(resourceManagerMock.notExistsCurrentTimeResourceFile("Scenes_saved")).thenReturn(false);
+        Mockito.when(resourceManagerMock.countFiles("Scenes_saved")).thenReturn(1);
+        assertTrue(mainMenu.canContinue());
     }
 }

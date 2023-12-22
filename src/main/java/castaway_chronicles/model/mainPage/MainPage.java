@@ -7,7 +7,7 @@ public class MainPage {
     private PAGE current;
     public MainPage() {
         mainMenu = new MainMenu();
-        endingPage = new EndingPageBuilder().createEndingPage();
+        endingPage = EndingPageBuilder.createEndingPage();
         current = PAGE.MENU;
     }
     public MainMenu getMainMenu() {

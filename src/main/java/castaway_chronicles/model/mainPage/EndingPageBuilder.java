@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class EndingPageBuilder {
-    public EndingPage createEndingPage() {
+    public static EndingPage createEndingPage() {
         Background background = new Background(0, 0, 200, 150, "EndingsMenu", false);
         HashMap<String, Interactable> endings = new HashMap<>();
         HashMap<String, Interactable> visibleEndings = new HashMap<>();

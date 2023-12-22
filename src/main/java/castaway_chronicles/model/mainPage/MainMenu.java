@@ -7,6 +7,7 @@ import castaway_chronicles.model.SelectionPanel;
 import java.util.Arrays;
 
 public class MainMenu extends Menu {
+    private final ResourceManager resourceManager = ResourceManager.getInstance();
     public MainMenu() {
         super();
         setSelectionPanel(new SelectionPanel(Arrays.asList("Start", "Exit", "Continue", "Endings")));
@@ -22,8 +23,11 @@ public class MainMenu extends Menu {
     }
     public boolean isSelectedEndings() {return getSelectionPanel().isSelected(3);}
     public boolean canContinue() {
-        ResourceManager resourceManager = ResourceManager.getInstance();
-        if(resourceManager.notExistsCurrentTimeResourceFile("Scenes_saved")) return false;
-        return resourceManager.countFiles("Scenes_saved") > 0;
+        if(getResourceManager().notExistsCurrentTimeResourceFile("Scenes_saved")) return false;
+        return getResourceManager().countFiles("Scenes_saved") > 0;
+    }
+
+    public ResourceManager getResourceManager() {
+        return resourceManager;
     }
 }
