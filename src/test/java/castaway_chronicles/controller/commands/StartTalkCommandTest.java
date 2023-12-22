@@ -1,6 +1,6 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.StartTalkCommand;
+import castaway_chronicles.controller.Commands.StartTalkCommand;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.NPC;
 import castaway_chronicles.model.game.scene.Location;

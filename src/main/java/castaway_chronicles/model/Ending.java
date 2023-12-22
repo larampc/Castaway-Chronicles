@@ -12,8 +12,7 @@ public class Ending {
     }
     public void setMax() {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Endings/"+name);
-        max = resourceManager.countFiles();
+        max = resourceManager.countFiles("Endings/"+name);
     }
     public int getMax() {return max;}
     public int getCurrent() {

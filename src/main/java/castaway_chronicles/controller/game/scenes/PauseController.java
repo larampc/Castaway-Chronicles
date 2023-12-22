@@ -2,7 +2,7 @@ package castaway_chronicles.controller.game.scenes;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
-import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
+import castaway_chronicles.controller.Commands.GetSideOptionCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
@@ -55,7 +55,7 @@ public class PauseController implements ControllerState {
     }
 
 
-    public void select(Application application) throws IOException {
+    public void select(Application application) {
         if (pauseMenu.isSelectedMenu()) application.setState(new MainPageState(new MainPage()));
         if (pauseMenu.isSelectedExit()) application.setState(null);
         if (pauseMenu.isSelectedResume()) {

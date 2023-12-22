@@ -1,6 +1,6 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.MoveCommand;
+import castaway_chronicles.controller.Commands.MoveCommand;
 import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.gameElements.Background;

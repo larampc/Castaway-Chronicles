@@ -1,6 +1,6 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.TalkCommand;
+import castaway_chronicles.controller.Commands.TalkCommand;
 import castaway_chronicles.model.SelectionPanel;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.NPC;

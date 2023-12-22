@@ -2,8 +2,8 @@ package castaway_chronicles.controller.game.locationControllers;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ContinuousControllerState;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.MoveCommand;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.MoveCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.scene.Location;

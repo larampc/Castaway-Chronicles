@@ -1,6 +1,6 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.PickUpCommand;
+import castaway_chronicles.controller.Commands.PickUpCommand;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;

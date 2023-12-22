@@ -1,4 +1,4 @@
-package castaway_chronicles.controller.game.Commands;
+package castaway_chronicles.controller.Commands;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

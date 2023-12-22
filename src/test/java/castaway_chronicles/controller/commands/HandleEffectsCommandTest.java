@@ -1,7 +1,7 @@
 package castaway_chronicles.controller.commands;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
+import castaway_chronicles.controller.Commands.HandleEffectsCommand;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.BackpackItem;
 import castaway_chronicles.model.game.gameElements.NPC;

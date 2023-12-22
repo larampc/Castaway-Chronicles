@@ -1,7 +1,7 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.Command;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.Command;
+import castaway_chronicles.controller.Commands.CommandInvoker;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

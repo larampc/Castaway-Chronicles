@@ -1,6 +1,6 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
+import castaway_chronicles.controller.Commands.GetSideOptionCommand;
 import castaway_chronicles.model.SelectionPanel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,9 +8,10 @@ import org.mockito.Mockito;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+
 public class GetSideOptionCommandTest {
     @Test
-    void GetSideOptionCommand() throws IOException, InterruptedException, URISyntaxException {
+    void GetSideOptionCommand() throws IOException, URISyntaxException, InterruptedException {
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
         Mockito.when(selectionPanelMock.getCurrentEntry()).thenReturn(0);

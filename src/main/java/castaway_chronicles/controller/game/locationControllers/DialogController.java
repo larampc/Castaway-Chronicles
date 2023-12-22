@@ -2,12 +2,11 @@ package castaway_chronicles.controller.game.locationControllers;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.ControllerState;
-import castaway_chronicles.controller.game.Commands.AnswerCommand;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
-import castaway_chronicles.controller.game.Commands.TalkCommand;
+import castaway_chronicles.controller.Commands.AnswerCommand;
+import castaway_chronicles.controller.Commands.HandleEffectsCommand;
+import castaway_chronicles.controller.Commands.TalkCommand;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.gameElements.NPC;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -54,7 +53,7 @@ public class DialogController implements ControllerState {
 
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         if (gameController.getModel().getTextBox().isActiveChoice()) {
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getTextBox().getInteractable()).getEffects(), application);
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextBox().getInteractable().getEffects(), application);
             gameController.getCommandInvoker().setCommand(effects);
             gameController.getCommandInvoker().execute();
             AnswerCommand answer = new AnswerCommand(gameController.getModel());
@@ -66,7 +65,7 @@ public class DialogController implements ControllerState {
         }
         gameController.getCommandInvoker().execute();
         if(!gameController.getModel().getTextBox().isActiveTextBox()){
-            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), ((NPC)gameController.getModel().getTextBox().getInteractable()).getEffects(), application);
+            HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextBox().getInteractable().getEffects(), application);
             gameController.getCommandInvoker().setCommand(effects);
             gameController.getCommandInvoker().execute();
             if (!gameController.getModel().getTextBox().isActiveTextBox()) gameController.setControllerState(gameController.getLocationController());

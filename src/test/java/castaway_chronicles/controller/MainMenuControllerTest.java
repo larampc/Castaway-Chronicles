@@ -1,8 +1,8 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.GetSideOptionCommand;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.GetSideOptionCommand;
 import castaway_chronicles.controller.mainPage.MainMenuController;
 import castaway_chronicles.controller.mainPage.MainPageController;
 import castaway_chronicles.model.SelectionPanel;

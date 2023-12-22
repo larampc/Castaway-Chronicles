@@ -1,6 +1,6 @@
 package castaway_chronicles.controller.commands;
 
-import castaway_chronicles.controller.game.Commands.ChangeLocationCommand;
+import castaway_chronicles.controller.Commands.ChangeLocationCommand;
 import castaway_chronicles.model.game.Game;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

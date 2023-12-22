@@ -4,7 +4,7 @@ import castaway_chronicles.Application;
 import castaway_chronicles.controller.ContinuousControllerState;
 import castaway_chronicles.controller.Controller;
 import castaway_chronicles.controller.ControllerState;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.CommandInvoker;
 import castaway_chronicles.controller.game.locationControllers.*;
 import castaway_chronicles.controller.game.scenes.BackpackController;
 import castaway_chronicles.controller.game.locationControllers.StandingController;

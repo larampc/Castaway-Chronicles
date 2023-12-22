@@ -1,10 +1,10 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.AnswerCommand;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.HandleEffectsCommand;
-import castaway_chronicles.controller.game.Commands.TalkCommand;
+import castaway_chronicles.controller.Commands.AnswerCommand;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.HandleEffectsCommand;
+import castaway_chronicles.controller.Commands.TalkCommand;
 import castaway_chronicles.controller.game.locationControllers.DialogController;
 import castaway_chronicles.controller.game.GameController;
 
