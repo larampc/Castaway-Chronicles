@@ -4,7 +4,6 @@ import castaway_chronicles.model.game.gameElements.NPC;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class NPCTest {
     private NPC npcDialog;
     @BeforeEach
-    void init() throws IOException {
+    void init() {
         npcDialog = new NPC(0,0,0,0, "toot", 0);
     }
 
@@ -32,7 +31,7 @@ public class NPCTest {
     }
 
     @Test
-    void goToStateChoice() throws IOException {
+    void goToStateChoice() {
         npcDialog.goToStateChoice();
         assertEquals(List.of("Beach rope V", "NPC toot 2"), npcDialog.getEffects());
         assertEquals("Hmm, where did I leave them?", npcDialog.getText());
@@ -40,7 +39,7 @@ public class NPCTest {
     }
 
     @Test
-    void goToState() throws IOException {
+    void goToState() {
         npcDialog.goToState(3);
         assertEquals(List.of("NPC toot 5 W", "Map City_icon V"), npcDialog.getEffects());
         assertEquals("Your loss my friend.", npcDialog.getText());

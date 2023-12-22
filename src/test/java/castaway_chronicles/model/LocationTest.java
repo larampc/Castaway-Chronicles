@@ -50,16 +50,4 @@ public class LocationTest {
 
         assertEquals(List.copyOf(interactables.values()), location.getInteractables());
     }
-
-//    @Test
-//    public void getTextDisplay(){
-//        assertEquals(TextDisplay.class, location.getTextDisplay().getClass());
-//    }
-//
-//    @Test
-//    public void setTextDisplay(){
-//        assertFalse(location.getTextDisplay().isActiveTextBox());
-//        location.setTextDisplay("test");
-//        assertTrue(location.getTextDisplay().isActiveTextBox());
-//    }
 }

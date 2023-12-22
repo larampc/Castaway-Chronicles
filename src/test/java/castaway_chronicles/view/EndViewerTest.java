@@ -7,12 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class EndViewerTest {
 
     @Test
-    void endViewer() throws IOException, URISyntaxException {
+    void endViewer() throws IOException {
         LanternaGUI guiMock = Mockito.mock(LanternaGUI.class);
         Ending endingMock = Mockito.mock(Ending.class);
         Mockito.when(endingMock.getCurrentFrame()).thenReturn("first");

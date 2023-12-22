@@ -5,6 +5,7 @@ import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.Location;
 import castaway_chronicles.model.game.scene.SceneLoader;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,19 +17,33 @@ public class SceneLoaderTest {
     public void getInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene", Game.SCENE.LOCATION);
         Scene scene = sceneBuilder.createScene();
-        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
-                new NPC(1,2,3,4,"witch",0),
-                new Icon(2,2,23,17,"MAP_icon"),
-                new Item(1, 2, 3, 4, "rope"),
-                new BackpackItem(1, 2, 3, 4, "rope_backpack"));
+        NPC npcMock = Mockito.mock(NPC.class);
+        Mockito.when(npcMock.getName()).thenReturn("engineer");
+        NPC npcMock2 = Mockito.mock(NPC.class);
+        Mockito.when(npcMock2.getName()).thenReturn("witch");
+        Item itemMock = Mockito.mock(Item.class);
+        Mockito.when(itemMock.getName()).thenReturn("rope");
+        Icon iconMock = Mockito.mock(Icon.class);
+        Mockito.when(iconMock.getName()).thenReturn("MAP_icon");
+        BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
+        Mockito.when(backpackItemMock.getName()).thenReturn("rope_backpack");
+        List<Interactable> interactables = List.of(npcMock,
+                npcMock2,
+                iconMock,
+                itemMock,
+                backpackItemMock);
         assertTrue(interactables.size() == scene.getInteractables().size() && interactables.containsAll(scene.getInteractables()));
     }
     @Test
     public void getVisibleInteractables() throws IOException {
         SceneLoader sceneBuilder = new SceneLoader("Scenes", "TestScene", Game.SCENE.LOCATION);
         Scene scene = sceneBuilder.createScene();
-        List<Interactable> interactables = List.of(new NPC(1,2,3,4,"engineer",0),
-                new Icon(2,2,23,17,"MAP_icon"));
+        Icon iconMock = Mockito.mock(Icon.class);
+        Mockito.when(iconMock.getName()).thenReturn("MAP_icon");
+        NPC npcMock = Mockito.mock(NPC.class);
+        Mockito.when(npcMock.getName()).thenReturn("engineer");
+        List<Interactable> interactables = List.of(npcMock,
+                iconMock);
         assertTrue(interactables.size() == scene.getVisibleInteractables().size() && interactables.containsAll(scene.getVisibleInteractables()));
     }
     @Test

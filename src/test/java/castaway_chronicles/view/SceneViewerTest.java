@@ -2,10 +2,7 @@ package castaway_chronicles.view;
 
 import castaway_chronicles.gui.GUI;
 import castaway_chronicles.model.Position;
-import castaway_chronicles.model.game.gameElements.Background;
-import castaway_chronicles.model.game.gameElements.Icon;
-import castaway_chronicles.model.game.gameElements.Item;
-import castaway_chronicles.model.game.gameElements.MainChar;
+import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,25 +18,41 @@ public class SceneViewerTest {
     private Location locationMock;
     private Backpack backpackMock;
     private SceneViewer gameSceneViewer;
+    private Position positionMock;
     @BeforeEach
     void setUp() {
         guiMock = Mockito.mock(GUI.class);
         locationMock = Mockito.mock(Location.class);
         backpackMock = Mockito.mock(Backpack.class);
         gameSceneViewer = new SceneViewer();
-        Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(new Item(0,0,0,0, "people"), new Icon(10,10, 10, 10, "forestRock")));
-        Mockito.when(locationMock.getBackground()).thenReturn(new Background(10,10,10, 10, "Menu", false));
+        positionMock = Mockito.mock(Position.class);
+        Item itemMock = Mockito.mock(Item.class);
+        Mockito.when(itemMock.getName()).thenReturn("people");
+        Mockito.when(itemMock.getPosition()).thenReturn(positionMock);
+        Icon iconMock = Mockito.mock(Icon.class);
+        Mockito.when(iconMock.getPosition()).thenReturn(positionMock);
+        Mockito.when(iconMock.getName()).thenReturn("forestRock");
+        Background backgroundMock = Mockito.mock(Background.class);
+        Mockito.when(backgroundMock.getName()).thenReturn("Menu");
+        Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
+        Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(itemMock, iconMock));
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backpackMock.getVisibleInteractables()).thenReturn(List.of(itemMock, iconMock));
+        Mockito.when(backpackMock.getBackground()).thenReturn(backgroundMock);
     }
     @Test
     void locationViewerMainChar() throws IOException, URISyntaxException, InterruptedException {
-        Mockito.when(locationMock.getMainChar()).thenReturn(new MainChar(10,10, 10, 10, "MainChar"));
+        MainChar mainCharMock = Mockito.mock(MainChar.class);
+        Mockito.when(mainCharMock.getPosition()).thenReturn(positionMock);
+        Mockito.when(mainCharMock.getName()).thenReturn("MainChar");
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
 
         gameSceneViewer.draw(locationMock, guiMock);
 
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(10,10), "Menu");
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(0,0), "people");
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(10,10), "forestRock");
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(new Position(10,10), "MainChar");
+        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "Menu");
+        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "people");
+        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "forestRock");
+        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "MainChar");
     }
 
     @Test
@@ -52,14 +65,11 @@ public class SceneViewerTest {
     }
     @Test
     void sceneViewer() throws IOException, URISyntaxException, InterruptedException {
-        Mockito.when(backpackMock.getVisibleInteractables()).thenReturn(List.of(new Item(0,0,0,0, "people"), new Icon(10,10, 10, 10, "forestRock")));
-        Mockito.when(backpackMock.getBackground()).thenReturn(new Background(10,10,10, 10, "Menu", false));
-
         gameSceneViewer.draw(backpackMock, guiMock);
 
-        Mockito.verify(guiMock).drawImage(new Position(10,10), "Menu");
-        Mockito.verify(guiMock).drawImage(new Position(0,0), "people");
-        Mockito.verify(guiMock).drawImage(new Position(10,10), "forestRock");
+        Mockito.verify(guiMock).drawImage(positionMock, "Menu");
+        Mockito.verify(guiMock).drawImage(positionMock, "people");
+        Mockito.verify(guiMock).drawImage(positionMock, "forestRock");
         Mockito.verify(guiMock, Mockito.times(3)).drawImage(Mockito.any(Position.class), Mockito.anyString());
     }
 }

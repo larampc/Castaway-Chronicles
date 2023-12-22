@@ -24,7 +24,10 @@ public class SelectionPanelViewerTest {
         Mockito.when(selectionPanel.isSelected(1)).thenReturn(false);
         Mockito.when(selectionPanel.isSelected(2)).thenReturn(false);
         Mockito.when(selectionPanel.isSelected(3)).thenReturn(false);
-        SelectionPanelViewer selectionPanelViewer = new SelectionPanelViewer(new Position(98, 101), 42,20);
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(positionMock.getX()).thenReturn(98);
+        Mockito.when(positionMock.getY()).thenReturn(101);
+        SelectionPanelViewer selectionPanelViewer = new SelectionPanelViewer(positionMock, 42,20);
 
         selectionPanelViewer.draw(selectionPanel, guiMock);
 
