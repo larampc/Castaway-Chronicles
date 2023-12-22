@@ -76,8 +76,7 @@ public class LanternaGUI implements GUI{
 
     private AWTTerminalFontConfiguration loadSquareFont() throws IOException, FontFormatException {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("fonts/square.ttf");
-        Font font =  Font.createFont(Font.TRUETYPE_FONT, resourceManager.getFile());
+        Font font =  Font.createFont(Font.TRUETYPE_FONT, resourceManager.getFile("fonts/square.ttf"));
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(font);
         Font newfont = font.deriveFont(Font.PLAIN, 4);
@@ -86,8 +85,7 @@ public class LanternaGUI implements GUI{
 
     private void loadSprites() throws IOException {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Images");
-        loadFiles(resourceManager.getFile(), images);
+        loadFiles(resourceManager.getFile("Images"), images);
     }
     private void loadFiles(File dir, HashMap<String, Sprite> images) throws IOException {
         if (!dir.isDirectory()) {
@@ -102,8 +100,7 @@ public class LanternaGUI implements GUI{
     }
     public void loadEnding(String name) throws IOException {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Endings/" + name);
-        loadFiles(resourceManager.getFile(), images);
+        loadFiles(resourceManager.getFile("Endings/" + name), images);
     }
     @Override
     public void resizeTerminal() {

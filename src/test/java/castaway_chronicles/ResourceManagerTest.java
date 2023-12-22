@@ -16,7 +16,6 @@ public class ResourceManagerTest {
         assertNotNull(resourceManager);
         newFile = new File("src/main/resources/Testing/resourceTest.txt");
         newDir = new File("src/main/resources/Testing/resourceDir");
-
         try {
             boolean success = newFile.createNewFile();
             assertTrue(success);
@@ -29,72 +28,61 @@ public class ResourceManagerTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        resourceManager.setPath("Testing/resourceTest.txt");
-        resourceManager.writeToFile("lorem ipsem\ntesting\nresource\nmanager\n");
+        resourceManager.writeToFile("Testing/resourceTest.txt","lorem ipsem\ntesting\nresource\nmanager\n");
     }
 
     @AfterEach
     void tearDown() {
         boolean success =  newFile.delete();
         assertTrue(success);
-        resourceManager.setPath("Testing/resourceDir");
-        resourceManager.deleteResourceFileContent();
+        resourceManager.deleteResourceFileContent("Testing/resourceDir");
         success = newDir.delete();
         assertTrue(success);
     }
 
     @Test
     void existsStaticResourceFile(){
-        resourceManager.setPath("Testing/staticResource.txt");
-        assertTrue(resourceManager.existsStaticResourceFile());
-
-        resourceManager.setPath("Testing/staticResource2.txt");
-        assertFalse(resourceManager.existsStaticResourceFile());
+        assertTrue(resourceManager.existsStaticResourceFile("Testing/staticResource.txt"));
+        assertFalse(resourceManager.existsStaticResourceFile("Testing/staticResource2.txt"));
     }
 
     @Test
     void readStaticResourceFile() {
-        resourceManager.setPath("Testing/staticResource.txt");
-        assertEquals(List.of("lorem ipsem","testing","resource","manager"), resourceManager.readCurrentTimeResourceFile());
+        assertEquals(List.of("lorem ipsem","testing","resource","manager"), resourceManager.readCurrentTimeResourceFile("Testing/staticResource.txt"));
     }
 
     @Test
     void failToReadStaticResourceFile() {
-        resourceManager.setPath("Testing/resourceTest2.txt");
-        assertThrows(RuntimeException.class,resourceManager::readStaticResourceFile);
+        assertThrows(Exception.class,()-> resourceManager.readStaticResourceFile("Testing/resourceTest2.txt"));
     }
     @Test
     void readCurrentTimeResourceFile() {
-        assertEquals(List.of("lorem ipsem","testing","resource","manager"),resourceManager.readCurrentTimeResourceFile());
+        assertEquals(List.of("lorem ipsem","testing","resource","manager"),resourceManager.readCurrentTimeResourceFile("Testing/resourceTest.txt"));
 
-        resourceManager.writeToFile("changed");
+        resourceManager.writeToFile("Testing/resourceTest.txt","changed");
 
-        assertEquals(List.of("lorem ipsem","testing","resource","manager","changed"),resourceManager.readCurrentTimeResourceFile());
+        assertEquals(List.of("lorem ipsem","testing","resource","manager","changed"),resourceManager.readCurrentTimeResourceFile("Testing/resourceTest.txt"));
     }
 
     @Test
     void failToReadCurrentTimeResourceFile() {
-        resourceManager.setPath("Testing/resourceTest2");
-        assertThrows(RuntimeException.class,resourceManager::readCurrentTimeResourceFile);
+        assertThrows(Exception.class,()-> resourceManager.readCurrentTimeResourceFile("Testing/resourceTest2"));
     }
     @Test
     void failToWriteToResourceFile() throws IOException {
-        resourceManager.setPath("Testing/resourceTest2.png");
-        File file = resourceManager.getFile();
+        File file = resourceManager.getFile("Testing/resourceTest2.png");
         boolean success = file.createNewFile();
         assertTrue(success);
         assertThrows(Exception.class,()->{
             boolean successFullReadOnly = file.setReadOnly();
             assertTrue(successFullReadOnly);
-            resourceManager.writeToFile("test");
+            resourceManager.writeToFile("Testing/resourceTest2.png","test");
         });
         success = file.delete();
         assertTrue(success);
     }
     @Test
     void countFiles() {
-        resourceManager.setPath("Testing/testDir");
-
-        assertEquals(2,resourceManager.countFiles());
+        assertEquals(2,resourceManager.countFiles("Testing/testDir"));
     }
 }
