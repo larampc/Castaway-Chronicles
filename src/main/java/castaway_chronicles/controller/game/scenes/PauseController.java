@@ -55,7 +55,7 @@ public class PauseController implements ControllerState {
     }
 
 
-    public void select(Application application) throws IOException {
+    public void select(Application application) {
         if (pauseMenu.isSelectedMenu()) application.setState(new MainPageState(new MainPage()));
         if (pauseMenu.isSelectedExit()) application.setState(null);
         if (pauseMenu.isSelectedResume()) {

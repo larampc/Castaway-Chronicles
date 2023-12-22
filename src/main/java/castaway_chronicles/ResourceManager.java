@@ -78,7 +78,7 @@ public class ResourceManager {
         return new File(Path.of("src", "main", "resources",path).toString());
     }
     public void createResourceDir(String path){
-        new File(Path.of("src", "main", "resources", path).toString()).mkdirs();
+        new File(Path.of("src", "main", "resources", path).toString()).mkdir();
     }
 }
 

@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EndingPageControllerTest {
     private Application applicationMock;
     private MainPage mainPageMock;
-    private MainPageController mainPageController;
+    private MainPageController mainPageControllerMock;
     private EndingPageController endingPageController;
     private boolean exists;
     private File endings;
@@ -69,16 +69,18 @@ public class EndingPageControllerTest {
         applicationMock = Mockito.mock(Application.class);
         mainPageMock = Mockito.mock(MainPage.class);
         Mockito.when(mainPageMock.getCurrent()).thenReturn(MainPage.PAGE.ENDINGS);
-        mainPageController = new MainPageController(mainPageMock);
-        endingPageController = (EndingPageController) mainPageController.getEndingPageController();
+        mainPageControllerMock = Mockito.mock(MainPageController.class);
+        Mockito.when(mainPageControllerMock.getModel()).thenReturn(mainPageMock);
+        endingPageController = new EndingPageController(mainPageControllerMock);
     }
 
     @Test
     void escape() throws IOException, URISyntaxException, InterruptedException {
+        assertEquals(mainPageControllerMock.getCurrent(), mainPageControllerMock.getMainMenuController());
         endingPageController.key(KeyEvent.VK_ESCAPE,applicationMock);
 
         Mockito.verify(mainPageMock).setCurrent(MainPage.PAGE.MENU);
-        assertEquals(mainPageController.getCurrent(), mainPageController.getMainMenuController());
+        Mockito.verify(mainPageControllerMock).setCurrent(Mockito.any());
     }
 
     @Test

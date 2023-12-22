@@ -23,7 +23,7 @@ public class MapController implements ControllerState {
 
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
-        CommandInvoker invoker = new CommandInvoker();
+        CommandInvoker invoker = gameController.getCommandInvoker();
         for (Interactable e: gameController.getModel().getMap().getVisibleInteractables()) {
             if (e.contains(position) && e instanceof Icon) {
                 String[] split = e.getName().split("_", -1);

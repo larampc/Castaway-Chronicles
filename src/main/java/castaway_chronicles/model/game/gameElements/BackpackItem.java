@@ -4,7 +4,6 @@ import castaway_chronicles.model.InteractableWithText;
 import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.SelectionPanel;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ public class BackpackItem extends InteractableWithText {
     private final List<String> defaultAnswers = new ArrayList<>();
     private String description;
     private boolean inHand = false;
-    public BackpackItem(int x, int y, int w, int h, String name) throws IOException {
+    public BackpackItem(int x, int y, int w, int h, String name) {
         super(x, y, w, h, name);
         getInfo();
     }
