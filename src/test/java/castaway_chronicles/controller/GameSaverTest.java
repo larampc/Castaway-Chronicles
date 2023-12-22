@@ -5,12 +5,10 @@ import castaway_chronicles.controller.game.GameSaver;
 import castaway_chronicles.model.Interactable;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.gameElements.Background;
-import castaway_chronicles.model.game.gameElements.Item;
-import castaway_chronicles.model.game.gameElements.MainChar;
-import castaway_chronicles.model.game.gameElements.NPC;
+import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.Backpack;
 import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.model.game.scene.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -158,4 +156,40 @@ public class GameSaverTest {
 
     }
 
+    @Test
+    void saveMap() {
+        Map mapMock = Mockito.mock(Map.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+        Position positionMock = Mockito.mock(Position.class);
+        Icon visibleInteractableMock = Mockito.mock(Icon.class);
+        Icon invisibleInteractableMock = Mockito.mock(Icon.class);
+
+        Mockito.when(gameMock.getMap()).thenReturn(mapMock);
+        Mockito.when(mapMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.getName()).thenReturn("BgName");
+        Mockito.when(backgroundMock.getWidth()).thenReturn(100);
+        Mockito.when(backgroundMock.getHeight()).thenReturn(200);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
+        Mockito.when(positionMock.getX()).thenReturn(5);
+        Mockito.when(positionMock.getY()).thenReturn(10);
+        Mockito.when(mapMock.getInteractables()).thenReturn(List.of(visibleInteractableMock,invisibleInteractableMock));
+        Mockito.when(mapMock.getVisibleInteractables()).thenReturn(List.of(visibleInteractableMock));
+        Mockito.when(invisibleInteractableMock.getName()).thenReturn("InvisibleInteractable");
+        Mockito.when(invisibleInteractableMock.getWidth()).thenReturn(10);
+        Mockito.when(invisibleInteractableMock.getHeight()).thenReturn(20);
+        Mockito.when(invisibleInteractableMock.getPosition()).thenReturn(positionMock);
+        Mockito.when(visibleInteractableMock.getName()).thenReturn("VisibleInteractable");
+        Mockito.when(visibleInteractableMock.getWidth()).thenReturn(10);
+        Mockito.when(visibleInteractableMock.getHeight()).thenReturn(20);
+        Mockito.when(visibleInteractableMock.getPosition()).thenReturn(positionMock);
+
+        gameSaver.saveMap();
+        String toWrite = "B BgName 5 10 100 200\n";
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Map.txt",toWrite);
+        toWrite = "I "+ visibleInteractableMock.getClass().getSimpleName() + " VisibleInteractable 5 10 10 20 V\n";
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Map.txt",toWrite);
+        toWrite = "I " + invisibleInteractableMock.getClass().getSimpleName() + " InvisibleInteractable 5 10 10 20\n";
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Map.txt",toWrite);
+        Mockito.verify(resourceManagerMock,Mockito.times(3)).writeToFile(Mockito.anyString(),Mockito.anyString());
+    }
 }
