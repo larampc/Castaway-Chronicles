@@ -18,9 +18,9 @@ public class MainPageTest {
     }
 
     @Test
-    public void MainPageContent() throws IOException {
+    public void MainPageContent() {
         assertEquals(MainMenu.class, mainPage.getMainMenu().getClass());
-        assertEquals(new EndingPageBuilder().createEndingPage().getClass(), mainPage.getEndingPage().getClass());
+        assertEquals(EndingPageBuilder.createEndingPage().getClass(), mainPage.getEndingPage().getClass());
         assertEquals("MENU", mainPage.getCurrent().name());
     }
 

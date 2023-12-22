@@ -35,4 +35,8 @@ public class EndingPage extends Scene {
         }
         setVisible("reset");
     }
+
+    public HashMap<String, Integer> getQuestionItem() {
+        return questionItem;
+    }
 }
