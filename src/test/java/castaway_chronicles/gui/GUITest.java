@@ -52,47 +52,56 @@ public class GUITest {
 
     @Test
     void drawText() {
-        gui.drawText(new Position(0,0),100,"Lorem ipsum ,.!?",false);
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(positionMock.getY()).thenReturn(0);
+        Mockito.when(positionMock.getX()).thenReturn(0);
+
+        gui.drawText(positionMock,100,"Lorem ipsum ,.!?",false);
 
         TextCharacter c = new TextCharacter(' ', new TextColor.RGB(0, 0, 0), new TextColor.RGB(0, 0, 0));
-        gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j",true);
-        gui.drawText(new Position(0,0),70,"Lorem ipsum ,.!? jjjjj", false);
+        gui.drawText(positionMock,67,"Lorem ipsum ,.!? j",true);
+        gui.drawText(positionMock,70,"Lorem ipsum ,.!? jjjjj", false);
 
         Mockito.verify(graphics, Mockito.times(3)).setCharacter(63,6, c);
         Mockito.verify(graphics, Mockito.times(2)).setCharacter(1,10, c);
         Mockito.verify(graphics, Mockito.times(4)).setForegroundColor(new TextColor.RGB(255,255,255));
-        Mockito.verify(graphics, Mockito.times(1)).drawLine(new TerminalPosition(28, 8), new TerminalPosition(53, 8), '_');
+        Mockito.verify(graphics).drawLine(new TerminalPosition(28, 8), new TerminalPosition(53, 8), '_');
     }
 
     @Test
     void drawLine() {
-        gui.drawLine(new Position(1, 1),30);
-        Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(new TextColor.RGB(255,255,255));
-        Mockito.verify(graphics, Mockito.times(1)).drawLine(new TerminalPosition(1, 1), new TerminalPosition(31, 1), '_');
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(positionMock.getY()).thenReturn(1);
+        Mockito.when(positionMock.getX()).thenReturn(1);
+        gui.drawLine(positionMock,30);
+        Mockito.verify(graphics).setForegroundColor(new TextColor.RGB(255,255,255));
+        Mockito.verify(graphics).drawLine(new TerminalPosition(1, 1), new TerminalPosition(31, 1), '_');
     }
 
     @Test
     void refresh() throws IOException {
         gui.refresh();
-        Mockito.verify(screen, Mockito.times(1)).refresh();
+        Mockito.verify(screen).refresh();
     }
 
     @Test
     void clear() {
         gui.clear();
-        Mockito.verify(screen, Mockito.times(1)).clear();
+        Mockito.verify(screen).clear();
     }
 
     @Test
     void close() throws IOException {
         gui.close();
-        Mockito.verify(screen, Mockito.times(1)).close();
+        Mockito.verify(screen).close();
     }
 
     @Test
     void resizeTerminalBig() {
+        TerminalSize terminalSizeMock = Mockito.mock(TerminalSize.class);
+        Mockito.when(terminalSizeMock.getColumns()).thenReturn(10);
         Mockito.when(terminalMock.getWidth()).thenReturn(10);
-        Mockito.when(screen.doResizeIfNecessary()).thenReturn(null).thenReturn(null).thenReturn(new TerminalSize(10,10));
+        Mockito.when(screen.doResizeIfNecessary()).thenReturn(null).thenReturn(null).thenReturn(terminalSizeMock);
         gui.setBigger(false);
 
         gui.resizeTerminal();
@@ -104,8 +113,10 @@ public class GUITest {
 
     @Test
     void resizeTerminalSmall() {
+        TerminalSize terminalSizeMock = Mockito.mock(TerminalSize.class);
+        Mockito.when(terminalSizeMock.getColumns()).thenReturn(10);
         Mockito.when(terminalMock.getWidth()).thenReturn(10);
-        Mockito.when(screen.doResizeIfNecessary()).thenReturn(null).thenReturn(null).thenReturn(new TerminalSize(10,10));
+        Mockito.when(screen.doResizeIfNecessary()).thenReturn(null).thenReturn(null).thenReturn(terminalSizeMock);
         gui.setBigger(true);
 
         gui.resizeTerminal();

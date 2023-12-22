@@ -100,21 +100,21 @@ public class MainMenuControllerTest {
         mainMenuController.key(KeyEvent.VK_RIGHT, applicationMock);
         Mockito.verify(commandInvoker).setCommand(Mockito.any(GetSideOptionCommand.class));
         Mockito.verify(commandInvoker).execute();
-        Mockito.verify(selectionPanelMock, Mockito.times(0)).previousEntry();
+        Mockito.verify(selectionPanelMock, Mockito.never()).previousEntry();
 
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(true);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(true);
         mainMenuController.key(KeyEvent.VK_RIGHT, applicationMock);
         Mockito.verify(commandInvoker, Mockito.times(2)).setCommand(Mockito.any(GetSideOptionCommand.class));
         Mockito.verify(commandInvoker, Mockito.times(2)).execute();
-        Mockito.verify(selectionPanelMock, Mockito.times(0)).previousEntry();
+        Mockito.verify(selectionPanelMock, Mockito.never()).previousEntry();
 
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(false);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(false);
         mainMenuController.key(KeyEvent.VK_LEFT, applicationMock);
         Mockito.verify(commandInvoker, Mockito.times(3)).setCommand(Mockito.any(GetSideOptionCommand.class));
         Mockito.verify(commandInvoker, Mockito.times(3)).execute();
-        Mockito.verify(selectionPanelMock, Mockito.times(0)).previousEntry();
+        Mockito.verify(selectionPanelMock, Mockito.never()).previousEntry();
 
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(true);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(false);
@@ -135,49 +135,49 @@ public class MainMenuControllerTest {
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(false);
         Mockito.when(mainMenuMock.isSelectedEndings()).thenReturn(false);
         mainMenuController.key(KeyEvent.VK_ENTER, applicationMock);
-        Mockito.verify(applicationMock, Mockito.times(0)).setState(null);
-        Mockito.verify(applicationMock, Mockito.times(0)).setState(Mockito.any(GameState.class));
-        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
-        Mockito.verify(mainPageControllerMock, Mockito.times(0)).setCurrent(controllerStateMock);
+        Mockito.verify(applicationMock, Mockito.never()).setState(null);
+        Mockito.verify(applicationMock, Mockito.never()).setState(Mockito.any(GameState.class));
+        Mockito.verify(mainPageMock, Mockito.never()).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(mainPageControllerMock, Mockito.never()).setCurrent(controllerStateMock);
 
         Mockito.when(mainMenuMock.canContinue()).thenReturn(true);
         mainMenuController.key(KeyEvent.VK_ENTER, applicationMock);
-        Mockito.verify(applicationMock, Mockito.times(0)).setState(null);
-        Mockito.verify(applicationMock, Mockito.times(0)).setState(Mockito.any(GameState.class));
-        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
-        Mockito.verify(mainPageControllerMock, Mockito.times(0)).setCurrent(controllerStateMock);
+        Mockito.verify(applicationMock, Mockito.never()).setState(null);
+        Mockito.verify(applicationMock, Mockito.never()).setState(Mockito.any(GameState.class));
+        Mockito.verify(mainPageMock, Mockito.never()).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(mainPageControllerMock, Mockito.never()).setCurrent(controllerStateMock);
 
         Mockito.when(mainMenuMock.canContinue()).thenReturn(false);
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(true);
         mainMenuController.key(KeyEvent.VK_ENTER, applicationMock);
-        Mockito.verify(applicationMock, Mockito.times(0)).setState(null);
-        Mockito.verify(applicationMock, Mockito.times(0)).setState(Mockito.any(GameState.class));
-        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
-        Mockito.verify(mainPageControllerMock, Mockito.times(0)).setCurrent(controllerStateMock);
+        Mockito.verify(applicationMock, Mockito.never()).setState(null);
+        Mockito.verify(applicationMock, Mockito.never()).setState(Mockito.any(GameState.class));
+        Mockito.verify(mainPageMock, Mockito.never()).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(mainPageControllerMock, Mockito.never()).setCurrent(controllerStateMock);
 
         Mockito.when(mainMenuMock.canContinue()).thenReturn(false);
         Mockito.when(mainMenuMock.isSelectedExit()).thenReturn(true);
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(false);
         mainMenuController.key(KeyEvent.VK_ENTER, applicationMock);
-        Mockito.verify(applicationMock, Mockito.times(1)).setState(null);
+        Mockito.verify(applicationMock).setState(null);
         Mockito.verify(applicationMock, Mockito.never()).setState(Mockito.any(GameState.class));
-        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
-        Mockito.verify(mainPageControllerMock, Mockito.times(0)).setCurrent(controllerStateMock);
+        Mockito.verify(mainPageMock, Mockito.never()).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(mainPageControllerMock, Mockito.never()).setCurrent(controllerStateMock);
 
         Mockito.when(mainMenuMock.isSelectedExit()).thenReturn(false);
         Mockito.when(mainMenuMock.isSelectedStart()).thenReturn(true);
         mainMenuController.key(KeyEvent.VK_ENTER, applicationMock);
-        Mockito.verify(applicationMock, Mockito.times(1)).setState(null);
+        Mockito.verify(applicationMock).setState(null);
         Mockito.verify(applicationMock).setState(Mockito.any(GameState.class));
-        Mockito.verify(mainPageMock, Mockito.times(0)).setCurrent(MainPage.PAGE.ENDINGS);
-        Mockito.verify(mainPageControllerMock, Mockito.times(0)).setCurrent(controllerStateMock);
+        Mockito.verify(mainPageMock, Mockito.never()).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(mainPageControllerMock, Mockito.never()).setCurrent(controllerStateMock);
 
         Mockito.when(mainMenuMock.isSelectedStart()).thenReturn(false);
         Mockito.when(mainMenuMock.isSelectedEndings()).thenReturn(true);
         mainMenuController.key(KeyEvent.VK_ENTER, applicationMock);
-        Mockito.verify(applicationMock, Mockito.times(1)).setState(null);
+        Mockito.verify(applicationMock).setState(null);
         Mockito.verify(applicationMock).setState(Mockito.any(GameState.class));
-        Mockito.verify(mainPageMock, Mockito.times(1)).setCurrent(MainPage.PAGE.ENDINGS);
-        Mockito.verify(mainPageControllerMock, Mockito.times(1)).setCurrent(controllerStateMock);
+        Mockito.verify(mainPageMock).setCurrent(MainPage.PAGE.ENDINGS);
+        Mockito.verify(mainPageControllerMock).setCurrent(controllerStateMock);
     }
 }

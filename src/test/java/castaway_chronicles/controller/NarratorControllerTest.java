@@ -37,7 +37,7 @@ public class NarratorControllerTest {
         Mockito.when(game.getTextBox()).thenReturn(backpackAnswer);
 
         narratorController.key(KeyEvent.VK_ENTER,Mockito.mock(Application.class));
-        Mockito.verify(backpackAnswer,Mockito.times(1)).closeTextBox();
+        Mockito.verify(backpackAnswer).closeTextBox();
         assertEquals(gameController.getCurrent(),gameController.getLocationController());
     }
 }

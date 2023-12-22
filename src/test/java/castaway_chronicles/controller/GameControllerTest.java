@@ -62,7 +62,7 @@ public class GameControllerTest {
         assertEquals(controllerStateMock, gameController.getCurrent());
 
         gameController.step(applicationMock, inputEventMock, 0);
-        Mockito.verify(controllerStateMock, Mockito.times(0)).key(Mockito.anyInt(), Mockito.any());
+        Mockito.verify(controllerStateMock, Mockito.never()).key(Mockito.anyInt(), Mockito.any());
 
         gameController.step(applicationMock, keyEventMock, 0);
         Mockito.verify(controllerStateMock).key(3, applicationMock);

@@ -76,8 +76,8 @@ public class DialogControllerTest {
         dialogController.select(mock(Application.class));
 
         verify(commandInvokerMock).setCommand(any(TalkCommand.class));
-        verify(commandInvokerMock, times(1)).execute();
-        verify(gameController, times(0)).setControllerState(gameController.getLocationController());
+        verify(commandInvokerMock).execute();
+        verify(gameController, Mockito.never()).setControllerState(gameController.getLocationController());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class DialogControllerTest {
 
         dialogController.key(KeyEvent.VK_UP, Mockito.mock(Application.class));
 
-        verify(selectionPanelMock,times(1)).previousEntry();
+        verify(selectionPanelMock).previousEntry();
     }
     @Test
     void keyDown() throws IOException, URISyntaxException, InterruptedException {
@@ -135,6 +135,6 @@ public class DialogControllerTest {
 
         dialogController.key(KeyEvent.VK_DOWN, Mockito.mock(Application.class));
 
-        verify(selectionPanelMock,times(1)).nextEntry();
+        verify(selectionPanelMock).nextEntry();
     }
 }

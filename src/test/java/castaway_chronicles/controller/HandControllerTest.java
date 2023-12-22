@@ -62,7 +62,11 @@ public class HandControllerTest {
         Mockito.when(game.getLocations()).thenReturn(locations);
         Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
 
-        handController.click(new Position(0, 0), applicationMock);
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(positionMock.getX()).thenReturn(0);
+        Mockito.when(positionMock.getY()).thenReturn(0);
+
+        handController.click(positionMock, applicationMock);
 
         Mockito.verify(backpackItem).setInHand(true);
         Mockito.verify(textBox).activateTextBox();
@@ -141,7 +145,7 @@ public class HandControllerTest {
         handController.setToGive("NPC_NAME");
         handController.click(position, applicationMock);
 
-        Mockito.verify(textBox,times(1)).activateTextBox();
+        Mockito.verify(textBox).activateTextBox();
         Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getNarratorController(), gameController.getCurrent());
     }
