@@ -120,8 +120,8 @@ public class LanternaGUI implements GUI{
     }
     @Override
     public void drawImage(Position position, String name) {
-        if (images.get(name) != null) {
-            images.get(name).drawSprite(position, graphics);
+        if (getImages().get(name) != null) {
+            getImages().get(name).drawSprite(position, graphics);
         }
     }
 
@@ -166,11 +166,23 @@ public class LanternaGUI implements GUI{
 
     @Override
     public InputEvent getNextAction() {
-        InputEvent return_action = action;
+        InputEvent returnAction = action;
         action = null;
-        return return_action;
+        return returnAction;
     }
     public boolean imageIsLoaded(String name) {
-        return images.get(name) != null;
+        return getImages().get(name) != null;
+    }
+    public void setBigger(boolean bigger) {
+        this.bigger = bigger;
+    }
+    public InputEvent getAction() {
+        return action;
+    }
+    public void setAction(InputEvent action) {
+        this.action = action;
+    }
+    public HashMap<String, Sprite> getImages() {
+        return images;
     }
 }
