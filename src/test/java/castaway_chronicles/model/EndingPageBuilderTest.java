@@ -23,6 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EndingPageBuilderTest {
     private File endings;
     private final List<String> endingsLines = new ArrayList<>();
+    private boolean exists;
+    private File achieved_endings;
+    private final List<String> achieved_endingsLines = new ArrayList<>();
 
     @BeforeAll
     void setUpEndings() throws IOException {
@@ -41,8 +44,40 @@ public class EndingPageBuilderTest {
         }
     }
 
+    @BeforeAll
+    void setUpAchieved_endings() throws IOException {
+        exists = true;
+        achieved_endings = null;
+        try {
+            achieved_endings = new File(Path.of("src", "main", "resources", "achieved_endings.txt").toString());
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(achieved_endings, StandardCharsets.UTF_8));
+            for (String line; (line = bufferedReader.readLine()) != null; ) {
+                achieved_endingsLines.add(line);
+            }
+        } catch (FileNotFoundException f) {
+            exists = false;
+        }
+        try {
+            Writer fr = Files.newBufferedWriter(achieved_endings.toPath(), UTF_8, CREATE, TRUNCATE_EXISTING);
+            fr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     @AfterAll
     void tearDown() throws IOException {
+        if (exists) {
+            Files.write(achieved_endings.toPath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
+            Writer writer = Files.newBufferedWriter(Paths.get(achieved_endings.getAbsolutePath()));
+            for (String line : achieved_endingsLines) {
+                writer.write(line + '\n');
+            }
+            writer.close();
+        } else {
+            new File(Path.of("src", "main", "resources", "achieved_endings.txt").toString()).delete();
+        }
+
         Files.write(endings.toPath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
         Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
         for (String line : endingsLines) {
