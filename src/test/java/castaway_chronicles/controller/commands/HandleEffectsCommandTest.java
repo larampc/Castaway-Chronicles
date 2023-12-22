@@ -18,8 +18,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class HandleEffectsCommandTest {
@@ -28,6 +30,7 @@ public class HandleEffectsCommandTest {
     private boolean exists;
     private File endings;
     private final List<String> lines = new ArrayList<>();
+    private File scenes_savedStorage;
 
     @BeforeAll
     void init() throws IOException {
@@ -39,14 +42,33 @@ public class HandleEffectsCommandTest {
             for (String line; (line = bufferedReader.readLine()) != null; ) {
                 lines.add(line);
             }
+            Files.write(endings.toPath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
         } catch (FileNotFoundException f) {
             exists = false;
+        }
+
+        Path storagePath = Path.of("src", "main", "resources", "Scenes_savedStorage");
+        scenes_savedStorage = new File(storagePath.toString());
+        scenes_savedStorage.mkdir();
+
+        File scenes_saved = new File(Path.of("src", "main", "resources","Scenes_saved").toString());
+        for(File file : Objects.requireNonNull(scenes_saved.listFiles())){
+            File copy = new File(Path.of(storagePath.toString(),file.getName()).toString());
+            copy.createNewFile();
+            try (InputStream is = new FileInputStream(file); OutputStream os = new FileOutputStream(copy)) {
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = is.read(buffer)) > 0) {
+                    os.write(buffer, 0, length);
+                }
+            }
         }
     }
 
     @AfterAll
     void tearDown() throws IOException {
         if (exists) {
+            Files.write(endings.toPath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
             Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
             for (String line : lines) {
                 writer.write(line + '\n');
@@ -55,6 +77,20 @@ public class HandleEffectsCommandTest {
         } else {
             new File(Path.of("src", "main", "resources", "achieved_endings.txt").toString()).delete();
         }
+
+        for(File file : Objects.requireNonNull(scenes_savedStorage.listFiles())){
+            File copy = new File(Path.of("src", "main", "resources","Scenes_saved", file.getName()).toString());
+            copy.createNewFile();
+            try (InputStream is = new FileInputStream(file); OutputStream os = new FileOutputStream(copy)) {
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = is.read(buffer)) > 0) {
+                    os.write(buffer, 0, length);
+                }
+            }
+            file.delete();
+        }
+        scenes_savedStorage.delete();
     }
 
     @BeforeEach
@@ -70,19 +106,6 @@ public class HandleEffectsCommandTest {
 
         Mockito.verify(gameMock).setCurrentLocation("TestLocation");
     }
-
-//    @Test
-//    void executeEndEffect() {
-//        //set up
-//
-//        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"), applicationMock);
-//        handleEffectsCommand.execute();
-////        assertNull();
-//        Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
-//
-//        //tear down
-//
-//    }
 
     @Test
     void executeNPCEffectNoWait() {
@@ -112,8 +135,8 @@ public class HandleEffectsCommandTest {
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("MAP TestIcon I", "MAP TestIcon2 V"), applicationMock);
         handleEffectsCommand.execute();
 
-        Mockito.verify(mapMock, Mockito.times(1)).setInvisible("TestIcon");
-        Mockito.verify(mapMock, Mockito.times(1)).setVisible("TestIcon2");
+        Mockito.verify(mapMock).setInvisible("TestIcon");
+        Mockito.verify(mapMock).setVisible("TestIcon2");
     }
 
     @Test
@@ -126,8 +149,8 @@ public class HandleEffectsCommandTest {
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("BACKPACK TestIcon I", "backpack TestIcon2 V", "backpack TestIcon3 NewTestIcon3"), applicationMock);
         handleEffectsCommand.execute();
 
-        Mockito.verify(backpackMock, Mockito.times(1)).setInvisible("TestIcon_backpack");
-        Mockito.verify(backpackMock, Mockito.times(1)).setVisible("TestIcon2_backpack");
+        Mockito.verify(backpackMock).setInvisible("TestIcon_backpack");
+        Mockito.verify(backpackMock).setVisible("TestIcon2_backpack");
         Mockito.verify(backpackItemMock).setNameBackpack("NewTestIcon3_backpack");
     }
 
@@ -141,8 +164,15 @@ public class HandleEffectsCommandTest {
         HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("City TestIcon I", "Beach TestItem V", "Beach TestNPC V"), applicationMock);
         handleEffectsCommand.execute();
 
-        Mockito.verify(City, Mockito.times(1)).setInvisible("TestIcon");
-        Mockito.verify(Beach, Mockito.times(1)).setVisible("TestItem");
-        Mockito.verify(Beach, Mockito.times(1)).setVisible("TestNPC");
+        Mockito.verify(City).setInvisible("TestIcon");
+        Mockito.verify(Beach).setVisible("TestItem");
+        Mockito.verify(Beach).setVisible("TestNPC");
+    }
+    @Test
+    void executeEndEffect() {
+        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"), applicationMock);
+        handleEffectsCommand.execute();
+
+        Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
     }
 }
