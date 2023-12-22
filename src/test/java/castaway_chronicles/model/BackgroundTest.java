@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BackgroundTest {
     @Test
-    void isIsloopable() {
+    void isLoopable() {
         Background background1 = new Background(0, 0, 10, 10, "test1", true);
         Background background2 = new Background(0, 0, 10, 10, "test2", false);
         assertTrue(background1.isLoopable());

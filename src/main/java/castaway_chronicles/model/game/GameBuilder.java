@@ -15,8 +15,7 @@ public class GameBuilder {
 
     private String getCurrentLocation(String dir) {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath(dir + "/Locations.txt");
-        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        List<String> lines = resourceManager.readCurrentTimeResourceFile(dir + "/Locations.txt");
         for (String line : lines){
             String[] s = line.split(" ",-1);
             if (s.length == 2) { return s[0];}
@@ -25,21 +24,20 @@ public class GameBuilder {
     }
 
     public Map createMap(String dir) throws IOException {
-        SceneLoader mapBuilder = new SceneLoader(dir, "Map", "Map");
+        SceneLoader mapBuilder = new SceneLoader(dir, "Map", Game.SCENE.MAP);
         return (Map) mapBuilder.createScene();
     }
     public Backpack createBackpack(String dir) throws IOException {
-        SceneLoader backpackBuilder = new SceneLoader(dir, "Backpack", "Backpack");
+        SceneLoader backpackBuilder = new SceneLoader(dir, "Backpack", Game.SCENE.BACKPACK);
         return (Backpack) backpackBuilder.createScene();
     }
     public HashMap<String, Location> createLocations(String dir) throws IOException {
         HashMap<String, Location> locations = new HashMap<>();
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath(dir + "/Locations.txt");
-        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        List<String> lines = resourceManager.readCurrentTimeResourceFile(dir + "/Locations.txt");
         for (String line : lines ){
             String[] s = line.split(" ",-1);
-            SceneLoader locationsBuilder = new SceneLoader(dir, s[0], "Location");
+            SceneLoader locationsBuilder = new SceneLoader(dir, s[0], Game.SCENE.LOCATION);
             locations.put(s[0], (Location) locationsBuilder.createScene());
         }
         return locations;

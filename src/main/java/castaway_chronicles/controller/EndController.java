@@ -9,11 +9,12 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-
 public class EndController extends Controller<Ending> {
     private long lastFrame = 0;
+    private final MainPage mainPage;
     public EndController(Ending model) {
         super(model);
+        mainPage = new MainPage();
     }
 
     @Override
@@ -23,9 +24,12 @@ public class EndController extends Controller<Ending> {
             lastFrame = startTime;
         }
         if (action instanceof KeyEvent && ((KeyEvent)action).getKeyCode() == KeyEvent.VK_ENTER && getModel().getMax() == getModel().getCurrent()) {
-            MainPage mainPage  = new MainPage();
-            mainPage.setCurrent(MainPage.PAGE.ENDINGS);
-            application.setState(new MainPageState(mainPage));
+            getMainPage().setCurrent(MainPage.PAGE.ENDINGS);
+            application.setState(new MainPageState(getMainPage()));
         }
+    }
+
+    protected MainPage getMainPage(){
+        return mainPage;
     }
 }

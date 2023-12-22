@@ -76,7 +76,7 @@ public class WalkingController implements ContinuousControllerState {
             MoveCommand move = new MoveCommand(location,goRight ? -dx : dx);
             invoker.setCommand(move);
             invoker.execute();
-            toWalk += (toWalk < 0) ? 1 : -1;
+            toWalk += (toWalk < 1) ? 1 : -1;
             lastMovementTime = time;
         }
     }

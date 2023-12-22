@@ -20,10 +20,8 @@ public class ResourceManager {
             instance = new ResourceManager();
         return instance;
     }
-    private String path;
-    private Path fullPath;
-    private File file;
-    public List<String> readStaticResourceFile(){
+
+    public List<String> readStaticResourceFile(String path){
         URL resource = getClass().getClassLoader().getResource(path);
         try {
             return new BufferedReader(new FileReader(resource.getFile(), StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
@@ -31,21 +29,23 @@ public class ResourceManager {
             throw new RuntimeException("Couldn't read from file: " + path);
         }
     }
-    public boolean existsStaticResourceFile(){
+    public boolean existsStaticResourceFile(String path){
         return getClass().getClassLoader().getResource(path) != null;
     }
-    public boolean notExistsCurrentTimeResourceFile(){
+    public boolean notExistsCurrentTimeResourceFile(String path){
+        File file = new File(Path.of("src", "main", "resources",path).toString());
         return !file.exists();
     }
 
-    public List<String> readCurrentTimeResourceFile(){
+    public List<String> readCurrentTimeResourceFile(String path){
         try {
-            return Files.readAllLines(fullPath);
+            return Files.readAllLines(Path.of("src", "main", "resources",path));
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read from file: " + path);
         }
     }
-    public void deleteResourceFileContent() {
+    public void deleteResourceFileContent(String path) {
+        File file = new File(Path.of("src", "main", "resources",path).toString());
         File[] allContents = file.listFiles();
         if (allContents != null) {
             for (File fileToDelete : allContents) {
@@ -54,11 +54,13 @@ public class ResourceManager {
             }
         }
     }
-    public void deleteResourceFile() {
-        deleteResourceFileContent();
+    public void deleteResourceFile(String path) {
+        File file = new File(Path.of("src", "main", "resources",path).toString());
+        deleteResourceFileContent(path);
         file.delete();
     }
-    public void writeToFile(String line){
+    public void writeToFile(String path, String line){
+        File file = new File(Path.of("src", "main", "resources",path).toString());
         try {
             Writer fr = Files.newBufferedWriter(file.toPath(), UTF_8, CREATE, APPEND);
             fr.write(line);
@@ -67,18 +69,16 @@ public class ResourceManager {
             throw new RuntimeException("Error Writing to file: " + path);
         }
     }
-    public int countFiles(){
-        if(notExistsCurrentTimeResourceFile()) return 0;
+    public int countFiles(String path){
+        if(notExistsCurrentTimeResourceFile(path)) return 0;
+        File file = new File(Path.of("src", "main", "resources",path).toString());
         return Objects.requireNonNull(file.listFiles()).length;
     }
-
-    public void setPath(String path) {
-        this.path = path;
-        fullPath = Path.of("src", "main", "resources",path);
-        file = new File(fullPath.toString());
+    public File getFile(String path){
+        return new File(Path.of("src", "main", "resources",path).toString());
     }
-    public File getFile(){
-        return file;
+    public void createResourceDir(String path){
+        new File(Path.of("src", "main", "resources", path).toString()).mkdir();
     }
 }
 

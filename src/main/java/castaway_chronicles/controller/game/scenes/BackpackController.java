@@ -100,7 +100,7 @@ public class BackpackController implements ControllerState {
             }
         }
         else {
-            CommandInvoker invoker = new CommandInvoker();
+            CommandInvoker invoker = gameController.getCommandInvoker();
             if (s[0].equalsIgnoreCase("use")) {
                 Command effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextBox().getInteractable().getEffects(), application);
                 invoker.setCommand(effects);

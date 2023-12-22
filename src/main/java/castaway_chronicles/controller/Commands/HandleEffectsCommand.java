@@ -61,10 +61,8 @@ public class HandleEffectsCommand implements Command{
     }
     private void executeEnd(String[] s) {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Scenes_saved");
-        resourceManager.deleteResourceFileContent();
-        resourceManager.setPath("achieved_endings.txt");
-        resourceManager.writeToFile(s[1]+"\n");
+        resourceManager.deleteResourceFileContent("Scenes_saved");
+        resourceManager.writeToFile("achieved_endings.txt",s[1]+"\n");
         application.setState(new EndState(new Ending(s[1])));
     }
     private void executeNPCEffects(String[] s) {

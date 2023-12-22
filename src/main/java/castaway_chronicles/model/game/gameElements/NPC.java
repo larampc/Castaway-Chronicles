@@ -20,8 +20,8 @@ public class NPC extends InteractableWithText {
     }
     protected void init() {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Dialog/" + getName() + "/" + getName() + state + ".txt");
-        List<String> lines = resourceManager.readStaticResourceFile();
+        List<String> lines = resourceManager
+                .readStaticResourceFile("Dialog/" + getName() + "/" + getName() + state + ".txt");
         line = 0;
         nextStates = new ArrayList<>();
         dialog = new ArrayList<>();
@@ -65,9 +65,9 @@ public class NPC extends InteractableWithText {
     }
     public void readEffects(int state) {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("Dialog/" + getName() + "/effect_" + getName() + state + ".txt");
-        if(resourceManager.existsStaticResourceFile()){
-            effects = resourceManager.readStaticResourceFile();
+        String path = "Dialog/" + getName() + "/effect_" + getName() + state + ".txt";
+        if(resourceManager.existsStaticResourceFile(path)){
+            effects = resourceManager.readStaticResourceFile(path);
         }
         else effects = new ArrayList<>();
     }

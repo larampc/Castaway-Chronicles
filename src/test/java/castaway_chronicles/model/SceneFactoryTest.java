@@ -1,5 +1,6 @@
 package castaway_chronicles.model;
 
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,25 +30,25 @@ public class SceneFactoryTest {
     @Test
     public void Location(){
         mainChar = new MainChar(10, 10, 10, 10, "standing_left");
-        Scene scene = SceneFactory.getScene("Location",background,interactables,visibleInteractables, mainChar);
+        Scene scene = SceneFactory.getScene(Game.SCENE.LOCATION,background,interactables,visibleInteractables, mainChar);
         assertNotNull(scene);
         assertEquals(scene.getClass(), Location.class);
     }
     @Test
     public void Backpack(){
-        Scene scene = SceneFactory.getScene("Backpack",background,interactables,visibleInteractables, mainChar);
+        Scene scene = SceneFactory.getScene(Game.SCENE.BACKPACK,background,interactables,visibleInteractables, mainChar);
         assertNotNull(scene);
         assertEquals(scene.getClass(), Backpack.class);
     }
     @Test
     public void Map(){
-        Scene scene = SceneFactory.getScene("Map",background,interactables,visibleInteractables, mainChar);
+        Scene scene = SceneFactory.getScene(Game.SCENE.MAP,background,interactables,visibleInteractables, mainChar);
         assertNotNull(scene);
         assertEquals(scene.getClass(), Map.class);
     }
     @Test
     public void noScene(){
-        Scene scene = SceneFactory.getScene("Invalid",background,interactables,visibleInteractables, mainChar);
+        Scene scene = SceneFactory.getScene(Game.SCENE.PAUSE, background,interactables,visibleInteractables, mainChar);
         assertNull(scene);
     }
 }

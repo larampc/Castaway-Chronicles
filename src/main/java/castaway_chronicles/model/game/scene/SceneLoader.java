@@ -3,6 +3,7 @@ package castaway_chronicles.model.game.scene;
 import castaway_chronicles.model.Interactable;
 import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.Scene;
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.*;
 
 import java.io.*;
@@ -13,12 +14,11 @@ public class SceneLoader {
     private final List<String> lines;
     private final HashMap<String, Interactable> interactables = new HashMap<>();
     private final HashMap<String, Interactable> visibleInteractables = new HashMap<>();
-    private final String type;
+    private final Game.SCENE type;
 
-    public SceneLoader(String dir, String filename, String type) throws IOException {
+    public SceneLoader(String dir, String filename, Game.SCENE type) throws IOException {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath(dir + "/" + filename + ".txt");
-        lines = resourceManager.readCurrentTimeResourceFile();
+        lines = resourceManager.readCurrentTimeResourceFile(dir + "/" + filename + ".txt");
         //SETTER PARA LINES PARA TESTE
         this.type = type;
         getInteractables();
@@ -58,9 +58,8 @@ public class SceneLoader {
         }
     }
 
-
     protected MainChar getMainChar() {
-        if (type.equalsIgnoreCase( "Location")) {
+        if (type == Game.SCENE.LOCATION) {
             for(String line : lines){
                 if (line.charAt(0) == 'M') {
                     String[] s = line.split(" ",-1);

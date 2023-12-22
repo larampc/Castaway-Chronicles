@@ -1,12 +1,11 @@
 package castaway_chronicles.model.mainPage;
 
-import java.io.IOException;
 
 public class MainPage {
     private final MainMenu mainMenu;
     private final EndingPage endingPage;
     private PAGE current;
-    public MainPage() throws IOException {
+    public MainPage() {
         mainMenu = new MainMenu();
         endingPage = EndingPageBuilder.createEndingPage();
         current = PAGE.MENU;

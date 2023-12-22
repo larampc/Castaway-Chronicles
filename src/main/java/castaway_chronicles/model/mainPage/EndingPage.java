@@ -18,9 +18,8 @@ public class EndingPage extends Scene {
 
     public void updateAchievedEndings() {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.setPath("achieved_endings.txt");
-        if (resourceManager.notExistsCurrentTimeResourceFile()) return;
-        List<String> lines = resourceManager.readCurrentTimeResourceFile();
+        if (resourceManager.notExistsCurrentTimeResourceFile("achieved_endings.txt")) return;
+        List<String> lines = resourceManager.readCurrentTimeResourceFile("achieved_endings.txt");
         for (String line : lines ) {
             setInvisible("question" + questionItem.get(line));
             setVisible(line);
