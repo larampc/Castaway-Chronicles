@@ -1,72 +1,27 @@
 package castaway_chronicles.model;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.game.gameElements.Background;
 import castaway_chronicles.model.mainPage.MainMenu;
 import org.junit.jupiter.api.*;
+import org.mockito.Mockito;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.nio.file.StandardOpenOption.CREATE;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static org.junit.jupiter.api.Assertions.*;
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MainMenuTest {
     MainMenu mainMenu;
-    private File scenes_savedStorage;
-    private Path scenes_savedPath;
-//    @BeforeAll
-//    void setUpScenes_Saved() {
-//        Path storagePath = Path.of("src", "main", "resources", "Scenes_savedStorage");
-//        scenes_savedPath = Path.of("src", "main", "resources","Scenes_saved");
-//        scenes_savedStorage = new File(storagePath.toString());
-//        scenes_savedStorage.mkdir();
-//
-//        File scenes_saved = new File(scenes_savedPath.toString());
-//        for(File file : Objects.requireNonNull(scenes_saved.listFiles())){
-//            File copy = new File(Path.of(storagePath.toString(),file.getName()).toString());
-//            try {
-//                copy.createNewFile();
-//                InputStream is = new FileInputStream(file);
-//                OutputStream os = new FileOutputStream(copy);
-//                byte[] buffer = new byte[1024];
-//                int length;
-//                while ((length = is.read(buffer)) > 0) {
-//                    os.write(buffer, 0, length);
-//                }
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            file.delete();
-//        }
-//    }
-//
-//    @AfterAll
-//    void tearDown() throws IOException {
-//        for(File file : Objects.requireNonNull(scenes_savedStorage.listFiles())){
-//            File copy = new File(Path.of(scenes_savedPath.toString(), file.getName()).toString());
-//            copy.createNewFile();
-//            try (InputStream is = new FileInputStream(file); OutputStream os = new FileOutputStream(copy)) {
-//                byte[] buffer = new byte[1024];
-//                int length;
-//                while ((length = is.read(buffer)) > 0) {
-//                    os.write(buffer, 0, length);
-//                }
-//            }
-//            file.delete();
-//        }
-//        scenes_savedStorage.delete();
-//    }
+    ResourceManager resourceManagerMock;
+
     @BeforeEach
     void init(){
-        mainMenu = new MainMenu();
+        resourceManagerMock = Mockito.mock(ResourceManager.class);
+        mainMenu = new MainMenu(){
+            @Override
+            public ResourceManager getResourceManager(){
+                return resourceManagerMock;
+            }
+        };
     }
 
     @Test
@@ -179,28 +134,23 @@ public class MainMenuTest {
         assertEquals(0, mainMenu.getSelectionPanel().getCurrentEntry());
     }
 
-//    @Test
-//    void cantContinueNotExistsScenesSaved() {
-//        new File(scenes_savedPath.toString()).delete();
-//        assertFalse(mainMenu.canContinue());
-//        new File(scenes_savedPath.toString()).mkdir();
-//    }
-//    @Test
-//    void cantContinueButExistsScenesSaved(){
-//        assertFalse(mainMenu.canContinue());
-//    }
-//    @Test
-//    void canContinue(){
-//        File backpack = new File(Path.of(scenes_savedPath.toString(), "Backpack").toString());
-//        try {
-//            Writer fr = Files.newBufferedWriter(backpack.toPath(), UTF_8, CREATE, TRUNCATE_EXISTING);
-//            fr.write("Backpack info");
-//            fr.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e.getMessage());
-//        }
-//        assertTrue(mainMenu.canContinue());
-//        boolean deleted = backpack.delete();
-//        assertTrue(deleted);
-//    }
+    @Test
+    void cantContinueNotExistsScenesSaved() {
+        Mockito.when(resourceManagerMock.notExistsCurrentTimeResourceFile("Scenes_saved")).thenReturn(true);
+        assertFalse(mainMenu.canContinue());
+    }
+    @Test
+    void cantContinueButExistsScenesSaved(){
+        Mockito.when(resourceManagerMock.notExistsCurrentTimeResourceFile("Scenes_saved")).thenReturn(false);
+        Mockito.when(resourceManagerMock.countFiles("Scenes_saved")).thenReturn(0);
+        assertFalse(mainMenu.canContinue());
+        Mockito.when(resourceManagerMock.countFiles("Scenes_saved")).thenReturn(-1);
+        assertFalse(mainMenu.canContinue());
+    }
+    @Test
+    void canContinue(){
+        Mockito.when(resourceManagerMock.notExistsCurrentTimeResourceFile("Scenes_saved")).thenReturn(false);
+        Mockito.when(resourceManagerMock.countFiles("Scenes_saved")).thenReturn(1);
+        assertTrue(mainMenu.canContinue());
+    }
 }
