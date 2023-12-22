@@ -24,11 +24,11 @@ public class GameBuilder {
     }
 
     public Map createMap(String dir) throws IOException {
-        SceneLoader mapBuilder = new SceneLoader(dir, "Map", "Map");
+        SceneLoader mapBuilder = new SceneLoader(dir, "Map", Game.SCENE.MAP);
         return (Map) mapBuilder.createScene();
     }
     public Backpack createBackpack(String dir) throws IOException {
-        SceneLoader backpackBuilder = new SceneLoader(dir, "Backpack", "Backpack");
+        SceneLoader backpackBuilder = new SceneLoader(dir, "Backpack", Game.SCENE.BACKPACK);
         return (Backpack) backpackBuilder.createScene();
     }
     public HashMap<String, Location> createLocations(String dir) throws IOException {
@@ -37,7 +37,7 @@ public class GameBuilder {
         List<String> lines = resourceManager.readCurrentTimeResourceFile(dir + "/Locations.txt");
         for (String line : lines ){
             String[] s = line.split(" ",-1);
-            SceneLoader locationsBuilder = new SceneLoader(dir, s[0], "Location");
+            SceneLoader locationsBuilder = new SceneLoader(dir, s[0], Game.SCENE.LOCATION);
             locations.put(s[0], (Location) locationsBuilder.createScene());
         }
         return locations;

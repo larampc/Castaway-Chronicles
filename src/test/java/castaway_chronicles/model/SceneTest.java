@@ -1,5 +1,6 @@
 package castaway_chronicles.model;
 
+import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.*;
 import castaway_chronicles.model.game.scene.SceneFactory;
 
@@ -29,7 +30,7 @@ public class SceneTest {
         visibleInteractables = new HashMap<>();
         visibleInteractables.put("new Item", mockinteractable);
         mainChar = null;
-        scene = SceneFactory.getScene("Location", mockbackground, interactables, visibleInteractables, mainChar);
+        scene = SceneFactory.getScene(Game.SCENE.LOCATION, mockbackground, interactables, visibleInteractables, mainChar);
 
     }
 
@@ -45,7 +46,7 @@ public class SceneTest {
 
     @Test
     public void SceneSetInvisible(){
-        Scene scene = SceneFactory.getScene("Location", mockbackground, interactables, visibleInteractables, mainChar);
+        Scene scene = SceneFactory.getScene(Game.SCENE.LOCATION, mockbackground, interactables, visibleInteractables, mainChar);
         scene.setInvisible("test");
         assertEquals(1, scene.getVisibleInteractables().size());
         scene.setInvisible("new Item");
@@ -54,7 +55,7 @@ public class SceneTest {
 
     @Test
     public void SceneSetVisible(){
-        Scene scene = SceneFactory.getScene("Location", mockbackground, interactables, visibleInteractables, mainChar);
+        Scene scene = SceneFactory.getScene(Game.SCENE.LOCATION, mockbackground, interactables, visibleInteractables, mainChar);
         scene.setVisible("new Item");
         assertEquals(1, scene.getVisibleInteractables().size());
         scene.setVisible("old Item");
