@@ -52,8 +52,8 @@ public class StandingController implements ContinuousControllerState {
                     else {
                         lastCommand = new ChangeLocationCommand(gameController.getModel(), split[0]);
                     }
-                invoker.execute();
-                break;
+                    invoker.execute();
+                    break;
                 }
             }
         }
