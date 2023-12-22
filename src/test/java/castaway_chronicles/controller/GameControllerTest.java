@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class GameControllerTest {
     private GameController gameController;
@@ -45,6 +46,7 @@ public class GameControllerTest {
         assertEquals(NarratorController.class, gameController.getNarratorController().getClass());
         assertEquals(GameSaver.class, gameController.getGameSaver().getClass());
         assertEquals(CommandInvoker.class, gameController.getCommandInvoker().getClass());
+        assertNull(gameController.getPrevious());
     }
 
     @Test
@@ -70,6 +72,7 @@ public class GameControllerTest {
 
         ContinuousControllerState continuousControllerStateMock = Mockito.mock(ContinuousControllerState.class);
         gameController.setControllerState(continuousControllerStateMock);
+        assertEquals(controllerStateMock, gameController.getPrevious());
         assertEquals(continuousControllerStateMock, gameController.getCurrent());
 
         gameController.step(applicationMock, inputEventMock, 10);
