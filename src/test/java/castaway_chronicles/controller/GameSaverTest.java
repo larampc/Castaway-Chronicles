@@ -96,17 +96,10 @@ public class GameSaverTest {
         locations.put("start",startLocationMock);
         locations.put("other",otherLocationMock);
 
-        Class c = NPC.class;
-        Class i = Item.class;
-        Mockito.when(npcMock.getClass()).thenReturn(c);
-        Mockito.when(c.getSimpleName()).thenReturn("NPC");
-        Mockito.when(itemMock.getClass()).thenReturn(i);
-        Mockito.when(i.getSimpleName()).thenReturn("Item");
-
         Mockito.when(gameMock.getCurrentLocation()).thenReturn(startLocationMock);
         Mockito.when(gameMock.getLocations()).thenReturn(locations);
         Mockito.when(gameMock.getLocation("start")).thenReturn(startLocationMock);
-        Mockito.when(gameMock.getLocation("other")).thenReturn(startLocationMock);
+        Mockito.when(gameMock.getLocation("other")).thenReturn(otherLocationMock);
         Mockito.when(startLocationMock.getBackground()).thenReturn(startBackgroundMock);
         Mockito.when(otherLocationMock.getBackground()).thenReturn(otherBackgroundMock);
         Mockito.when(startBackgroundMock.getName()).thenReturn("BgName");
@@ -122,6 +115,7 @@ public class GameSaverTest {
         Mockito.when(positionMock.getX()).thenReturn(5);
         Mockito.when(positionMock.getY()).thenReturn(10);
         Mockito.when(startLocationMock.getInteractables()).thenReturn(List.of(npcMock,itemMock));
+        Mockito.when(otherLocationMock.getInteractables()).thenReturn(List.of(npcMock,itemMock));
         Mockito.when(startLocationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
         Mockito.when(otherLocationMock.getVisibleInteractables()).thenReturn(List.of(itemMock));
         Mockito.when(startLocationMock.getMainChar()).thenReturn(mainCharMock);
@@ -140,22 +134,23 @@ public class GameSaverTest {
         Mockito.when(mainCharMock.getHeight()).thenReturn(10);
 
         gameSaver.saveLocations();
+
         Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Locations.txt","start");
-        //nao percebo
-        Mockito.verify(resourceManagerMock,Mockito.times(2)).writeToFile("Scenes_saved/Locations.txt"," S");
-
         Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Locations.txt","other");
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Locations.txt"," S");
+        Mockito.verify(resourceManagerMock,Mockito.times(2)).writeToFile("Scenes_saved/Locations.txt","\n");
         Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/start.txt","B BgName 5 10 100 200 L\n");
-        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/start.txt","I NPC npcName 5 10 10 10 1 V\n");
-        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/start.txt","I Item 5 10 10 10\n");
-
-
-
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/start.txt","I " + npcMock.getClass().getSimpleName() +
+                " npcName 5 10 10 10 1 V\n");
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/start.txt","I " + itemMock.getClass().getSimpleName() +
+                " itemName 5 10 10 10\n");
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/start.txt","M 5 10 10 10\n");
         Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/other.txt","B BgName 5 10 100 200\n");
-
-
-//        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Locations.txt","\n");
-
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/other.txt","I " + npcMock.getClass().getSimpleName() +
+                " npcName 5 10 10 10 1\n");
+        Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/other.txt","I " + itemMock.getClass().getSimpleName() +
+                " itemName 5 10 10 10 V\n");
+        Mockito.verify(resourceManagerMock,Mockito.times(12)).writeToFile(Mockito.anyString(),Mockito.anyString());
     }
 
 }
