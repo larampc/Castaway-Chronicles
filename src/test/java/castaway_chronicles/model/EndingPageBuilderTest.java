@@ -25,7 +25,7 @@ public class EndingPageBuilderTest {
     private final List<String> endingsLines = new ArrayList<>();
 
     @BeforeAll
-    void setUpAchieved_endings() throws IOException {
+    void setUpEndings() throws IOException {
         endings = new File(Path.of("src", "main", "resources", "endings.txt").toString());
         BufferedReader bufferedReader = new BufferedReader(new FileReader(endings, StandardCharsets.UTF_8));
         for (String line; (line = bufferedReader.readLine()) != null; ) {
@@ -46,7 +46,8 @@ public class EndingPageBuilderTest {
         Files.write(endings.toPath(), new byte[0], StandardOpenOption.TRUNCATE_EXISTING);
         Writer writer = Files.newBufferedWriter(Paths.get(endings.getAbsolutePath()));
         for (String line : endingsLines) {
-            writer.write(line + '\n');
+            writer.write(line);
+            if(!endingsLines.get(endingsLines.size()-1).equals(line)) writer.write('\n');
         }
         writer.close();
     }
