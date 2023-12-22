@@ -25,6 +25,11 @@ public class MainMenuTest {
     }
 
     @Test
+    public void MainMenuContent(){
+        assertEquals(ResourceManager.class, new MainMenu().getResourceManager().getClass());
+    }
+
+    @Test
     public void getEntry(){
         assertEquals("Continue", mainMenu.getSelectionPanel().getEntry(2));
         assertEquals("Endings", mainMenu.getSelectionPanel().getEntry(3));
