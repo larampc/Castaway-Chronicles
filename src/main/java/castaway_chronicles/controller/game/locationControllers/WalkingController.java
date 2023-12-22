@@ -72,11 +72,11 @@ public class WalkingController implements ContinuousControllerState {
         }
         if (time - lastMovementTime > 150) {
             Location location = gameController.getModel().getCurrentLocation();
-            CommandInvoker invoker = (CommandInvoker) gameController.getCommandInvoker();
+            CommandInvoker invoker = gameController.getCommandInvoker();
             MoveCommand move = new MoveCommand(location,goRight ? -dx : dx);
             invoker.setCommand(move);
             invoker.execute();
-            toWalk += (toWalk < 0) ? 1 : -1;
+            toWalk += (toWalk < 1) ? 1 : -1;
             lastMovementTime = time;
         }
     }
