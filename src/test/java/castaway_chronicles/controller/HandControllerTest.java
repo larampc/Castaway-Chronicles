@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class HandControllerTest {
 
@@ -47,14 +46,14 @@ public class HandControllerTest {
     void testClickWithEmptyToGive() throws IOException, InterruptedException, URISyntaxException {
         BackpackItem backpackItem = Mockito.mock(BackpackItem.class);
 
-        TextBox textBox = mock(TextBox.class);
-        Backpack backpackMock = mock(Backpack.class);
-        when(game.getTextBox()).thenReturn(textBox);
+        TextBox textBox = Mockito.mock(TextBox.class);
+        Backpack backpackMock = Mockito.mock(Backpack.class);
+        Mockito.when(game.getTextBox()).thenReturn(textBox);
         Mockito.when(textBox.getInteractable()).thenReturn(backpackItem);
 
         Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 
-        Location locationMock = mock(Location.class);
+        Location locationMock = Mockito.mock(Location.class);
 
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
@@ -77,40 +76,40 @@ public class HandControllerTest {
     @Test
     void testNPCClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
         BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
-        TextBox textDisplayMock = mock(TextBox.class);
-        Location locationMock = mock(Location.class);
-        NPC npcMock = mock(NPC.class);
+        TextBox textDisplayMock = Mockito.mock(TextBox.class);
+        Location locationMock = Mockito.mock(Location.class);
+        NPC npcMock = Mockito.mock(NPC.class);
         Position positionMock = Mockito.mock(Position.class);
         CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
 
         handController.setToGive("NPC_NAME");
-        when(game.getCurrentLocation()).thenReturn(locationMock);
-        when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
-        when(npcMock.contains(positionMock)).thenReturn(true);
-        when(npcMock.getName()).thenReturn("NPC_NAME");
-        when(game.getTextBox()).thenReturn(textDisplayMock);
-        when(textDisplayMock.getInteractable()).thenReturn(backpackItemMock);
-        when(backpackItemMock.getEffects()).thenReturn(new ArrayList<>());
+        Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
+        Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
+        Mockito.when(npcMock.contains(positionMock)).thenReturn(true);
+        Mockito.when(npcMock.getName()).thenReturn("NPC_NAME");
+        Mockito.when(game.getTextBox()).thenReturn(textDisplayMock);
+        Mockito.when(textDisplayMock.getInteractable()).thenReturn(backpackItemMock);
+        Mockito.when(backpackItemMock.getEffects()).thenReturn(new ArrayList<>());
         Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
-        when(game.getLocations()).thenReturn(locations);
-        when(textDisplayMock.isActiveTextBox()).thenReturn(true);
+        Mockito.when(game.getLocations()).thenReturn(locations);
+        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(true);
         gameController.setCommandInvoker(commandInvokerMock);
 
         handController.click(positionMock, applicationMock);
 
-        verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
-        verify(commandInvokerMock).execute();
-        verify(game).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(HandleEffectsCommand.class));
+        Mockito.verify(commandInvokerMock).execute();
+        Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getDialogController(), gameController.getCurrent());
 
-        when(textDisplayMock.isActiveTextBox()).thenReturn(false);
+        Mockito.when(textDisplayMock.isActiveTextBox()).thenReturn(false);
         handController.click(positionMock, applicationMock);
 
-        verify(commandInvokerMock,times(2)).setCommand(any(HandleEffectsCommand.class));
-        verify(commandInvokerMock,times(2)).execute();
-        verify(game,times(2)).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(commandInvokerMock,Mockito.times(2)).setCommand(Mockito.any(HandleEffectsCommand.class));
+        Mockito.verify(commandInvokerMock,Mockito.times(2)).execute();
+        Mockito.verify(game,Mockito.times(2)).setCurrentScene(Game.SCENE.LOCATION);
         assertEquals(gameController.getLocationController(), gameController.getCurrent());
     }
 
@@ -119,15 +118,15 @@ public class HandControllerTest {
     void testEmptyClickWithToGive() throws IOException, InterruptedException, URISyntaxException {
         BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
 
-        TextBox textBox = mock(TextBox.class);
-        when(textBox.getInteractable()).thenReturn(backpackItemMock);
+        TextBox textBox = Mockito.mock(TextBox.class);
+        Mockito.when(textBox.getInteractable()).thenReturn(backpackItemMock);
 
-        Backpack backpackMock = mock(Backpack.class);
-        when(game.getTextBox()).thenReturn(textBox);
+        Backpack backpackMock = Mockito.mock(Backpack.class);
+        Mockito.when(game.getTextBox()).thenReturn(textBox);
 
         Mockito.when(game.getBackpack()).thenReturn(backpackMock);
 
-        Location locationMock = mock(Location.class);
+        Location locationMock = Mockito.mock(Location.class);
 
         HashMap<String,Location> locations = new HashMap<>();
         locations.put("StartLocation",locationMock);
@@ -135,12 +134,12 @@ public class HandControllerTest {
         Mockito.when(game.getLocations()).thenReturn(locations);
         Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
 
-        NPC npcMock = mock(NPC.class);
-        when(npcMock.getName()).thenReturn("NPC_NAME");
+        NPC npcMock = Mockito.mock(NPC.class);
+        Mockito.when(npcMock.getName()).thenReturn("NPC_NAME");
         Position position = Mockito.mock(Position.class);
-        when(npcMock.contains(position)).thenReturn(false);
+        Mockito.when(npcMock.contains(position)).thenReturn(false);
 
-        when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
+        Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(npcMock));
 
         handController.setToGive("NPC_NAME");
         handController.click(position, applicationMock);

@@ -23,8 +23,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import static java.awt.event.KeyEvent.VK_ENTER;
-import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
 public class DialogControllerTest {
 
@@ -42,8 +40,8 @@ public class DialogControllerTest {
         Mockito.when(gameController.getModel()).thenReturn(game);
         dialogController = new DialogController(gameController);
         commandInvokerMock = Mockito.mock(CommandInvoker.class);
-        when(gameController.getCommandInvoker()).thenReturn(commandInvokerMock);
-        when(gameController.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameController.getCommandInvoker()).thenReturn(commandInvokerMock);
+        Mockito.when(gameController.getLocationController()).thenReturn(controllerStateMock);
     }
 
     @Test
@@ -52,18 +50,18 @@ public class DialogControllerTest {
         TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC npcMock = Mockito.mock(NPC.class);
 
-        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextBox()).thenReturn(textBoxMock);
-        when(textBoxMock.isActiveChoice()).thenReturn(true);
-        when(textBoxMock.isActiveTextBox()).thenReturn(true);
-        when(textBoxMock.getInteractable()).thenReturn(npcMock);
-        when(npcMock.getEffects()).thenReturn(new ArrayList<>());
+        Mockito.when(game.getCurrentLocation()).thenReturn(currentLocationMock);
+        Mockito.when(game.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.isActiveChoice()).thenReturn(true);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(npcMock);
+        Mockito.when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
         dialogController.key(VK_ENTER, Mockito.mock(Application.class));
 
-        verify(commandInvokerMock).setCommand(any(AnswerCommand.class));
-        verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
-        verify(commandInvokerMock, times(2)).execute();
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(AnswerCommand.class));
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(HandleEffectsCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).execute();
     }
 
     @Test
@@ -71,16 +69,16 @@ public class DialogControllerTest {
         Location currentLocationMock = Mockito.mock(Location.class);
         TextBox textBoxMock = Mockito.mock(TextBox.class);
 
-        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextBox()).thenReturn(textBoxMock);
-        when(textBoxMock.isActiveChoice()).thenReturn(false);
-        when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        Mockito.when(game.getCurrentLocation()).thenReturn(currentLocationMock);
+        Mockito.when(game.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.isActiveChoice()).thenReturn(false);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(true);
 
-        dialogController.select(mock(Application.class));
+        dialogController.select(Mockito.mock(Application.class));
 
-        verify(commandInvokerMock).setCommand(any(TalkCommand.class));
-        verify(commandInvokerMock).execute();
-        verify(gameController, Mockito.never()).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(TalkCommand.class));
+        Mockito.verify(commandInvokerMock).execute();
+        Mockito.verify(gameController, Mockito.never()).setControllerState(controllerStateMock);
     }
 
     @Test
@@ -89,28 +87,28 @@ public class DialogControllerTest {
         TextBox textBoxMock = Mockito.mock(TextBox.class);
         NPC npcMock = Mockito.mock(NPC.class);
 
-        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextBox()).thenReturn(textBoxMock);
-        when(textBoxMock.isActiveChoice()).thenReturn(false);
-        when(textBoxMock.isActiveTextBox()).thenReturn(false, true);
-        when(textBoxMock.getInteractable()).thenReturn(npcMock);
-        when(npcMock.getEffects()).thenReturn(new ArrayList<>());
+        Mockito.when(game.getCurrentLocation()).thenReturn(currentLocationMock);
+        Mockito.when(game.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.isActiveChoice()).thenReturn(false);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false, true);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(npcMock);
+        Mockito.when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
-        dialogController.select(mock(Application.class));
+        dialogController.select(Mockito.mock(Application.class));
 
-        verify(commandInvokerMock).setCommand(any(TalkCommand.class));
-        verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
-        verify(commandInvokerMock, times(2)).execute();
-        verify(gameController, never()).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(TalkCommand.class));
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(HandleEffectsCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).execute();
+        Mockito.verify(gameController, Mockito.never()).setControllerState(controllerStateMock);
 
-        when(textBoxMock.isActiveTextBox()).thenReturn(false);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(false);
 
-        dialogController.select(mock(Application.class));
+        dialogController.select(Mockito.mock(Application.class));
 
-        verify(commandInvokerMock, times(2)).setCommand(any(TalkCommand.class));
-        verify(commandInvokerMock, times(2)).setCommand(any(HandleEffectsCommand.class));
-        verify(commandInvokerMock, times(4)).execute();
-        verify(gameController).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).setCommand(Mockito.any(TalkCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).setCommand(Mockito.any(HandleEffectsCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(4)).execute();
+        Mockito.verify(gameController).setControllerState(controllerStateMock);
     }
 
     @Test
@@ -120,16 +118,16 @@ public class DialogControllerTest {
         NPC npcMock = Mockito.mock(NPC.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
-        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextBox()).thenReturn(textBoxMock);
-        when(textBoxMock.isActiveChoice()).thenReturn(true);
-        when(textBoxMock.isActiveTextBox()).thenReturn(true);
-        when(textBoxMock.getInteractable()).thenReturn(npcMock);
-        when(npcMock.getChoices()).thenReturn(selectionPanelMock);
+        Mockito.when(game.getCurrentLocation()).thenReturn(currentLocationMock);
+        Mockito.when(game.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.isActiveChoice()).thenReturn(true);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(npcMock);
+        Mockito.when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
         dialogController.key(KeyEvent.VK_UP, Mockito.mock(Application.class));
 
-        verify(selectionPanelMock).previousEntry();
+        Mockito.verify(selectionPanelMock).previousEntry();
     }
     @Test
     void keyDown() throws IOException, URISyntaxException, InterruptedException {
@@ -138,15 +136,15 @@ public class DialogControllerTest {
         NPC npcMock = Mockito.mock(NPC.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
 
-        when(game.getCurrentLocation()).thenReturn(currentLocationMock);
-        when(game.getTextBox()).thenReturn(textBoxMock);
-        when(textBoxMock.isActiveChoice()).thenReturn(true);
-        when(textBoxMock.isActiveTextBox()).thenReturn(true);
-        when(textBoxMock.getInteractable()).thenReturn(npcMock);
-        when(npcMock.getChoices()).thenReturn(selectionPanelMock);
+        Mockito.when(game.getCurrentLocation()).thenReturn(currentLocationMock);
+        Mockito.when(game.getTextBox()).thenReturn(textBoxMock);
+        Mockito.when(textBoxMock.isActiveChoice()).thenReturn(true);
+        Mockito.when(textBoxMock.isActiveTextBox()).thenReturn(true);
+        Mockito.when(textBoxMock.getInteractable()).thenReturn(npcMock);
+        Mockito.when(npcMock.getChoices()).thenReturn(selectionPanelMock);
 
         dialogController.key(KeyEvent.VK_DOWN, Mockito.mock(Application.class));
 
-        verify(selectionPanelMock).nextEntry();
+        Mockito.verify(selectionPanelMock).nextEntry();
     }
 }
