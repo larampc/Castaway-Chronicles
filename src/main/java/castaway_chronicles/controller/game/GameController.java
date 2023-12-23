@@ -31,7 +31,7 @@ public class GameController extends Controller<Game> {
     private ControllerState previous;
     private final ControllerState narratorController;
     private final GameSaver gameSaver;
-    private CommandInvoker commandInvoker;
+    private final CommandInvoker commandInvoker;
 
     public GameController(Game model) {
         super(model);
@@ -100,7 +100,6 @@ public class GameController extends Controller<Game> {
     }
 
     public CommandInvoker getCommandInvoker() {return commandInvoker;}
-    public void setCommandInvoker(CommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
 
     public GameSaver getGameSaver() {return gameSaver;}
 }

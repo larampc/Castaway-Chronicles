@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 public class MainMenuController implements ControllerState {
     private final MainPageController mainPageController;
     private final MainMenu mainMenu;
-    private CommandInvoker commandInvoker;
+    private final CommandInvoker commandInvoker;
     public MainMenuController(MainPageController mainPageController) {
         this.mainPageController = mainPageController;
         mainMenu = mainPageController.getModel().getMainMenu();
@@ -60,8 +60,8 @@ public class MainMenuController implements ControllerState {
     }
     public void keySide() throws IOException, URISyntaxException, InterruptedException {
         GetSideOptionCommand getSide = new GetSideOptionCommand(mainMenu.getSelectionPanel());
-        commandInvoker.setCommand(getSide);
-        commandInvoker.execute();
+        getCommandInvoker().setCommand(getSide);
+        getCommandInvoker().execute();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) {
             mainMenu.getSelectionPanel().previousEntry();
             mainMenu.getSelectionPanel().previousEntry();
@@ -80,5 +80,5 @@ public class MainMenuController implements ControllerState {
         }
     }
 
-    public void setCommandInvoker(CommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
+    public CommandInvoker getCommandInvoker() {return commandInvoker;}
 }

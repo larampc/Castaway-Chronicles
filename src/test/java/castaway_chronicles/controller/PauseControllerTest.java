@@ -56,7 +56,6 @@ public class PauseControllerTest {
     @Test
     void keySide() throws IOException, URISyntaxException, InterruptedException {
         CommandInvoker commandInvoker = Mockito.mock(CommandInvoker.class);
-        gameControllerMock.setCommandInvoker(commandInvoker);
         Mockito.when(gameControllerMock.getCommandInvoker()).thenReturn(commandInvoker);
 
         pauseController.key(KeyEvent.VK_LEFT, applicationMock);

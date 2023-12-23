@@ -17,6 +17,8 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainMenuControllerTest {
     private Application applicationMock;
     private MainPage mainPageMock;
@@ -89,39 +91,45 @@ public class MainMenuControllerTest {
 
     @Test
     void keySide() throws IOException, URISyntaxException, InterruptedException {
-        CommandInvoker commandInvoker = Mockito.mock(CommandInvoker.class);
-        mainMenuController.setCommandInvoker(commandInvoker);
-
+        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
         SelectionPanel selectionPanelMock = Mockito.mock(SelectionPanel.class);
         Mockito.when(mainMenuMock.getSelectionPanel()).thenReturn(selectionPanelMock);
-
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(false);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(true);
-        mainMenuController.key(KeyEvent.VK_RIGHT, applicationMock);
-        Mockito.verify(commandInvoker).setCommand(Mockito.any(GetSideOptionCommand.class));
-        Mockito.verify(commandInvoker).execute();
+        MainMenuController mainMenuController2 = new MainMenuController(mainPageControllerMock){
+            @Override
+            public CommandInvoker getCommandInvoker() {
+                return commandInvokerMock;
+            }
+        };
+
+        mainMenuController2.key(KeyEvent.VK_RIGHT, applicationMock);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(GetSideOptionCommand.class));
+        Mockito.verify(commandInvokerMock).execute();
         Mockito.verify(selectionPanelMock, Mockito.never()).previousEntry();
 
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(true);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(true);
-        mainMenuController.key(KeyEvent.VK_RIGHT, applicationMock);
-        Mockito.verify(commandInvoker, Mockito.times(2)).setCommand(Mockito.any(GetSideOptionCommand.class));
-        Mockito.verify(commandInvoker, Mockito.times(2)).execute();
+        mainMenuController2.key(KeyEvent.VK_RIGHT, applicationMock);
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).setCommand(Mockito.any(GetSideOptionCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).execute();
         Mockito.verify(selectionPanelMock, Mockito.never()).previousEntry();
 
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(false);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(false);
-        mainMenuController.key(KeyEvent.VK_LEFT, applicationMock);
-        Mockito.verify(commandInvoker, Mockito.times(3)).setCommand(Mockito.any(GetSideOptionCommand.class));
-        Mockito.verify(commandInvoker, Mockito.times(3)).execute();
+        mainMenuController2.key(KeyEvent.VK_LEFT, applicationMock);
+        Mockito.verify(commandInvokerMock, Mockito.times(3)).setCommand(Mockito.any(GetSideOptionCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(3)).execute();
         Mockito.verify(selectionPanelMock, Mockito.never()).previousEntry();
 
         Mockito.when(mainMenuMock.isSelectedContinue()).thenReturn(true);
         Mockito.when(mainMenuMock.canContinue()).thenReturn(false);
-        mainMenuController.key(KeyEvent.VK_LEFT, applicationMock);
-        Mockito.verify(commandInvoker, Mockito.times(4)).setCommand(Mockito.any(GetSideOptionCommand.class));
-        Mockito.verify(commandInvoker, Mockito.times(4)).execute();
+        mainMenuController2.key(KeyEvent.VK_LEFT, applicationMock);
+        Mockito.verify(commandInvokerMock, Mockito.times(4)).setCommand(Mockito.any(GetSideOptionCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(4)).execute();
         Mockito.verify(selectionPanelMock, Mockito.times(2)).previousEntry();
+
+        assertEquals(CommandInvoker.class, mainMenuController.getCommandInvoker().getClass());
     }
 
     @Test
