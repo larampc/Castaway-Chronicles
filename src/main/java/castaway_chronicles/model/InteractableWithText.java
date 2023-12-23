@@ -1,5 +1,7 @@
 package castaway_chronicles.model;
 
+import castaway_chronicles.ResourceManager;
+
 import java.util.List;
 
 public abstract class InteractableWithText extends Interactable {
@@ -9,4 +11,7 @@ public abstract class InteractableWithText extends Interactable {
     public SelectionPanel getChoices() {return choices;}
     public abstract List<String> getEffects();
     public void setChoices(SelectionPanel choices) {this.choices = choices;}
+    public ResourceManager getResourceManager(){
+        return ResourceManager.getInstance();
+    }
 }

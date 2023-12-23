@@ -1,7 +1,6 @@
 package castaway_chronicles.model.game.gameElements;
 
 import castaway_chronicles.model.InteractableWithText;
-import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.SelectionPanel;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class BackpackItem extends InteractableWithText {
     private final HashMap<String, String> optionCommand = new HashMap<>();
-    private final List<String> defaultAnswers = new ArrayList<>();
+    private List<String> defaultAnswers;
     private String description;
     private boolean inHand = false;
     public BackpackItem(int x, int y, int w, int h, String name) {
@@ -20,10 +19,10 @@ public class BackpackItem extends InteractableWithText {
     }
     public void getInfo() {
         String[] s1 = getName().split("_",-1);
-        ResourceManager resourceManager = ResourceManager.getInstance();
-        List<String> lines = resourceManager.readStaticResourceFile("BackpackItems/" + s1[0] + ".txt");
+        List<String> lines = getResourceManager().readStaticResourceFile("BackpackItems/" + s1[0] + ".txt");
         List<String> entries = new ArrayList<>();
         description = lines.get(0);
+        defaultAnswers = new ArrayList<>();
         for (int i = 1; i < lines.size(); i+=2) {
             String[] s = lines.get(i).split(" - ",-1);
             optionCommand.put(s[0], s[1]);
@@ -39,13 +38,12 @@ public class BackpackItem extends InteractableWithText {
     }
     @Override
     public List<String> getEffects() {
-        ResourceManager resourceManager = ResourceManager.getInstance();
         String[] s = getName().split("_",-1);
         String path = "BackpackItems/" + s[0] + "_" +
                 getChoices().getEntry(getChoices().getCurrentEntry()).replaceAll(" ", "").toLowerCase() +
                 "_effects.txt";
-        if (!resourceManager.existsStaticResourceFile(path)) return Collections.emptyList();
-        return resourceManager.readStaticResourceFile(path);
+        if (!getResourceManager().existsStaticResourceFile(path)) return Collections.emptyList();
+        return getResourceManager().readStaticResourceFile(path);
     }
     @Override
     public String getText() {
@@ -53,4 +51,5 @@ public class BackpackItem extends InteractableWithText {
         return description;
     }
     public void setInHand(boolean inHand) {this.inHand = inHand;}
+
 }
