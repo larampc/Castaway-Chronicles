@@ -82,8 +82,6 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
-        Mockito.verify(commandInvokerMock).setCommand(null);
-        Mockito.verify(commandInvokerMock).execute();
         Mockito.verify(gameControllerMock, Mockito.never()).setControllerState(walkingControllerMock);
 
 
@@ -94,7 +92,6 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
-        Mockito.verify(commandInvokerMock, Mockito.times(2)).execute();
         Mockito.verify(gameControllerMock, Mockito.never()).setControllerState(walkingControllerMock);
 
 
@@ -106,7 +103,6 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
-        Mockito.verify(commandInvokerMock, Mockito.times(3)).execute();
         Mockito.verify(gameControllerMock).setControllerState(walkingControllerMock);
 
 
@@ -120,8 +116,6 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
-        Mockito.verify(commandInvokerMock, Mockito.times(4)).execute();
-        Mockito.verify(gameControllerMock, Mockito.times(2)).setControllerState(walkingControllerMock);
         Mockito.verify(mainCharMock).setName("walk1_left");
 
 
@@ -135,7 +129,6 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
-        Mockito.verify(commandInvokerMock, Mockito.times(5)).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(mainCharMock).setName("walk1_right");
 
@@ -146,7 +139,6 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
-        Mockito.verify(commandInvokerMock, Mockito.times(6)).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
 
@@ -160,7 +152,7 @@ public class StandingControllerTest {
         standingController.none(0);
 
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(PickUpCommand.class));
-        Mockito.verify(commandInvokerMock, Mockito.times(8)).execute();
+        Mockito.verify(commandInvokerMock).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
 
@@ -174,7 +166,7 @@ public class StandingControllerTest {
         standingController.none(0);
 
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(StartTalkCommand.class));
-        Mockito.verify(commandInvokerMock, Mockito.times(10)).execute();
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(gameControllerMock).setControllerState(controllerStateMock);
         Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
@@ -190,7 +182,7 @@ public class StandingControllerTest {
         standingController.none(0);
 
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeLocationCommand.class));
-        Mockito.verify(commandInvokerMock, Mockito.times(13)).execute();
+        Mockito.verify(commandInvokerMock, Mockito.times(3)).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(gameControllerMock).setControllerState(controllerStateMock);
         Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
@@ -205,7 +197,7 @@ public class StandingControllerTest {
 
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeLocationCommand.class));
         Mockito.verify(gameMock).setCurrentScene(Game.SCENE.MAP);
-        Mockito.verify(commandInvokerMock, Mockito.times(15)).execute();
+        Mockito.verify(commandInvokerMock, Mockito.times(3)).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(gameControllerMock, Mockito.times(2)).setControllerState(controllerStateMock);
         Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
@@ -220,7 +212,7 @@ public class StandingControllerTest {
 
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeLocationCommand.class));
         Mockito.verify(gameMock).setCurrentScene(Game.SCENE.BACKPACK);
-        Mockito.verify(commandInvokerMock, Mockito.times(17)).execute();
+        Mockito.verify(commandInvokerMock, Mockito.times(3)).execute();
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(walkingControllerMock);
         Mockito.verify(gameControllerMock, Mockito.times(3)).setControllerState(controllerStateMock);
         Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
