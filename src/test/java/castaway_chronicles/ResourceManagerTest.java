@@ -41,19 +41,22 @@ public class ResourceManagerTest {
     }
 
     @Test
+    void readStaticResourceFile() {
+        assertEquals(List.of("lorem ipsem","testing","resource","manager"), resourceManager.readCurrentTimeResourceFile("Testing/staticResource.txt"));
+    }
+    @Test
+    void failToReadStaticResourceFile() {
+        assertThrows(Exception.class,()-> resourceManager.readStaticResourceFile("Testing/resourceTest2.txt"));
+    }
+    @Test
     void existsStaticResourceFile(){
         assertTrue(resourceManager.existsStaticResourceFile("Testing/staticResource.txt"));
         assertFalse(resourceManager.existsStaticResourceFile("Testing/staticResource2.txt"));
     }
-
     @Test
-    void readStaticResourceFile() {
-        assertEquals(List.of("lorem ipsem","testing","resource","manager"), resourceManager.readCurrentTimeResourceFile("Testing/staticResource.txt"));
-    }
-
-    @Test
-    void failToReadStaticResourceFile() {
-        assertThrows(Exception.class,()-> resourceManager.readStaticResourceFile("Testing/resourceTest2.txt"));
+    void notExistsCurrentTimeResourceFile(){
+        assertTrue(resourceManager.notExistsCurrentTimeResourceFile("Testing/resourceTest2.txt"));
+        assertFalse(resourceManager.notExistsCurrentTimeResourceFile("Testing/resourceTest.txt"));
     }
     @Test
     void readCurrentTimeResourceFile() {
@@ -63,11 +66,11 @@ public class ResourceManagerTest {
 
         assertEquals(List.of("lorem ipsem","testing","resource","manager","changed"),resourceManager.readCurrentTimeResourceFile("Testing/resourceTest.txt"));
     }
-
     @Test
     void failToReadCurrentTimeResourceFile() {
         assertThrows(Exception.class,()-> resourceManager.readCurrentTimeResourceFile("Testing/resourceTest2"));
     }
+    
     @Test
     void failToWriteToResourceFile() throws IOException {
         File file = resourceManager.getFile("Testing/resourceTest2.png");

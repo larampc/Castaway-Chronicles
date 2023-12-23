@@ -24,21 +24,23 @@ public class SceneViewerTest {
         guiMock = Mockito.mock(GUI.class);
         locationMock = Mockito.mock(Location.class);
         backpackMock = Mockito.mock(Backpack.class);
-        gameSceneViewer = new SceneViewer();
         positionMock = Mockito.mock(Position.class);
         Item itemMock = Mockito.mock(Item.class);
+        Icon iconMock = Mockito.mock(Icon.class);
+        Background backgroundMock = Mockito.mock(Background.class);
+
         Mockito.when(itemMock.getName()).thenReturn("people");
         Mockito.when(itemMock.getPosition()).thenReturn(positionMock);
-        Icon iconMock = Mockito.mock(Icon.class);
         Mockito.when(iconMock.getPosition()).thenReturn(positionMock);
         Mockito.when(iconMock.getName()).thenReturn("forestRock");
-        Background backgroundMock = Mockito.mock(Background.class);
         Mockito.when(backgroundMock.getName()).thenReturn("Menu");
         Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
         Mockito.when(locationMock.getVisibleInteractables()).thenReturn(List.of(itemMock, iconMock));
         Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
         Mockito.when(backpackMock.getVisibleInteractables()).thenReturn(List.of(itemMock, iconMock));
         Mockito.when(backpackMock.getBackground()).thenReturn(backgroundMock);
+
+        gameSceneViewer = new SceneViewer();
     }
     @Test
     void locationViewerMainChar() throws IOException, URISyntaxException, InterruptedException {
@@ -49,10 +51,10 @@ public class SceneViewerTest {
 
         gameSceneViewer.draw(locationMock, guiMock);
 
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "Menu");
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "people");
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "forestRock");
-        Mockito.verify(guiMock, Mockito.times(1)).drawImage(positionMock, "MainChar");
+        Mockito.verify(guiMock).drawImage(positionMock, "Menu");
+        Mockito.verify(guiMock).drawImage(positionMock, "people");
+        Mockito.verify(guiMock).drawImage(positionMock, "forestRock");
+        Mockito.verify(guiMock).drawImage(positionMock, "MainChar");
     }
 
     @Test

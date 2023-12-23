@@ -9,7 +9,6 @@ import org.mockito.Mockito;
 import java.io.IOException;
 
 public class EndViewerTest {
-
     @Test
     void endViewer() throws IOException {
         LanternaGUI guiMock = Mockito.mock(LanternaGUI.class);

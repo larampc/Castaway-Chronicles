@@ -36,8 +36,8 @@ public class MenuViewerTest {
 
         Mockito.when(menuMock.getBackground()).thenReturn(backgroundMock);
         Mockito.when(backgroundMock.getName()).thenReturn("Menu");
-
         Mockito.when(backgroundMock.getPosition()).thenReturn(positionMock);
+
         menuViewer.draw(menuMock, guiMock);
 
         Mockito.verify(guiMock).drawImage(positionMock, "Menu");
