@@ -1,11 +1,10 @@
-package castaway_chronicles.controller.commands;
+package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
 import castaway_chronicles.controller.Commands.ChangeLocationCommand;
 import castaway_chronicles.controller.Commands.CommandInvoker;
 import castaway_chronicles.controller.Commands.PickUpCommand;
 import castaway_chronicles.controller.Commands.StartTalkCommand;
-import castaway_chronicles.controller.ControllerState;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.controller.game.locationControllers.StandingController;
 import castaway_chronicles.controller.game.locationControllers.WalkingController;
@@ -83,6 +82,7 @@ public class StandingControllerTest {
 
         standingController.click(positionMock, applicationMock);
 
+        Mockito.verify(commandInvokerMock).setCommand(null);
         Mockito.verify(commandInvokerMock).execute();
         Mockito.verify(gameControllerMock, Mockito.never()).setControllerState(walkingControllerMock);
 
