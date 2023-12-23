@@ -30,8 +30,7 @@ public class EndingPageController implements ControllerState {
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         for (Interactable e: mainPageController.getModel().getEndingPage().getVisibleInteractables()) {
             if (e.getName().equalsIgnoreCase("reset") && e.contains(position)){
-                ResourceManager resourceManager = ResourceManager.getInstance();
-                resourceManager.deleteResourceFile("achieved_endings.txt");
+                getResourceManager().deleteResourceFile("achieved_endings.txt");
                 mainPageController.getModel().getEndingPage().reset();
                 break;
             }
@@ -39,5 +38,9 @@ public class EndingPageController implements ControllerState {
                 application.setState(new EndState(new Ending(e.getName())));
             }
         }
+    }
+
+    public ResourceManager getResourceManager() {
+        return ResourceManager.getInstance();
     }
 }

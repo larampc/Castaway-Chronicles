@@ -1,6 +1,7 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.controller.mainPage.EndingPageController;
 import castaway_chronicles.controller.mainPage.MainPageController;
 import castaway_chronicles.model.Position;
@@ -33,6 +34,7 @@ public class EndingPageControllerTest {
     private boolean exists;
     private File endings;
     private final List<String> lines = new ArrayList<>();
+    ResourceManager resourceManagerMock;
 
     @BeforeAll
     void init() throws IOException {
@@ -66,12 +68,23 @@ public class EndingPageControllerTest {
 
     @BeforeEach
     void setUp(){
+        resourceManagerMock = Mockito.mock(ResourceManager.class);
         applicationMock = Mockito.mock(Application.class);
         mainPageMock = Mockito.mock(MainPage.class);
         Mockito.when(mainPageMock.getCurrent()).thenReturn(MainPage.PAGE.ENDINGS);
         mainPageControllerMock = Mockito.mock(MainPageController.class);
         Mockito.when(mainPageControllerMock.getModel()).thenReturn(mainPageMock);
-        endingPageController = new EndingPageController(mainPageControllerMock);
+        endingPageController = new EndingPageController(mainPageControllerMock){
+            @Override
+            public ResourceManager getResourceManager(){
+                return resourceManagerMock;
+            }
+        };
+    }
+
+    @Test
+    void ResourceManager() {
+        assertEquals(ResourceManager.getInstance(), new EndingPageController(mainPageControllerMock).getResourceManager());
     }
 
     @Test
@@ -96,6 +109,7 @@ public class EndingPageControllerTest {
         endingPageController.click(positionMock, applicationMock);
 
         Mockito.verify(endingPageMock).reset();
+        Mockito.verify(resourceManagerMock).deleteResourceFile("achieved_endings.txt");
     }
     @Test
     void clickEnding() throws IOException, URISyntaxException, InterruptedException {
