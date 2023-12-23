@@ -14,9 +14,7 @@ public class TalkCommand implements Command{
         if (npcDialog.dialogEnded() && npcDialog.getChoices().getNumberEntries() == 0) {
             game.getTextBox().closeTextBox();
         }
-        else if (npcDialog.dialogEnded()) {
-            game.getTextBox().setActiveChoice(true);
-        }
+        else if (npcDialog.dialogEnded()) game.getTextBox().setActiveChoice(true);
         else npcDialog.nextLine();
     }
 }

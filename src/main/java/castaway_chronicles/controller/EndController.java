@@ -16,7 +16,6 @@ public class EndController extends Controller<Ending> {
         super(model);
         mainPage = new MainPage();
     }
-
     @Override
     public void step(Application application, InputEvent action, long startTime) throws IOException {
         if (startTime-lastFrame > 200 && getModel().getMax() > getModel().getCurrent()) {
@@ -28,7 +27,6 @@ public class EndController extends Controller<Ending> {
             application.setState(new MainPageState(getMainPage()));
         }
     }
-
     protected MainPage getMainPage(){
         return mainPage;
     }

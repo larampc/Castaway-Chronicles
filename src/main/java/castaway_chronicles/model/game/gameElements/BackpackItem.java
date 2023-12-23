@@ -32,9 +32,7 @@ public class BackpackItem extends InteractableWithText {
         }
         setChoices(new SelectionPanel(entries));
     }
-    public String getCommand() {
-        return optionCommand.get(getChoices().getEntry(getChoices().getCurrentEntry()));
-    }
+    public String getCommand() {return optionCommand.get(getChoices().getEntry(getChoices().getCurrentEntry()));}
     public void setNameBackpack(String name) {
         setName(name);
         getInfo();
@@ -49,14 +47,10 @@ public class BackpackItem extends InteractableWithText {
         if (!resourceManager.existsStaticResourceFile(path)) return Collections.emptyList();
         return resourceManager.readStaticResourceFile(path);
     }
-
     @Override
     public String getText() {
         if (inHand) return defaultAnswers.get(getChoices().getCurrentEntry());
         return description;
     }
-
-    public void setInHand(boolean inHand) {
-        this.inHand = inHand;
-    }
+    public void setInHand(boolean inHand) {this.inHand = inHand;}
 }

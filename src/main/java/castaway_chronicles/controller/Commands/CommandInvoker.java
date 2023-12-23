@@ -8,9 +8,7 @@ public class CommandInvoker {
     public CommandInvoker() {
     }
     public void execute() throws IOException, InterruptedException, URISyntaxException {
-        if (command!= null) {
-            this.command.execute();
-        }
+        if (command!= null) {this.command.execute();}
     }
     public void setCommand(Command command) {this.command = command;}
 }

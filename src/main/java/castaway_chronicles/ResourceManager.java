@@ -16,11 +16,9 @@ import static java.nio.file.StandardOpenOption.CREATE;
 public class ResourceManager {
     private static ResourceManager instance = null;
     public static ResourceManager getInstance() {
-        if (instance == null)
-            instance = new ResourceManager();
+        if (instance == null) instance = new ResourceManager();
         return instance;
     }
-
     public List<String> readStaticResourceFile(String path){
         URL resource = getClass().getClassLoader().getResource(path);
         try {
@@ -36,7 +34,6 @@ public class ResourceManager {
         File file = new File(Path.of("src", "main", "resources",path).toString());
         return !file.exists();
     }
-
     public List<String> readCurrentTimeResourceFile(String path){
         try {
             return Files.readAllLines(Path.of("src", "main", "resources",path));
@@ -68,7 +65,7 @@ public class ResourceManager {
     }
     public void deleteResourceFile(String path) {
         File file = new File(Path.of("src", "main", "resources",path).toString());
-        if(file.isDirectory()) deleteResourceDirContent(path);
+        if (file.isDirectory()) deleteResourceDirContent(path);
         file.delete();
     }
     public void writeToFile(String path, String line){
@@ -82,15 +79,11 @@ public class ResourceManager {
         }
     }
     public int countFiles(String path){
-        if(notExistsCurrentTimeResourceFile(path)) return 0;
+        if (notExistsCurrentTimeResourceFile(path)) return 0;
         File file = new File(Path.of("src", "main", "resources",path).toString());
         return Objects.requireNonNull(file.listFiles()).length;
     }
-    public File getFile(String path){
-        return new File(Path.of("src", "main", "resources",path).toString());
-    }
-    public void createResourceDir(String path){
-        new File(Path.of("src", "main", "resources", path).toString()).mkdir();
-    }
+    public File getFile(String path) {return new File(Path.of("src", "main", "resources",path).toString());}
+    public void createResourceDir(String path) {new File(Path.of("src", "main", "resources", path).toString()).mkdir();}
 }
 

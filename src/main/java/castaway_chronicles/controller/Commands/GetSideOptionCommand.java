@@ -12,14 +12,10 @@ public class GetSideOptionCommand implements Command {
     }
     @Override
     public void execute() throws IOException, InterruptedException, URISyntaxException {
-        if (!selectionPanel.getEntry(
-                selectionPanel.getCurrentEntry() + 2
-        ).isEmpty()) {
+        if (!selectionPanel.getEntry(selectionPanel.getCurrentEntry() + 2).isEmpty()) {
             selectionPanel.nextEntry();
             selectionPanel.nextEntry();
-        } else if (!selectionPanel.getEntry(
-                selectionPanel.getCurrentEntry() - 2
-        ).isEmpty()) {
+        } else if (!selectionPanel.getEntry(selectionPanel.getCurrentEntry() - 2).isEmpty()) {
             selectionPanel.previousEntry();
             selectionPanel.previousEntry();
         }

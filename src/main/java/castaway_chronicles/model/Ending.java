@@ -15,15 +15,8 @@ public class Ending {
         max = resourceManager.countFiles("Endings/"+name);
     }
     public int getMax() {return max;}
-    public int getCurrent() {
-        return current;
-    }
-
-    public void setNext() {
-        ++this.current;
-    }
-    public String getCurrentFrame() {
-        return String.format(name + "_" + "%04d", current);
-    }
+    public int getCurrent() {return current;}
+    public void setNext() {++this.current;}
+    public String getCurrentFrame() {return String.format(name + "_" + "%04d", current);}
     public String getName() {return name;}
 }

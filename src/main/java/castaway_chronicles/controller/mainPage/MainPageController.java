@@ -28,30 +28,15 @@ public class MainPageController extends Controller<MainPage> {
                 current = endingPageController;
         }
     }
-
     @Override
     public void step(Application application, InputEvent action, long startTime) throws IOException, InterruptedException, URISyntaxException {
-        if (action instanceof KeyEvent) {
-            current.key(((KeyEvent)action).getKeyCode(), application);
-        }
+        if (action instanceof KeyEvent) current.key(((KeyEvent)action).getKeyCode(), application);
         if (action instanceof MouseEvent) {
             current.click(new Position(((MouseEvent)action).getX()/4, ((MouseEvent)action).getY()/4), application);
         }
     }
-
-    public ControllerState getMainMenuController() {
-        return mainMenuController;
-    }
-
-    public ControllerState getEndingPageController() {
-        return endingPageController;
-    }
-
-    public void setCurrent(ControllerState current) {
-        this.current = current;
-    }
-    public ControllerState getCurrent() {
-        return current;
-    }
-
+    public ControllerState getMainMenuController() {return mainMenuController;}
+    public ControllerState getEndingPageController() {return endingPageController;}
+    public void setCurrent(ControllerState current) {this.current = current;}
+    public ControllerState getCurrent() {return current;}
 }

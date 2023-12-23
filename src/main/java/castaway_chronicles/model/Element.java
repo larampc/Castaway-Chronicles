@@ -11,10 +11,10 @@ public class Element {
         this.width = width;
         this.height = height;
     }
-    public Position getPosition() {return position; }
-    public int getWidth() {return width; }
-    public int getHeight() {return height; }
-    public String getName() {return name; }
+    public Position getPosition() {return position;}
+    public int getWidth() {return width;}
+    public int getHeight() {return height;}
+    public String getName() {return name;}
     public void setName(String name) {this.name = name;}
-    public void setPosition(Position position) {this.position = position; }
+    public void setPosition(Position position) {this.position = position;}
 }

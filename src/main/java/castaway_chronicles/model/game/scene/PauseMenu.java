@@ -10,12 +10,8 @@ public class PauseMenu extends Menu {
         super();
         setSelectionPanel(new SelectionPanel(Arrays.asList("Resume", "Save", "Menu", "Exit")));
     }
-    public boolean isSelectedExit() {
-        return getSelectionPanel().isSelected(3);
-    }
-    public boolean isSelectedResume() {
-        return getSelectionPanel().isSelected(0);
-    }
+    public boolean isSelectedExit() {return getSelectionPanel().isSelected(3);}
+    public boolean isSelectedResume() {return getSelectionPanel().isSelected(0);}
     public boolean isSelectedSave() {return getSelectionPanel().isSelected(1);}
     public boolean isSelectedMenu() {return getSelectionPanel().isSelected(2);}
 }

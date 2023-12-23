@@ -27,14 +27,12 @@ public class LanternaGUI implements GUI{
     private final AWTTerminalFrame terminal;
     private boolean bigger;
     private InputEvent action;
-
     public LanternaGUI(AWTTerminalFrame terminal, Screen screen) throws IOException {
         this.screen = screen;
         this.graphics = screen.newTextGraphics();
         this.terminal = terminal;
         loadSprites();
     }
-
     public LanternaGUI(int width, int height) throws IOException, FontFormatException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
         this.terminal = createTerminal(width, height, fontConfig);
@@ -45,13 +43,11 @@ public class LanternaGUI implements GUI{
     private Screen createScreen(Terminal terminal) throws IOException {
         final Screen screen;
         screen = new TerminalScreen(terminal);
-
         screen.setCursorPosition(null);
         screen.startScreen();
         screen.doResizeIfNecessary();
         return screen;
     }
-
     private AWTTerminalFrame createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
         Terminal terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(new TerminalSize(width, height))
@@ -73,7 +69,6 @@ public class LanternaGUI implements GUI{
         });
         return (AWTTerminalFrame) terminal;
     }
-
     private AWTTerminalFontConfiguration loadSquareFont() throws IOException, FontFormatException {
         ResourceManager resourceManager = ResourceManager.getInstance();
         Font font =  Font.createFont(Font.TRUETYPE_FONT, resourceManager.getFile("fonts/square.ttf"));
@@ -82,7 +77,6 @@ public class LanternaGUI implements GUI{
         Font newfont = font.deriveFont(Font.PLAIN, 4);
         return new SwingTerminalFontConfiguration(true, AWTTerminalFontConfiguration.BoldMode.EVERYTHING, newfont);
     }
-
     private void loadSprites() throws IOException {
         ResourceManager resourceManager = ResourceManager.getInstance();
         loadFiles(resourceManager.getFile("Images"), images);
@@ -105,26 +99,17 @@ public class LanternaGUI implements GUI{
     @Override
     public void resizeTerminal() {
         screen.doResizeIfNecessary();
-        if (bigger) {
-            terminal.setSize(terminal.getWidth(), 637);
-        }
-        else {
-            terminal.setSize(terminal.getWidth(), 765);
-        }
+        if (bigger) terminal.setSize(terminal.getWidth(), 637);
+        else terminal.setSize(terminal.getWidth(), 765);
         bigger = !bigger;
         while (screen.doResizeIfNecessary() == null);
     }
     @Override
-    public boolean isBigger() {
-        return bigger;
-    }
+    public boolean isBigger() {return bigger;}
     @Override
     public void drawImage(Position position, String name) {
-        if (getImages().get(name) != null) {
-            getImages().get(name).drawSprite(position, graphics);
-        }
+        if (getImages().get(name) != null) getImages().get(name).drawSprite(position, graphics);
     }
-
     @Override
     public void drawText(Position startPosition, int maxsize, String text, boolean underlined) {
         String[] arrOfStr = text.split(" ", -1);
@@ -148,41 +133,21 @@ public class LanternaGUI implements GUI{
         graphics.setForegroundColor(new TextColor.RGB(255,255,255));
         graphics.drawLine(new TerminalPosition(position.getX(), position.getY()), new TerminalPosition(position.getX()+size, position.getY()), '_');
     }
-
     @Override
-    public void clear() {
-        screen.clear();
-    }
-
+    public void clear() {screen.clear();}
     @Override
-    public void refresh() throws IOException {
-        screen.refresh();
-    }
-
+    public void refresh() throws IOException {screen.refresh();}
     @Override
-    public void close() throws IOException {
-        screen.close();
-    }
-
+    public void close() throws IOException {screen.close();}
     @Override
     public InputEvent getNextAction() {
         InputEvent returnAction = action;
         action = null;
         return returnAction;
     }
-    public boolean imageIsLoaded(String name) {
-        return getImages().get(name) != null;
-    }
-    public void setBigger(boolean bigger) {
-        this.bigger = bigger;
-    }
-    public InputEvent getAction() {
-        return action;
-    }
-    public void setAction(InputEvent action) {
-        this.action = action;
-    }
-    public HashMap<String, Sprite> getImages() {
-        return images;
-    }
+    public boolean imageIsLoaded(String name) {return getImages().get(name) != null;}
+    public void setBigger(boolean bigger) {this.bigger = bigger;}
+    public InputEvent getAction() {return action;}
+    public void setAction(InputEvent action) {this.action = action;}
+    public HashMap<String, Sprite> getImages() {return images;}
 }

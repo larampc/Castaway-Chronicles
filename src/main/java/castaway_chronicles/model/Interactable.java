@@ -14,7 +14,5 @@ public abstract class Interactable extends Element {
         return interactable.getName().equals(this.getName());
     }
     @Override
-    public int hashCode() {
-        return this.getName().hashCode();
-    }
+    public int hashCode() {return this.getName().hashCode();}
 }

@@ -10,17 +10,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class NarratorController implements ControllerState {
-
     private final GameController gameController;
     public NarratorController(GameController gameController) {
         this.gameController = gameController;
     }
-
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException {
-
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if (key == KeyEvent.VK_ENTER) {

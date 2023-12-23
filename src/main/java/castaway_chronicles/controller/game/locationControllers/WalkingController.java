@@ -19,10 +19,7 @@ public class WalkingController implements ContinuousControllerState {
     private long lastMovementTime = 0;
     private boolean goRight = false;
     private static final int dx = 10;
-    public WalkingController(GameController gameController) {
-        this.gameController = gameController;
-    }
-
+    public WalkingController(GameController gameController) {this.gameController = gameController;}
     public boolean setToWalk(Position walkTo) {
         Location location = gameController.getModel().getCurrentLocation();
         int background_x = location.getBackground().getPosition().getX();
@@ -38,7 +35,10 @@ public class WalkingController implements ContinuousControllerState {
             toWalk = 0;
             return false;
         }
-        if (location.getBackground().isLoopable()) {toWalk = offset/dx; return true;}
+        if (location.getBackground().isLoopable()) {
+            toWalk = offset/dx;
+            return true;
+        }
         if (next_x <= 0 && next_x >= max_background_x) {
             toWalk = offset/dx;
             toWalk += (toWalk < 0) ? 1 : -1;
@@ -51,18 +51,14 @@ public class WalkingController implements ContinuousControllerState {
         }
         return true;
     }
-
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException {
         setToWalk(position);
         ((StandingController)gameController.getStandingController()).setLastCommandNull();
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
-
     }
-
     @Override
     public void none(long time) throws IOException, InterruptedException, URISyntaxException {
         if (toWalk == 0) {
@@ -80,10 +76,6 @@ public class WalkingController implements ContinuousControllerState {
             lastMovementTime = time;
         }
     }
-
-    public int getToWalk() {
-        return toWalk;
-    }
-
+    public int getToWalk() {return toWalk;}
     public boolean isFacingRight() {return goRight;}
 }

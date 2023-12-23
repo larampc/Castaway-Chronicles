@@ -11,21 +11,13 @@ public class MainMenu extends Menu {
         super();
         setSelectionPanel(new SelectionPanel(Arrays.asList("Start", "Exit", "Continue", "Endings")));
     }
-    public boolean isSelectedExit() {
-        return getSelectionPanel().isSelected(1);
-    }
-    public boolean isSelectedStart() {
-        return getSelectionPanel().isSelected(0);
-    }
-    public boolean isSelectedContinue() {
-        return getSelectionPanel().isSelected(2);
-    }
+    public boolean isSelectedExit() {return getSelectionPanel().isSelected(1);}
+    public boolean isSelectedStart() {return getSelectionPanel().isSelected(0);}
+    public boolean isSelectedContinue() {return getSelectionPanel().isSelected(2);}
     public boolean isSelectedEndings() {return getSelectionPanel().isSelected(3);}
     public boolean canContinue() {
         if(getResourceManager().notExistsCurrentTimeResourceFile("Scenes_saved")) return false;
         return getResourceManager().countFiles("Scenes_saved") > 0;
     }
-    public ResourceManager getResourceManager() {
-        return ResourceManager.getInstance();
-    }
+    public ResourceManager getResourceManager() {return ResourceManager.getInstance();}
 }

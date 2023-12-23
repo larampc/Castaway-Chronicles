@@ -15,10 +15,7 @@ import java.net.URISyntaxException;
 
 public class EndingPageController implements ControllerState {
     private final MainPageController mainPageController;
-    public EndingPageController(MainPageController mainPageController) {
-        this.mainPageController = mainPageController;
-    }
-
+    public EndingPageController(MainPageController mainPageController) {this.mainPageController = mainPageController;}
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if(key == KeyEvent.VK_ESCAPE){
@@ -39,8 +36,5 @@ public class EndingPageController implements ControllerState {
             }
         }
     }
-
-    public ResourceManager getResourceManager() {
-        return ResourceManager.getInstance();
-    }
+    public ResourceManager getResourceManager() {return ResourceManager.getInstance();}
 }

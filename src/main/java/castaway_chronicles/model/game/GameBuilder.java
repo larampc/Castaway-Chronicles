@@ -12,7 +12,6 @@ public class GameBuilder {
         String dir = saved? "Scenes_saved":"Scenes";
         return new Game(createMap(dir), createBackpack(dir), createLocations(dir), createPauseMenu(), getCurrentLocation(dir));
     }
-
     private String getCurrentLocation(String dir) {
         ResourceManager resourceManager = ResourceManager.getInstance();
         List<String> lines = resourceManager.readCurrentTimeResourceFile(dir + "/Locations.txt");
@@ -22,7 +21,6 @@ public class GameBuilder {
         }
         return "";
     }
-
     public Map createMap(String dir) throws IOException {
         SceneLoader mapBuilder = new SceneLoader(dir, "Map", Game.SCENE.MAP);
         return (Map) mapBuilder.createScene();
@@ -42,7 +40,5 @@ public class GameBuilder {
         }
         return locations;
     }
-    public PauseMenu createPauseMenu() {
-        return new PauseMenu();
-    }
+    public PauseMenu createPauseMenu() {return new PauseMenu();}
 }

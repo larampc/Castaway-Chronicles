@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 public class Location extends Scene {
     private final MainChar mainChar;
-
     public Location(Background background, HashMap<String, Interactable> interactables, HashMap<String, Interactable> visibleInteractables, MainChar mainChar) {
         super(background,interactables, visibleInteractables);
         this.mainChar = mainChar;

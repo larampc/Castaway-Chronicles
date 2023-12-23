@@ -19,8 +19,12 @@ public class EndingPageBuilder {
         for (String line : lines){
             String[] s = line.split(" ", -1);
             if (!s[0].contains("question")) questionItem.put(s[0], count);
-            if (s.length == 6) visibleEndings.put(s[0], new EndingItem(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4]), s[0]));
-            endings.put(s[0], new EndingItem(Integer.parseInt(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4]), s[0]));
+            if (s.length == 6) visibleEndings.put(s[0], new EndingItem(Integer.parseInt(s[1]), Integer.parseInt(s[2]),
+                                                                        Integer.parseInt(s[3]), Integer.parseInt(s[4]),
+                                                                        s[0]));
+            endings.put(s[0], new EndingItem(Integer.parseInt(s[1]), Integer.parseInt(s[2]),
+                                             Integer.parseInt(s[3]), Integer.parseInt(s[4]),
+                                             s[0]));
             count++;
         }
         return new EndingPage(background, endings, visibleEndings, questionItem);

@@ -11,7 +11,6 @@ public class EndViewer extends Viewer<Ending> {
     public EndViewer(Ending model) {
         super(model);
     }
-
     @Override
     public void drawScreen(GUI gui) throws IOException {
         if (!((LanternaGUI)gui).imageIsLoaded(getModel().getCurrentFrame())) ((LanternaGUI)gui).loadEnding(getModel().getName());

@@ -18,13 +18,11 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-
 public class BackpackController implements ControllerState {
     private final GameController gameController;
     public BackpackController(GameController gameController) {
         this.gameController = gameController;
     }
-
     @Override
     public void click(Position position, Application application) throws IOException {
         for (Interactable e: gameController.getModel().getBackpack().getVisibleInteractables()) {
@@ -34,7 +32,6 @@ public class BackpackController implements ControllerState {
             }
         }
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         switch (key) {
@@ -57,32 +54,27 @@ public class BackpackController implements ControllerState {
             default:
         }
     }
-
     public void keyUp() {
         if (gameController.getModel().getTextBox().isActiveChoice()) {
             gameController.getModel().getTextBox().getInteractable().getChoices().previousEntry();
         }
     }
-
     public void keyDown() {
         if (gameController.getModel().getTextBox().isActiveChoice()) {
             gameController.getModel().getTextBox().getInteractable().getChoices().nextEntry();
         }
     }
-
     public void keySide() throws IOException, URISyntaxException, InterruptedException {
         GetSideOptionCommand getSide = new GetSideOptionCommand(gameController.getModel().getTextBox().getInteractable().getChoices());
         gameController.getCommandInvoker().setCommand(getSide);
         gameController.getCommandInvoker().execute();
     }
-
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         if (gameController.getModel().getTextBox().isActiveTextBox() && !gameController.getModel().getTextBox().isActiveChoice()) {
             gameController.getModel().getTextBox().setActiveChoice(true);
             return;
         }
         if (!gameController.getModel().getTextBox().isActiveChoice()) return;
-
         String command = ((BackpackItem)gameController.getModel().getTextBox().getInteractable()).getCommand();
         gameController.getModel().getTextBox().closeTextBox();
         String[] s = command.split(" ", -1);
@@ -115,15 +107,11 @@ public class BackpackController implements ControllerState {
             }
         }
     }
-
     public void escape() {
         if (!(gameController.getModel().getTextBox().isActiveChoice()|| gameController.getModel().getTextBox().isActiveTextBox())) {
             gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
             gameController.setControllerState(gameController.getStandingController());
         }
-        else {
-            gameController.getModel().getTextBox().closeTextBox();
-        }
+        else gameController.getModel().getTextBox().closeTextBox();
     }
-
 }

@@ -17,15 +17,12 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class StandingController implements ContinuousControllerState {
-
     private final GameController gameController;
     private Command lastCommand = null;
-
     public StandingController(GameController gameController) {
         this.gameController = gameController;
     }
     public void setLastCommandNull() {lastCommand = null;}
-
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         Location location = gameController.getModel().getCurrentLocation();
@@ -47,9 +44,7 @@ public class StandingController implements ContinuousControllerState {
                         gameController.getModel().setCurrentScene(Game.SCENE.MAP);
                         gameController.setControllerState(gameController.getMapController());
                     }
-                    else {
-                        lastCommand = new ChangeLocationCommand(gameController.getModel(), split[0]);
-                    }
+                    else lastCommand = new ChangeLocationCommand(gameController.getModel(), split[0]);
                     break;
                 }
             }
@@ -62,7 +57,6 @@ public class StandingController implements ContinuousControllerState {
             gameController.setControllerState(gameController.getWalkingController());
         }
     }
-
     @Override
     public void key(int key, Application application) {
         if (key == KeyEvent.VK_ESCAPE) {
@@ -71,8 +65,6 @@ public class StandingController implements ContinuousControllerState {
             gameController.setControllerState(gameController.getPauseController());
         }
     }
-
-
     @Override
     public void none(long time) throws IOException, InterruptedException, URISyntaxException {
         if (lastCommand != null) {

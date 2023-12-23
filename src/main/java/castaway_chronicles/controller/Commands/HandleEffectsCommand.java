@@ -21,7 +21,6 @@ public class HandleEffectsCommand implements Command{
         this.effects = effects;
         this.application = application;
     }
-
     @Override
     public void execute()  {
         if (effects.isEmpty()) return;
@@ -70,25 +69,14 @@ public class HandleEffectsCommand implements Command{
         else game.getTextBox().closeTextBox();
     }
     private void executeMapEffects(String[] s) {
-        if (s[2].equalsIgnoreCase("V")) {
-            game.getMap().setVisible(s[1]);
-        }
-        if (s[2].equalsIgnoreCase("I")) {
-            game.getMap().setInvisible(s[1]);
-        }
+        if (s[2].equalsIgnoreCase("V")) game.getMap().setVisible(s[1]);
+        if (s[2].equalsIgnoreCase("I")) game.getMap().setInvisible(s[1]);
     }
     private void executeBackpackEffects(String[] s) {
-        if (s[2].equalsIgnoreCase("V")) {
-            game.getBackpack().setVisible(s[1]+"_backpack");
-        }
-        else if (s[2].equalsIgnoreCase("I")) {
-            game.getBackpack().setInvisible(s[1]+"_backpack");
-        }
-        else {
-            ((BackpackItem)game.getBackpack().getInteractable(s[1]+"_backpack")).setNameBackpack(s[2]+"_backpack");
-        }
+        if (s[2].equalsIgnoreCase("V")) game.getBackpack().setVisible(s[1]+"_backpack");
+        else if (s[2].equalsIgnoreCase("I")) game.getBackpack().setInvisible(s[1]+"_backpack");
+        else ((BackpackItem)game.getBackpack().getInteractable(s[1]+"_backpack")).setNameBackpack(s[2]+"_backpack");
     }
-
     public ResourceManager getResourceManager() {
         return ResourceManager.getInstance();
     }

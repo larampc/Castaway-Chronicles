@@ -7,17 +7,9 @@ import castaway_chronicles.view.Viewer;
 import castaway_chronicles.view.game.GameViewer;
 
 public class GameState extends State<Game>{
-    public GameState(Game model) {
-        super(model);
-    }
-
+    public GameState(Game model) {super(model);}
     @Override
-    protected Viewer<Game> getViewer() {
-        return new GameViewer(getModel());
-    }
-
+    protected Viewer<Game> getViewer() {return new GameViewer(getModel());}
     @Override
-    protected Controller<Game> getController() {
-        return new GameController(getModel());
-    }
+    protected Controller<Game> getController() {return new GameController(getModel());}
 }

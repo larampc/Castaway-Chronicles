@@ -11,9 +11,7 @@ import java.io.IOException;
 
 public class Sprite {
     private final BufferedImage sprite;
-    public Sprite(File fontFile) throws IOException {
-        sprite = ImageIO.read(fontFile);
-    }
+    public Sprite(File fontFile) throws IOException {sprite = ImageIO.read(fontFile);}
     public void drawSprite(Position position, TextGraphics graphics) {
         for (int x = 0; x < getSprite().getWidth(); x++){
             for (int y = 0; y < getSprite().getHeight(); y++){
@@ -30,7 +28,5 @@ public class Sprite {
         }
     }
     public int getWidth() {return sprite.getWidth();}
-    public BufferedImage getSprite() {
-         return sprite;
-    }
+    public BufferedImage getSprite() {return sprite;}
 }

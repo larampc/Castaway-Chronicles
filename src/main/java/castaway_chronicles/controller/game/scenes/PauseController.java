@@ -17,17 +17,13 @@ import java.net.URISyntaxException;
 public class PauseController implements ControllerState {
     private final GameController gameController;
     private final PauseMenu pauseMenu;
-
     public PauseController(GameController gameController){
         this.gameController = gameController;
         this.pauseMenu = gameController.getModel().getPauseMenu();
     }
-
     @Override
     public void click(Position position, Application application){
-        //does nothing
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         switch (key) {
@@ -47,14 +43,11 @@ public class PauseController implements ControllerState {
             default:
         }
     }
-
     public void keySide() throws IOException, URISyntaxException, InterruptedException {
         GetSideOptionCommand getSide = new GetSideOptionCommand(pauseMenu.getSelectionPanel());
         gameController.getCommandInvoker().setCommand(getSide);
         gameController.getCommandInvoker().execute();
     }
-
-
     public void select(Application application) {
         if (pauseMenu.isSelectedMenu()) application.setState(new MainPageState(new MainPage()));
         if (pauseMenu.isSelectedExit()) application.setState(null);
@@ -62,8 +55,6 @@ public class PauseController implements ControllerState {
             gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
             gameController.setControllerState(gameController.getStandingController());
         }
-        if (pauseMenu.isSelectedSave()) {
-            gameController.getGameSaver().saveGame();
-        }
+        if (pauseMenu.isSelectedSave()) gameController.getGameSaver().saveGame();
     }
 }

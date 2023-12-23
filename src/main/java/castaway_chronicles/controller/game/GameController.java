@@ -32,7 +32,6 @@ public class GameController extends Controller<Game> {
     private final ControllerState narratorController;
     private final GameSaver gameSaver;
     private final CommandInvoker commandInvoker;
-
     public GameController(Game model) {
         super(model);
         gameSaver = new GameSaver(model);
@@ -47,7 +46,6 @@ public class GameController extends Controller<Game> {
         current = standingController;
         commandInvoker = new CommandInvoker();
     }
-
     @Override
     public void step(Application application, InputEvent action, long time) throws IOException, InterruptedException, URISyntaxException {
         if (current instanceof ContinuousControllerState) {
@@ -64,42 +62,16 @@ public class GameController extends Controller<Game> {
         this.previous = this.current;
         this.current = controllerState;
     }
-
-    public ControllerState getPauseController() {
-        return pauseController;
-    }
-
-    public ControllerState getStandingController() {
-        return standingController;
-    }
-    public ControllerState getBackpackController() {
-        return backpackController;
-    }
-
-    public ControllerState getMapController() {
-        return mapController;
-    }
-
-    public ControllerState getDialogController() {
-        return dialogController;
-    }
-
-    public ControllerState getHandController() {
-        return handController;
-    }
-
-    public ControllerState getWalkingController() {
-        return walkingController;
-    }
+    public ControllerState getPauseController() {return pauseController;}
+    public ControllerState getStandingController() {return standingController;}
+    public ControllerState getBackpackController() {return backpackController;}
+    public ControllerState getMapController() {return mapController;}
+    public ControllerState getDialogController() {return dialogController;}
+    public ControllerState getHandController() {return handController;}
+    public ControllerState getWalkingController() {return walkingController;}
     public ControllerState getNarratorController() {return narratorController;}
-    public ControllerState getCurrent() {
-        return current;
-    }
-    public ControllerState getPrevious() {
-        return previous;
-    }
-
+    public ControllerState getCurrent() {return current;}
+    public ControllerState getPrevious() {return previous;}
     public CommandInvoker getCommandInvoker() {return commandInvoker;}
-
     public GameSaver getGameSaver() {return gameSaver;}
 }

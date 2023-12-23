@@ -19,7 +19,6 @@ public class GameViewer extends Viewer<Game> {
         gameSceneViewer = new SceneViewer();
         textBoxViewer = new TextBoxViewer();
     }
-
     @Override
     public void drawScreen(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         switch (getModel().getScene()) {
@@ -43,18 +42,10 @@ public class GameViewer extends Viewer<Game> {
         }
         else if (gui.isBigger()) gui.resizeTerminal();
     }
-
     public <T> void drawScene(GUI gui, T scene, ScreenViewer<T> viewer) throws IOException, URISyntaxException, InterruptedException {
         viewer.draw(scene, gui);
     }
-    public MenuViewer getPauseMenuViewer() {
-        return pauseMenuViewer;
-    }
-    public TextBoxViewer getTextBoxViewer() {
-        return textBoxViewer;
-    }
-
-    public SceneViewer getGameSceneViewer() {
-        return gameSceneViewer;
-    }
+    public MenuViewer getPauseMenuViewer() {return pauseMenuViewer;}
+    public TextBoxViewer getTextBoxViewer() {return textBoxViewer;}
+    public SceneViewer getGameSceneViewer() {return gameSceneViewer;}
 }

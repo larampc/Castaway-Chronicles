@@ -7,17 +7,9 @@ import castaway_chronicles.view.Viewer;
 import castaway_chronicles.view.mainPage.MainPageViewer;
 
 public class MainPageState extends State<MainPage> {
-    public MainPageState(MainPage model) {
-        super(model);
-    }
-
+    public MainPageState(MainPage model) {super(model);}
     @Override
-    protected Viewer<MainPage> getViewer() {
-        return new MainPageViewer(getModel());
-    }
-
+    protected Viewer<MainPage> getViewer() {return new MainPageViewer(getModel());}
     @Override
-    protected Controller<MainPage> getController() {
-        return new MainPageController(getModel());
-    }
+    protected Controller<MainPage> getController() {return new MainPageController(getModel());}
 }

@@ -23,12 +23,9 @@ public class MainMenuController implements ControllerState {
         mainMenu = mainPageController.getModel().getMainMenu();
         commandInvoker = new CommandInvoker();
     }
-
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
-
     }
-
     @Override
     public void key(int keyCode, Application application) throws IOException, URISyntaxException, InterruptedException {
         switch (keyCode){
@@ -48,12 +45,10 @@ public class MainMenuController implements ControllerState {
             default:
         }
     }
-
     public void keyUp() {
         mainMenu.getSelectionPanel().previousEntry();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) mainMenu.getSelectionPanel().previousEntry();
     }
-
     public void keyDown() {
         mainMenu.getSelectionPanel().nextEntry();
         if (mainMenu.isSelectedContinue() && !mainMenu.canContinue()) mainMenu.getSelectionPanel().nextEntry();
@@ -67,7 +62,6 @@ public class MainMenuController implements ControllerState {
             mainMenu.getSelectionPanel().previousEntry();
         }
     }
-
     public void select(Application application) throws IOException {
         if (mainMenu.isSelectedExit()) application.setState(null);
         if (mainMenu.isSelectedStart())
@@ -79,6 +73,5 @@ public class MainMenuController implements ControllerState {
             mainPageController.setCurrent(mainPageController.getEndingPageController());
         }
     }
-
     public CommandInvoker getCommandInvoker() {return commandInvoker;}
 }

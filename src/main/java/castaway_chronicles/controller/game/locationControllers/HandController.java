@@ -22,11 +22,9 @@ public class HandController implements ControllerState {
     public HandController(GameController gameController) {
         this.gameController = gameController;
     }
-
     public void setToGive(String toGive) {
         this.toGive = toGive;
     }
-
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         if (!toGive.isEmpty()) {
@@ -39,7 +37,8 @@ public class HandController implements ControllerState {
                     gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                     if (gameController.getModel().getTextBox().isActiveTextBox()) {
                         gameController.setControllerState(gameController.getDialogController());
-                    } else gameController.setControllerState(gameController.getStandingController());
+                    }
+                    else gameController.setControllerState(gameController.getStandingController());
                     return;
                 }
             }
@@ -49,7 +48,6 @@ public class HandController implements ControllerState {
         gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
         gameController.setControllerState(gameController.getNarratorController());
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if (key == KeyEvent.VK_ESCAPE) {

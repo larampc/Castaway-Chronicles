@@ -13,8 +13,6 @@ public abstract class ScreenViewer<T> {
             drawElement(gui, element);
         }
     }
-    public void drawElement(GUI gui, Element element) {
-        gui.drawImage(element.getPosition(), element.getName());
-    }
+    public void drawElement(GUI gui, Element element) {gui.drawImage(element.getPosition(), element.getName());}
     public abstract void draw(T model, GUI gui) throws IOException, URISyntaxException, InterruptedException;
 }

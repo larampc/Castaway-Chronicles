@@ -23,7 +23,5 @@ public class Position {
         return position.x == x && position.y == y;
     }
     @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
+    public int hashCode() {return Objects.hash(x, y);}
 }

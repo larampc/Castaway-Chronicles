@@ -12,14 +12,11 @@ import castaway_chronicles.model.game.scene.Map;
 public class GameSaver {
     private final Game game;
     private final ResourceManager resourceManager = ResourceManager.getInstance();
-
     public GameSaver(Game game) {
         this.game = game;
         getResourceManager().createResourceDir("Scenes_saved");
     }
-    public void emptySave() {
-        getResourceManager().deleteResourceDirContent("Scenes_saved");
-    }
+    public void emptySave() {getResourceManager().deleteResourceDirContent("Scenes_saved");}
     public void saveGame() {
         emptySave();
         saveBackpack();
@@ -34,7 +31,6 @@ public class GameSaver {
             getResourceManager().writeToFile("Scenes_saved/Backpack.txt","I BItem "+ i.getName() + " " + i.getPosition().getX() + " " + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
         }
     }
-
     public void saveLocations() {
         for (String l: game.getLocations().keySet()) {
             getResourceManager().writeToFile("Scenes_saved/Locations.txt",l);
@@ -45,13 +41,12 @@ public class GameSaver {
             saveLocation(l, game.getLocation(l));
         }
     }
-
     public void saveLocation(String name, Location location) {
         Background bg = location.getBackground();
         String loopable = bg.isLoopable()?" L":"";
         getResourceManager().writeToFile("Scenes_saved/" + name + ".txt",
-                "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() +
-                        " " + bg.getWidth() + " " + bg.getHeight() + loopable + "\n");
+                "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY()
+                        + " " + bg.getWidth() + " " + bg.getHeight() + loopable + "\n");
         for (Interactable i: location.getInteractables()) {
             String npcState = i instanceof NPC ? " " +((NPC) i).getState() : "";
             String visible = location.getVisibleInteractables().contains(i)? " V":"";
@@ -70,7 +65,8 @@ public class GameSaver {
         Map map = game.getMap();
         Background bg = map.getBackground();
         getResourceManager().writeToFile("Scenes_saved/Map.txt",
-                "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY() + " " + bg.getWidth() + " " + bg.getHeight() + "\n");
+                "B " + bg.getName() + " " + bg.getPosition().getX() + " " + bg.getPosition().getY()
+                        + " " + bg.getWidth() + " " + bg.getHeight() + "\n");
         for (Interactable i: map.getInteractables()) {
             String visible = map.getVisibleInteractables().contains(i)? " V":"";
             getResourceManager().writeToFile("Scenes_saved/Map.txt",
@@ -78,8 +74,5 @@ public class GameSaver {
                             + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
         }
     }
-
-    public ResourceManager getResourceManager() {
-        return resourceManager;
-    }
+    public ResourceManager getResourceManager() {return resourceManager;}
 }

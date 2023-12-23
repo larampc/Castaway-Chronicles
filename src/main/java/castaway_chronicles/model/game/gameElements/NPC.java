@@ -20,8 +20,9 @@ public class NPC extends InteractableWithText {
     }
     protected void init() {
         ResourceManager resourceManager = ResourceManager.getInstance();
-        List<String> lines = resourceManager
-                .readStaticResourceFile("Dialog/" + getName() + "/" + getName() + state + ".txt");
+        List<String> lines = resourceManager.readStaticResourceFile(
+                "Dialog/" + getName() + "/" + getName() + state + ".txt"
+        );
         line = 0;
         nextStates = new ArrayList<>();
         dialog = new ArrayList<>();
@@ -41,16 +42,9 @@ public class NPC extends InteractableWithText {
         setChoices(new SelectionPanel(choices));
         readEffects(state);
     }
-
     @Override
-    public String getText() {
-        return dialog.get(line);
-    }
-
-    public List<Integer> getNextStates() {
-        return nextStates;
-    }
-
+    public String getText() {return dialog.get(line);}
+    public List<Integer> getNextStates() {return nextStates;}
     public void goToStateChoice() {
         state = nextStates.get(getChoices().getCurrentEntry());
         init();
@@ -59,10 +53,8 @@ public class NPC extends InteractableWithText {
         this.state = state;
         init();
     }
-    public boolean dialogEnded() { return line == dialog.size()-1;}
-    public void nextLine() {
-        line++;
-    }
+    public boolean dialogEnded() {return line == dialog.size()-1;}
+    public void nextLine() {line++;}
     public void readEffects(int state) {
         ResourceManager resourceManager = ResourceManager.getInstance();
         String path = "Dialog/" + getName() + "/effect_" + getName() + state + ".txt";
@@ -72,8 +64,6 @@ public class NPC extends InteractableWithText {
         else effects = new ArrayList<>();
     }
     @Override
-    public List<String> getEffects() {
-        return effects;
-    }
+    public List<String> getEffects() {return effects;}
     public int getState() {return state;}
 }

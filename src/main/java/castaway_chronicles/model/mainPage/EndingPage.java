@@ -15,7 +15,6 @@ public class EndingPage extends Scene {
         this.questionItem = questionItem;
         updateAchievedEndings();
     }
-
     public void updateAchievedEndings() {
         ResourceManager resourceManager = ResourceManager.getInstance();
         if (resourceManager.notExistsCurrentTimeResourceFile("achieved_endings.txt")) return;
@@ -27,15 +26,10 @@ public class EndingPage extends Scene {
     }
     public void reset() {
         for (Interactable interactable: getInteractables()) {
-            if (interactable.getName().contains("question")) {
-                setVisible(interactable.getName());
-            }
+            if (interactable.getName().contains("question")) setVisible(interactable.getName());
             else setInvisible(interactable.getName());
         }
         setVisible("reset");
     }
-
-    public HashMap<String, Integer> getQuestionItem() {
-        return questionItem;
-    }
+    public HashMap<String, Integer> getQuestionItem() {return questionItem;}
 }

@@ -15,18 +15,15 @@ public class SceneLoader {
     private final HashMap<String, Interactable> interactables = new HashMap<>();
     private final HashMap<String, Interactable> visibleInteractables = new HashMap<>();
     private final Game.SCENE type;
-
     public SceneLoader(String dir, String filename, Game.SCENE type) throws IOException {
         ResourceManager resourceManager = ResourceManager.getInstance();
         lines = resourceManager.readCurrentTimeResourceFile(dir + "/" + filename + ".txt");
         this.type = type;
         getInteractables();
     }
-
     public Scene createScene() {
         return SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
     }
-
     protected Background getBackground() {
         for (String line : lines) {
             if (line.charAt(0) == 'B') {
@@ -39,7 +36,6 @@ public class SceneLoader {
         }
         return null;
     }
-
     protected void getInteractables() throws IOException {
         for (String line : lines) {
             if (line.charAt(0) == 'I') {
@@ -49,14 +45,11 @@ public class SceneLoader {
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]), state = 0;
                 if (type.equalsIgnoreCase("npc")) state = Integer.parseInt(s[7]);
                 Interactable interactable = GameInteractableFactory.getInteractable(type,x,y,w,h,name,state);
-                if (line.charAt(line.length()-1)=='V') {
-                    visibleInteractables.put(name,interactable);
-                }
+                if (line.charAt(line.length()-1)=='V') visibleInteractables.put(name,interactable);
                 interactables.put(name,interactable);
             }
         }
     }
-
     protected MainChar getMainChar() {
         if (type == Game.SCENE.LOCATION) {
             for(String line : lines){

@@ -14,15 +14,12 @@ import java.net.URISyntaxException;
 
 public class DialogController implements ControllerState {
     private final GameController gameController;
-
     public DialogController(GameController gameController) {
         this.gameController = gameController;
     }
-
     @Override
     public void click(Position position, Application application) {
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         switch (key) {
@@ -38,19 +35,16 @@ public class DialogController implements ControllerState {
             default:
         }
     }
-
     public void keyUp() {
         if (gameController.getModel().getTextBox().isActiveChoice()) {
             gameController.getModel().getTextBox().getInteractable().getChoices().previousEntry();
         }
     }
-
     public void keyDown() {
         if (gameController.getModel().getTextBox().isActiveChoice()) {
             gameController.getModel().getTextBox().getInteractable().getChoices().nextEntry();
         }
     }
-
     public void select(Application application) throws IOException, InterruptedException, URISyntaxException {
         if (gameController.getModel().getTextBox().isActiveChoice()) {
             HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextBox().getInteractable().getEffects(), application);

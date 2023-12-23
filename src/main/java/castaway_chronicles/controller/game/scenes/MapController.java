@@ -17,10 +17,7 @@ import java.net.URISyntaxException;
 
 public class MapController implements ControllerState {
     private final GameController gameController;
-    public MapController(GameController gameController) {
-        this.gameController = gameController;
-    }
-
+    public MapController(GameController gameController) {this.gameController = gameController;}
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         CommandInvoker invoker = gameController.getCommandInvoker();
@@ -41,7 +38,6 @@ public class MapController implements ControllerState {
             }
         }
     }
-
     @Override
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if (key == KeyEvent.VK_ESCAPE) {
@@ -49,5 +45,4 @@ public class MapController implements ControllerState {
             gameController.setControllerState(gameController.getStandingController());
         }
     }
-
 }

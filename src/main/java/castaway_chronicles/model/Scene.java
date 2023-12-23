@@ -10,7 +10,6 @@ public abstract class Scene {
     private final HashMap<String, Interactable> interactables;
     private final Background background;
     private final HashMap<String, Interactable> visibleInteractables;
-
     public Scene(Background background, HashMap<String, Interactable> interactables, HashMap<String, Interactable> visibleInteractables) {
         this.interactables = interactables;
         this.background = background;
@@ -18,15 +17,8 @@ public abstract class Scene {
     }
     public List<Interactable> getInteractables() {return new ArrayList<>(interactables.values());}
     public Background getBackground() {return background;}
-
-    public List<Interactable> getVisibleInteractables() {
-        return new ArrayList<>(visibleInteractables.values());
-    }
+    public List<Interactable> getVisibleInteractables() {return new ArrayList<>(visibleInteractables.values());}
     public Interactable getInteractable(String name) {return interactables.get(name);}
-    public void setVisible(String name){
-        visibleInteractables.put(name, interactables.get(name));
-    }
-    public void setInvisible(String name){
-        visibleInteractables.remove(name);
-    }
+    public void setVisible(String name){visibleInteractables.put(name, interactables.get(name));}
+    public void setInvisible(String name){visibleInteractables.remove(name);}
 }

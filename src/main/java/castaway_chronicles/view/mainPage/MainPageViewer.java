@@ -19,7 +19,6 @@ public class MainPageViewer extends Viewer<MainPage> {
         mainMenuViewer = new MenuViewer();
         getMainMenuViewer().getSelectionPanelViewer().setDefinitions(42,20, new Position(98,101));
     }
-
     @Override
     public void drawScreen(GUI gui) throws IOException, InterruptedException, URISyntaxException {
         switch (getModel().getCurrent()) {
@@ -31,10 +30,6 @@ public class MainPageViewer extends Viewer<MainPage> {
                 break;
         }
     }
-    public MenuViewer getMainMenuViewer() {
-        return mainMenuViewer;
-    }
-    public SceneViewer getEndingPageViewer() {
-        return endingPageViewer;
-    }
+    public MenuViewer getMainMenuViewer() {return mainMenuViewer;}
+    public SceneViewer getEndingPageViewer() {return endingPageViewer;}
 }
