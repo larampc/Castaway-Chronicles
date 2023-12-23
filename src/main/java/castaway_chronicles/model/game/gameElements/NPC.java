@@ -1,7 +1,6 @@
 package castaway_chronicles.model.game.gameElements;
 
 import castaway_chronicles.model.InteractableWithText;
-import castaway_chronicles.ResourceManager;
 import castaway_chronicles.model.SelectionPanel;
 
 import java.util.ArrayList;
