@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>Position.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.model;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Objects;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class Position {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final int x;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final int y;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public Position(int x, int y) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.x = x;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.y = y;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_12'/>
+12
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_12'>2</a>
+<span>
+
+1. getLeft : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+2. getLeft : replaced return value with null for castaway_chronicles/model/Position::getLeft &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public Position getLeft(int offset) {return new Position(x - offset, y);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_13'/>
+13
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_13'>2</a>
+<span>
+
+1. getRight : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+2. getRight : replaced return value with null for castaway_chronicles/model/Position::getRight &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public Position getRight(int offset) {return new Position(x + offset, y);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_14'/>
+14
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_14'>2</a>
+<span>
+
+1. getUp : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+2. getUp : replaced return value with null for castaway_chronicles/model/Position::getUp &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public Position getUp(int offset) {return new Position(x, y - offset);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_15'/>
+15
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_15'>2</a>
+<span>
+
+1. getDown : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+2. getDown : replaced return value with null for castaway_chronicles/model/Position::getDown &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public Position getDown(int offset) {return new Position(x, y + offset);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_16'/>
+16
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_16'>1</a>
+<span>
+
+1. getX : replaced int return with 0 for castaway_chronicles/model/Position::getX &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public int getX() {return x;}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_17'/>
+17
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_17'>1</a>
+<span>
+
+1. getY : replaced int return with 0 for castaway_chronicles/model/Position::getY &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public int getY() {return y;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean equals(Object o) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_20'/>
+20
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_20'>2</a>
+<span>
+
+1. equals : replaced boolean return with false for castaway_chronicles/model/Position::equals &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (this == o) return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_21'/>
+21
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_21'>2</a>
+<span>
+
+1. equals : replaced boolean return with true for castaway_chronicles/model/Position::equals &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (!(o instanceof Position)) return false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Position position = (Position) o;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_23'/>
+23
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_23'>3</a>
+<span>
+
+1. equals : replaced boolean return with true for castaway_chronicles/model/Position::equals &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+3. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return position.x == x &#38;&#38; position.y == y;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_26'/>
+26
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_26'>1</a>
+<span>
+
+1. hashCode : replaced int return with 0 for castaway_chronicles/model/Position::hashCode &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public int hashCode() {return Objects.hash(x, y);}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@35929bc7_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_12'>12</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_12'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getLeft<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getLeft(int, int, int)]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getLeft<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getLeft(int, int, int)]</span></span> replaced return value with null for castaway_chronicles/model/Position::getLeft &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_13'>13</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_13'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getRight<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getRight(int, int, int)]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getRight<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getRight(int, int, int)]</span></span> replaced return value with null for castaway_chronicles/model/Position::getRight &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_14'>14</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_14'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getUp<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getUp(int, int, int)]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getUp<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getUp(int, int, int)]</span></span> replaced return value with null for castaway_chronicles/model/Position::getUp &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_15'>15</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_15'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getDown<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getDown(int, int, int)]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getDown<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getDown(int, int, int)]</span></span> replaced return value with null for castaway_chronicles/model/Position::getDown &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_16'>16</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_16'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getX<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getRight(int, int, int)]</span></span> replaced int return with 0 for castaway_chronicles/model/Position::getX &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_17'>17</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_17'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getY<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getRight(int, int, int)]</span></span> replaced int return with 0 for castaway_chronicles/model/Position::getY &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_20'>20</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_20'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_same()]</span></span> replaced boolean return with false for castaway_chronicles/model/Position::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_different()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_21'>21</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_21'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_different()]</span></span> replaced boolean return with true for castaway_chronicles/model/Position::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_different()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_23'>23</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_23'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_different()]</span></span> replaced boolean return with true for castaway_chronicles/model/Position::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_same()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_different()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@35929bc7_26'>26</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@35929bc7_26'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:hashcode_different()]</span></span> replaced int return with 0 for castaway_chronicles/model/Position::hashCode &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getBackground()] (9 ms)</li><li>castaway_chronicles.model.PauseMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PauseMenuTest]/[method:getBackground()] (7 ms)</li><li>castaway_chronicles.view.TextBoxViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.TextBoxViewerTest]/[method:drawTextBox()] (12 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getDown(int, int, int)] (162 ms)</li><li>castaway_chronicles.gui.GUITest.[engine:junit-jupiter]/[class:castaway_chronicles.gui.GUITest]/[method:drawText()] (498 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_same()] (5 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandLoopableLocation()] (20 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandLoopableLocation()] (48 ms)</li><li>castaway_chronicles.view.GameViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.GameViewerTest]/[method:constructor()] (5 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_out()] (5 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getUp(int, int, int)] (95 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()] (5 ms)</li><li>castaway_chronicles.controller.MainPageControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.MainPageControllerTest]/[method:step()] (11 ms)</li><li>castaway_chronicles.view.EndViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.EndViewerTest]/[method:endViewer()] (5 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:hashcode_same()] (5 ms)</li><li>castaway_chronicles.view.SelectionPanelViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.SelectionPanelViewerTest]/[method:selectionPanelTest()] (15 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:hashcode_different()] (6 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_map()] (19 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_border()] (5 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()] (16 ms)</li><li>castaway_chronicles.view.GameViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.GameViewerTest]/[method:drawBackpack()] (7 ms)</li><li>castaway_chronicles.view.GameViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.GameViewerTest]/[method:drawLocation()] (10 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getRight(int, int, int)] (82 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandNotLoopableLocation()] (24 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PositionTest]/[method:equals_different()] (4 ms)</li><li>castaway_chronicles.model.PositionTest.[engine:jqwik]/[class:castaway_chronicles.model.PositionTest]/[property:getLeft(int, int, int)] (94 ms)</li><li>castaway_chronicles.view.MainPageViewerTest.[engine:junit-jupiter]/[class:castaway_chronicles.view.MainPageViewerTest]/[method:constructor()] (9 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()] (47 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:interactable()] (5 ms)</li><li>castaway_chronicles.controller.GameControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.GameControllerTest]/[method:step()] (22 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommand_MainIconsDontMove()] (23 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>

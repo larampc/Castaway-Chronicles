@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>MoveCommand.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.controller.Commands;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.Position;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.game.gameElements.Icon;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.Interactable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.game.scene.Location;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class MoveCommand implements Command{</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final Location location;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private int offset;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public MoveCommand(Location location, int x) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.location = location;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.offset = x;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void execute() throws IOException {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_19'/>
+19
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_19'>2</a>
+<span>
+
+1. execute : Replaced integer modulus with multiplication &rarr; KILLED<br/>
+
+2. execute : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        int next = (Character.digit(location.getMainChar().getName().charAt(4),10) % 4) + 1 ;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_20'/>
+20
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_20'>3</a>
+<span>
+
+1. execute : changed conditional boundary &rarr; KILLED<br/>
+
+2. execute : negated conditional &rarr; KILLED<br/>
+
+3. execute : removed call to castaway_chronicles/model/game/gameElements/MainChar::setName &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        location.getMainChar().setName(&#34;walk&#34; + next + ((offset &#60; 0) ? &#34;_right&#34; : &#34;_left&#34;));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_21'/>
+21
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_21'>1</a>
+<span>
+
+1. execute : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(location.getBackground().isLoopable()){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_22'/>
+22
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_22'>3</a>
+<span>
+
+1. execute : changed conditional boundary &rarr; KILLED<br/>
+
+2. execute : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+3. execute : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (location.getBackground().getPosition().getX() + offset &#62; 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_23'/>
+23
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_23'>2</a>
+<span>
+
+1. execute : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+2. execute : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                offset = 200 - location.getBackground().getWidth() + offset;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_24'/>
+24
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_24'>1</a>
+<span>
+
+1. execute : removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                location.getBackground().setPosition(new Position(offset,0));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_26'/>
+26
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_26'>4</a>
+<span>
+
+1. execute : changed conditional boundary &rarr; KILLED<br/>
+
+2. execute : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+3. execute : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+4. execute : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            else if (location.getBackground().getPosition().getX() + offset &#60; 200 - location.getBackground().getWidth()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_27'/>
+27
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_27'>1</a>
+<span>
+
+1. execute : removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                location.getBackground().setPosition(new Position(offset,0));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_28'/>
+28
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_28'>2</a>
+<span>
+
+1. execute : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+2. execute : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                offset = offset - (200 - location.getBackground().getWidth());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_30'/>
+30
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_30'>1</a>
+<span>
+
+1. execute : removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            else location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_32'/>
+32
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_32'>1</a>
+<span>
+
+1. execute : removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else location.getBackground().setPosition(location.getBackground().getPosition().getRight(offset));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        for (Interactable e : location.getInteractables()) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_34'/>
+34
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_34'>3</a>
+<span>
+
+1. execute : negated conditional &rarr; KILLED<br/>
+
+2. execute : negated conditional &rarr; KILLED<br/>
+
+3. execute : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            if (!(e instanceof Icon &#38;&#38; (e.getName().equalsIgnoreCase(&#34;Map_icon&#34;) || e.getName().equalsIgnoreCase(&#34;Backpack_icon&#34;)))) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_35'/>
+35
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_35'>1</a>
+<span>
+
+1. execute : removed call to castaway_chronicles/model/Interactable::setPosition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>                e.setPosition(e.getPosition().getRight(offset));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6ff708d_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_19'>19</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_19'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> Replaced integer modulus with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_20'>20</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_20'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> removed call to castaway_chronicles/model/game/gameElements/MainChar::setName &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_21'>21</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_21'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_22'>22</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_22'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandLoopableLocation()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_23'>23</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_23'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_24'>24</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_24'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_26'>26</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_26'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandLoopableLocation()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandLoopableLocation()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_27'>27</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_27'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_28'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_30'>30</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_30'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandLoopableLocation()]</span></span> removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_32'>32</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_32'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> removed call to castaway_chronicles/model/game/gameElements/Background::setPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_34'>34</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_34'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommand_MainIconsDontMove()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommand_MainIconsDontMove()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6ff708d_35'>35</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6ff708d_35'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>execute<br/><b>Killed by : </b>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()]</span></span> removed call to castaway_chronicles/model/Interactable::setPosition &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandNotLoopableLocation()] (24 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandNotLoopableLocation()] (16 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommandLoopableLocationAtBorder()] (47 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveCommand_MainIconsDontMove()] (23 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveRightCommandLoopableLocation()] (20 ms)</li><li>castaway_chronicles.controller.commands.MoveCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.MoveCommandTest]/[method:moveLeftCommandLoopableLocation()] (48 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>

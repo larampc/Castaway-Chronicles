@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>MainMenu.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.model.mainPage;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.ResourceManager;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.Menu;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.SelectionPanel;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Arrays;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class MainMenu extends Menu {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public MainMenu() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_12'/>
+12
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_12'>1</a>
+<span>
+
+1. &#60;init&#62; : removed call to castaway_chronicles/model/mainPage/MainMenu::setSelectionPanel &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        setSelectionPanel(new SelectionPanel(Arrays.asList(&#34;Start&#34;, &#34;Exit&#34;, &#34;Continue&#34;, &#34;Endings&#34;)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_14'/>
+14
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_14'>2</a>
+<span>
+
+1. isSelectedExit : replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedExit &rarr; KILLED<br/>
+
+2. isSelectedExit : replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedExit &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public boolean isSelectedExit() {return getSelectionPanel().isSelected(1);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_15'/>
+15
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_15'>2</a>
+<span>
+
+1. isSelectedStart : replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedStart &rarr; KILLED<br/>
+
+2. isSelectedStart : replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedStart &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public boolean isSelectedStart() {return getSelectionPanel().isSelected(0);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_16'/>
+16
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_16'>2</a>
+<span>
+
+1. isSelectedContinue : replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedContinue &rarr; KILLED<br/>
+
+2. isSelectedContinue : replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedContinue &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public boolean isSelectedContinue() {return getSelectionPanel().isSelected(2);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_17'/>
+17
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_17'>2</a>
+<span>
+
+1. isSelectedEndings : replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedEndings &rarr; KILLED<br/>
+
+2. isSelectedEndings : replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedEndings &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public boolean isSelectedEndings() {return getSelectionPanel().isSelected(3);}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean canContinue() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_19'/>
+19
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_19'>2</a>
+<span>
+
+1. canContinue : replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::canContinue &rarr; KILLED<br/>
+
+2. canContinue : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if(getResourceManager().notExistsCurrentTimeResourceFile(&#34;Scenes_saved&#34;)) return false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_20'/>
+20
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_20'>3</a>
+<span>
+
+1. canContinue : replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::canContinue &rarr; KILLED<br/>
+
+2. canContinue : changed conditional boundary &rarr; KILLED<br/>
+
+3. canContinue : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return getResourceManager().countFiles(&#34;Scenes_saved&#34;) &#62; 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_22'/>
+22
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_22'>1</a>
+<span>
+
+1. getResourceManager : replaced return value with null for castaway_chronicles/model/mainPage/MainMenu::getResourceManager &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public ResourceManager getResourceManager() {return ResourceManager.getInstance();}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@23ef226d_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_12'>12</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_12'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedExit()]</span></span> removed call to castaway_chronicles/model/mainPage/MainMenu::setSelectionPanel &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_14'>14</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_14'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isSelectedExit<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedExit()]</span></span> replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedExit &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isSelectedExit<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedExit()]</span></span> replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedExit &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_15'>15</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_15'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isSelectedStart<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedStart()]</span></span> replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedStart &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isSelectedStart<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedStart()]</span></span> replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedStart &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_16'>16</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_16'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isSelectedContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedContinue()]</span></span> replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedContinue &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isSelectedContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedContinue()]</span></span> replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedContinue &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_17'>17</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_17'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isSelectedEndings<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedEndings()]</span></span> replaced boolean return with false for castaway_chronicles/model/mainPage/MainMenu::isSelectedEndings &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isSelectedEndings<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedEndings()]</span></span> replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::isSelectedEndings &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_19'>19</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_19'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>canContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:cantContinueNotExistsScenesSaved()]</span></span> replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::canContinue &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>canContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:canContinue()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_20'>20</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_20'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>canContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:cantContinueButExistsScenesSaved()]</span></span> replaced boolean return with true for castaway_chronicles/model/mainPage/MainMenu::canContinue &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>canContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:cantContinueButExistsScenesSaved()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>canContinue<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:canContinue()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@23ef226d_22'>22</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@23ef226d_22'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getResourceManager<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:MainMenuContent()]</span></span> replaced return value with null for castaway_chronicles/model/mainPage/MainMenu::getResourceManager &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getBackground()] (9 ms)</li><li>castaway_chronicles.controller.EndControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.EndControllerTest]/[method:step1()] (20 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:previousEntry()] (6 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getNumberEntries()] (7 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:nextEntry()] (4 ms)</li><li>castaway_chronicles.model.MainPageTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainPageTest]/[method:current()] (4 ms)</li><li>castaway_chronicles.controller.EndControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.EndControllerTest]/[method:step2()] (12 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedStart()] (3 ms)</li><li>castaway_chronicles.model.MainPageTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainPageTest]/[method:MainPageContent()] (4 ms)</li><li>castaway_chronicles.states.EndStateTest.[engine:junit-jupiter]/[class:castaway_chronicles.states.EndStateTest]/[method:MainPageContent()] (6 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedContinue()] (4 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedEndings()] (5 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:canContinue()] (8 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:cantContinueNotExistsScenesSaved()] (11 ms)</li><li>castaway_chronicles.controller.EndControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.EndControllerTest]/[method:EndControllerContent()] (6 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:cantContinueButExistsScenesSaved()] (17 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelected()] (4 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedExit()] (3 ms)</li><li>castaway_chronicles.controller.commands.HandleEffectsCommandTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.commands.HandleEffectsCommandTest]/[method:executeEndEffect()] (8 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getCurrentEntry()] (8 ms)</li><li>castaway_chronicles.controller.EndingPageControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.EndingPageControllerTest]/[method:clickEnding()] (11 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:MainMenuContent()] (7 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getEntries()] (43 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getEntry()] (6 ms)</li><li>castaway_chronicles.controller.PauseControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.PauseControllerTest]/[method:select_Menu()] (20 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>

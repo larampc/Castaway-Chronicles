@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>Interactable.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.model;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public abstract class Interactable extends Element {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public Interactable(int x, int y, int w, int h, String name) {super (x, y, w, h, name);}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean contains(Position position) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_6'/>
+6
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_6'>6</a>
+<span>
+
+1. contains : replaced boolean return with true for castaway_chronicles/model/Interactable::contains &rarr; KILLED<br/>
+
+2. contains : changed conditional boundary &rarr; KILLED<br/>
+
+3. contains : changed conditional boundary &rarr; KILLED<br/>
+
+4. contains : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+5. contains : negated conditional &rarr; KILLED<br/>
+
+6. contains : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (position.getX() &#62;= this.getPosition().getX() &#38;&#38; position.getX() &#60; this.getPosition().getX() + this.getWidth()</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_7'/>
+7
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_7'>5</a>
+<span>
+
+1. contains : changed conditional boundary &rarr; KILLED<br/>
+
+2. contains : changed conditional boundary &rarr; KILLED<br/>
+
+3. contains : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+4. contains : negated conditional &rarr; KILLED<br/>
+
+5. contains : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            &#38;&#38; position.getY() &#62;= this.getPosition().getY() &#38;&#38; position.getY() &#60; this.getPosition().getY() + this.getHeight());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean equals(Object o) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_11'/>
+11
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_11'>2</a>
+<span>
+
+1. equals : replaced boolean return with false for castaway_chronicles/model/Interactable::equals &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (this == o) return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_12'/>
+12
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_12'>2</a>
+<span>
+
+1. equals : replaced boolean return with true for castaway_chronicles/model/Interactable::equals &rarr; KILLED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (!(o instanceof Interactable)) return false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Interactable interactable = (Interactable) o;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_14'/>
+14
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_14'>2</a>
+<span>
+
+1. equals : replaced boolean return with false for castaway_chronicles/model/Interactable::equals &rarr; KILLED<br/>
+
+2. equals : replaced boolean return with true for castaway_chronicles/model/Interactable::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return interactable.getName().equals(this.getName());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_17'/>
+17
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_17'>1</a>
+<span>
+
+1. hashCode : replaced int return with 0 for castaway_chronicles/model/Interactable::hashCode &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public int hashCode() {return this.getName().hashCode();}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1c3577ec_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1c3577ec_6'>6</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_6'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_out()]</span></span> replaced boolean return with true for castaway_chronicles/model/Interactable::contains &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_border()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_out()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1c3577ec_7'>7</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_7'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_border()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_out()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>contains<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1c3577ec_11'>11</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_11'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_same()]</span></span> replaced boolean return with false for castaway_chronicles/model/Interactable::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_different()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1c3577ec_12'>12</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_12'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_different()]</span></span> replaced boolean return with true for castaway_chronicles/model/Interactable::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_different()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1c3577ec_14'>14</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_14'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_same()]</span></span> replaced boolean return with false for castaway_chronicles/model/Interactable::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_different()]</span></span> replaced boolean return with true for castaway_chronicles/model/Interactable::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1c3577ec_17'>17</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1c3577ec_17'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:hashcode_different()]</span></span> replaced int return with 0 for castaway_chronicles/model/Interactable::hashCode &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_Backpack()] (26 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_border()] (5 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_map()] (19 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getVisibleInteractables()] (8 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getInteractables()] (12 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_same()] (5 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:hashcode_same()] (5 ms)</li><li>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()] (7 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_out()] (5 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:equals_different()] (4 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:hashcode_different()] (5 ms)</li><li>castaway_chronicles.model.InteractableTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.InteractableTest]/[method:contains_inside()] (5 ms)</li><li>castaway_chronicles.model.EndingPageBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.EndingPageBuilderTest]/[method:createEndingPage()] (12 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>
