@@ -3,7 +3,12 @@ package castaway_chronicles;
 import org.junit.jupiter.api.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourceManagerTest {
@@ -28,16 +33,33 @@ public class ResourceManagerTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        resourceManager.writeToFile("Testing/resourceTest.txt","lorem ipsem\ntesting\nresource\nmanager\n");
+        try {
+            Writer fr = Files.newBufferedWriter(newFile.toPath(), UTF_8);
+            fr.write("lorem ipsem\ntesting\nresource\nmanager\n");
+            fr.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @AfterEach
     void tearDown() {
-        boolean success =  newFile.delete();
-        assertTrue(success);
-        resourceManager.deleteResourceFileContent("Testing/resourceDir");
-        success = newDir.delete();
-        assertTrue(success);
+        newFile.delete();
+        removeDirContent(newDir);
+        newDir.delete();
+    }
+    private void removeDirContent(File dir){
+        if(dir.isFile()) {
+            dir.delete();
+            return;
+        }
+        File[] allContents = dir.listFiles();
+        if (allContents != null) {
+            for (File fileToDelete : allContents) {
+                removeDirContent(fileToDelete);
+            }
+        }
+        dir.delete();
     }
 
     @Test
@@ -70,7 +92,42 @@ public class ResourceManagerTest {
     void failToReadCurrentTimeResourceFile() {
         assertThrows(Exception.class,()-> resourceManager.readCurrentTimeResourceFile("Testing/resourceTest2"));
     }
-    
+    @Test
+    void deleteResourceDirContent(){
+        File dir = new File(newDir.getPath() ,"anotherDir");
+        dir.mkdir();
+        try {
+            new File(dir.getPath(),"testFile.txt").createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        resourceManager.deleteResourceDirContent("Testing/resourceDir");
+        assertEquals(0, Objects.requireNonNull(newDir.listFiles()).length);
+    }
+    @Test
+    void deleteResourceFile(){
+        resourceManager.deleteResourceFile("Testing/resourceDir");
+        assertFalse(newDir.exists());
+
+        resourceManager.deleteResourceFile("Testing/resourceTest.txt");
+        assertFalse(newFile.exists());
+    }
+    @Test
+    void createResourceDir(){
+        resourceManager.createResourceDir("Testing/resourceDir/createdDir");
+        assertTrue(new File(newDir.getPath() ,"createdDir").exists());
+    }
+    @Test
+    void writeToFile(){
+        resourceManager.writeToFile("Testing/resourceTest.txt","testing writing");
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(Path.of("src", "main", "resources", "Testing","resourceTest.txt"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(List.of("lorem ipsem","testing","resource","manager","testing writing"), lines);
+    }
     @Test
     void failToWriteToResourceFile() throws IOException {
         File file = resourceManager.getFile("Testing/resourceTest2.png");
@@ -87,5 +144,9 @@ public class ResourceManagerTest {
     @Test
     void countFiles() {
         assertEquals(2,resourceManager.countFiles("Testing/testDir"));
+    }
+    @Test
+    void getFile() {
+        assertEquals(newFile,resourceManager.getFile("Testing/resourceTest.txt"));
     }
 }

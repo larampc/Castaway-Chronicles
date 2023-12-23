@@ -44,19 +44,31 @@ public class ResourceManager {
             throw new RuntimeException("Couldn't read from file: " + path);
         }
     }
-    public void deleteResourceFileContent(String path) {
+    public void deleteResourceDirContent(String path) {
         File file = new File(Path.of("src", "main", "resources",path).toString());
         File[] allContents = file.listFiles();
         if (allContents != null) {
             for (File fileToDelete : allContents) {
-                boolean deleted = fileToDelete.delete();
-                assert(deleted);
+                deleteDirContent(fileToDelete);
             }
         }
     }
+    private void deleteDirContent(File dir){
+        if(dir.isFile()) {
+            dir.delete();
+            return;
+        }
+        File[] allContents = dir.listFiles();
+        if (allContents != null) {
+            for (File fileToDelete : allContents) {
+                deleteDirContent(fileToDelete);
+            }
+        }
+        dir.delete();
+    }
     public void deleteResourceFile(String path) {
         File file = new File(Path.of("src", "main", "resources",path).toString());
-        deleteResourceFileContent(path);
+        if(file.isDirectory()) deleteResourceDirContent(path);
         file.delete();
     }
     public void writeToFile(String path, String line){

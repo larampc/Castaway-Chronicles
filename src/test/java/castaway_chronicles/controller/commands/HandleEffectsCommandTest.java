@@ -189,7 +189,7 @@ public class HandleEffectsCommandTest {
         handleEffectsCommand.execute();
 
         Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
-        Mockito.verify(resourceManagerMock).deleteResourceFileContent("Scenes_saved");
+        Mockito.verify(resourceManagerMock).deleteResourceDirContent("Scenes_saved");
         Mockito.verify(resourceManagerMock).writeToFile("achieved_endings.txt","drink\n");
     }
 }

@@ -60,7 +60,7 @@ public class HandleEffectsCommand implements Command{
         }
     }
     private void executeEnd(String[] s) {
-        getResourceManager().deleteResourceFileContent("Scenes_saved");
+        getResourceManager().deleteResourceDirContent("Scenes_saved");
         getResourceManager().writeToFile("achieved_endings.txt",s[1]+"\n");
         application.setState(new EndState(new Ending(s[1])));
     }

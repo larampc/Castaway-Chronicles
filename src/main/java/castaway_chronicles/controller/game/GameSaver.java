@@ -18,7 +18,7 @@ public class GameSaver {
         getResourceManager().createResourceDir("Scenes_saved");
     }
     public void emptySave() {
-        getResourceManager().deleteResourceFileContent("Scenes_saved");
+        getResourceManager().deleteResourceDirContent("Scenes_saved");
     }
     public void saveGame() {
         emptySave();

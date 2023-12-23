@@ -19,7 +19,6 @@ public class SceneLoader {
     public SceneLoader(String dir, String filename, Game.SCENE type) throws IOException {
         ResourceManager resourceManager = ResourceManager.getInstance();
         lines = resourceManager.readCurrentTimeResourceFile(dir + "/" + filename + ".txt");
-        //SETTER PARA LINES PARA TESTE
         this.type = type;
         getInteractables();
     }

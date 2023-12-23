@@ -39,7 +39,7 @@ public class GameSaverTest {
     @Test
     void emptySave(){
         gameSaver.emptySave();
-        Mockito.verify(resourceManagerMock).deleteResourceFileContent("Scenes_saved");
+        Mockito.verify(resourceManagerMock).deleteResourceDirContent("Scenes_saved");
     }
 
     @Test
@@ -277,7 +277,7 @@ public class GameSaverTest {
 
         gameSaver.saveGame();
 
-        Mockito.verify(resourceManagerMock).deleteResourceFileContent("Scenes_saved");
+        Mockito.verify(resourceManagerMock).deleteResourceDirContent("Scenes_saved");
         Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Backpack.txt","B BgName 5 10 100 200\n");
         Mockito.verify(resourceManagerMock).writeToFile("Scenes_saved/Locations.txt","start");
         String toWrite = "I "+ visibleInteractableMock.getClass().getSimpleName() + " VisibleInteractable 5 10 10 20 V\n";
