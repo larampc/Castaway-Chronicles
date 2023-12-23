@@ -32,15 +32,18 @@ public class DialogControllerTest {
     private GameController gameController;
     private Game game;
     private CommandInvoker commandInvokerMock;
+    private ControllerState controllerStateMock;
 
     @BeforeEach
     void setUp() {
         game = Mockito.mock(Game.class);
+        controllerStateMock = Mockito.mock(ControllerState.class);
         gameController = Mockito.mock(GameController.class);
         Mockito.when(gameController.getModel()).thenReturn(game);
         dialogController = new DialogController(gameController);
         commandInvokerMock = Mockito.mock(CommandInvoker.class);
         when(gameController.getCommandInvoker()).thenReturn(commandInvokerMock);
+        when(gameController.getLocationController()).thenReturn(controllerStateMock);
     }
 
     @Test
@@ -77,7 +80,7 @@ public class DialogControllerTest {
 
         verify(commandInvokerMock).setCommand(any(TalkCommand.class));
         verify(commandInvokerMock).execute();
-        verify(gameController, Mockito.never()).setControllerState(gameController.getLocationController());
+        verify(gameController, Mockito.never()).setControllerState(controllerStateMock);
     }
 
     @Test
@@ -89,7 +92,7 @@ public class DialogControllerTest {
         when(game.getCurrentLocation()).thenReturn(currentLocationMock);
         when(game.getTextBox()).thenReturn(textBoxMock);
         when(textBoxMock.isActiveChoice()).thenReturn(false);
-        when(textBoxMock.isActiveTextBox()).thenReturn(false);
+        when(textBoxMock.isActiveTextBox()).thenReturn(false, true);
         when(textBoxMock.getInteractable()).thenReturn(npcMock);
         when(npcMock.getEffects()).thenReturn(new ArrayList<>());
 
@@ -98,7 +101,16 @@ public class DialogControllerTest {
         verify(commandInvokerMock).setCommand(any(TalkCommand.class));
         verify(commandInvokerMock).setCommand(any(HandleEffectsCommand.class));
         verify(commandInvokerMock, times(2)).execute();
-        verify(gameController).setControllerState(gameController.getLocationController());
+        verify(gameController, never()).setControllerState(controllerStateMock);
+
+        when(textBoxMock.isActiveTextBox()).thenReturn(false);
+
+        dialogController.select(mock(Application.class));
+
+        verify(commandInvokerMock, times(2)).setCommand(any(TalkCommand.class));
+        verify(commandInvokerMock, times(2)).setCommand(any(HandleEffectsCommand.class));
+        verify(commandInvokerMock, times(4)).execute();
+        verify(gameController).setControllerState(controllerStateMock);
     }
 
     @Test
