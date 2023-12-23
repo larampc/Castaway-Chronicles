@@ -1,6 +1,7 @@
 package castaway_chronicles.controller.commands;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.ResourceManager;
 import castaway_chronicles.controller.Commands.HandleEffectsCommand;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.BackpackItem;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class HandleEffectsCommandTest {
     private Game gameMock;
@@ -31,6 +34,7 @@ public class HandleEffectsCommandTest {
     private File endings;
     private final List<String> lines = new ArrayList<>();
     private File scenes_savedStorage;
+    private ResourceManager resourceManagerMock;
 
     @BeforeAll
     void init() throws IOException {
@@ -95,8 +99,14 @@ public class HandleEffectsCommandTest {
 
     @BeforeEach
     void setUp() {
+        resourceManagerMock = Mockito.mock(ResourceManager.class);
         gameMock = Mockito.mock(Game.class);
         applicationMock = Mockito.mock(Application.class);
+    }
+
+    @Test
+    void ResourceManager() {
+        assertEquals(ResourceManager.getInstance(), new HandleEffectsCommand(gameMock, List.of("GO TestLocation"), applicationMock).getResourceManager());
     }
 
     @Test
@@ -170,9 +180,16 @@ public class HandleEffectsCommandTest {
     }
     @Test
     void executeEndEffect() {
-        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"), applicationMock);
+        HandleEffectsCommand handleEffectsCommand = new HandleEffectsCommand(gameMock, List.of("END drink"), applicationMock){
+            @Override
+            public ResourceManager getResourceManager(){
+                return resourceManagerMock;
+            }
+        };
         handleEffectsCommand.execute();
 
         Mockito.verify(applicationMock).setState(Mockito.any(EndState.class));
+        Mockito.verify(resourceManagerMock).deleteResourceFileContent("Scenes_saved");
+        Mockito.verify(resourceManagerMock).writeToFile("achieved_endings.txt","drink\n");
     }
 }

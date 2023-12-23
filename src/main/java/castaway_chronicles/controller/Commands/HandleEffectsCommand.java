@@ -60,9 +60,8 @@ public class HandleEffectsCommand implements Command{
         }
     }
     private void executeEnd(String[] s) {
-        ResourceManager resourceManager = ResourceManager.getInstance();
-        resourceManager.deleteResourceFileContent("Scenes_saved");
-        resourceManager.writeToFile("achieved_endings.txt",s[1]+"\n");
+        getResourceManager().deleteResourceFileContent("Scenes_saved");
+        getResourceManager().writeToFile("achieved_endings.txt",s[1]+"\n");
         application.setState(new EndState(new Ending(s[1])));
     }
     private void executeNPCEffects(String[] s) {
@@ -88,5 +87,9 @@ public class HandleEffectsCommand implements Command{
         else {
             ((BackpackItem)game.getBackpack().getInteractable(s[1]+"_backpack")).setNameBackpack(s[2]+"_backpack");
         }
+    }
+
+    public ResourceManager getResourceManager() {
+        return ResourceManager.getInstance();
     }
 }

@@ -34,7 +34,7 @@ public class EndingPageControllerTest {
     private boolean exists;
     private File endings;
     private final List<String> lines = new ArrayList<>();
-    ResourceManager resourceManagerMock;
+    private ResourceManager resourceManagerMock;
 
     @BeforeAll
     void init() throws IOException {
