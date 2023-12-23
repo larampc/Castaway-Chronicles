@@ -5,6 +5,7 @@ import castaway_chronicles.controller.Commands.CommandInvoker;
 import castaway_chronicles.controller.Commands.HandleEffectsCommand;
 import castaway_chronicles.controller.game.locationControllers.HandController;
 import castaway_chronicles.controller.game.GameController;
+import castaway_chronicles.controller.game.locationControllers.NarratorController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 import castaway_chronicles.model.game.gameElements.BackpackItem;
@@ -41,36 +42,25 @@ public class HandControllerTest {
         handController = new HandController(gameControllerMock);
         applicationMock = Mockito.mock(Application.class);
     }
-
     @Test
     void testClickWithEmptyToGive() throws IOException, InterruptedException, URISyntaxException {
         BackpackItem backpackItem = Mockito.mock(BackpackItem.class);
-
         TextBox textBox = Mockito.mock(TextBox.class);
-        Backpack backpackMock = Mockito.mock(Backpack.class);
+        NarratorController narratorControllerMock = Mockito.mock(NarratorController.class);
+
         Mockito.when(game.getTextBox()).thenReturn(textBox);
         Mockito.when(textBox.getInteractable()).thenReturn(backpackItem);
-
-        Mockito.when(game.getBackpack()).thenReturn(backpackMock);
-
-        Location locationMock = Mockito.mock(Location.class);
-
-        HashMap<String,Location> locations = new HashMap<>();
-        locations.put("StartLocation",locationMock);
-
-        Mockito.when(game.getLocations()).thenReturn(locations);
-        Mockito.when(game.getCurrentLocation()).thenReturn(locationMock);
-
         Position positionMock = Mockito.mock(Position.class);
         Mockito.when(positionMock.getX()).thenReturn(0);
         Mockito.when(positionMock.getY()).thenReturn(0);
+        Mockito.when(gameControllerMock.getNarratorController()).thenReturn(narratorControllerMock);
 
         handController.click(positionMock, applicationMock);
 
         Mockito.verify(backpackItem).setInHand(true);
         Mockito.verify(textBox).activateTextBox();
         Mockito.verify(game).setCurrentScene(Game.SCENE.LOCATION);
-        assertEquals(gameControllerMock.getNarratorController(), gameControllerMock.getCurrent());
+        Mockito.verify(gameControllerMock).setControllerState(narratorControllerMock);
     }
 
     @Test
