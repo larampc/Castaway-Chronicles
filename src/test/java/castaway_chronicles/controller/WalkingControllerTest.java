@@ -135,16 +135,19 @@ public class WalkingControllerTest {
         assertFalse(walkingController.isFacingRight());
 
         Mockito.when(positionWalkToMock.getX()).thenReturn(0);
-        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
-        Mockito.when(positionCharacterMock.getX()).thenReturn(-100);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-5);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
         Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
 
         assertTrue(walkingController.setToWalk(positionWalkToMock));
         assertEquals(1, walkingController.getToWalk());
-        assertTrue(walkingController.isFacingRight());
+        assertFalse(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(-30);
 
         assertFalse(walkingController.setToWalk(positionWalkToMock));
-
         assertEquals(0, walkingController.getToWalk());
         assertTrue(walkingController.isFacingRight());
 
@@ -180,13 +183,13 @@ public class WalkingControllerTest {
         Mockito.verify(commandInvokerMock, Mockito.never()).execute();
 
 
-        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
-        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
-        Mockito.when(positionCharacterMock.getX()).thenReturn(-100);
+        Mockito.when(positionWalkToMock.getX()).thenReturn(83);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-511);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
         Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
         assertTrue(walkingController.setToWalk(positionWalkToMock));
         assertEquals(1, walkingController.getToWalk());
-        assertTrue(walkingController.isFacingRight());
+        assertFalse(walkingController.isFacingRight());
 
 
         walkingController.none(150);
@@ -200,6 +203,15 @@ public class WalkingControllerTest {
         Mockito.verify(commandInvokerMock).setCommand(Mockito.any(MoveCommand.class));
         Mockito.verify(commandInvokerMock).execute();
         assertEquals(0, walkingController.getToWalk());
+
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(100);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-511);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(80);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+        assertFalse(walkingController.setToWalk(positionWalkToMock));
+        assertEquals(0, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
 
         walkingController.none(0);
         Mockito.verify(mainCharMock).setName("standing_right");
