@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameController extends Controller<Game> {
-    private final ControllerState locationController;
+    private final ControllerState standingController;
     private final ControllerState backpackController;
     private final ControllerState mapController;
     private final ControllerState dialogController;
@@ -36,7 +36,7 @@ public class GameController extends Controller<Game> {
     public GameController(Game model) {
         super(model);
         gameSaver = new GameSaver(model);
-        locationController = new StandingController(this);
+        standingController = new StandingController(this);
         backpackController = new BackpackController(this);
         mapController = new MapController(this);
         dialogController = new DialogController(this);
@@ -44,7 +44,7 @@ public class GameController extends Controller<Game> {
         pauseController = new PauseController(this);
         walkingController = new WalkingController(this);
         narratorController = new NarratorController(this);
-        current = locationController;
+        current = standingController;
         commandInvoker = new CommandInvoker();
     }
 
@@ -69,8 +69,8 @@ public class GameController extends Controller<Game> {
         return pauseController;
     }
 
-    public ControllerState getLocationController() {
-        return locationController;
+    public ControllerState getStandingController() {
+        return standingController;
     }
     public ControllerState getBackpackController() {
         return backpackController;

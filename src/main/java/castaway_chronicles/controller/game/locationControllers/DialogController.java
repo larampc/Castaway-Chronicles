@@ -68,7 +68,7 @@ public class DialogController implements ControllerState {
             HandleEffectsCommand effects = new HandleEffectsCommand(gameController.getModel(), gameController.getModel().getTextBox().getInteractable().getEffects(), application);
             gameController.getCommandInvoker().setCommand(effects);
             gameController.getCommandInvoker().execute();
-            if (!gameController.getModel().getTextBox().isActiveTextBox()) gameController.setControllerState(gameController.getLocationController());
+            if (!gameController.getModel().getTextBox().isActiveTextBox()) gameController.setControllerState(gameController.getStandingController());
         }
     }
 }

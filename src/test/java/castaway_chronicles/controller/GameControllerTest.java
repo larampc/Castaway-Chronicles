@@ -38,7 +38,7 @@ public class GameControllerTest {
     void GameControllerContent() {
         assertEquals(BackpackController.class, gameController.getBackpackController().getClass());
         assertEquals(DialogController.class, gameController.getDialogController().getClass());
-        assertEquals(StandingController.class, gameController.getLocationController().getClass());
+        assertEquals(StandingController.class, gameController.getStandingController().getClass());
         assertEquals(MapController.class, gameController.getMapController().getClass());
         assertEquals(PauseController.class, gameController.getPauseController().getClass());
         assertEquals(HandController.class, gameController.getHandController().getClass());

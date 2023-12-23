@@ -67,7 +67,7 @@ public class StandingController implements ContinuousControllerState {
     public void key(int key, Application application) {
         if (key == KeyEvent.VK_ESCAPE) {
             gameController.getModel().setCurrentScene(Game.SCENE.PAUSE);
-            gameController.setControllerState(gameController.getLocationController());
+            gameController.setControllerState(gameController.getStandingController());
             gameController.setControllerState(gameController.getPauseController());
         }
     }

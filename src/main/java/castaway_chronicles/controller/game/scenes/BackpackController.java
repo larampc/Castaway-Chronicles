@@ -106,7 +106,7 @@ public class BackpackController implements ControllerState {
                 invoker.setCommand(effects);
                 invoker.execute();
                 gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
-                gameController.setControllerState(gameController.getLocationController());
+                gameController.setControllerState(gameController.getStandingController());
             }
             if (s[0].equalsIgnoreCase("give")) {
                 gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
@@ -119,7 +119,7 @@ public class BackpackController implements ControllerState {
     public void escape() {
         if (!(gameController.getModel().getTextBox().isActiveChoice()|| gameController.getModel().getTextBox().isActiveTextBox())) {
             gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
-            gameController.setControllerState(gameController.getLocationController());
+            gameController.setControllerState(gameController.getStandingController());
         }
         else {
             gameController.getModel().getTextBox().closeTextBox();

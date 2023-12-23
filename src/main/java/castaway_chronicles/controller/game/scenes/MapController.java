@@ -31,7 +31,7 @@ public class MapController implements ControllerState {
                 invoker.setCommand(changeLocation);
                 invoker.execute();
                 gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
-                gameController.setControllerState(gameController.getLocationController());
+                gameController.setControllerState(gameController.getStandingController());
                 break;
             }
             if (e.contains(position) && e instanceof Item) {
@@ -46,7 +46,7 @@ public class MapController implements ControllerState {
     public void key(int key, Application application) throws IOException, URISyntaxException, InterruptedException {
         if (key == KeyEvent.VK_ESCAPE) {
             gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
-            gameController.setControllerState(gameController.getLocationController());
+            gameController.setControllerState(gameController.getStandingController());
         }
     }
 

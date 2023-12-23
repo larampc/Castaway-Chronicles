@@ -55,7 +55,7 @@ public class WalkingController implements ContinuousControllerState {
     @Override
     public void click(Position position, Application application) throws IOException, InterruptedException {
         setToWalk(position);
-        ((StandingController)gameController.getLocationController()).setLastCommandNull();
+        ((StandingController)gameController.getStandingController()).setLastCommandNull();
     }
 
     @Override

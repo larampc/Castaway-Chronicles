@@ -38,6 +38,6 @@ public class NarratorControllerTest {
 
         narratorController.key(KeyEvent.VK_ENTER,Mockito.mock(Application.class));
         Mockito.verify(backpackAnswer).closeTextBox();
-        assertEquals(gameController.getCurrent(),gameController.getLocationController());
+        assertEquals(gameController.getCurrent(),gameController.getStandingController());
     }
 }

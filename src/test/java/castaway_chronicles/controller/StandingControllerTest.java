@@ -50,7 +50,7 @@ public class StandingControllerTest {
         walkingControllerMock = Mockito.mock(WalkingController.class);
         Mockito.when(gameControllerMock.getModel()).thenReturn(gameMock);
         Mockito.when(gameControllerMock.getCommandInvoker()).thenReturn(commandInvokerMock);
-        Mockito.when(gameControllerMock.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameControllerMock.getStandingController()).thenReturn(controllerStateMock);
         Mockito.when(gameControllerMock.getPauseController()).thenReturn(controllerStateMock);
         Mockito.when(gameControllerMock.getWalkingController()).thenReturn(walkingControllerMock);
         Mockito.when(gameControllerMock.getDialogController()).thenReturn(controllerStateMock);

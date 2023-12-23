@@ -38,7 +38,7 @@ public class MapControllerTest {
     @Test
     public void key() throws IOException, URISyntaxException, InterruptedException {
         ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
-        Mockito.when(gameControlleMock.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameControlleMock.getStandingController()).thenReturn(controllerStateMock);
 
         mapController.key(KeyEvent.VK_DOWN, applicationMock);
         Mockito.verify(gameMock, Mockito.never()).setCurrentScene(Game.SCENE.LOCATION);
@@ -52,7 +52,7 @@ public class MapControllerTest {
     @Test
     public void click() throws IOException, URISyntaxException, InterruptedException {
         ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
-        Mockito.when(gameControlleMock.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameControlleMock.getStandingController()).thenReturn(controllerStateMock);
         Position positionMock = Mockito.mock(Position.class);
         CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
         Mockito.when(gameControlleMock.getCommandInvoker()).thenReturn(commandInvokerMock);

@@ -39,7 +39,7 @@ public class HandController implements ControllerState {
                     gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
                     if (gameController.getModel().getTextBox().isActiveTextBox()) {
                         gameController.setControllerState(gameController.getDialogController());
-                    } else gameController.setControllerState(gameController.getLocationController());
+                    } else gameController.setControllerState(gameController.getStandingController());
                     return;
                 }
             }

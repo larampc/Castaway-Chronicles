@@ -41,7 +41,7 @@ public class DialogControllerTest {
         dialogController = new DialogController(gameController);
         commandInvokerMock = Mockito.mock(CommandInvoker.class);
         Mockito.when(gameController.getCommandInvoker()).thenReturn(commandInvokerMock);
-        Mockito.when(gameController.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameController.getStandingController()).thenReturn(controllerStateMock);
     }
 
     @Test

@@ -60,7 +60,7 @@ public class PauseController implements ControllerState {
         if (pauseMenu.isSelectedExit()) application.setState(null);
         if (pauseMenu.isSelectedResume()) {
             gameController.getModel().setCurrentScene(Game.SCENE.LOCATION);
-            gameController.setControllerState(gameController.getLocationController());
+            gameController.setControllerState(gameController.getStandingController());
         }
         if (pauseMenu.isSelectedSave()) {
             gameController.getGameSaver().saveGame();

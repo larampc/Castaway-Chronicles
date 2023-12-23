@@ -113,7 +113,7 @@ public class BackpackControllerTest {
     @Test
     void escape() throws IOException, URISyntaxException, InterruptedException {
         ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
-        Mockito.when(gameControllerMock.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameControllerMock.getStandingController()).thenReturn(controllerStateMock);
 
         Mockito.when(testBoxMock.isActiveChoice()).thenReturn(true);
         Mockito.when(testBoxMock.isActiveTextBox()).thenReturn(true);
@@ -150,7 +150,7 @@ public class BackpackControllerTest {
         HandController handControllerMock = Mockito.mock(HandController.class);
         BackpackItem backpackItemMock = Mockito.mock(BackpackItem.class);
         ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
-        Mockito.when(gameControllerMock.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameControllerMock.getStandingController()).thenReturn(controllerStateMock);
         Mockito.when(testBoxMock.getInteractable()).thenReturn(backpackItemMock);
         Mockito.when(gameControllerMock.getHandController()).thenReturn(handControllerMock);
         Mockito.when(gameControllerMock.getCommandInvoker()).thenReturn(commandInvokerMock);

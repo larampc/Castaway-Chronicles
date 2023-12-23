@@ -74,7 +74,7 @@ public class PauseControllerTest {
         Mockito.when(pauseMenuMock.isSelectedResume()).thenReturn(true);
         Mockito.when(pauseMenuMock.isSelectedSave()).thenReturn(false);
         Mockito.when(pauseMenuMock.isSelectedExit()).thenReturn(false);
-        Mockito.when(gameControllerMock.getLocationController()).thenReturn(controllerStateMock);
+        Mockito.when(gameControllerMock.getStandingController()).thenReturn(controllerStateMock);
 
         pauseController.key(KeyEvent.VK_ENTER, applicationMock);
         Mockito.verify(gameMock).setCurrentScene(Game.SCENE.LOCATION);
