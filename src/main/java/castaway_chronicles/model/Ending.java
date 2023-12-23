@@ -8,15 +8,14 @@ public class Ending {
     private int max = 0;
     public Ending(String name) {
         this.name = name;
-        setMax();
-    }
-    public void setMax() {
-        ResourceManager resourceManager = ResourceManager.getInstance();
-        max = resourceManager.countFiles("Endings/"+name);
+        max = getResourceManager().countFiles("Endings/"+name);
     }
     public int getMax() {return max;}
     public int getCurrent() {return current;}
     public void setNext() {++this.current;}
     public String getCurrentFrame() {return String.format(name + "_" + "%04d", current);}
     public String getName() {return name;}
+    public ResourceManager getResourceManager(){
+        return ResourceManager.getInstance();
+    }
 }
