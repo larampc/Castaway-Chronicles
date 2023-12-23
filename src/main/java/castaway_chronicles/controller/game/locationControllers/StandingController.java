@@ -30,6 +30,7 @@ public class StandingController implements ContinuousControllerState {
     public void click(Position position, Application application) throws IOException, InterruptedException, URISyntaxException {
         Location location = gameController.getModel().getCurrentLocation();
         CommandInvoker invoker = gameController.getCommandInvoker();
+        invoker.setCommand(null);
         for (Interactable e: location.getVisibleInteractables()) {
             if (e.contains(position)) {
                 if (e instanceof Item) {
