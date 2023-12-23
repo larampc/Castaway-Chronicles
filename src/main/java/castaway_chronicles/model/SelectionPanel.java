@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SelectionPanel {
     private final List<String> entries;
-    private int currentEntry;
+    private int currentEntry = 0;
     public SelectionPanel(List<String> entries) {this.entries = entries;}
     public void nextEntry() {
         currentEntry++;
