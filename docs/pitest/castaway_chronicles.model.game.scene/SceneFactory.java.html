@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>SceneFactory.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.model.game.scene;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.Scene;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.game.Game;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.game.gameElements.Background;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.Interactable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.game.gameElements.MainChar;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.HashMap;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>public abstract class SceneFactory {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>   public static Scene getScene(Game.SCENE type, Background background, HashMap&#60;String, Interactable&#62; interactables, HashMap&#60;String, Interactable&#62; visibleInteractables, MainChar mainChar){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>       switch (type) {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>           case MAP:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_15'/>
+15
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_15'>1</a>
+<span>
+
+1. getScene : replaced return value with null for castaway_chronicles/model/game/scene/SceneFactory::getScene &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>               return new Map(background,interactables, visibleInteractables);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>           case LOCATION:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_17'/>
+17
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_17'>1</a>
+<span>
+
+1. getScene : replaced return value with null for castaway_chronicles/model/game/scene/SceneFactory::getScene &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>               return new Location(background,interactables, visibleInteractables, mainChar);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>           case BACKPACK:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_19'/>
+19
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_19'>1</a>
+<span>
+
+1. getScene : replaced return value with null for castaway_chronicles/model/game/scene/SceneFactory::getScene &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>               return new Backpack(background, interactables, visibleInteractables);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>           default:</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>               return null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>       }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>   }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@7b83476f_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7b83476f_15'>15</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_15'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getScene<br/><b>Killed by : </b>castaway_chronicles.model.SceneFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneFactoryTest]/[method:Map()]</span></span> replaced return value with null for castaway_chronicles/model/game/scene/SceneFactory::getScene &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7b83476f_17'>17</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_17'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getScene<br/><b>Killed by : </b>castaway_chronicles.model.SceneFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneFactoryTest]/[method:Location()]</span></span> replaced return value with null for castaway_chronicles/model/game/scene/SceneFactory::getScene &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@7b83476f_19'>19</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@7b83476f_19'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getScene<br/><b>Killed by : </b>castaway_chronicles.model.SceneFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneFactoryTest]/[method:Backpack()]</span></span> replaced return value with null for castaway_chronicles/model/game/scene/SceneFactory::getScene &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_Backpack()] (26 ms)</li><li>castaway_chronicles.model.SceneTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneTest]/[method:SceneSetVisible()] (4 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:BackPack()] (4 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_map()] (19 ms)</li><li>castaway_chronicles.model.SceneFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneFactoryTest]/[method:Location()] (5 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getVisibleInteractables()] (8 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getInteractables()] (12 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_Locations()] (21 ms)</li><li>castaway_chronicles.model.SceneTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneTest]/[method:SceneContent()] (6 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_pauseMenu()] (18 ms)</li><li>castaway_chronicles.controller.MainMenuControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.MainMenuControllerTest]/[method:select()] (53 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getBackground()] (11 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:Map()] (7 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:Location()] (7 ms)</li><li>castaway_chronicles.model.SceneFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneFactoryTest]/[method:Backpack()] (5 ms)</li><li>castaway_chronicles.model.SceneFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneFactoryTest]/[method:Map()] (4 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:hasMainChar()] (7 ms)</li><li>castaway_chronicles.model.SceneTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneTest]/[method:SceneSetInvisible()] (5 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:hasNotMainChar()] (9 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>

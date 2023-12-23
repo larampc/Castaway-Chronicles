@@ -1,19 +1,26 @@
 package castaway_chronicles.controller.game;
 
 import castaway_chronicles.Application;
+import castaway_chronicles.controller.ContinuousControllerState;
 import castaway_chronicles.controller.Controller;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.GenericCommandInvoker;
-import castaway_chronicles.controller.game.ControllerStates.*;
-import castaway_chronicles.gui.Action;
-import castaway_chronicles.gui.ClickAction;
+import castaway_chronicles.controller.ControllerState;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.locationControllers.*;
+import castaway_chronicles.controller.game.scenes.BackpackController;
+import castaway_chronicles.controller.game.locationControllers.StandingController;
+import castaway_chronicles.controller.game.scenes.MapController;
+import castaway_chronicles.controller.game.scenes.PauseController;
+import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
 
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class GameController extends Controller<Game> {
-    private final ControllerState locationController;
+    private final ControllerState standingController;
     private final ControllerState backpackController;
     private final ControllerState mapController;
     private final ControllerState dialogController;
@@ -24,12 +31,11 @@ public class GameController extends Controller<Game> {
     private ControllerState previous;
     private final ControllerState narratorController;
     private final GameSaver gameSaver;
-    private GenericCommandInvoker commandInvoker;
-
+    private final CommandInvoker commandInvoker;
     public GameController(Game model) {
         super(model);
         gameSaver = new GameSaver(model);
-        locationController = new LocationController(this);
+        standingController = new StandingController(this);
         backpackController = new BackpackController(this);
         mapController = new MapController(this);
         dialogController = new DialogController(this);
@@ -37,62 +43,35 @@ public class GameController extends Controller<Game> {
         pauseController = new PauseController(this);
         walkingController = new WalkingController(this);
         narratorController = new NarratorController(this);
-        current = locationController;
+        current = standingController;
         commandInvoker = new CommandInvoker();
     }
-
     @Override
-    public void step(Application application, Action action, long time) throws IOException, InterruptedException, URISyntaxException {
-        current.none(time);
-        if (action.getType().equalsIgnoreCase("UP")) current.keyUp();
-        if (action.getType().equalsIgnoreCase("DOWN")) current.keyDown();
-        if (action.getType().equalsIgnoreCase("LEFT")) current.keyLeft();
-        if (action.getType().equalsIgnoreCase("RIGHT")) current.keyRight();
-        if (action.getType().equalsIgnoreCase("SELECT")) current.select(application);
-        if (action.getType().equalsIgnoreCase("ESCAPE")) current.escape();
-        if (action.getType().equalsIgnoreCase("CLICK")) current.click(((ClickAction)action).getPosition(), application);
+    public void step(Application application, InputEvent action, long time) throws IOException, InterruptedException, URISyntaxException {
+        if (current instanceof ContinuousControllerState) {
+            ((ContinuousControllerState)current).none(time);
+        }
+        if (action instanceof KeyEvent) {
+            current.key(((KeyEvent)action).getKeyCode(), application);
+        }
+        if (action instanceof MouseEvent) {
+            current.click(new Position(((MouseEvent)action).getX()/4, ((MouseEvent)action).getY()/4), application);
+        }
     }
     public void setControllerState(ControllerState controllerState) {
         this.previous = this.current;
         this.current = controllerState;
     }
-
-    public ControllerState getPauseController() {
-        return pauseController;
-    }
-
-    public ControllerState getLocationController() {
-        return locationController;
-    }
-    public ControllerState getBackpackController() {
-        return backpackController;
-    }
-
-    public ControllerState getMapController() {
-        return mapController;
-    }
-
-    public ControllerState getDialogController() {
-        return dialogController;
-    }
-
-    public ControllerState getHandController() {
-        return handController;
-    }
-
-    public ControllerState getWalkingController() {
-        return walkingController;
-    }
+    public ControllerState getPauseController() {return pauseController;}
+    public ControllerState getStandingController() {return standingController;}
+    public ControllerState getBackpackController() {return backpackController;}
+    public ControllerState getMapController() {return mapController;}
+    public ControllerState getDialogController() {return dialogController;}
+    public ControllerState getHandController() {return handController;}
+    public ControllerState getWalkingController() {return walkingController;}
     public ControllerState getNarratorController() {return narratorController;}
-    public ControllerState getCurrent() {
-        return current;
-    }
-    public ControllerState getPrevious() {
-        return previous;
-    }
-
-    public GenericCommandInvoker getCommandInvoker() {return commandInvoker;}
-    public void setCommandInvoker(GenericCommandInvoker commandInvoker) {this.commandInvoker = commandInvoker;}
-
+    public ControllerState getCurrent() {return current;}
+    public ControllerState getPrevious() {return previous;}
+    public CommandInvoker getCommandInvoker() {return commandInvoker;}
     public GameSaver getGameSaver() {return gameSaver;}
 }

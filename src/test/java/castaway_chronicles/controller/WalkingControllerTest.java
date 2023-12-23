@@ -1,14 +1,15 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.Commands.CommandInvoker;
-import castaway_chronicles.controller.game.Commands.MoveCommand;
-import castaway_chronicles.controller.game.ControllerStates.WalkingController;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.Commands.MoveCommand;
+import castaway_chronicles.controller.game.locationControllers.StandingController;
+import castaway_chronicles.controller.game.locationControllers.WalkingController;
 import castaway_chronicles.controller.game.GameController;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.MainChar;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.game.gameElements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,135 +22,230 @@ import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WalkingControllerTest {
-    private Game game;
     private WalkingController walkingController;
-    private GameController gameController;
-    private Application application;
-    private CommandInvoker commandInvoker;
+    private GameController gameControllerMock;
+    private Application applicationMock;
+    private CommandInvoker commandInvokerMock;
+    private Background backgroundMock;
+    private MainChar mainCharMock;
+    private Position positionWalkToMock;
+    private Position positionBackgroundMock;
+    private Position positionCharacterMock;
 
     @BeforeEach
     void init() {
-        game = Mockito.mock(Game.class);
-        gameController = new GameController(game);
-        commandInvoker = Mockito.mock(CommandInvoker.class);
-        gameController.setCommandInvoker(commandInvoker);
-
-        application = Mockito.mock(Application.class);
-        gameController.setControllerState(gameController.getWalkingController());
-        walkingController = (WalkingController) gameController.getWalkingController();
-
-        Location startLocation = Mockito.mock(Location.class);
-        Mockito.when(game.getCurrentLocation()).thenReturn(startLocation);
-        Background background = Mockito.mock(Background.class);
-        Mockito.when(startLocation.getBackground()).thenReturn(background);
-        Mockito.when(background.getPosition()).thenReturn(new Position(-100,0));
-        Mockito.when(background.getWidth()).thenReturn(700);
-        Mockito.when(background.getHeight()).thenReturn(150);
-        MainChar mainChar = Mockito.mock(MainChar.class);
-        Mockito.when(startLocation.getMainChar()).thenReturn(mainChar);
-        Mockito.when(mainChar.getPosition()).thenReturn(new Position(100,100));
-        Mockito.when(mainChar.getWidth()).thenReturn(10);
-        Mockito.when(mainChar.getHeight()).thenReturn(10);
-        Mockito.when(mainChar.getName()).thenReturn("standing_right");
+        Game gameMock = Mockito.mock(Game.class);
+        gameControllerMock = Mockito.mock(GameController.class);
+        commandInvokerMock = Mockito.mock(CommandInvoker.class);
+        applicationMock = Mockito.mock(Application.class);
+        Location locationMock = Mockito.mock(Location.class);
+        backgroundMock = Mockito.mock(Background.class);
+        walkingController = new WalkingController(gameControllerMock);
+        mainCharMock = Mockito.mock(MainChar.class);
+        positionWalkToMock = Mockito.mock(Position.class);
+        positionBackgroundMock = Mockito.mock(Position.class);
+        positionCharacterMock = Mockito.mock(Position.class);
+        Mockito.when(gameControllerMock.getModel()).thenReturn(gameMock);
+        Mockito.when(gameControllerMock.getCommandInvoker()).thenReturn(commandInvokerMock);
+        Mockito.when(gameMock.getCurrentLocation()).thenReturn(locationMock);
+        Mockito.when(locationMock.getBackground()).thenReturn(backgroundMock);
+        Mockito.when(backgroundMock.getPosition()).thenReturn(positionBackgroundMock);
+        Mockito.when(backgroundMock.getWidth()).thenReturn(700);
+        Mockito.when(backgroundMock.getHeight()).thenReturn(150);
+        Mockito.when(locationMock.getMainChar()).thenReturn(mainCharMock);
+        Mockito.when(mainCharMock.getPosition()).thenReturn(positionCharacterMock);
+        Mockito.when(mainCharMock.getWidth()).thenReturn(10);
+        Mockito.when(mainCharMock.getHeight()).thenReturn(10);
+        Mockito.when(mainCharMock.getName()).thenReturn("standing_right");
 
     }
 
     @Test
-    void setToWalkLegalRight() {
+    void WalkingControllerContent() {
         assertEquals (0,walkingController.getToWalk());
-        assertFalse (walkingController.isFacingRight());
-
-        boolean walked = walkingController.setTowalk(new Position(200,123));
-        assertTrue (walked);
-        assertTrue (walkingController.getToWalk() < 0);
-        assertTrue (walkingController.isFacingRight());
-    }
-
-    @Test
-    void setToWalkLegalLeft() {
-        assertEquals (0,walkingController.getToWalk());
-        assertFalse (walkingController.isFacingRight());
-
-        boolean walked = walkingController.setTowalk(new Position(50,123));
-        assertTrue (walked);
-        assertTrue (walkingController.getToWalk() > 0);
         assertFalse (walkingController.isFacingRight());
     }
 
     @Test
-    void walk() throws IOException, InterruptedException, URISyntaxException {
-        long time = 0;
-        assertEquals (0,walkingController.getToWalk());
-        assertFalse (walkingController.isFacingRight());
+    void setToWalk() throws IOException, InterruptedException {
+        ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
+        Mockito.when(gameControllerMock.getPrevious()).thenReturn(controllerStateMock);
+        StandingController standingControllerMock = Mockito.mock(StandingController.class);
+        Mockito.when(gameControllerMock.getStandingController()).thenReturn(standingControllerMock);
 
-        walkingController.click(new Position(90,9), application);
-        assertEquals (0,walkingController.getToWalk());
-        assertFalse (walkingController.isFacingRight());
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(100);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
 
-        walkingController.click(new Position(110,9), application);
-        assertEquals (0,walkingController.getToWalk());
-        assertTrue (walkingController.isFacingRight());
+        walkingController.click(positionWalkToMock, applicationMock);
 
-        walkingController.click(new Position(150,9), application);
-        assertEquals (-3,walkingController.getToWalk());
+        assertEquals(11, walkingController.getToWalk());
+        assertFalse(walkingController.isFacingRight());
+        Mockito.verify(standingControllerMock).setLastCommandNull();
 
-        walkingController.click(new Position(200,9), application);
-        assertEquals (-8,walkingController.getToWalk());
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(100);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(-25);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
 
-        walkingController.none(time+150);
-        assertEquals (-8,walkingController.getToWalk());
+        assertTrue(walkingController.setToWalk(positionWalkToMock));
 
-        for(int i = 1; i <= 8; i++) {
-            walkingController.none(time+i*200);
-            assertEquals (-8+i,walkingController.getToWalk());
-            //Mockito.verify(commandInvoker,Mockito.times(i)).setCommand(new MoveCommand(startLocation,-10));
-            Mockito.verify(commandInvoker,Mockito.times(i)).setCommand(Mockito.any(MoveCommand.class));
-            Mockito.verify(commandInvoker,Mockito.times(i)).execute();
-        }
-        walkingController.none(time+2000);
-        assertEquals(gameController.getLocationController(), gameController.getCurrent());
+        assertEquals(-60, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(90);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(-100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+
+        assertTrue(walkingController.setToWalk(positionWalkToMock));
+
+        assertEquals(-8, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-200);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(-310);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+
+        assertTrue(walkingController.setToWalk(positionWalkToMock));
+
+        assertEquals(-29, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-200);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(true);
+
+        assertTrue(walkingController.setToWalk(positionWalkToMock));
+
+        assertEquals(10, walkingController.getToWalk());
+        assertFalse(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(0);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+
+        assertFalse(walkingController.setToWalk(positionWalkToMock));
+
+        assertEquals(0, walkingController.getToWalk());
+        assertFalse(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-5);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+
+        assertTrue(walkingController.setToWalk(positionWalkToMock));
+        assertEquals(1, walkingController.getToWalk());
+        assertFalse(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(-30);
+
+        assertFalse(walkingController.setToWalk(positionWalkToMock));
+        assertEquals(0, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(181);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(176);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+
+        assertFalse(walkingController.setToWalk(positionWalkToMock));
+
+        assertEquals(0, walkingController.getToWalk());
+        assertFalse(walkingController.isFacingRight());
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(200);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(176);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+
+        assertFalse(walkingController.setToWalk(positionWalkToMock));
+
+        assertEquals(0, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
     }
 
-//    @Test
-//    void walkMostPossibleOnOutOfBoundsClick() throws IOException, InterruptedException {
-//        long time = 0;
-//        assertEquals(-100,game.getCurrentLocation().getBackground().getPosition().getX());
-//        assertEquals (0,walkingController.getToWalk());
-//        assertFalse (walkingController.isFacingRight());
+    @Test
+    void none() throws IOException, InterruptedException, URISyntaxException {
+        ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
+        Mockito.when(gameControllerMock.getPrevious()).thenReturn(controllerStateMock);
 
-//        gameController.step(application, new ClickAction("CLICK", new Position(0,9)),time);
-//        while(walkingController.getToWalk() != 0) {
-//            time += 200;
-//            gameController.step(application, new ClickAction("DUMMY", new Position(150,9)),time);
-//        }
-//    }
+        walkingController.none(0);
+        Mockito.verify(mainCharMock).setName("standing_left");
+        Mockito.verify(gameControllerMock).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock, Mockito.never()).execute();
 
-//    @Property
-//    public void inBounds(@ForAll List<@From("moveActions") Position> positionList) throws IOException, InterruptedException, URISyntaxException {
-//        init();
-//        long time = 0;
-//        for(Position position : positionList){
-//            gameController.step(application, new ClickAction("CLICK", position),time);
-//            while(walkingController.getToWalk() != 0) {
-//                time += 200;
-//                walkingController.none(time);
-//            }
-//        }
-//        time += 200;
-//        walkingController.none(time);
-//
-//        assertEquals(0, game.getCurrentLocation().getBackground().getPosition().getY());
-//        assertTrue(game.getCurrentLocation().getBackground().getPosition().getX() <= 0 &&
-//                game.getCurrentLocation().getBackground().getPosition().getX() >= 200 - game.getCurrentLocation().getBackground().getWidth());
-//        assertEquals("standing",game.getCurrentLocation().getMainChar().getName().split("_",-1)[0]);
-//    }
-//    @Provide@Size(max = 20)
-//    Arbitrary<Position> moveActions() {
-//        int x = (int) (Math.random() * 200);
-//        int y = (int) (Math.random() * 150);
-//        return Arbitraries.of(new Position(x, y));
-//    }
 
+        Mockito.when(positionWalkToMock.getX()).thenReturn(83);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-511);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+        assertTrue(walkingController.setToWalk(positionWalkToMock));
+        assertEquals(1, walkingController.getToWalk());
+        assertFalse(walkingController.isFacingRight());
+
+
+        walkingController.none(150);
+        Mockito.verify(mainCharMock).setName(Mockito.anyString());
+        Mockito.verify(gameControllerMock).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock, Mockito.never()).execute();
+
+        walkingController.none(151);
+        Mockito.verify(mainCharMock).setName(Mockito.anyString());
+        Mockito.verify(gameControllerMock).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(MoveCommand.class));
+        Mockito.verify(commandInvokerMock).execute();
+        assertEquals(0, walkingController.getToWalk());
+
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(100);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-511);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(80);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+        assertFalse(walkingController.setToWalk(positionWalkToMock));
+        assertEquals(0, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
+
+        walkingController.none(0);
+        Mockito.verify(mainCharMock).setName("standing_right");
+        Mockito.verify(gameControllerMock, Mockito.times(2)).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock).execute();
+
+
+
+        Mockito.when(positionWalkToMock.getX()).thenReturn(181);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-490);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(176);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+        walkingController.setToWalk(positionWalkToMock);
+        Mockito.when(positionWalkToMock.getX()).thenReturn(0);
+        Mockito.when(positionBackgroundMock.getX()).thenReturn(-460);
+        Mockito.when(positionCharacterMock.getX()).thenReturn(-100);
+        Mockito.when(backgroundMock.isLoopable()).thenReturn(false);
+        walkingController.setToWalk(positionWalkToMock);
+        assertEquals(-4, walkingController.getToWalk());
+        assertTrue(walkingController.isFacingRight());
+
+
+        walkingController.none(0);
+        Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
+        Mockito.verify(gameControllerMock, Mockito.times(2)).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock).execute();
+
+        walkingController.none(302);
+        Mockito.verify(mainCharMock, Mockito.times(2)).setName(Mockito.anyString());
+        Mockito.verify(gameControllerMock, Mockito.times(2)).setControllerState(controllerStateMock);
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).setCommand(Mockito.any(MoveCommand.class));
+        Mockito.verify(commandInvokerMock, Mockito.times(2)).execute();
+        assertEquals(-3, walkingController.getToWalk());
+    }
 }
 
 

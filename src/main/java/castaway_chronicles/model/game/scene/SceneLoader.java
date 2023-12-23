@@ -1,11 +1,12 @@
 package castaway_chronicles.model.game.scene;
 
-import castaway_chronicles.model.game.elements.*;
+import castaway_chronicles.model.Interactable;
+import castaway_chronicles.ResourceManager;
+import castaway_chronicles.model.Scene;
+import castaway_chronicles.model.game.Game;
+import castaway_chronicles.model.game.gameElements.*;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,26 +14,16 @@ public class SceneLoader {
     private final List<String> lines;
     private final HashMap<String, Interactable> interactables = new HashMap<>();
     private final HashMap<String, Interactable> visibleInteractables = new HashMap<>();
-    private final String type;
-
-    public SceneLoader(String dir, String filename, String type) throws IOException {
-        File f = new File(Paths.get("").toAbsolutePath() + "/src/main/resources/"+dir + "/" + filename + ".txt");
-        BufferedReader br = new BufferedReader(new FileReader(f, StandardCharsets.UTF_8));
-        lines = readLines(br);
+    private final Game.SCENE type;
+    public SceneLoader(String dir, String filename, Game.SCENE type) throws IOException {
+        ResourceManager resourceManager = ResourceManager.getInstance();
+        lines = resourceManager.readCurrentTimeResourceFile(dir + "/" + filename + ".txt");
         this.type = type;
         getInteractables();
     }
     public Scene createScene() {
-        Scene scene = SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
-        return scene;
+        return SceneFactory.getScene(type, getBackground(), interactables, visibleInteractables, getMainChar());
     }
-    private List<String> readLines(BufferedReader br) throws IOException {
-        List<String> lines = new ArrayList<>();
-        for (String line; (line = br.readLine()) != null; )
-            lines.add(line);
-        return lines;
-    }
-
     protected Background getBackground() {
         for (String line : lines) {
             if (line.charAt(0) == 'B') {
@@ -45,7 +36,6 @@ public class SceneLoader {
         }
         return null;
     }
-
     protected void getInteractables() throws IOException {
         for (String line : lines) {
             if (line.charAt(0) == 'I') {
@@ -54,23 +44,18 @@ public class SceneLoader {
                 String type = s[1];
                 int x = Integer.parseInt(s[3]), y = Integer.parseInt(s[4]), w = Integer.parseInt(s[5]), h = Integer.parseInt(s[6]), state = 0;
                 if (type.equalsIgnoreCase("npc")) state = Integer.parseInt(s[7]);
-                Interactable interactable = InteractableFactory.getInteractable(type,x,y,w,h,name,state);
-                if (line.charAt(line.length()-1)=='V') {
-                    visibleInteractables.put(name,interactable);
-                }
+                Interactable interactable = GameInteractableFactory.getInteractable(type,x,y,w,h,name,state);
+                if (line.charAt(line.length()-1)=='V') visibleInteractables.put(name,interactable);
                 interactables.put(name,interactable);
             }
         }
     }
-
-
     protected MainChar getMainChar() {
-        if (type.equalsIgnoreCase( "Location")) {
+        if (type == Game.SCENE.LOCATION) {
             for(String line : lines){
                 if (line.charAt(0) == 'M') {
                     String[] s = line.split(" ",-1);
                     int x = Integer.parseInt(s[1]), y = Integer.parseInt(s[2]), w = Integer.parseInt(s[3]), h = Integer.parseInt(s[4]);
-                    //FACTORY?
                     return new MainChar(x,y,w,h, "standing_right");
                 }
             }

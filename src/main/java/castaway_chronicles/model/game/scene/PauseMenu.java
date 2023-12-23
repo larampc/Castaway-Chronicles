@@ -1,24 +1,17 @@
 package castaway_chronicles.model.game.scene;
 
+import castaway_chronicles.model.Menu;
 import castaway_chronicles.model.SelectionPanel;
 
 import java.util.Arrays;
 
-public class PauseMenu extends SelectionPanel {
-
+public class PauseMenu extends Menu {
     public PauseMenu() {
-        super(Arrays.asList("Resume", "Save", "Menu", "Exit"));
+        super();
+        setSelectionPanel(new SelectionPanel(Arrays.asList("Resume", "Save", "Menu", "Exit")));
     }
-
-    public boolean isSelectedExit() {
-        return isSelected(3);
-    }
-
-    public boolean isSelectedResume() {
-        return isSelected(0);
-    }
-
-    public boolean isSelectedSave() {return isSelected(1);}
-    public boolean isSelectedMenu() {return isSelected(2);}
-
+    public boolean isSelectedExit() {return getSelectionPanel().isSelected(3);}
+    public boolean isSelectedResume() {return getSelectionPanel().isSelected(0);}
+    public boolean isSelectedSave() {return getSelectionPanel().isSelected(1);}
+    public boolean isSelectedMenu() {return getSelectionPanel().isSelected(2);}
 }

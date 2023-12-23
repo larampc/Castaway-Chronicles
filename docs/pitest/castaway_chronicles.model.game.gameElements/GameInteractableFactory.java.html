@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>GameInteractableFactory.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.model.game.gameElements;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import castaway_chronicles.model.Interactable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>public abstract class GameInteractableFactory {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static Interactable getInteractable(String type, int x, int y, int width, int height, String name, int state) throws IOException {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_9'/>
+9
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_9'>2</a>
+<span>
+
+1. getInteractable : negated conditional &rarr; KILLED<br/>
+
+2. getInteractable : replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (&#34;Item&#34;.equalsIgnoreCase(type)) return new Item(x,y,width,height,name);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_10'/>
+10
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_10'>2</a>
+<span>
+
+1. getInteractable : negated conditional &rarr; KILLED<br/>
+
+2. getInteractable : replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else if(&#34;NPC&#34;.equalsIgnoreCase(type)) return new NPC(x,y,width,height,name,state);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_11'/>
+11
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_11'>2</a>
+<span>
+
+1. getInteractable : negated conditional &rarr; KILLED<br/>
+
+2. getInteractable : replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else if(&#34;Icon&#34;.equalsIgnoreCase(type)) return new Icon(x,y,width,height,name);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_12'/>
+12
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_12'>2</a>
+<span>
+
+1. getInteractable : negated conditional &rarr; KILLED<br/>
+
+2. getInteractable : replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        else if(&#34;BItem&#34;.equalsIgnoreCase(type)) return new BackpackItem(x,y,width,height,name);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6e9c118f_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6e9c118f_9'>9</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_9'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6e9c118f_10'>10</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_10'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6e9c118f_11'>11</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_11'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6e9c118f_12'>12</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6e9c118f_12'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getInteractable<br/><b>Killed by : </b>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()]</span></span> replaced return value with null for castaway_chronicles/model/game/gameElements/GameInteractableFactory::getInteractable &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:BackPack()] (4 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_Backpack()] (26 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_map()] (19 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getVisibleInteractables()] (8 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getInteractables()] (12 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_Locations()] (21 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_pauseMenu()] (18 ms)</li><li>castaway_chronicles.model.GameInteractableFactoryTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameInteractableFactoryTest]/[method:getInteractable()] (7 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:getBackground()] (11 ms)</li><li>castaway_chronicles.controller.MainMenuControllerTest.[engine:junit-jupiter]/[class:castaway_chronicles.controller.MainMenuControllerTest]/[method:select()] (53 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:Map()] (7 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:Location()] (7 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:hasMainChar()] (7 ms)</li><li>castaway_chronicles.model.SceneLoaderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SceneLoaderTest]/[method:hasNotMainChar()] (9 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>

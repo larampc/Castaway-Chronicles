@@ -7,17 +7,12 @@ import java.net.URISyntaxException;
 
 public abstract class Viewer<T> {
     private final T model;
-
-    protected Viewer(T model) {
-        this.model = model;
-    }
-    public T getModel() {
-        return model;
-    }
+    protected Viewer(T model) {this.model = model;}
+    public T getModel() {return model;}
     public void draw(GUI gui) throws IOException, URISyntaxException, InterruptedException {
         gui.clear();
-        drawElements(gui);
+        drawScreen(gui);
         gui.refresh();
     }
-    protected abstract void drawElements(GUI gui) throws IOException, InterruptedException, URISyntaxException;
+    public abstract void drawScreen(GUI gui) throws IOException, InterruptedException, URISyntaxException;
 }

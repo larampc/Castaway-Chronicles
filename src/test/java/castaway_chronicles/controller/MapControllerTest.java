@@ -1,108 +1,97 @@
 package castaway_chronicles.controller;
 
 import castaway_chronicles.Application;
-import castaway_chronicles.controller.game.ControllerStates.LocationController;
-import castaway_chronicles.controller.game.ControllerStates.MapController;
+import castaway_chronicles.controller.Commands.ChangeLocationCommand;
+import castaway_chronicles.controller.Commands.CommandInvoker;
+import castaway_chronicles.controller.game.scenes.MapController;
 import castaway_chronicles.controller.game.GameController;
-import castaway_chronicles.gui.ClickAction;
-import castaway_chronicles.gui.KeyAction;
 import castaway_chronicles.model.Position;
 import castaway_chronicles.model.game.Game;
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Icon;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.MainChar;
-import castaway_chronicles.model.game.scene.Location;
+import castaway_chronicles.model.game.gameElements.Icon;
+import castaway_chronicles.model.game.gameElements.Item;
 import castaway_chronicles.model.game.scene.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.HashMap;
-
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
 
 public class MapControllerTest {
-    private Game game;
-    private Application application;
-    private GameController gameController;
+    private Game gameMock;
+    private Application applicationMock;
+    private GameController gameControlleMock;
+    private MapController mapController;
     @BeforeEach
     public void init() {
-        game = new Game();
+        applicationMock = Mockito.mock(Application.class);
+        gameControlleMock = Mockito.mock(GameController.class);
+        gameMock = Mockito.mock(Game.class);
+        Mockito.when(gameControlleMock.getModel()).thenReturn(gameMock);
 
-        HashMap<String, Interactable> interactables = new HashMap<>();
-        HashMap<String, Interactable> visibleInteractables = new HashMap<>();
-        Icon icon = new Icon(5,5,10,10,"City");
-        interactables.put("Icon",icon);
-        visibleInteractables.put("Icon",icon);
-        interactables.put("Icon",new Icon(20,20,10,10,"Beach"));
-
-        game.setMap(new Map(new Background(0,0,200,150,"map", false),interactables,visibleInteractables));
-        game.setCurrentScene("MAP");
-
-        HashMap<String, Location> locations = new HashMap<>();
-        locations.put("Beach",new Location(new Background(0,0,700,150,"Beach", false),
-                new HashMap<>(), new HashMap<>(), new MainChar(100,100,10,10,"standing_right")));
-        locations.put("City",new Location(new Background(0,0,700,150,"Beach", false),
-                new HashMap<>(), new HashMap<>(), null));
-        game.setLocations(locations);
-        game.setCurrentLocation("Beach");
-
-        gameController = new GameController(game);
-        gameController.setControllerState(gameController.getMapController());
-        application = Mockito.mock(Application.class);
+        mapController = new MapController(gameControlleMock);
     }
 
     @Test
-    public void clickIcon() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new ClickAction("Click", new Position(6,6)),10);
-        assertEquals(gameController.getCurrent(),gameController.getLocationController());
-        assertEquals(gameController.getModel().getScene(), Game.SCENE.LOCATION);
-        assertEquals(game.getLocation("City"),game.getCurrentLocation());
+    public void key() throws IOException, URISyntaxException, InterruptedException {
+        ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
+        Mockito.when(gameControlleMock.getStandingController()).thenReturn(controllerStateMock);
+
+        mapController.key(KeyEvent.VK_DOWN, applicationMock);
+        Mockito.verify(gameMock, Mockito.never()).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(gameControlleMock, Mockito.never()).setControllerState(controllerStateMock);
+
+        mapController.key(KeyEvent.VK_ESCAPE, applicationMock);
+        Mockito.verify(gameMock).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(gameControlleMock).setControllerState(controllerStateMock);
     }
 
     @Test
-    public void clickInvisibleIcon() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new ClickAction("Click", new Position(25,25)),10);
-        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-        assertTrue(gameController.getCurrent() instanceof MapController);
-    }
+    public void click() throws IOException, URISyntaxException, InterruptedException {
+        ControllerState controllerStateMock = Mockito.mock(ControllerState.class);
+        Mockito.when(gameControlleMock.getStandingController()).thenReturn(controllerStateMock);
+        Position positionMock = Mockito.mock(Position.class);
+        CommandInvoker commandInvokerMock = Mockito.mock(CommandInvoker.class);
+        Mockito.when(gameControlleMock.getCommandInvoker()).thenReturn(commandInvokerMock);
+        Map mapMock = Mockito.mock(Map.class);
+        Mockito.when(gameMock.getMap()).thenReturn(mapMock);
+        Icon iconMock = Mockito.mock(Icon.class);
+        Item itemMock = Mockito.mock(Item.class);
+        Mockito.when(mapMock.getVisibleInteractables()).thenReturn(List.of(iconMock, itemMock));
+        Mockito.when(iconMock.getName()).thenReturn("icon_test");
+        Mockito.when(itemMock.getName()).thenReturn("item_test");
 
-    @Test
-    public void escape() throws IOException, InterruptedException, URISyntaxException {
-        gameController.step(application, new KeyAction("ESCAPE"),0);
-        assertEquals(Game.SCENE.LOCATION,gameController.getModel().getScene());
-        assertTrue(gameController.getCurrent() instanceof LocationController);
-    }
+        Mockito.when(iconMock.contains(positionMock)).thenReturn(false);
+        Mockito.when(itemMock.contains(positionMock)).thenReturn(false);
+        mapController.click(positionMock, applicationMock);
+        Mockito.verify(commandInvokerMock, Mockito.never()).setCommand(Mockito.any());
+        Mockito.verify(commandInvokerMock, Mockito.never()).execute();
+        Mockito.verify(gameMock, Mockito.never()).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(gameControlleMock, Mockito.never()).setControllerState(controllerStateMock);
+        Mockito.verify(mapMock, Mockito.never()).setInvisible(Mockito.any());
+        Mockito.verify(mapMock, Mockito.never()).setVisible(Mockito.any());
 
-//    @Test
-//    public void EmptyKeys() throws IOException, InterruptedException {
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-//        assertTrue(gameController.getCurrent() instanceof MapController);
-//
-//        gameController.step(application, new KeyAction("RIGHT"),0);
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-//        assertTrue(gameController.getCurrent() instanceof MapController);
-//
-//        gameController.step(application, new KeyAction("LEFT"),0);
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-//        assertTrue(gameController.getCurrent() instanceof MapController);
-//
-//        gameController.step(application, new KeyAction("UP"),0);
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-//        assertTrue(gameController.getCurrent() instanceof MapController);
-//
-//        gameController.step(application, new KeyAction("DOWN"),0);
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-//        assertTrue(gameController.getCurrent() instanceof MapController);
-//
-//        gameController.step(application, new ClickAction("CLICK", new Position(4,4)),0);
-//        assertEquals(gameController.getModel().getScene(), Game.SCENE.MAP);
-//        assertTrue(gameController.getCurrent() instanceof MapController);
-//    }
+        Mockito.when(iconMock.contains(positionMock)).thenReturn(false);
+        Mockito.when(itemMock.contains(positionMock)).thenReturn(true);
+        mapController.click(positionMock, applicationMock);
+        Mockito.verify(commandInvokerMock, Mockito.never()).setCommand(Mockito.any());
+        Mockito.verify(commandInvokerMock, Mockito.never()).execute();
+        Mockito.verify(gameMock, Mockito.never()).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(gameControlleMock, Mockito.never()).setControllerState(controllerStateMock);
+        Mockito.verify(mapMock).setInvisible("item_test");
+        Mockito.verify(mapMock).setVisible("item_icon");
+
+        Mockito.when(iconMock.contains(positionMock)).thenReturn(true);
+        Mockito.when(itemMock.contains(positionMock)).thenReturn(false);
+        mapController.click(positionMock, applicationMock);
+        Mockito.verify(commandInvokerMock).setCommand(Mockito.any(ChangeLocationCommand.class));
+        Mockito.verify(commandInvokerMock).execute();
+        Mockito.verify(gameMock).setCurrentScene(Game.SCENE.LOCATION);
+        Mockito.verify(gameControlleMock).setControllerState(controllerStateMock);
+        Mockito.verify(mapMock).setInvisible("item_test");
+        Mockito.verify(mapMock).setVisible("item_icon");
+    }
 }

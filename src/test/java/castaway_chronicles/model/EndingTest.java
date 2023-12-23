@@ -1,29 +1,38 @@
 package castaway_chronicles.model;
 
+import castaway_chronicles.ResourceManager;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
-import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EndingTest {
     Ending end;
+    ResourceManager resourceManagerMock;
     @BeforeEach
-    void setUp() throws URISyntaxException {
-        end = new Ending("drink");
+    void setUp() {
+        resourceManagerMock = Mockito.mock(ResourceManager.class);
+        Mockito.when(resourceManagerMock.countFiles("Endings/endingTest")).thenReturn(3);
+        end = new Ending("endingTest"){
+            @Override
+            public ResourceManager getResourceManager(){
+                return resourceManagerMock;
+            }
+        };
     }
-
     @Test
-    void getters() {
-        assertEquals(26, end.getMax());
+    void Ending(){
+        Mockito.verify(resourceManagerMock).countFiles("Endings/endingTest");
+        assertEquals(3, end.getMax());
         assertEquals(1, end.getCurrent());
-        assertEquals("drink", end.getName());
-        assertEquals("drink_0001", end.getCurrentFrame());
+        assertEquals("endingTest", end.getName());
+        assertEquals("endingTest_0001", end.getCurrentFrame());
     }
-
     @Test
     void setNext() {
-        for (int i = 1; i <= 26; i++) {
+        for (int i = 1; i <= 3; i++) {
             assertEquals(i, end.getCurrent());
             end.setNext();
         }

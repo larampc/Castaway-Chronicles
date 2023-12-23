@@ -11,13 +11,11 @@ import java.io.IOException;
 
 public class Sprite {
     private final BufferedImage sprite;
-    public Sprite(File fontFile) throws IOException {
-        sprite = ImageIO.read(fontFile);
-    }
+    public Sprite(File fontFile) throws IOException {sprite = ImageIO.read(fontFile);}
     public void drawSprite(Position position, TextGraphics graphics) {
-        for (int x = 0; x < sprite.getWidth(); x++){
-            for (int y = 0; y < sprite.getHeight(); y++){
-                int a = sprite.getRGB(x, y);
+        for (int x = 0; x < getSprite().getWidth(); x++){
+            for (int y = 0; y < getSprite().getHeight(); y++){
+                int a = getSprite().getRGB(x, y);
                 int alpha = (a >> 24) & 0xff;
                 int red = (a >> 16) & 255;
                 int green = (a >> 8) & 255;
@@ -30,5 +28,5 @@ public class Sprite {
         }
     }
     public int getWidth() {return sprite.getWidth();}
-    public int getHeight() {return sprite.getHeight();}
+    public BufferedImage getSprite() {return sprite;}
 }

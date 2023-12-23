@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>SelectionPanel.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package castaway_chronicles.model;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.List;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public class SelectionPanel {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private final List&#60;String&#62; entries;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    private int currentEntry = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public SelectionPanel(List&#60;String&#62; entries) {this.entries = entries;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void nextEntry() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_10'/>
+10
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_10'>1</a>
+<span>
+
+1. nextEntry : Replaced integer addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        currentEntry++;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_11'/>
+11
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_11'>3</a>
+<span>
+
+1. nextEntry : changed conditional boundary &rarr; KILLED<br/>
+
+2. nextEntry : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+3. nextEntry : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (currentEntry &#62; this.entries.size() - 1) currentEntry = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void previousEntry() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_14'/>
+14
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_14'>1</a>
+<span>
+
+1. previousEntry : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        currentEntry--;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_15'/>
+15
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_15'>3</a>
+<span>
+
+1. previousEntry : changed conditional boundary &rarr; KILLED<br/>
+
+2. previousEntry : Replaced integer subtraction with addition &rarr; KILLED<br/>
+
+3. previousEntry : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (currentEntry &#60; 0) currentEntry = this.entries.size() - 1;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public String getEntry(int entry) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_18'/>
+18
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_18'>1</a>
+<span>
+
+1. getEntry : replaced return value with &#34;&#34; for castaway_chronicles/model/SelectionPanel::getEntry &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        try {return entries.get(entry);}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        catch (IndexOutOfBoundsException e) {return &#34;&#34;;}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_21'/>
+21
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_21'>1</a>
+<span>
+
+1. getCurrentEntry : replaced int return with 0 for castaway_chronicles/model/SelectionPanel::getCurrentEntry &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public int getCurrentEntry() {return currentEntry;}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_22'/>
+22
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_22'>1</a>
+<span>
+
+1. getEntries : replaced return value with Collections.emptyList for castaway_chronicles/model/SelectionPanel::getEntries &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public List&#60;String&#62; getEntries() {return entries;}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_23'/>
+23
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_23'>2</a>
+<span>
+
+1. isSelected : replaced boolean return with true for castaway_chronicles/model/SelectionPanel::isSelected &rarr; KILLED<br/>
+
+2. isSelected : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public boolean isSelected(int entry) {return currentEntry == entry;}</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_24'/>
+24
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_24'>1</a>
+<span>
+
+1. getNumberEntries : replaced int return with 0 for castaway_chronicles/model/SelectionPanel::getNumberEntries &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>    public int getNumberEntries() {return this.entries.size();}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@46c22d8e_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_10'>10</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_10'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nextEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()]</span></span> Replaced integer addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_11'>11</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_11'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>nextEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>nextEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>nextEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_14'>14</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_14'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>previousEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:previousEntry()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_15'>15</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_15'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>previousEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:previousEntry()]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>previousEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:previousEntry()]</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>previousEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:previousEntry()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_18'>18</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_18'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getEntry<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:getEntry()]</span></span> replaced return value with &#34;&#34; for castaway_chronicles/model/SelectionPanel::getEntry &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_21'>21</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_21'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getCurrentEntry<br/><b>Killed by : </b>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:nextEntry()]</span></span> replaced int return with 0 for castaway_chronicles/model/SelectionPanel::getCurrentEntry &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_22'>22</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_22'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getEntries<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:getters()]</span></span> replaced return value with Collections.emptyList for castaway_chronicles/model/SelectionPanel::getEntries &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_23'>23</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_23'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>isSelected<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()]</span></span> replaced boolean return with true for castaway_chronicles/model/SelectionPanel::isSelected &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>isSelected<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@46c22d8e_24'>24</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@46c22d8e_24'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getNumberEntries<br/><b>Killed by : </b>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:getters()]</span></span> replaced int return with 0 for castaway_chronicles/model/SelectionPanel::getNumberEntries &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+<li class='mutator'>NULL_RETURN_VALUES</li>
+
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedContinue()] (4 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedEndings()] (5 ms)</li><li>castaway_chronicles.model.PauseMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PauseMenuTest]/[method:PauseMenuSelection()] (4 ms)</li><li>castaway_chronicles.model.NPCTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.NPCTest]/[method:NPCDialog()] (11 ms)</li><li>castaway_chronicles.model.NPCTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.NPCTest]/[method:goToStateChoice()] (9 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:previousEntry()] (6 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getNumberEntries()] (7 ms)</li><li>castaway_chronicles.model.GameBuilderTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.GameBuilderTest]/[method:game_pauseMenu()] (18 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelected()] (4 ms)</li><li>castaway_chronicles.model.BackpackItemTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.BackpackItemTest]/[method:setNameBackpack()] (10 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedExit()] (3 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:nextEntry()] (4 ms)</li><li>castaway_chronicles.model.BackpackItemTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.BackpackItemTest]/[method:ItemBackpackContent()] (10 ms)</li><li>castaway_chronicles.ResourceManagerTest.[engine:junit-jupiter]/[class:castaway_chronicles.ResourceManagerTest]/[method:countFiles()] (15 ms)</li><li>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:getEntry()] (5 ms)</li><li>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:nextEntry()] (4 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getCurrentEntry()] (8 ms)</li><li>castaway_chronicles.model.PauseMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.PauseMenuTest]/[method:PauseMenuContent()] (4 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:isSelectedStart()] (3 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getEntries()] (43 ms)</li><li>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:getters()] (4 ms)</li><li>castaway_chronicles.model.SelectionPanelTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.SelectionPanelTest]/[method:previousEntry()] (5 ms)</li><li>castaway_chronicles.model.MainMenuTest.[engine:junit-jupiter]/[class:castaway_chronicles.model.MainMenuTest]/[method:getEntry()] (6 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.6.3
+
+</body>
+</html>

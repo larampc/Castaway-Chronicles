@@ -1,16 +1,16 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Background;
+import castaway_chronicles.model.game.gameElements.Background;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BackgroundTest {
     @Test
-    void isIsloopable() {
+    void isLoopable() {
         Background background1 = new Background(0, 0, 10, 10, "test1", true);
         Background background2 = new Background(0, 0, 10, 10, "test2", false);
-        assertTrue(background1.isIsloopable());
-        assertFalse(background2.isIsloopable());
+        assertTrue(background1.isLoopable());
+        assertFalse(background2.isLoopable());
     }
 
     @Test

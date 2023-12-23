@@ -2,6 +2,7 @@ package castaway_chronicles.gui;
 
 import castaway_chronicles.model.Position;
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -11,68 +12,145 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import static org.mockito.ArgumentMatchers.*;
+import java.util.HashMap;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GUITest {
     private Screen screen;
     private LanternaGUI gui;
     private TextGraphics graphics;
+    private AWTTerminalFrame terminalMock;
 
     @BeforeEach
-    void setUp() throws URISyntaxException, IOException {
+    void setUp() throws IOException {
         screen = Mockito.mock(Screen.class);
         graphics = Mockito.mock(TextGraphics.class);
-        AWTTerminalFrame terminal = Mockito.mock(AWTTerminalFrame.class);
+        terminalMock = Mockito.mock(AWTTerminalFrame.class);
         Mockito.when(screen.newTextGraphics()).thenReturn(graphics);
-        gui = new LanternaGUI(terminal, screen);
+        gui = new LanternaGUI(terminalMock, screen);
     }
 
     @Test
-    void drawImage() {
-        gui.drawImage(new Position(0, 0), "test");
-        TextCharacter c = new TextCharacter(' ', new TextColor.RGB(255, 255, 255), new TextColor.RGB(255, 255, 255));
-        Mockito.verify(graphics, Mockito.times(1)).setCharacter(10,10, c);
-        Mockito.verify(graphics, Mockito.times(0)).setCharacter(eq(11),eq(11), any(TextCharacter.class));
-        Mockito.verify(graphics, Mockito.times(96)).setCharacter(intThat(inte -> (inte>0 && inte <11)),intThat(inte -> (inte>0 && inte <11)), any(TextCharacter.class));
+    void drawImage() throws IOException {
+        Position positionMock = Mockito.mock(Position.class);
+        HashMap<String, Sprite> imagesTest = new HashMap<>();
+        Sprite spriteMock = Mockito.mock(Sprite.class);
+        imagesTest.put("1", spriteMock);
+        LanternaGUI guitest = new LanternaGUI(terminalMock, screen) {
+          @Override
+          public HashMap<String, Sprite> getImages() {
+              return imagesTest;
+          }
+        };
+        guitest.drawImage(positionMock, "1");
+        Mockito.verify(spriteMock).drawSprite(positionMock, graphics);
     }
 
     @Test
-    void drawText() throws IOException, InterruptedException {
-        gui.drawText(new Position(0,0),100,"Lorem ipsum ,.!?",false);
+    void drawText() {
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(positionMock.getY()).thenReturn(0);
+        Mockito.when(positionMock.getX()).thenReturn(0);
+
+        gui.drawText(positionMock,100,"Lorem ipsum ,.!?",false);
 
         TextCharacter c = new TextCharacter(' ', new TextColor.RGB(0, 0, 0), new TextColor.RGB(0, 0, 0));
-        gui.drawText(new Position(0,0),67,"Lorem ipsum ,.!? j",false);
-        gui.drawText(new Position(0,0),70,"Lorem ipsum ,.!? jjjjj", false);
+        gui.drawText(positionMock,67,"Lorem ipsum ,.!? j",true);
+        gui.drawText(positionMock,70,"Lorem ipsum ,.!? jjjjj", false);
 
         Mockito.verify(graphics, Mockito.times(3)).setCharacter(63,6, c);
         Mockito.verify(graphics, Mockito.times(2)).setCharacter(1,10, c);
+        Mockito.verify(graphics, Mockito.times(4)).setForegroundColor(new TextColor.RGB(255,255,255));
+        Mockito.verify(graphics).drawLine(new TerminalPosition(28, 8), new TerminalPosition(53, 8), '_');
     }
 
     @Test
     void drawLine() {
-        gui.drawLine(new Position(1, 1),30);
-        Mockito.verify(graphics, Mockito.times(1)).setForegroundColor(new TextColor.RGB(255,255,255));
-        Mockito.verify(graphics, Mockito.times(1)).drawLine(new TerminalPosition(1, 1), new TerminalPosition(31, 1), '_');
+        Position positionMock = Mockito.mock(Position.class);
+        Mockito.when(positionMock.getY()).thenReturn(1);
+        Mockito.when(positionMock.getX()).thenReturn(1);
+        gui.drawLine(positionMock,30);
+        Mockito.verify(graphics).setForegroundColor(new TextColor.RGB(255,255,255));
+        Mockito.verify(graphics).drawLine(new TerminalPosition(1, 1), new TerminalPosition(31, 1), '_');
     }
 
     @Test
     void refresh() throws IOException {
         gui.refresh();
-        Mockito.verify(screen, Mockito.times(1)).refresh();
+        Mockito.verify(screen).refresh();
     }
 
     @Test
     void clear() {
         gui.clear();
-        Mockito.verify(screen, Mockito.times(1)).clear();
+        Mockito.verify(screen).clear();
     }
 
     @Test
     void close() throws IOException {
         gui.close();
-        Mockito.verify(screen, Mockito.times(1)).close();
+        Mockito.verify(screen).close();
+    }
+
+    @Test
+    void resizeTerminalBig() {
+        TerminalSize terminalSizeMock = Mockito.mock(TerminalSize.class);
+        Mockito.when(terminalSizeMock.getColumns()).thenReturn(10);
+        Mockito.when(terminalMock.getWidth()).thenReturn(10);
+        Mockito.when(screen.doResizeIfNecessary()).thenReturn(null).thenReturn(null).thenReturn(terminalSizeMock);
+        gui.setBigger(false);
+
+        gui.resizeTerminal();
+
+        Mockito.verify(screen, Mockito.times(3)).doResizeIfNecessary();
+        Mockito.verify(terminalMock).setSize(10, 765);
+        assertTrue(gui.isBigger());
+    }
+
+    @Test
+    void resizeTerminalSmall() {
+        TerminalSize terminalSizeMock = Mockito.mock(TerminalSize.class);
+        Mockito.when(terminalSizeMock.getColumns()).thenReturn(10);
+        Mockito.when(terminalMock.getWidth()).thenReturn(10);
+        Mockito.when(screen.doResizeIfNecessary()).thenReturn(null).thenReturn(null).thenReturn(terminalSizeMock);
+        gui.setBigger(true);
+
+        gui.resizeTerminal();
+
+        Mockito.verify(screen, Mockito.times(3)).doResizeIfNecessary();
+        Mockito.verify(terminalMock).setSize(10, 637);
+        assertFalse(gui.isBigger());
+    }
+
+    @Test
+    void getNextAction() {
+        KeyEvent keyEventMock = Mockito.mock(KeyEvent.class);
+        gui.setAction(keyEventMock);
+        InputEvent returnAction = gui.getAction();
+
+        assertEquals(gui.getNextAction(), returnAction);
+        assertNull(gui.getAction());
+    }
+
+    @Test
+    void imagesLoaded() throws IOException {
+        HashMap<String, Sprite> imagesTest = new HashMap<>();
+        Sprite spriteMock = Mockito.mock(Sprite.class);
+        imagesTest.put("1", spriteMock);
+        LanternaGUI guitest = new LanternaGUI(terminalMock, screen) {
+            @Override
+            public HashMap<String, Sprite> getImages() {
+                return imagesTest;
+            }
+        };
+
+        assertTrue(guitest.imageIsLoaded("1"));
+        assertFalse(guitest.imageIsLoaded("2"));
+        assertEquals(HashMap.class, gui.getImages().getClass());
     }
 }
 

@@ -1,8 +1,7 @@
 package castaway_chronicles.model;
 
-import castaway_chronicles.model.game.elements.Background;
-import castaway_chronicles.model.game.elements.Interactable;
-import castaway_chronicles.model.game.elements.MainChar;
+import castaway_chronicles.model.game.gameElements.Background;
+import castaway_chronicles.model.game.gameElements.MainChar;
 import castaway_chronicles.model.game.scene.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,17 +50,4 @@ public class LocationTest {
 
         assertEquals(List.copyOf(interactables.values()), location.getInteractables());
     }
-
-//    @Test
-//    public void LocationLeftEntered(){
-//        assertFalse(location.hasMainChar());
-//        location.leftLocation();
-//        assertFalse(location.hasMainChar());
-//        location.enteredLocation();
-//        assertTrue(location.hasMainChar());
-//        location.enteredLocation();
-//        assertTrue(location.hasMainChar());
-//        location.leftLocation();
-//        assertFalse(location.hasMainChar());
-//    }
 }
