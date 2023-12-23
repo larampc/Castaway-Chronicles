@@ -11,7 +11,6 @@ import castaway_chronicles.model.game.scene.Map;
 
 public class GameSaver {
     private final Game game;
-    private final ResourceManager resourceManager = ResourceManager.getInstance();
     public GameSaver(Game game) {
         this.game = game;
         getResourceManager().createResourceDir("Scenes_saved");
@@ -74,5 +73,5 @@ public class GameSaver {
                             + i.getPosition().getY() + " " + i.getWidth() + " " + i.getHeight() + visible + "\n");
         }
     }
-    public ResourceManager getResourceManager() {return resourceManager;}
+    public ResourceManager getResourceManager() {return ResourceManager.getInstance();}
 }
