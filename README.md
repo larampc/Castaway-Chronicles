@@ -1,6 +1,6 @@
 ﻿## LDTS_project-l01gr03 - CASTAWAY CHRONICLES
 
-**Our project**:
+**Our project**: 
 
 In this exciting game you arrive at an isolated island after a ship wreck and you receive unsettling news, what are you going to do?
 
